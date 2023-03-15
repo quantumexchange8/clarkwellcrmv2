@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Web\Member;
 
 use App\Exports\ExportCommissions;
 use App\Http\Controllers\Controller;
+use App\Models\BonusHistories;
 use App\Models\Brokers;
 use App\Models\Commissions;
 use App\Models\Deposits;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class CommissionController extends Controller
@@ -73,20 +75,21 @@ class CommissionController extends Controller
                     ]]);
                     break;
                 case 'export':
-                    $now = Carbon::now()->format('YmdHis');
-                    return Excel::download(new ExportCommissions($userIds,  $request->input('freetext'), $request->input('transaction_start'), $request->input('filter_broker'), null, $request->input('transaction_end')), $now . '-commissions-records.xlsx');
+//                    $now = Carbon::now()->format('YmdHis');
+//                    return Excel::download(new ExportCommissions($userIds,  $request->input('freetext'), $request->input('transaction_start'), $request->input('filter_broker'), null, $request->input('transaction_end')), $now . '-commissions-records.xlsx');
                 case 'reset':
                     session()->forget('commissions_network_search');
                     break;
             }
         }
+        $group_total = BonusHistories::where('upline_id', $user->id)->sum('bonus_amount');
 
         $search = session('commissions_network_search') ? session('commissions_network_search') : $search;
         return view('member/network', [
             'submit' => route('network_commissions_listing'),
-            'commissions' => Commissions::get_commissions_table($search, 10, $user->id, $userIds),
+            'commissions' => BonusHistories::get_commissions_table($search, 10, $user->id),
             'brokers' => Brokers::all(),
-            'group_total' => $user->groupTotalCommissions(),
+            'group_total' => $group_total,
             'search' =>  $search,
         ]);
     }
