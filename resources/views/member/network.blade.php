@@ -126,7 +126,7 @@
                                     {{$data->commission->broker->name}}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ number_format($data->lot_size,2) }}
+                                    {{ number_format($data->commission_lot,2) }}
                                 </td>
                                 <td class="px-6 py-4">
                                     $ {{ number_format($data->bonus_amount,2) }}
