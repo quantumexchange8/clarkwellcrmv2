@@ -1,0 +1,239 @@
+@extends('layouts.master-member')
+
+@section('title') Network Tree @endsection
+
+@section('contents')
+        <nav class="flex mb-4 max-[1000px]:flex-col" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3 text-xl font-semibold mb-4">
+                <li class="inline-flex items-center">
+                <p href="#" class="inline-flex items-center text-gray-700 hover:text-orange-600 dark:text-gray-400 dark:hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mr-4">
+                <path fill-rule="evenodd"
+                    d="M8.25 6.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM15.75 9.75a3 3 0 116 0 3 3 0 01-6 0zM2.25 9.75a3 3 0 116 0 3 3 0 01-6 0zM6.31 15.117A6.745 6.745 0 0112 12a6.745 6.745 0 016.709 7.498.75.75 0 01-.372.568A12.696 12.696 0 0112 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 01-.372-.568 6.787 6.787 0 011.019-4.38z"
+                    clip-rule="evenodd"/>
+                <path
+                    d="M5.082 14.254a8.287 8.287 0 00-1.308 5.135 9.687 9.687 0 01-1.764-.44l-.115-.04a.563.563 0 01-.373-.487l-.01-.121a3.75 3.75 0 013.57-4.047zM20.226 19.389a8.287 8.287 0 00-1.308-5.135 3.75 3.75 0 013.57 4.047l-.01.121a.563.563 0 01-.373.486l-.115.04c-.567.2-1.156.349-1.764.441z"/>
+                </svg>
+                Network Tree
+                </p>
+                </li>
+                <div class="text-sm font-medium text-gray-500 mt-1">
+                    Last Updated on : GMT+8 {{ today()->timezone('Etc/GMT+8')->toDayDateTimeString() }}
+                </div>
+            </ol>
+        </nav>
+        <div class=" w-auto ">
+            <div class="px-4">
+                <form action="{{ url('member/tree') }}" method="post" class="flex max-[900px]:flex-col gap-3 mb-4">
+                    @csrf
+                    <div class="relative w-4/12 max-[900px]:w-full">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+                        </div>
+                        <input type="text" id="search" name="freetext" value="{{ @$search['freetext'] }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" placeholder="Search">
+                    </div>
+
+                    <button type="submit" name="submit" value="search" class="max-[900px]:justify-center text-white bg-orange-500 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-lg p-2.5 text-center inline-flex items-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                        </svg>
+                    </button>
+                    <button type="submit" name="submit" value="reset" class="max-[900px]:justify-center text-white bg-rose-500 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-lg p-2.5 text-center inline-flex items-center dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-rose-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+                        </svg>
+                    </button>
+                    <button type="submit" name="submit" value="export" class="max-[900px]:justify-center text-white bg-secondary-800 hover:bg-secondary-500 focus:ring-4 focus:outline-none focus:ring-secondary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center inline-flex items-center dark:bg-secondary-600 dark:hover:bg-secondary-700 dark:focus:ring-secondary-800">
+                        <svg class="h-6 w-6 mr-2" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 15V6C8 4.89543 8.89543 4 10 4H38C39.1046 4 40 4.89543 40 6V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V33" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M31 15H34" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/><path d="M28 23H34" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/><path d="M28 31H34" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/><rect x="4" y="15" width="18" height="18" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 21L16 27" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 21L10 27" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        Export as Excel
+                    </button>
+                </form>
+
+                <div class="relative overflow-x-auto lg:max-w-[972px] xl:max-w-[1100px] 2xl:max-w-[1200px]">
+                    @if(count($members) > 0)
+                        @foreach ($members as $member)
+                            @php
+                                $count = 1
+                            @endphp
+                            @if (count($member->children))
+                                <!-- Parent with children -->
+                                <div class="inline-flex mb-4 w-auto justify-center items-center toggle-{{$member->id}}" id="container">
+                                    <button
+                                        class="inline-flex items-center justify-center w-10 h-10 bg-[#FFA168] hover:bg-orange-400 rounded-full shrink-0 grow-0 mr-4 dark:bg-gray-600 hide"
+                                        type="button" id="{{ $member->id }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-white transform rotate-180" id="svgPlus{{ $member->id }}">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                        </svg>
+                                        <svg class="h-6 w-6 text-white" style="display: none" id="svgMinus{{ $member->id }}"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="5" y1="12" x2="19" y2="12" /></svg>
+                                    </button>
+                                    <a class=" bg-[#FDFCF3] border w-auto border-orange-600 p-4 shadow-lg hover:shadow-2xl dark:bg-neutral-700 dark:text-neutral-50 inline-flex"
+                                        href="{{url("member/account/$member->id")}}">
+                                        <div class="flex items-center space-x-4 sp">
+                                            <div class="inline-flex items-center justify-center w-10 h-10 bg-rose-400 rounded-full shrink-0 grow-0 dark:bg-gray-600" id="countBg">
+                                                <span class="font-bold text-xl text-white">{{$count}}</span>
+                                            </div>
+                                            <div class="inline-flex items-center justify-center w-14 h-14 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">
+                                                @if ($member->profile_image)
+                                                    <img src="{{ asset('uploads/users/' .$member->profile_image)}}" id="profile_pic_preview" class="inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
+                                                @else
+                                                    <img src="{{url('/img/profile.png')}}" id="profile_pic_preview" class="inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
+                                                @endif
+                                            </div>
+                                            <div class="font-semibold dark:text-white">
+                                                <div class=" text-md">{{$member->name}}</div>
+                                                <div class="text-sm text-gray-500 dark:text-gray-400">{{$member->email}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-4 mr-12 ml-6">
+                                            <div class="font-semibold dark:text-white">
+                                                <div class=" text-md">{{$member->rank->rank_short_form}}</div>
+                                                <div class="text-sm text-gray-500 dark:text-gray-400">Rank</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-4 mr-12">
+                                            <div class="font-semibold dark:text-white">
+                                                <div class=" text-md">${{number_format($member->wallet_balance, 2)}}</div>
+                                                <div class="text-sm text-gray-500 dark:text-gray-400">Wallet Balance</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-4 mr-12">
+                                            <div class="font-semibold dark:text-white">
+                                                <div class=" text-md">${{number_format($member->personalDeposits(), 2)}}</div>
+                                                <div class="text-sm text-gray-500 dark:text-gray-400">Total Personal Deposit</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-4 mr-12">
+                                            <div class="font-semibold dark:text-white">
+                                                <div class=" text-md">${{number_format($member->groupTotalDeposit(), 2)}}</div>
+                                                <div class="text-sm text-gray-500 dark:text-gray-400">Total Group Deposit</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-4 mr-12">
+                                            <div class="font-semibold dark:text-white">
+                                                <div class=" text-md">{{$member->getClientsCount()}}</div>
+                                                <div class="text-sm text-gray-500 dark:text-gray-400">Direct Downlines</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="!visible hidden hideContent-{{ $member->id }} ml-6" id="collapseExample-{{$member->id}}" data-te-collapse-item>
+                                    @include('components.child', [
+                                    'children' => $member->children,
+                                    'count' => $count
+                                    ])
+                                </div>
+                            @else
+                                <div class="inline-flex mb-4 hover:shadow-2xl" id="container">
+                                    <a
+                                        class=" bg-[#FDFCF3] border w-auto border-orange-600 p-4 shadow-lg dark:bg-neutral-700 dark:text-neutral-50 inline-flex"
+                                        href="{{url("member/account/$member->id")}}">
+
+                                        <div class="mt-6 px-4 mr-6 inline-flex items-center justify-center w-10 h-10 bg-rose-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">
+                                            <span class="font-bold text-xl text-gray-600 dark:text-gray-300">{{$count}}</span>
+                                        </div>
+                                        <div class="flex items-center space-x-4 sp">
+                                            <div class="inline-flex items-center justify-center w-14 h-14 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">
+                                                @if ($member->profile_image)
+                                                    <img src="{{ asset('uploads/users/' .$member->profile_image)}}" id="profile_pic_preview" class="inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-green-500 rounded-full shrink-0 grow-0 dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
+                                                @else
+                                                    <img src="{{url('/img/profile.png')}}" id="profile_pic_preview" class="inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-green-500 rounded-full shrink-0 grow-0 dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
+                                                @endif
+                                            </div>
+                                            <div class="font-semibold dark:text-white">
+                                                <div class=" text-md">{{$member->name}}</div>
+                                                <div class="text-sm text-gray-500 dark:text-gray-400">{{$member->email}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-4 ml-12">
+                                            <div class="font-semibold dark:text-white">
+                                                <div class=" text-md">{{$member->rank->rank_short_form}}</div>
+                                                <div class="text-sm text-gray-500 dark:text-gray-400">Rank</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-4 ml-12">
+                                            <div class="font-semibold dark:text-white">
+                                                <div class=" text-md">${{number_format($member->wallet_balance, 2)}}</div>
+                                                <div class="text-sm text-gray-500 dark:text-gray-400">Wallet Balance</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-4 ml-12">
+                                            <div class="font-semibold dark:text-white">
+                                                <div class=" text-md">${{number_format($member->personalDeposits(), 2)}}</div>
+                                                <div class="text-sm text-gray-500 dark:text-gray-400">Total Personal Deposit</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-4 ml-12">
+                                            <div class="font-semibold dark:text-white">
+                                                <div class=" text-md">${{number_format($member->groupTotalDeposit(), 2)}}</div>
+                                                <div class="text-sm text-gray-500 dark:text-gray-400">Total Group Deposit</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-4 ml-12">
+                                            <div class="font-semibold dark:text-white">
+                                                <div class=" text-md">{{$member->getClientsCount()}}</div>
+                                                <div class="text-sm text-gray-500 dark:text-gray-400">Direct Downlines</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            @endif
+                        @endforeach
+                    @else
+                        <div class="w-full flex p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800" role="alert">
+                            <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                            <span class="sr-only">Info</span>
+                            <div>
+                                <span class="font-medium">Info :</span> There are no records yet.
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function(e) {
+            var color = [
+                "#cc0066", "#cc0073", "#cc0080", "#cc008c", "#cc0099", "#cc00a6", "#cc00b2", "#cc00bf", "#cc00cc", "#cc00d9",
+                "#cc00e6", "#cc00f2", "#cc1df2", "#cc29f2", "#cc36f2", "#cc42f2", "#cc4ff2", "#cc5bf2", "#cc68f2", "#cc74f2",
+                "#cc81f2", "#cc8df2", "#cc9af2", "#cca6f2", "#ccb2f2", "#ccbff2", "#cccbf2", "#ccd8f2", "#cce4f2", "#ccf2f2",
+                "#d1f2cc", "#d6f2cc", "#dbf2cc", "#e0f2cc", "#e6f2cc", "#ebf2cc", "#f0f2cc", "#f5f2cc", "#faf2cc", "#fff2cc",
+                "#fff2d1", "#fff2d6", "#fff2db", "#fff2e0", "#fff2e6", "#fff2eb", "#fff2f0", "#fff2f5", "#fff2fa", "#fff2ff",
+                "#f2f2ff", "#e6f2ff", "#d9f2ff", "#ccf2ff", "#c0f2ff", "#b3f2ff", "#a6f2ff", "#99f2ff", "#8df2ff", "#80f2ff",
+                "#73f2ff", "#66f2ff"
+            ];
+
+            var colorChild = [
+                "#54bebe", "#76c8c8", "#98d1d1", "#badbdb", "#dedad2", "#e4bcad", "#df979e", "#d7658b", "#c80064", "#59f2ff",
+                "#4df2ff", "#40f2ff", "#33f2ff", "#26f2ff", "#1af2ff", "#0df2ff", "#00f2f2", "#00e6cc", "#00d9cc", "#00cccc",
+                "#00bfff", "#00b3ff", "#00a6ff", "#0099ff", "#008dff", "#0080ff", "#0073ff", "#0066ff", "#0059ff", "#004dff",
+                "#0040ff", "#0033ff", "#0026ff", "#001aff", "#000dff", "#0000ff", "#0d00ff", "#1a00ff", "#2600ff", "#3300ff",
+                "#4000ff", "#4d00ff", "#5900ff", "#6600ff", "#7300ff", "#8000ff", "#8d00ff", "#9900ff", "#a600ff", "#b300ff",
+                "#bf00ff", "#cc00ff", "#d900ff", "#e600ff", "#f200ff"
+            ]
+
+            $("#container #countBg").each(function(i) {
+                $(this).css('background', color[i])
+            });
+            $("#containerChild #countBg-child").each(function(i) {
+                $(this).css('background', colorChild[i])
+            });
+
+            $('.hide').on('click', function() {
+                var id = $(this).attr('id');
+                $(".hideContent-"+id).toggle('fast');
+                $('#svgPlus'+id).toggle('fast');
+                $('#svgMinus'+id).toggle('fast');
+            });
+
+            $('.hide-child').on('click', function() {
+                var id = $(this).attr('id');
+                $(".hideContent-"+id).toggle('fast');
+                $('#svgPlus-child'+id).toggle('fast');
+                $('#svgMinus-child'+id).toggle('fast');
+            });
+        });
+    </script>
+@endsection

@@ -1,0 +1,173 @@
+<?php
+
+namespace App\Http\Controllers\Web;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRegisterRequest;
+use App\Models\Rankings;
+use App\Models\SettingCountry;
+use App\Models\User;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Password as PasswordSupport;
+use Alert;
+
+class AuthController extends Controller
+{
+    public function guard()
+    {
+        return Auth::guard('web');
+    }
+
+    public function getLogin(Request $request)
+    {
+        return view('welcome');
+    }
+
+
+    public function postLogin(Request $request)
+    {
+        $request->validate([
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'string', 'max:15',
+                Password::min(8)->letters()->numbers()->mixedCase()->symbols()],
+        ]);
+        $credentials = [
+            'email' => $request['email'],
+            'password' => $request['password'],
+        ];
+        $remember = $request->filled('remember');
+        $token_duration = 1440;
+        if($remember) {
+            $token_duration = 525960;
+        }
+
+        if ($token = $this->guard()->setTTL($token_duration)->attempt($credentials)) {
+            Session::put('jwt-token', $token);
+
+            if (Auth::user()->role === 1)
+            {
+                return redirect('member/dashboard');
+            }
+            else if (Auth::user()->role === 2)
+            {
+                return redirect('admin/dashboard');
+            }
+        }
+
+        return back()->withErrors(['error_message' => 'Invalid email or password']);
+    }
+
+    public function getRegister(Request $request, $referral = null)
+    {
+        $countries = SettingCountry::where('id', '>', 1)->get();
+
+        return view('register', compact('countries', 'referral'));
+    }
+
+    public function postRegister(UserRegisterRequest $request)
+    {
+        $hierarchyList = null;
+        $upline_user_id = null;
+        if ($request->referral) {
+            $temp_user = User::where('referral_id', $request->referral)->first();
+            if (!$temp_user) {
+                return back()->withInput($request->input())->withErrors(['error_messages'=>'Invalid referral code!']);
+            }
+            $upline_user_id = $temp_user->id;
+            if (empty($temp_user['hierarchyList'])) {
+                $hierarchyList = "-" . $upline_user_id . "-";
+            } else {
+                $hierarchyList = $temp_user['hierarchyList'] . $upline_user_id . "-";
+            }
+        }
+
+        $country = json_decode($request->country, true);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'address' => $request->address,
+            'country' => $country['name'],
+            'contact_number' => $request->phone,
+            'rankId'=> Rankings::where('position', 1)->first()->id,
+            'upline_referral_id' => $upline_user_id,
+            'hierarchyList' => $hierarchyList
+        ]);
+        if ($user) {
+            $user->setReferralId();
+
+            Alert::success('Done', 'Successfully Created Account! Login to view account');
+            return redirect('welcome');
+        }
+        return back()->withInput($request->input())->withErrors(['error_messages'=>'Fail to crate user, please try again!']);
+    }
+
+    public function getForgotPassword(Request $request)
+    {
+        return view('forgot-password');
+    }
+
+    public function postForgotPassword(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+
+        $status = PasswordSupport::sendResetLink(
+            ['email' => $request->email]
+        );
+        return $status === PasswordSupport::RESET_LINK_SENT
+            ? back()->with(['success_msg' => __($status)])
+            : back()->withErrors(['email' => __($status)]);
+    }
+
+    public function getResetPassword(Request $request)
+    {
+        $token = $request->token;
+        $email = $request->email;
+
+        if (!$token || !$email) {
+            return redirect('welcome');
+        }
+        return view('reset-password', ['token' => $token, 'email' => $email]);
+    }
+
+    public function postResetPassword(Request $request)
+    {
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => ['required', 'string', 'max:15', 'confirmed',
+                Password::min(8)->letters()->numbers()->mixedCase()->symbols()],
+        ]);
+        $status = PasswordSupport::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) {
+                $user->forceFill([
+                    'password' => Hash::make($password)
+                ])->setRememberToken(Str::random(60));
+
+                $user->save();
+
+                event(new PasswordReset($user));
+                Alert::success('Done', 'Successfully Reset Password! Login using new password');
+            }
+        );
+        return $status === PasswordSupport::PASSWORD_RESET
+            ? redirect()->route('welcome')->with('status', __($status))
+            : back()->withErrors(['email' => __($status)]);
+    }
+
+    public function logout()
+    {
+        $this->guard()->logout();
+        session()->invalidate();
+        return redirect('welcome');
+    }
+}
