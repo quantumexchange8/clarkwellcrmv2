@@ -61,6 +61,7 @@ class AuthController extends Controller
             }
         }
 
+        Alert::error('fail', 'Invalid Email or Password');
         return back()->withErrors(['error_message' => 'Invalid email or password']);
     }
 
