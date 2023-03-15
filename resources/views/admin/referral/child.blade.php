@@ -4,7 +4,7 @@
 @foreach ($children as $child)
     @if (count($child->children))
         <!-- With Child -->
-        <div class="inline-flex mb-4 w-auto justify-center items-center" id="containerChild">
+        <div class="inline-flex mb-4 w-auto justify-center items-center">
             <button
                 class="inline-flex items-center justify-center w-10 h-10 bg-[#FFA168] hover:bg-orange-400 rounded-full shrink-0 grow-0 mr-4 dark:bg-gray-600 hide-child"
                 type="button"
@@ -17,7 +17,7 @@
             <a class=" bg-[#FDFCF3] border w-auto border-orange-600 p-4 shadow-lg hover:shadow-2xl dark:bg-neutral-700 dark:text-neutral-50 inline-flex"
                 href="{{ route('referral_detail', $child->id) }}">
                 <div class="flex items-center space-x-4 sp">
-                    <div class="inline-flex items-center justify-center w-10 h-10 bg-rose-400 rounded-full shrink-0 grow-0 dark:bg-gray-600" id="countBg-child">
+                    <div class="inline-flex items-center justify-center w-10 h-10 bg-rose-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">
                         <span class="font-bold text-md text-white">{{$count}}</span>
                     </div>
                     <div class="inline-flex items-center justify-center w-14 h-14 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">
@@ -69,11 +69,11 @@
         </div>
     @else
         <!-- Without Child -->
-        <div class="inline-flex mb-4 w-auto justify-center items-center" id="containerChild">
+        <div class="inline-flex mb-4 w-auto justify-center items-center">
             <a class=" bg-[#FDFCF3] border w-full border-orange-600 p-4 shadow-lg hover:shadow-2xl dark:bg-neutral-700 dark:text-neutral-50 inline-flex"
                 href="{{ route('referral_detail', $child->id) }}">
                 <div class="flex items-center space-x-4 sp">
-                    <div class="inline-flex items-center justify-center w-10 h-10 bg-rose-400 rounded-full shrink-0 grow-0 dark:bg-gray-600" id="countBg-child">
+                    <div class="inline-flex items-center justify-center w-10 h-10 bg-rose-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">
                         <span class="font-bold text-md text-white">{{$count}}</span>
                     </div>
                     <div class="inline-flex items-center justify-center w-14 h-14 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">

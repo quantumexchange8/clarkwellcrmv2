@@ -57,7 +57,7 @@
                             @endphp
                             @if (count($member->children))
                                 <!-- Parent with children -->
-                                <div class="inline-flex mb-4 w-auto justify-center items-center toggle-{{$member->id}}" id="container">
+                                <div class="inline-flex mb-4 w-auto justify-center items-center toggle-{{$member->id}}">
                                     <button
                                         class="inline-flex items-center justify-center w-10 h-10 bg-[#FFA168] hover:bg-orange-400 rounded-full shrink-0 grow-0 mr-4 dark:bg-gray-600 hide"
                                         type="button" id="{{ $member->id }}">
@@ -69,7 +69,7 @@
                                     <a class=" bg-[#FDFCF3] border w-auto border-orange-600 p-4 shadow-lg hover:shadow-2xl dark:bg-neutral-700 dark:text-neutral-50 inline-flex"
                                         href="{{url("member/account/$member->id")}}">
                                         <div class="flex items-center space-x-4 sp">
-                                            <div class="inline-flex items-center justify-center w-10 h-10 bg-rose-400 rounded-full shrink-0 grow-0 dark:bg-gray-600" id="countBg">
+                                            <div class="inline-flex items-center justify-center w-10 h-10 bg-rose-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">
                                                 <span class="font-bold text-xl text-white">{{$count}}</span>
                                             </div>
                                             <div class="inline-flex items-center justify-center w-14 h-14 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">
@@ -123,11 +123,9 @@
                                     ])
                                 </div>
                             @else
-                                <div class="inline-flex mb-4 hover:shadow-2xl" id="container">
-                                    <a
-                                        class=" bg-[#FDFCF3] border w-auto border-orange-600 p-4 shadow-lg dark:bg-neutral-700 dark:text-neutral-50 inline-flex"
+                                <div class="inline-flex mb-4 hover:shadow-2xl">
+                                    <a class=" bg-[#FDFCF3] border w-auto border-orange-600 p-4 shadow-lg dark:bg-neutral-700 dark:text-neutral-50 inline-flex"
                                         href="{{url("member/account/$member->id")}}">
-
                                         <div class="mt-6 px-4 mr-6 inline-flex items-center justify-center w-10 h-10 bg-rose-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">
                                             <span class="font-bold text-xl text-gray-600 dark:text-gray-300">{{$count}}</span>
                                         </div>
@@ -195,32 +193,6 @@
 @section('script')
     <script>
         $(document).ready(function(e) {
-            var color = [
-                "#cc0066", "#cc0073", "#cc0080", "#cc008c", "#cc0099", "#cc00a6", "#cc00b2", "#cc00bf", "#cc00cc", "#cc00d9",
-                "#cc00e6", "#cc00f2", "#cc1df2", "#cc29f2", "#cc36f2", "#cc42f2", "#cc4ff2", "#cc5bf2", "#cc68f2", "#cc74f2",
-                "#cc81f2", "#cc8df2", "#cc9af2", "#cca6f2", "#ccb2f2", "#ccbff2", "#cccbf2", "#ccd8f2", "#cce4f2", "#ccf2f2",
-                "#d1f2cc", "#d6f2cc", "#dbf2cc", "#e0f2cc", "#e6f2cc", "#ebf2cc", "#f0f2cc", "#f5f2cc", "#faf2cc", "#fff2cc",
-                "#fff2d1", "#fff2d6", "#fff2db", "#fff2e0", "#fff2e6", "#fff2eb", "#fff2f0", "#fff2f5", "#fff2fa", "#fff2ff",
-                "#f2f2ff", "#e6f2ff", "#d9f2ff", "#ccf2ff", "#c0f2ff", "#b3f2ff", "#a6f2ff", "#99f2ff", "#8df2ff", "#80f2ff",
-                "#73f2ff", "#66f2ff"
-            ];
-
-            var colorChild = [
-                "#54bebe", "#76c8c8", "#98d1d1", "#badbdb", "#dedad2", "#e4bcad", "#df979e", "#d7658b", "#c80064", "#59f2ff",
-                "#4df2ff", "#40f2ff", "#33f2ff", "#26f2ff", "#1af2ff", "#0df2ff", "#00f2f2", "#00e6cc", "#00d9cc", "#00cccc",
-                "#00bfff", "#00b3ff", "#00a6ff", "#0099ff", "#008dff", "#0080ff", "#0073ff", "#0066ff", "#0059ff", "#004dff",
-                "#0040ff", "#0033ff", "#0026ff", "#001aff", "#000dff", "#0000ff", "#0d00ff", "#1a00ff", "#2600ff", "#3300ff",
-                "#4000ff", "#4d00ff", "#5900ff", "#6600ff", "#7300ff", "#8000ff", "#8d00ff", "#9900ff", "#a600ff", "#b300ff",
-                "#bf00ff", "#cc00ff", "#d900ff", "#e600ff", "#f200ff"
-            ]
-
-            $("#container #countBg").each(function(i) {
-                $(this).css('background', color[i])
-            });
-            $("#containerChild #countBg-child").each(function(i) {
-                $(this).css('background', colorChild[i])
-            });
-
             $('.hide').on('click', function() {
                 var id = $(this).attr('id');
                 $(".hideContent-"+id).toggle('fast');
