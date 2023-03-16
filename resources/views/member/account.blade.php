@@ -23,33 +23,29 @@
         </nav>
         <div class=" w-auto ">
             <div class="px-4">
-                <div class="flex py-6 max-[1000px]:flex-col">
-
-                <div class="flex items-center space-x-4 mb-4 ">
-                    @if ($user->profile_image)
-                        <img src="{{ asset('uploads/users/' .$user->profile_image)}}" class="w-12 h-12 rounded-full bg-orange-500 "></img>
-                    @else
-                        <img src="{{url('/img/profile.png')}}" class="w-12 h-12 rounded-full bg-orange-500"></img>
-                    @endif
-                    <div class="font-semibold text-orange-400 text-lg">
-                        <div>{{$user->name}}</div>
-                        <span class="text-md text-gray-500 dark:text-gray-400">{{$user->email}}</span>
+                <div class="flex py-6 max-[1000px]:flex-col justify-center items-center">
+                    <div class="flex items-center space-x-4 mb-4 ">
+                        @if ($user->profile_image)
+                            <img src="{{ asset('uploads/users/' .$user->profile_image)}}" class="w-12 h-12 rounded-full bg-orange-500 "></img>
+                        @else
+                            <img src="{{url('/img/profile.png')}}" class="w-12 h-12 rounded-full bg-orange-400"></img>
+                        @endif
+                        <div class="font-semibold text-orange-400 text-lg">
+                            <div>{{$user->name}}</div>
+                            <span class="text-md text-gray-500 dark:text-gray-400">{{$user->email}}</span>
+                        </div>
                     </div>
-                </div>
-
-                <div class=" items-center space-x-4 ml-12 font-semibold text-orange-400 text-xl mb-4 max-[1150px]:ml-8">
-                    <div>Rank :</div>
-                    <span class="text-lg text-gray-500 dark:text-gray-400">{{$user->rank->name}}</span>
-                </div>
-
-                <button type="submit"   onclick="location.href='{{ url("member/deposit/$user->id") }}'" class="max-[1150px]:justify-center max-w-xs max-[1150px]:ml-8 ml-auto text-white bg-orange-500 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-6 h-6 mr-2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                View Deposits
-                </button>
-
+                    <div class=" items-center ml-12 font-semibold text-orange-400 text-xl mb-4 max-[1150px]:ml-8">
+                        <div>Rank :</div>
+                        <span class="text-lg text-gray-500 dark:text-gray-400">{{$user->rank->name}}</span>
+                    </div>
+                    <a href="{{ url("member/deposit/$user->id") }}" class="mmax-[1150px]:justify-center max-w-xs max-[1150px]:ml-8 ml-auto text-white bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-500 font-semibold rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-6 h-6 mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span class="ml-2 text-md text-white">View Deposit</span>
+                    </a>
                 </div>
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-md text-left text-gray-700 dark:text-gray-400">

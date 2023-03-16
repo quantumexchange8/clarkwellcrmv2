@@ -1,6 +1,6 @@
 @extends('layouts.master-member')
 
-@section('title') Dashboard @endsection
+@section('title') Change Password @endsection
 
 @section('contents')
     <div class="block p-6 shadow-lg bg-[#FDFCF3] max-w-lg mx-auto">

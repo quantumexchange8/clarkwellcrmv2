@@ -23,7 +23,7 @@
             </ol>
             <div class="flex ml-auto gap-3 ">
 
-                <div class="block max-w-md px-6 py-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <div class="block max-w-md px-6 py-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mr-4">
                     <h5 class=" text-xl font-bold tracking-tight text-orange-500 dark:text-white">Total Earned:</h5>
                     <p class="font-semibold text-gray-700 dark:text-gray-400">${{ number_format($personal_total,2) }}</p>
                 </div>

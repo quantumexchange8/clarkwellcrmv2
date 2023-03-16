@@ -384,59 +384,62 @@
                         </button>
                     </div>
                     <!-- Modal body -->
-                    <div class="p-6 space-y-6 overflow-auto overflow-y-scroll">
-                        @foreach ($group_deposits as $group_deposit)
-                        <div id="accordion-flush-{{$group_deposit->id}}" data-accordion="collapse"
-                             data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
-                             data-inactive-classes="text-gray-500 dark:text-gray-400">
-                            <h2 id="accordion-flush-heading-{{$group_deposit->id}}">
-                                <button type="button"
-                                        class=" flex items-center justify-between w-full py-5 font-semibold text-left  border-b border-gray-200 dark:border-gray-700 dark:text-gray-400"
-                                        data-accordion-target="#accordion-flush-body-{{$group_deposit->id}}" aria-expanded="true"
-                                        aria-controls="accordion-flush-body-{{$group_deposit->id}}">
-                                    <div class="flex items-center space-x-4 ml-4">
-                                        @if ($group_deposit->profile_image)
-                                            <img src="{{ asset('uploads/users/' .$group_deposit->profile_image)}}" class="w-10 h-10 rounded-full bg-red-400" alt="">
-                                        @else
-                                            <img src="{{url('/img/profile.png')}}" class="w-10 h-10 rounded-full bg-orange-400" alt="">
-                                        @endif
-                                        <div
-                                            class="font-semibold dark:text-white text-orange-400 text-md"> {{$group_deposit->name}} </div>
-                                    </div>
-                                    <span class="mr-6 font-2xl">${{number_format($group_deposit->total,2)}}</span>
-                                </button>
-                            </h2>
-                            <div id="accordion-flush-body-{{$group_deposit->id}}" class="hidden" aria-labelledby="accordion-flush-heading-{{$group_deposit->id}}">
-                                @foreach ($group_deposit->deposits as $deposit)
-                                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                                        <tbody>
-                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-orange-50 dark:hover:bg-gray-600">
-                                            <th scope="row"
-                                                class="flex-inline px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                <div class="flex items-center space-x-4">
-                                                    @if ($deposit['broker']['broker_image'])
-                                                        <img src="{{ asset('uploads/brokers/' .$deposit['broker']['broker_image'])}}" class="w-10 h-10 rounded-full bg-rose-400" alt="">
+                    <div class="px-6 py-4 space-y-6 overflow-auto overflow-y-scroll">
+                        <div class="flow-root">
+                            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                                @foreach ($group_deposits as $group_deposit)
+                                    <li class="py-3 sm:py-4 accordion-flush-{{$group_deposit->id}}" data-accordion="collapse" data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
+                                        <a href="javascript:void(0)" id="accordion-flush-heading-{{$group_deposit->id}}">
+                                            <div class="flex items-center space-x-4" data-accordion-target="#accordion-flush-body-{{$group_deposit->id}}" aria-expanded="true" aria-controls="accordion-flush-body-{{$group_deposit->id}}">
+                                                <div class="flex-shrink-0">
+                                                    @if ($group_deposit->profile_image)
+                                                        <img src="{{ asset('uploads/users/' .$group_deposit->profile_image)}}" class="w-10 h-10 rounded-full bg-red-400" alt="">
                                                     @else
-                                                        <img class="w-10 h-10 rounded-full bg-rose-400" alt="">
+                                                        <img src="{{url('/img/profile.png')}}" class="w-10 h-10 rounded-full bg-orange-400" alt="">
                                                     @endif
-                                                    <div
-                                                        class="font-semibold dark:text-white text-orange-400 text-md">{{$deposit['broker']['name']}}</div>
                                                 </div>
-                                            </th>
-                                            <td class="px-6 py-4 float-right font-semibold text-gray-800 mt-3">
-                                                $ {{number_format($deposit['amount'],2)}}
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                                <div class="flex-1 min-w-0">
+                                                    <p class="font-semibold text-orange-400 text-md break-words">
+                                                        {{$group_deposit->name}}
+                                                    </p>
+                                                </div>
+                                                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                                    ${{number_format($group_deposit->total,2)}}
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <div id="accordion-flush-body-{{$group_deposit->id}}" class="hidden" aria-labelledby="accordion-flush-heading-{{$group_deposit->id}}">
+                                        @foreach($group_deposit->deposits as $deposit)
+                                            <li class="pl-6 py-2 sm:py-3">
+                                                <div class="flex items-center space-x-4">
+                                                    <div class="flex-shrink-0">
+                                                        @if ($deposit['broker']['broker_image'])
+                                                            <img src="{{ asset('uploads/brokers/' .$deposit['broker']['broker_image'])}}" class="w-10 h-10 rounded-full bg-rose-400" alt="">
+                                                        @else
+                                                            <img class="w-10 h-10 rounded-full bg-rose-400" alt="">
+                                                        @endif
+                                                    </div>
+                                                    <div class="flex-1 min-w-0">
+                                                        <p class="text-md text-[#C8C0B4] font-semibold break-words">
+                                                            {{ $deposit['broker']['name'] }}
+                                                        </p>
+                                                    </div>
+                                                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                                        ${{number_format($deposit['amount'],2) }}
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    </div>
                                 @endforeach
+                            </ul>
+                            <div class="flex items-center float-right mt-4">
+                                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    <p class="font-bold text-xl text-orange-400">Total: ${{number_format($group_deposits_total,2)}}</p>
+                                </div>
                             </div>
                         </div>
-                        @endforeach
-                        <div class="flex items-center  space-x-2  dark:border-gray-600 place-content-end mr-6">
-                            <p class="font-bold text-xl text-orange-400">Total: ${{number_format($group_deposits_total,2)}}</p>
-                        </div>
-
                     </div>
                 </div>
             </div>

@@ -17,7 +17,7 @@
                 <li>
                 <div class="flex items-center">
                     <svg aria-hidden="true" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                    <a href="#" class="ml-1  text-gray-700 hover:text-orange-600 md:ml-2 dark:text-gray-400 dark:hover:text-white"> {{$user->name}}</a>
+                    <a href="#" class="ml-1  text-gray-700 hover:text-orange-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">{{$user->name}}</a>
                 </div>
                 </li>
                 <li>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div class="w-4/12 mr-4  max-[1250px]:w-full">
-                    <select id="broker" name="filter_broker" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500">
+                    <select id="broker" name="filter_broker" class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500">
                         <option selected value="all">Select Broker</option>
                         @foreach($brokers as $broker)
                             <option {{ @$search['filter_broker'] == $broker->id ? 'selected' : '' }} value="{{ $broker->id }}">{{ $broker->name}}</option>
@@ -56,12 +56,12 @@
                     </select>
                 </div>
 
-                <button type="submit" name="submit" value="search" class="max-[1250px]:justify-center text-white bg-orange-500 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-lg p-2.5 text-center inline-flex items-center mr-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
+                <button type="submit" name="submit" value="search" class="max-[1250px]:justify-center text-white bg-orange-500 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-lg p-2.5 text-center inline-flex items-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
                 </button>
-                <button type="submit" name="submit" value="reset" class="max-[1250px]:justify-center text-white bg-rose-500 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-lg p-2.5 text-center inline-flex items-center mr-2 dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-rose-800">
+                <button type="submit" name="submit" value="reset" class="max-[1250px]:justify-center text-white bg-rose-500 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-lg p-2.5 text-center inline-flex items-center dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-rose-800">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
                     </svg>
@@ -128,16 +128,9 @@
                 </span>
                     <!-- Buttons -->
                     <div class="inline-flex mt-2">
-                        <div class="d-flex justify-content-center">
+                        <div class="d-flex justify-content-center ml-2">
                             {!! $deposits->links() !!}
-
                         </div>
-                        {{--                    <button class="px-4 py-2 text-sm font-medium text-white bg-orange-500 rounded-l hover:bg-orange-900 dark:bg-orange-800 dark:border-orange-700 dark:text-gray-400 dark:hover:bg-orange-700 dark:hover:text-white">--}}
-                        {{--                        Prev--}}
-                        {{--                    </button>--}}
-                        {{--                    <button class="px-4 py-2 text-sm font-medium text-white bg-orange-500 border-0 border-l border-orange-700 rounded-r hover:bg-orange-900 dark:bg-orange-800 dark:border-orange-700 dark:text-gray-400 dark:hover:bg-orange-700 dark:hover:text-white">--}}
-                        {{--                        Next--}}
-                        {{--                    </button>--}}
                     </div>
                 </div>
             </div>

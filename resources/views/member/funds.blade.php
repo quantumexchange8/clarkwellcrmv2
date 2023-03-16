@@ -42,24 +42,23 @@
                         </div>
                     </div>
                     <div class="w-4/12 mr-4 max-[900px]:w-full">
-                        <select id="broker" name="filter_broker" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500">
+                        <select id="broker" name="filter_broker" class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500">
                             <option selected value="all">Select Broker</option>
                             @foreach($brokers as $broker)
                                 <option {{ @$search['filter_broker'] == $broker->id ? 'selected' : '' }} value="{{ $broker->id }}">{{ $broker->name}}</option>
                             @endforeach
                         </select>
                     </div>
-                    <button type="submit" name="submit" value="search" class="max-[900px]:justify-center text-white bg-orange-500 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-lg p-2.5 text-center inline-flex items-center mr-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
+                    <button type="submit" name="submit" value="search" class="max-[900px]:justify-center text-white bg-orange-500 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-lg p-2.5 text-center inline-flex items-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                         </svg>
                     </button>
-                    <button type="submit" name="submit" value="reset" class="max-[900px]:justify-center text-white bg-rose-500 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-lg p-2.5 text-center inline-flex items-center mr-2 dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-rose-800">
+                    <button type="submit" name="submit" value="reset" class="max-[900px]:justify-center text-white bg-rose-500 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-lg p-2.5 text-center inline-flex items-center dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-rose-800">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
                         </svg>
                     </button>
-
                 </form>
 
                 <div class="relative overflow-x-auto sm:rounded-lg">
@@ -120,40 +119,31 @@
 
                         @endif
                 </span>
-
-
                 <!-- Buttons -->
                 <div class="inline-flex mt-2">
                     <div class="d-flex justify-content-center">
                         {!! $deposits->links() !!}
-
-                    </div>
-{{--                    <button class="px-4 py-2 text-sm font-medium text-white bg-orange-500 rounded-l hover:bg-orange-900 dark:bg-orange-800 dark:border-orange-700 dark:text-gray-400 dark:hover:bg-orange-700 dark:hover:text-white">--}}
-{{--                        Prev--}}
-{{--                    </button>--}}
-{{--                    <button class="px-4 py-2 text-sm font-medium text-white bg-orange-500 border-0 border-l border-orange-700 rounded-r hover:bg-orange-900 dark:bg-orange-800 dark:border-orange-700 dark:text-gray-400 dark:hover:bg-orange-700 dark:hover:text-white">--}}
-{{--                        Next--}}
-{{--                    </button>--}}
-                </div>
-                </div>
-            </div>
-            <div class="col-span-2 px-4 max-[1250px]:col-span-4 max-[1250px]:pt-8">
-                <div class="max-w-md  bg-[#FDFCF3] border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto text-center pb-4">
-                    <div class="py-12 bg-orange-500 w-full rounded-lg">
-                        <h5 class="text-3xl font-semibold tracking-tight text-slate-50">Current Funds: </h5>
-                        <h5 class=" text-2xl font-semibold tracking-tight text-slate-50">$ {{number_format($personal_total,2)}}</h5>
-                    </div>
-                        <svg class="rounded-full -mt-10 w-20 h-20 mx-auto text-orange-500 bg-[#FDFCF3] p-2 drop-shadow-2xl mb-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 5a3 3 0 015-2.236A3 3 0 0114.83 6H16a2 2 0 110 4h-5V9a1 1 0 10-2 0v1H4a2 2 0 110-4h1.17C5.06 5.687 5 5.35 5 5zm4 1V5a1 1 0 10-1 1h1zm3 0a1 1 0 10-1-1v1h1z" clip-rule="evenodd"></path><path d="M9 11H3v5a2 2 0 002 2h4v-7zM11 18h4a2 2 0 002-2v-5h-6v7z"></path></svg>
-                    <div class=" bg-[#FDFCF3] w-full rounded-lg">
-                        @foreach($broker_group as $group)
-                            <div class="p-2">
-                                <h5 class="text-xl font-semibold tracking-tight text-orange-500"> {{$group->broker->name}} </h5>
-                                <h5 class=" text-2xl font-semibold tracking-tight text-gray-800">$ {{number_format($group->amount,2)}}</h5>
-                            </div>
-                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-span-2 px-4 max-[1250px]:col-span-4 max-[1250px]:pt-8">
+            <div class="max-w-md  bg-[#FDFCF3] border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto text-center pb-4">
+                <div class="py-12 bg-orange-500 w-full rounded-lg">
+                    <h5 class="text-3xl font-semibold tracking-tight text-slate-50">Current Funds: </h5>
+                    <h5 class=" text-2xl font-semibold tracking-tight text-slate-50">$ {{number_format($personal_total,2)}}</h5>
+                </div>
+                    <svg class="rounded-full -mt-10 w-20 h-20 mx-auto text-orange-500 bg-[#FDFCF3] p-2 drop-shadow-2xl mb-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 5a3 3 0 015-2.236A3 3 0 0114.83 6H16a2 2 0 110 4h-5V9a1 1 0 10-2 0v1H4a2 2 0 110-4h1.17C5.06 5.687 5 5.35 5 5zm4 1V5a1 1 0 10-1 1h1zm3 0a1 1 0 10-1-1v1h1z" clip-rule="evenodd"></path><path d="M9 11H3v5a2 2 0 002 2h4v-7zM11 18h4a2 2 0 002-2v-5h-6v7z"></path></svg>
+                <div class=" bg-[#FDFCF3] w-full rounded-lg">
+                    @foreach($broker_group as $group)
+                        <div class="p-2">
+                            <h5 class="text-xl font-semibold tracking-tight text-orange-500"> {{$group->broker->name}} </h5>
+                            <h5 class=" text-2xl font-semibold tracking-tight text-gray-800">$ {{number_format($group->amount,2)}}</h5>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection
