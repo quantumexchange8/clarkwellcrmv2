@@ -222,6 +222,11 @@ return array(
     'approved' => 'Approved',
     'rejected' => 'Rejected',
 
+    //newly added
+    'new_password' => 'New Password',
+    'current_password' => 'Current Password',
+    'confirm_password' => 'Confirm New Password',
+
     'done' => 'Done',
     'try_again' => 'Please Try Again Later',
     'invalid_action' => 'Invalid Action',
