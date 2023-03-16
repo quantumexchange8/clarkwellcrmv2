@@ -129,7 +129,7 @@ class MemberController extends Controller
 
         if (!$user)
         {
-            Session::flash('fail_msg', 'Invalid User! Please try again later..');
+            Alert::error('Error', 'Invalid User! Please try again later..');
             return redirect()->back();
         }
 
@@ -180,7 +180,6 @@ class MemberController extends Controller
                     $user->save();
                 }
 
-//                dd($request->all());
                 if ($request->input('password') != 'Testtest__123') {
                     $update_detail['password'] = Hash::make($request->input('password'));
                 }

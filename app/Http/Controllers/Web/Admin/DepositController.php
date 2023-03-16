@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
+use Alert;
 use Session;
 
 class DepositController extends Controller
@@ -138,7 +139,7 @@ class DepositController extends Controller
         $route = app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName();
 
         if (!$deposit) {
-            Session::flash('fail_msg', 'Error, Please try again later..');
+            Alert::error('Invalid Deposit', 'Please try again later..');
             return redirect()->route($route);
         }
 
@@ -150,7 +151,7 @@ class DepositController extends Controller
             'description' => $user->name. ' has DELETED deposit with id: '. $deposit->id,
         ]);
 
-        Session::flash('success_msg', "Successfully Deleted Deposit!");
+        Alert::success('Done', "Successfully Deleted Deposit!");
         return redirect()->route($route);
     }
 }

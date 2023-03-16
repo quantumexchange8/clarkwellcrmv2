@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
+use Alert;
 use Session;
 
 class CommissionsController extends Controller
@@ -141,12 +142,12 @@ class CommissionsController extends Controller
         $route = app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName();
 
         if (!$commission) {
-            Session::flash('fail_msg', 'Error, Please try again later..');
+            Alert::error('Invalid Commission', 'Please try again later..');
             return redirect()->route($route);
         }
 
         if ($commission->status ==  Commissions::STATUS_CALCULATED) {
-            Session::flash('fail_msg', 'Error, Only commissions that not yet calculate can be delete..');
+            Alert::error('Invalid Commission', 'Only commissions that not yet calculate can be delete..');
             return redirect()->route($route);
         }
 
@@ -158,7 +159,7 @@ class CommissionsController extends Controller
             'description' => $user->name. ' has DELETED commission with id: '. $commission->id,
         ]);
 
-        Session::flash('success_msg', "Successfully Deleted Commission!");
+        Alert::success('Done', "Successfully Deleted Commission!");
         return redirect()->route($route);
     }
 }

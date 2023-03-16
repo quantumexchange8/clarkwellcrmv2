@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use Alert;
 use Session;
 
 class BrokersController extends Controller
@@ -107,7 +108,7 @@ class BrokersController extends Controller
                     'userId' => $user->id
                 ]);
 
-                Session::flash('success_msg', 'Successfully Added Broker.');
+                Alert::success('Done', 'Successfully Added Broker.');
                 return redirect()->route('broker_listing');
             }
 
@@ -142,7 +143,7 @@ class BrokersController extends Controller
         $post = $broker = Brokers::find($id);
 
         if (!$broker) {
-            Session::flash('fail_msg', 'Invalid Broker Profile! Please Try Again Later..');
+            Alert::error('Invalid Broker Profile', 'Please Try Again Later..');
             return redirect()->back();
         }
 
@@ -189,7 +190,7 @@ class BrokersController extends Controller
                 $broker->updated_at = now();
                 $broker->save();
 
-                Session::flash('success_msg', 'Successfully Updated Broker Profile');
+                Alert::success('Done', 'Successfully Updated Broker Profile');
                 return redirect()->route('broker_listing');
             }
 
@@ -210,7 +211,7 @@ class BrokersController extends Controller
         $broker = Brokers::find($broker_id);
 
         if (!$broker) {
-            Session::flash('fail_msg', 'Error, Please try again later..');
+            Alert::error('Invalid Broker Profile', 'Please try again later..');
             return redirect('broker_listing');
         }
 
@@ -218,7 +219,7 @@ class BrokersController extends Controller
             'deleted_at' => now()
         ]);
 
-        Session::flash('success_msg', "Successfully Deleted Broker Profile.");
+        Alert::success('Done', "Successfully Deleted Broker Profile.");
         return redirect()->route('broker_listing');
     }
 

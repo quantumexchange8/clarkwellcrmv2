@@ -23,22 +23,6 @@
             </a>
         @endif
     </div>
-    @if($errors->any())
-        @foreach($errors->all() as $key => $error)
-            <div id="toast-danger-{{ $key }}" class="absolute top-30 right-10 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
-                <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
-                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    <span class="sr-only">Error icon</span>
-                </div>
-                <div class="ml-3 font-normal">{{ $error }}</div>
-                <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-danger-{{ $key }}" aria-label="Close">
-
-                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                </button>
-            </div>
-        @endforeach
-    @endif
-
 
     <form method="post" action="{{ $submit }}" enctype="multipart/form-data">
         @csrf
@@ -47,19 +31,37 @@
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
                     <label for="email" class="block mb-2 font-semibold text-md text-orange-400 dark:text-white">Email Address</label>
-                    <input type="email" id="email" name="email" class="font-medium text-md placeholder:text-gray-400 text-gray-500 bg-gray-50 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" placeholder="email@company.com" value="{{ @$post->email }}" required>
+                    <input type="email" id="email" name="email" class="font-medium text-md placeholder:text-gray-400 text-gray-500 bg-gray-50 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 @error('email') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="email@company.com" value="{{ @$post->email }}">
+                    @error('email')
+                    <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div>
                     <label for="rank" class="block mb-2 font-semibold text-md text-orange-400 dark:text-white">Role</label>
                     {!! Form::select('role', $get_role_sel, @$post->role, ['class' => 'font-medium text-md text-gray-500 bg-gray-50 border border-gray-300 text-md placeholder:text-gray-400 text-gray-500 rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500']) !!}
                 </div>
                 <div>
-                    <label for="password" class="block mb-2 font-semibold text-md text-orange-400 dark:text-whit">Password</label>
-                    <input type="password" id="password" name="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" value="{{ @$post->password }}">
+                    <label for="password" class="flex block mb-2 font-semibold text-orange-400">
+                        Password <button data-popover-target="popover-description" data-popover-placement="bottom-start" type="button"><svg class="w-4 h-4 ml-2 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg><span class="sr-only"></span></button>
+                        <div data-popover id="popover-description" role="tooltip" class="absolute z-10 invisible inline-block text-sm font-light text-gray-500 transition-opacity duration-300 bg-[#FDFCF3] border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400">
+                            <div class="p-3 space-y-2">
+                                <h3 class="font-semibold text-gray-900 dark:text-white">Password type</h3>
+                                <p>Must include a-z & A-Z</p>
+                                <p>Must include a number</p>
+                                <p>Must include a special character</p>
+                                <p>Must be between 8-15 words</p>
+                            </div>
+                            <div data-popper-arrow></div>
+                        </div>
+                    </label>
+                    <input type="password" id="password" name="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('password') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="•••••••••" value="{{ @$post->password }}">
+                    @error('password')
+                    <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div>
                     <label for="confirm_password" class="block mb-2 font-semibold text-md text-orange-400 dark:text-whit">Confirm password</label>
-                    <input type="password" id="confirm_password" name="password_confirmation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" value="{{ @$post->confirm_password ?? @$post->password }}">
+                    <input type="password" id="confirm_password" name="password_confirmation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('password') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="•••••••••" value="{{ @$post->confirm_password ?? @$post->password }}">
                 </div>
             </div>
         </div>
@@ -84,19 +86,28 @@
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
                     <label for="name" class="block mb-2 font-semibold text-md text-orange-400 dark:text-white">Name</label>
-                    <input type="text" id="name" name="name" class="font-medium text-md placeholder:text-gray-400 text-gray-500 bg-gray-50 border border-gray-300  rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" placeholder="Full Name" value="{{ @$post->name }}" required>
+                    <input type="text" id="name" name="name" class="font-medium text-md placeholder:text-gray-400 text-gray-500 bg-gray-50 border border-gray-300  rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 @error('name') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="Full Name" value="{{ @$post->name }}">
+                    @error('name')
+                    <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div>
                     <label for="address" class="block mb-2 font-semibold text-md text-orange-400 dark:text-white">Address</label>
-                    <input type="text" id="address" name="address" class="font-medium text-md placeholder:text-gray-400 text-gray-500 bg-gray-50 border border-gray-300  rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" placeholder="Address" value="{{ @$post->address }}" required>
+                    <input type="text" id="address" name="address" class="font-medium text-md placeholder:text-gray-400 text-gray-500 bg-gray-50 border border-gray-300  rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 @error('address') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="Address" value="{{ @$post->address }}">
+                    @error('address')
+                    <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div>
                     <label for="rank" class="block mb-2 font-semibold text-md text-orange-400 dark:text-white">Rank</label>
                     {!! Form::select('rankId', $get_rank_sel, @$post->rankId, ['class' => 'font-medium text-md text-gray-500 bg-gray-50 border border-gray-300 text-md placeholder:text-gray-400 text-gray-500 rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500']) !!}
                 </div>
                 <div>
-                    <label for="contact" class="block mb-2 font-semibold text-md text-orange-400 dark:text-white">Contact Number</label>
-                    <input type="text" id="contact" name="contact_number" class="font-medium text-md text-gray-500 bg-gray-50 border border-gray-300 text-md placeholder:text-gray-400 text-gray-500 rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" placeholder="Ex. +6012..." value="{{ @$post->contact_number }}" required>
+                    <label for="contact_number" class="block mb-2 font-semibold text-md text-orange-400 dark:text-white">Contact Number</label>
+                    <input type="text" id="contact_number" name="contact_number" class="font-medium text-md text-gray-500 bg-gray-50 border border-gray-300 text-md placeholder:text-gray-400 text-gray-500 rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 @error('contact_number') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="Ex. +6012..." value="{{ @$post->contact_number }}">
+                    @error('contact_number')
+                    <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div>
                     <label for="countries" class="block mb-2 text-md font-semibold text-orange-400 dark:text-white">Country</label>

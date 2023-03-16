@@ -9,48 +9,46 @@
         <a href="{{ route('broker_listing') }}" class="text-xl font-semibold text-[#FFA168]">Back</a>
     </div>
 
-    @if($errors->any())
-        @foreach($errors->all() as $key => $error)
-            <div id="toast-danger-{{ $key }}" class="absolute top-30 right-10 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
-                <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
-                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    <span class="sr-only">Error icon</span>
-                </div>
-                <div class="ml-3 font-normal">{{ $error }}</div>
-                <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-danger-{{ $key }}" aria-label="Close">
-                    <span class="sr-only">Close</span>
-                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                </button>
-            </div>
-        @endforeach
-    @endif
-
     <form class="space-y-6" action="{{ $submit }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="grid gap-6 mb-6 md:grid-cols-2">
             <div>
                 <label for="name" class="block mb-2 font-bold text-[#FFA168] dark:text-white">Name</label>
-                <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name" required name="name" value="{{ @$post->name }}">
+                <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('name') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="Name" name="name" value="{{ @$post->name }}">
+                @error('name')
+                <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
+                @enderror
             </div>
             <div>
                 <label for="url" class="block mb-2 font-bold text-[#FFA168] dark:text-white">URL</label>
-                <input type="text" id="url" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="URL" required name="url" value="{{ @$post->url }}" >
+                <input type="text" id="url" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('url') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="URL" name="url" value="{{ @$post->url }}" >
+                @error('url')
+                <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
+                @enderror
             </div>
             <div>
                 <label for="description" class="block mb-2 font-bold text-[#FFA168] dark:text-white">Description</label>
-                <textarea id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Broker Description.." name="description" >{{ @$post->description }}</textarea>
-
+                <textarea id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('description') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="Broker Description.." name="description" >{{ @$post->description }}</textarea>
+                @error('description')
+                <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
+                @enderror
             </div>
             <div>
                 <label for="note" class="block mb-2 font-bold text-[#FFA168] dark:text-white">Instructor Notes</label>
-                <textarea id="note" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Broker Instructions.." name="note" >{{ @$post->note }}</textarea>
+                <textarea id="note" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('note') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="Broker Instructions.." name="note" >{{ @$post->note }}</textarea>
+                @error('note')
+                <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
+                @enderror
             </div>
             <div>
                 <label for="broker_image" class="block mb-2 font-bold text-[#FFA168] dark:text-white">Broker Image</label>
                 @if($title == 'Edit')
                     <img class="object-cover w-full rounded h-96 md:h-auto md:w-48 md:rounded-none md:rounded-lg mb-4" src="{{ asset('uploads/brokers/' .$broker->broker_image)}}" alt="">
                 @endif
-                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="broker_image_desc" id="file_input" accept=".xls" type="file" name="broker_image" value="{{ @$post->broker_image }}">
+                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 @error('broker_image') block w-full text-sm text-red-900 border border-red-500 rounded-lg cursor-pointer bg-red-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 @enderror" aria-describedby="broker_image_desc" id="file_input" accept=".xls" type="file" name="broker_image" value="{{ @$post->broker_image }}">
+                @error('broker_image')
+                <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
+                @enderror
                 <p class="mt-2 text-sm text-gray-500 dark:text-gray-300" id="broker_image_desc">SVG, PNG, JPG or GIF (MAX. 200 x 200 pixels).</p>
             </div>
             <div>
@@ -58,7 +56,10 @@
                 @if($title == 'Edit')
                     <img class="object-cover w-full rounded-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-lg mb-4" src="{{ asset('uploads/brokers/' .$broker->qr_image)}}" alt="">
                 @endif
-                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="qr_image_desc" id="file_input" type="file" name="qr_image" value="{{ @$post->qr_image }}">
+                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 @error('qr_image') block w-full text-sm text-red-900 border border-red-500 rounded-lg cursor-pointer bg-red-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 @enderror" aria-describedby="qr_image_desc" id="file_input" type="file" name="qr_image" value="{{ @$post->qr_image }}">
+                @error('qr_image')
+                <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
+                @enderror
                 <p class="mt-2 text-sm text-gray-500 dark:text-gray-300" id="qr_image_desc">SVG, PNG, JPG or GIF (MAX. 512 x 256 pixels).</p>
             </div>
         </div>

@@ -12,30 +12,21 @@
         <a href="{{ route('news_listing') }}" class="text-xl font-semibold text-[#FFA168]">Back</a>
     </div>
 
-    @if($errors->any())
-        @foreach($errors->all() as $key => $error)
-            <div id="toast-danger-{{ $key }}" class="absolute top-30 right-10 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
-                <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
-                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    <span class="sr-only">Error icon</span>
-                </div>
-                <div class="ml-3 font-normal">{{ $error }}</div>
-                <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-danger-{{ $key }}" aria-label="Close">
-                    <span class="sr-only">Close</span>
-                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                </button>
-            </div>
-        @endforeach
-    @endif
     <form class="space-y-6" action="{{ $submit }}" enctype="multipart/form-data" method="post">
         @csrf
         <div>
-            <label for="text" class="block mb-2 font-bold text-[#FFA168] dark:text-white">Title</label>
-            <input type="text" name="title" id="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="News Title" value="{{ @$post->title }}">
+            <label for="title" class="block mb-2 font-bold text-[#FFA168] dark:text-white">Title</label>
+            <input type="text" name="title" id="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white @error('title') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="News Title" value="{{ @$post->title }}">
+            @error('title')
+            <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
+            @enderror
         </div>
         <div>
-            <label for="description" class="block mb-2 font-bold text-[#FFA168] dark:text-white">Description</label>
-            <textarea id="description" name="content">{!! @$post->content !!}</textarea>
+            <label for="content" class="block mb-2 font-bold text-[#FFA168] dark:text-white">Description</label>
+            <textarea id="description" class="@error('content') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" name="content">{!! @$post->content !!}</textarea>
+            @error('content')
+            <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
+            @enderror
         </div>
         <label class="relative inline-flex items-center cursor-pointer">
             <input type="checkbox" name="visibility" value="on" class="sr-only peer" @if(@$post->visibility == 1) checked @endif>

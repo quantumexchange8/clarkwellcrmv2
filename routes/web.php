@@ -81,6 +81,7 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
             Route::controller('UserController')->group(function () {
                 Route::get('/dashboard', 'dashboard')->name('admin_dashboard');
                 Route::match(['get', 'post'],'/profile', 'profile')->name('admin_profile');
+                Route::match(['get', 'post'],'/change_password', 'change_password')->name('admin_change_password');
             });
 
             Route::controller('MemberController')->prefix('member')->group(function () {

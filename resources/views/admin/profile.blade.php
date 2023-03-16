@@ -9,22 +9,6 @@
         <a href="{{ route('admin_dashboard') }}" class="text-xl font-semibold text-[#FFA168]">Back</a>
     </div>
 
-    @if($errors->any())
-        @foreach($errors->all() as $key => $error)
-            <div id="toast-danger-{{ $key }}" class="absolute top-30 right-10 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
-                <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
-                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    <span class="sr-only">Error icon</span>
-                </div>
-                <div class="ml-3 font-normal">{{ $error }}</div>
-                <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-danger-{{ $key }}" aria-label="Close">
-                    <span class="sr-only">Close</span>
-                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                </button>
-            </div>
-        @endforeach
-    @endif
-
     <div class="flex justify-center mt-8">
         <form method="post" action="{{ $submit }}" enctype="multipart/form-data">
             @csrf
@@ -45,22 +29,31 @@
                     </div>
                     <div class="mb-6">
                         <label for="name" class="block mb-2 font-semibold text-md text-orange-400 dark:text-white">Name</label>
-                        <input type="text" id="name" name="name" class="font-semibold text-md text-gray-500 bg-gray-50 border border-gray-300  rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" placeholder="email@company.com" value="{{ $post->name }}" required>
+                        <input type="text" id="name" name="name" class="font-semibold placeholder:text-gray-400 text-md text-gray-500 bg-gray-50 border border-gray-300  rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 @error('name') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="Full Name" value="{{ $post->name }}">
+                        @error('name')
+                        <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-6">
                         <div>
                             <label for="email" class="block mb-2 font-semibold text-md text-orange-400 dark:text-white">Email Address</label>
-                            <input type="email" id="email" name="email" class="font-semibold text-md text-gray-500 bg-gray-50 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" placeholder="email@company.com" value="{{ $post->email }}" readonly>
+                            <input type="email" id="email" name="email" class="font-semibold placeholder:text-gray-400 text-md text-gray-500 bg-gray-50 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 @error('email') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="email@company.com" value="{{ $post->email }}">
+                            @error('email')
+                            <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="mb-6">
-                        <label for="contact" class="block mb-2 font-semibold text-md text-orange-400 dark:text-white">Contact Number</label>
-                        <input type="text" id="contact" name="contact_number" class="font-semibold text-md text-gray-500 bg-gray-50 border border-gray-300 font-semibold text-md text-gray-500 rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" placeholder="Ex. +6012..." value="{{$post->contact_number }}" required>
+                        <label for="contact_number" class="block mb-2 font-semibold text-md text-orange-400 dark:text-white">Contact Number</label>
+                        <input type="text" id="contact_number" name="contact_number" class="font-semibold placeholder:text-gray-400 text-md text-gray-500 bg-gray-50 border border-gray-300 font-semibold text-md text-gray-500 rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 @error('contact_number') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="Ex. +6012..." value="{{$post->contact_number }}">
+                        @error('contact_number')
+                        <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-6">
                         <div>
                             <label for="countries" class="block mb-2 font-semibold text-orange-400 dark:text-white">Country</label>
-                            {!! Form::select('country', $get_country_sel, $post->country, ['class' => 'font-semibold text-md text-gray-500 bg-gray-50 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500']) !!}
+                            {!! Form::select('country', $get_country_sel, $post->country, ['class' => 'font-semibold text-md text-gray-500 bg-gray-50 border border-gray-300 placeholder:text-gray-400 rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500']) !!}
                         </div>
                     </div>
                     <button type="submit" class="text-white rounded-lg bg-[#1A8BFF] hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-blue-700 font-semibold text-mdrounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-blue-500 dark:hover:bg-[#050708]/30 float-right">Update</button>

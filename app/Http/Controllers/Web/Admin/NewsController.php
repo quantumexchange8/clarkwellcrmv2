@@ -7,6 +7,7 @@ use App\Models\Announcements;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Alert;
 use Session;
 
 class NewsController extends Controller
@@ -61,7 +62,7 @@ class NewsController extends Controller
                     'userId' => Auth::user()->id,
                 ]);
 
-                Session::flash('success_msg', 'Successfully Created News.');
+                Alert::success('Done', 'Successfully Created News.');
                 return redirect()->route('news_listing');
             }
 
@@ -82,7 +83,7 @@ class NewsController extends Controller
         $post = $news = Announcements::find($id);
 
         if (!$news) {
-            Session::flash('fail_msg', 'Invalid News! Please try again later..');
+            Alert::error('Invalid News', 'Please try again later..');
             return redirect()->back();
         }
 
@@ -104,7 +105,7 @@ class NewsController extends Controller
                     'userId' => Auth::user()->id,
                 ]);
 
-                Session::flash('success_msg', 'Successfully Updated News.');
+                Alert::success('Done', 'Successfully Updated News.');
                 return redirect()->route('news_listing');
             }
 
@@ -125,7 +126,7 @@ class NewsController extends Controller
         $news = Announcements::find($news_id);
 
         if (!$news) {
-            Session::flash('fail_msg', 'Error, Please try again later..');
+            Alert::error('Invalid News', 'Please try again later..');
             return redirect()->route('news_listing');
         }
 
@@ -133,6 +134,6 @@ class NewsController extends Controller
             'deleted_at' => now()
         ]);
 
-        Session::flash('success_msg', "Successfully Deleted News!");
+        Alert::success('Done', "Successfully Deleted News!");
         return redirect()->route('news_listing');
     }}

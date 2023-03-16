@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
+use Alert;
 use Session;
 
 class WithdrawalController extends Controller
@@ -127,7 +128,7 @@ class WithdrawalController extends Controller
 
         if (!$user)
         {
-            Session::flash('fail_msg', 'Invalid User! Please try again..');
+            Alert::error('Invalid User', 'Please try again..');
             return redirect()->back();
         }
 
@@ -145,7 +146,7 @@ class WithdrawalController extends Controller
                 break;
         }
 
-        Session::flash('success_msg', 'Successfully Updated Withdrawal Status');
+        Alert::success('Done', 'Successfully Updated Withdrawal Status');
         return redirect()->back();
 
     }

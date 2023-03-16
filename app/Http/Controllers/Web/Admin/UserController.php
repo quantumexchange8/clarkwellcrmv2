@@ -13,7 +13,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 use Intervention\Image\Facades\Image;
 use Alert;
 use Session;
@@ -77,11 +79,13 @@ class UserController extends Controller
         if($request->isMethod('post')){
             $validator = Validator::make($request->all(), [
                 'name' => 'required|regex:/^[a-zA-Z0-9. -_]+$/u|max:100',
+                'email' => "required|unique:users,email,{$user->id},id",
                 'contact_number' => "required|unique:users,contact_number,{$user_id},id",
                 'country' => 'required',
                 'profile_image' => 'nullable|image',
             ])->setAttributeNames([
                 'name' => 'Name',
+                'email' => 'Email',
                 'contact_number' => 'Contact Number',
                 'country' => 'Country',
                 'profile_image' => 'Profile Image'
@@ -90,6 +94,7 @@ class UserController extends Controller
             if (!$validator->fails()) {
                 $user->update([
                     'name' => $request->input('name'),
+                    'email' => $request->input('email'),
                     'contact_number' => $request->input('contact_number'),
                     'country' => $request->input('country'),
                 ]);
@@ -120,5 +125,51 @@ class UserController extends Controller
             'get_country_sel' => SettingCountry::get_country_sel(),
             'submit' => route('admin_profile'),
         ])->withErrors($validator);
+    }
+
+    public function change_password(Request $request)
+    {
+        $validator = null;
+        $user_id = Auth::id();
+        $user = User::find($user_id);
+
+        if(!$user){
+            Alert::flash('Error', 'Invalid User, Please try again later.');
+            return redirect('/');
+        }
+        if($request->isMethod('post')){
+            $validator = Validator::make($request->all(), [
+                'current_password' => 'required|min:8',
+                'password' => ['required', 'string', 'max:15', 'confirmed',
+                    Password::min(8)->letters()->numbers()->mixedCase()->symbols()],
+                'password_confirmation' => 'required|same:password'
+            ])->setAttributeNames([
+                'current_password' => 'Current Password',
+                'password' => 'New Password',
+                'password_confirmation' => 'Confirm Password'
+            ]);
+            if (!$validator->fails()) {
+
+                if (!Hash::check($request->get('current_password'), $user->password)) {
+
+                    Alert::error('Invalid', 'Current Password is Invalid!');
+                    return back();
+                }
+
+                if (strcmp($request->get('current_password'), $request->password) == 0) {
+                    Alert::warning('Invalid', 'New Password cannot be same as your current password!');
+                    return back();
+                }
+
+                $user->password = Hash::make($request->password);
+                $user->save();
+
+                Alert::success('Done', 'Successfully Updated Password.');
+                return redirect()->route('admin_dashboard');
+
+            }
+        }
+
+        return view('admin.change-password')->withErrors($validator);
     }
 }
