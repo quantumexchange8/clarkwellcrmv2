@@ -17,11 +17,11 @@
                                   d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM9.624 7.084a.75.75 0 00-1.248.832l2.223 3.334H9a.75.75 0 000 1.5h2.25v1.5H9a.75.75 0 000 1.5h2.25v1.5a.75.75 0 001.5 0v-1.5H15a.75.75 0 000-1.5h-2.25v-1.5H15a.75.75 0 000-1.5h-1.599l2.223-3.334a.75.75 0 10-1.248-.832L12 10.648 9.624 7.084z"
                                   clip-rule="evenodd"/>
                         </svg>
-                        Personal Deposit
+                        @lang('public.personal_deposit')
                     </div>
                     <div class="py-3">
                         <h5 class="my-3 text-xl font-bold leading-tight text-neutral-800 dark:text-neutral-50">
-                            Total: ${{number_format($personal_total,2)}}
+                            @lang('public.total'): ${{number_format($personal_total,2)}}
                         </h5>
                         <div class="flex flex-col">
                             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -49,7 +49,7 @@
                     class="mb-3 inline-block rounded px-6 pb-2 text-md font-medium leading-normal text-primary hover:text-orange-500"
                     data-te-ripple-init
                     data-te-ripple-color="light">
-                    More...
+                    @lang('public.more')...
                 </button>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                                 d="M2.25 18a.75.75 0 000 1.5c5.4 0 10.63.722 15.6 2.075 1.19.324 2.4-.558 2.4-1.82V18.75a.75.75 0 00-.75-.75H2.25z"/>
                         </svg>
 
-                        Group Deposit
+                        @lang('public.group_deposit')
                     </div>
                     <div class="py-3">
                         <h5 class="my-3 text-xl font-bold leading-tight text-neutral-800 dark:text-neutral-50">
@@ -101,7 +101,7 @@
                         class="mb-3 inline-block rounded px-6  pb-2 text-md font-medium leading-normal text-primary hover:text-orange-500"
                         data-te-ripple-init
                         data-te-ripple-color="light">
-                        More...
+                        @lang('public.more')...
                     </button>
                 </div>
             </div>
@@ -131,7 +131,7 @@
                                     d="M2.273 5.625A4.483 4.483 0 015.25 4.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 3H5.25a3 3 0 00-2.977 2.625zM2.273 8.625A4.483 4.483 0 015.25 7.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 6H5.25a3 3 0 00-2.977 2.625zM5.25 9a3 3 0 00-3 3v6a3 3 0 003 3h13.5a3 3 0 003-3v-6a3 3 0 00-3-3H15a.75.75 0 00-.75.75 2.25 2.25 0 01-4.5 0A.75.75 0 009 9H5.25z"/>
                             </svg>
 
-                            Wallet Balance:
+                            @lang('public.wallet_balance'):
                         </h5>
                         <h5 class="my-px text-xl font-bold leading-tight text-neutral-800 dark:text-neutral-50">
                             {{$user->wallet_balance}}
@@ -155,13 +155,13 @@
                             <path stroke-linecap="round" stroke-linejoin="round"
                                   d="M6.75 6.75h.75v.75h-.75v-.75zM6.75 16.5h.75v.75h-.75v-.75zM16.5 6.75h.75v.75h-.75v-.75zM13.5 13.5h.75v.75h-.75v-.75zM13.5 19.5h.75v.75h-.75v-.75zM19.5 13.5h.75v.75h-.75v-.75zM19.5 19.5h.75v.75h-.75v-.75zM16.5 16.5h.75v.75h-.75v-.75z"/>
                         </svg>
-                        Referral Program
+                        @lang('public.referral_program')
                     </div>
                     <div>
 
                     </div>
                     <p class="my-3 ml-6 text-base text-neutral-600 dark:text-neutral-200">
-                        Share your referral link through QR link or social media portals
+                        @lang('public.share_referral')
                     </p>
                     <div class="grid grid-cols-2  max-[1185px]:grid-cols-none">
 
@@ -171,7 +171,7 @@
 
                         <div class="m-4">
                             <p class="my-4 text-lg text-neutral-600 dark:text-neutral-200 font-medium ">
-                                Referral ID: <span class="text-orange-500 font-semibold">{{$user->referral_id}}</span>
+                                @lang('public.referral_id'): <span class="text-orange-500 font-semibold">{{$user->referral_id}}</span>
                             </p>
                             <div class="flex w-full ">
                                 <button onclick="copyLink()"
@@ -252,7 +252,7 @@
                                   clip-rule="evenodd"/>
                             <path d="M18.75 6.75h1.875c.621 0 1.125.504 1.125 1.125V18a1.5 1.5 0 01-3 0V6.75z"/>
                         </svg>
-                        News & Announcements
+                        @lang('public.news_and_announcement')
                     </div>
                     <div class="py-3 truncate overflow-hidden">
                         <div class="flex flex-col">
@@ -300,7 +300,7 @@
                                   clip-rule="evenodd"/>
                         </svg>
                         <h3 class="text-2xl font-semibold dark:text-white ">
-                            Personal Deposit
+                            @lang('public.personal_deposit')
                         </h3>
 
                         <button type="button"
@@ -312,7 +312,7 @@
                                       d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                                       clip-rule="evenodd"></path>
                             </svg>
-                            <span class="sr-only">Close modal</span>
+                            <span class="sr-only">@lang('public.close_modal')</span>
                         </button>
                     </div>
                     <!-- Modal body -->
@@ -345,7 +345,7 @@
                     <!-- Modal footer -->
                     <div
                         class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600 place-content-end mr-6">
-                        <p class="font-bold text-xl text-orange-400">Total: ${{number_format($personal_total,2)}}</p>
+                        <p class="font-bold text-xl text-orange-400">@lang('public.total'): ${{number_format($personal_total,2)}}</p>
                     </div>
                 </div>
             </div>
@@ -368,7 +368,7 @@
                                 d="M2.25 18a.75.75 0 000 1.5c5.4 0 10.63.722 15.6 2.075 1.19.324 2.4-.558 2.4-1.82V18.75a.75.75 0 00-.75-.75H2.25z"/>
                         </svg>
                         <h3 class="text-2xl font-semibold dark:text-white ">
-                            Group Deposit
+                            @lang('public.group_deposit')
                         </h3>
 
                         <button type="button"
@@ -436,7 +436,7 @@
                             </ul>
                             <div class="flex items-center float-right mt-4">
                                 <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                    <p class="font-bold text-xl text-orange-400">Total: ${{number_format($group_deposits_total,2)}}</p>
+                                    <p class="font-bold text-xl text-orange-400">@lang('public.total'): ${{number_format($group_deposits_total,2)}}</p>
                                 </div>
                             </div>
                         </div>

@@ -18,12 +18,12 @@ class BonusHistories extends Model
     protected $dateFormat = 'Y-m-d H:i:s';
 
     public $sortable = [
-        'lot_size',
-        'commissions_amount',
-        'transaction_at',
-        'userId',
+        'commission_lot',
+        'bonus_amount',
+        'downline_id',
         'brokersId',
-        'status'
+        'status',
+        'from_commissions_id'
     ];
 
     public static function get_commissions_table($search, $perpage, $userId)

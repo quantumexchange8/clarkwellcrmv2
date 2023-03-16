@@ -3,9 +3,9 @@
 use App\Http\Controllers\Web\Admin\CommissionsController;
 use App\Http\Controllers\Web\Admin\DepositController;
 use App\Http\Controllers\Web\Admin\WithdrawalController;
+use App\Http\Controllers\Web\LocalizationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\AuthController;
-
 /*
     GET - Request resource
     POST - Create resource
@@ -41,6 +41,7 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
 
     // TODO: if token is valid then only perform the action below
     Route::middleware('jwt.verify')->group(function () {
+        Route::get('localization/{locale}',[LocalizationController::class, 'setLang']);
         Route::middleware('role.check:member')->prefix('member')->namespace('Member')->group(function () {
             Route::controller('UserController')->group(function () {
                 Route::get('/dashboard', 'dashboard')->name('member_dashboard');

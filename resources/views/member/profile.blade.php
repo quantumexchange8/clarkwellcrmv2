@@ -7,7 +7,7 @@
             <div class="flex justify-center max-[1200px]:justify-start ">
                 <div class="block rounded-lg bg-[#FDFCF3] border-2 text-center shadow-lg dark:bg-neutral-700 w-full">
                     <div class="py-8 px-6  dark:text-neutral-50 flex text-orange-400 font-bold text-3xl">
-                        Rank
+                        @lang('public.rank')
                     </div>
                     <div class="py-2">
                         <div class="relative inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600">
@@ -22,19 +22,19 @@
             <div class="flex justify-center col-span-2 max-[1200px]:col-span-1 max-[1200px]:justify-start ">
                 <div class="block rounded-lg bg-[#FDFCF3] border-2 shadow-lg dark:bg-neutral-700 w-full py-4">
                     <div class="pt-4 px-6 flex text-orange-400 font-bold text-3xl">
-                            Personal Details
+                        @lang('public.personal_details')
                     </div>
                     <div class="grid grid-cols-2 max-[1200px]:grid-cols-none">
                         <div class="px-12 py-4 col-span-2 max-[1200px]:col-span-1">
-                            <p class="font-medium text-gray-500 dark:text-gray-400 ">Name :</p>
+                            <p class="font-medium text-gray-500 dark:text-gray-400 "> @lang('public.name'):</p>
                             <h5 class="mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{$user->name}}</h5>
                         </div>
                         <div class="px-12 py-4 ">
-                            <p class="font-medium text-gray-500 dark:text-gray-400 ">Email :</p>
+                            <p class="font-medium text-gray-500 dark:text-gray-400 "> @lang('public.email'):</p>
                             <h5 class="mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{$user->email}}</h5>
                         </div>
                         <div class="px-12 py-4">
-                            <p class="font-medium text-gray-500 dark:text-gray-400 ">Phone Number :</p>
+                            <p class="font-medium text-gray-500 dark:text-gray-400 "> @lang('public.contact'):</p>
                             <div class="flex items-center space-x-4">
                                 <h5 class=" text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{$user->contact_number}}</h5>
                             </div>
@@ -45,7 +45,7 @@
             <div class="flex justify-center max-[1200px]:justify-start mt-3 ">
                 <div class="block  rounded-lg bg-[#FDFCF3] border-2 text-center shadow-lg dark:bg-neutral-700 w-full py-4">
                     <div class="py-4 px-6 dark:text-neutral-50 flex text-orange-400 font-bold text-3xl">
-                        Avatar
+                        @lang('public.avatar')
                     </div>
                     <div class="">
                         @if ($user->profile_image)
@@ -55,24 +55,24 @@
                         @endif
                     </div>
                     <button data-modal-target="avatarModal" data-modal-toggle="avatarModal" type="button" class="font-semibold my-6 text-white bg-orange-400 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 rounded-lg text-sm px-5 py-2.5  dark:bg-orange-600 dark:hover:bg-orange-700 focus:outline-none dark:focus:ring-orange-800">
-                        Change Avatar
+                        @lang('public.change_avatar')
                     </button>
                 </div>
             </div>
             <div class="flex justify-center col-span-2 max-[1200px]:col-span-1 max-[1200px]:justify-start mt-3 ">
                 <div class="block rounded-lg bg-[#FDFCF3] border-2 shadow-lg dark:bg-neutral-700 w-full py-4">
                     <div class="pt-4 px-6 flex text-orange-400 font-bold text-3xl">
-                            Location
+                        @lang('public.location')
                     </div>
                     <div class="grid grid-cols-2 max-[1400px]:grid-cols-none">
                         <div class="px-12 py-4 ">
-                            <p class="font-medium text-gray-500 dark:text-gray-400 ">Address :</p>
+                            <p class="font-medium text-gray-500 dark:text-gray-400 "> @lang('public.address'):</p>
                             <h5 class="mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
                                 {{$user->address}}
                             </h5>
                         </div>
                         <div class="px-12 py-4">
-                            <p class="font-medium text-gray-500 dark:text-gray-400 ">Country :</p>
+                            <p class="font-medium text-gray-500 dark:text-gray-400 "> @lang('public.country'):</p>
                             <div class="flex items-center space-x-4">
                                 @if($user->countryFlag)
                                 <span class="fi fi-{{$user->countryFlag}} "></span>
@@ -92,11 +92,11 @@
                 <!-- Modal header -->
                 <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
                     <h3 class="text-xl font-semibold text-orange-500 dark:text-white">
-                        Upload Avatar
+                        @lang('public.upload_avatar')
                     </h3>
                     <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="avatarModal">
                         <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                        <span class="sr-only">Close modal</span>
+                        <span class="sr-only"> @lang('public.close_modal')</span>
                     </button>
                 </div>
                 <!-- Modal body -->
@@ -110,19 +110,19 @@
                     @endif
                          alt="avatar">
 
-                    <label class="block my-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
+                    <label class="block my-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">@lang('public.upload_file')</label>
                     <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                            aria-describedby="file_input_help" id="file_input" name="profile_image" type="file"
                            accept="image/png, image/gif, image/jpeg" >
-                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">JPG, JPEG, OR PNG ONLY (MAX. 250x250px).</p>
+                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">@lang('public.profile_pic_req')</p>
                     @error('profile_image')
                     <div class="text-sm text-red-600">{{ $message }}</div>
                     @enderror
                 </div>
                 <!-- Modal footer -->
                 <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <button  type="submit" name="submit" data-modal-hide="avatarModal" type="button" class="text-white bg-orange-500 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">Save</button>
-                    <button data-modal-hide="avatarModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-orange-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
+                    <button  type="submit" name="submit" data-modal-hide="avatarModal" type="button" class="text-white bg-orange-500 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">@lang('public.save')</button>
+                    <button data-modal-hide="avatarModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-orange-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">@lang('public.cancel')</button>
                 </div>
 
             </div>

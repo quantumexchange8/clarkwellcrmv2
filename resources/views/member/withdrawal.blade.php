@@ -16,7 +16,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                               d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3"/>
                     </svg>
-                    Wallet
+                    @lang('public.wallet')
                 </p>
             </li>
             <li>
@@ -29,7 +29,7 @@
                     </svg>
                     <p href="#"
                        class="ml-1  text-gray-700 hover:text-orange-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">
-                        Withdrawals</p>
+                        @lang('public.withdrawals')</p>
                 </div>
             </li>
         </ol>
@@ -44,20 +44,20 @@
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                             <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                         </div>
-                        <input type="text" class="block w-full p-2.5 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-blue-500" placeholder="Select Date Start" autocomplete="off" name="created_start" value="{{ @$search['created_start'] }}">
+                        <input type="text" class="block w-full p-2.5 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-blue-500" placeholder="@lang('public.select_start_date')" autocomplete="off" name="created_start" value="{{ @$search['created_start'] }}">
                     </div>
-                    <span class="mx-4 text-gray-500">to</span>
+                    <span class="mx-4 text-gray-500">@lang('public.to')</span>
                     <div class="relative w-full">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                             <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                         </div>
-                        <input type="text" class="block w-full p-2.5 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-blue-500" placeholder="Select Date End" autocomplete="off" name="created_end" value="{{ @$search['created_end'] }}">
+                        <input type="text" class="block w-full p-2.5 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-blue-500" placeholder="@lang('public.select_end_date')" autocomplete="off" name="created_end" value="{{ @$search['created_end'] }}">
                     </div>
                 </div>
                 <div class="w-full mr-4 ">
                     <select id="status" name="filter_status"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500">
-                        <option selected value="all">Filter by Status</option>
+                        <option selected value="all">@lang('public.filter_status')</option>
                         @foreach(\App\Models\Withdrawals::listApprovalStatus() as $status)
                             <option {{ @$search['filter_status'] == $status ? 'selected' : '' }} value="{{ $status }}">{{\App\Models\Withdrawals::getApprovalStatus($status)}}</option>
                         @endforeach
@@ -83,13 +83,13 @@
                             <path d="M10 21L16 27" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M16 21L10 27" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Export as Excel
+                        @lang('public.export_excel')
                     </button>
                     <button type="button" data-modal-target="withdrawModal" data-modal-toggle="withdrawModal" class="mb-2 max-[1000px]:w-full justify-center text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg text-md px-5 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        Withdraw
+                        @lang('public.withdraw')
                     </button>
                 </div>
 
@@ -101,25 +101,25 @@
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             <div class="flex items-center">
-                                @sortablelink('created_at', 'Date')
+                                @sortablelink('created_at', trans('public.date'))
                                 <a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
                             </div>
                         </th>
                         <th scope="col" class="px-6 py-3">
                             <div class="flex items-center">
-                                @sortablelink('status', 'Withdraw Status')
+                                @sortablelink('status', trans('public.status'))
                                 <a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
                             </div>
                         </th>
                         <th scope="col" class="px-6 py-3">
                             <div class="flex items-center">
-                                @sortablelink('network', 'Method')
+                                @sortablelink('network', trans('public.method'))
                                 <a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
                             </div>
                         </th>
                         <th scope="col" class="px-6 py-3">
                             <div class="flex items-center">
-                                @sortablelink('amount', 'Amount')
+                                @sortablelink('amount', trans('public.amount'))
                                 <a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
                             </div>
                         </th>
@@ -135,22 +135,22 @@
                             @switch($data->status)
                                 @case(\App\Models\Withdrawals::STATUS_PENDING)
                                     <td class="px-6 py-4 text-primary font-semibold">
-                                        Processing
+                                    @lang('public.process')
                                     @break
 
                                 @case(\App\Models\Withdrawals::STATUS_APPROVED)
                                     <td class="px-6 py-4 text-success font-semibold">
-                                        Approved
+                                    @lang('public.approved')
                                     @break
 
                                 @case(\App\Models\Withdrawals::STATUS_REJECTED)
                                     <td class="px-6 py-4 text-danger font-semibold">
-                                        Rejected
+                                    @lang('public.rejected')
                                     @break
 
                                 @default
                                     <td class="px-6 py-4 text-primary font-semibold">
-                                        Processing
+                                        @lang('public.process')
                                         @endswitch
                                     </td>
                                     <td class="px-6 py-4">
@@ -169,11 +169,11 @@
                 <!-- Help text -->
                 <span class="text-sm text-gray-700 dark:text-gray-400">
                         @if(count($withdrawals) > 0)
-                        Showing <span
-                            class="font-semibold text-gray-900 dark:text-white">{{$withdrawals->count()}}</span> to
-                        <span class="font-semibold text-gray-900 dark:text-white">{{ $withdrawals->count() }}</span> of
+                        @lang('public.showing') <span
+                            class="font-semibold text-gray-900 dark:text-white">{{$withdrawals->count()}}</span> @lang('public.to')
+                        <span class="font-semibold text-gray-900 dark:text-white">{{ $withdrawals->count() }}</span> @lang('public.of')
                         <span class="font-semibold text-gray-900 dark:text-white">{{ $withdrawals->total() }}</span>
-                        Entries
+                        @lang('public.entries')
                     @else
                         <div
                             class="w-full flex p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800"
@@ -182,11 +182,10 @@
                                  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd"
                                                                                               d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                                                                                               clip-rule="evenodd"></path></svg>
-                            <span class="sr-only">Info</span>
+                            <span class="sr-only">@lang('public.info')</span>
                             <div>
-                                <span class="font-medium">Info :</span> There are no records yet.
+                                <span class="font-medium">@lang('public.info') :</span>@lang('public.no_record')
                             </div>
-                        </div>
 
                     @endif
                 </span>
@@ -214,10 +213,10 @@
                               d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                               clip-rule="evenodd"></path>
                     </svg>
-                    <span class="sr-only">Close modal</span>
+                    <span class="sr-only">@lang('public.close_modal')</span>
                 </button>
                 <div class="px-6 py-6 lg:px-8">
-                    <h3 class="mb-4 text-xl font-semibold text-orange-500 dark:text-white">Withdraw as USDT</h3>
+                    <h3 class="mb-4 text-xl font-semibold text-orange-500 dark:text-white">@lang('public.withdrawal_as_USDT')</h3>
                     <form method="post" action="{{ url('member/store-withdrawal') }}"
                           enctype="multipart/form-data">@csrf
                         <div class="mb-4">
@@ -237,7 +236,7 @@
                             @enderror
                             <div class="mb-4">
                                 <label for="Address"
-                                       class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Address</label>
+                                       class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">@lang('public.address')</label>
                                 <input type="text" name="address" id="address" value= "{{ old('address') }}"
                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                        placeholder="" required>
@@ -247,8 +246,8 @@
                             </div>
                             <div class="mb-4">
                                 <label for="balance"
-                                       class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Available
-                                    Balance</label>
+                                       class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">@lang('public.available_balance')
+                                </label>
                                 <input type="text" name="balance" id="balance" aria-label="disabled input 1" disabled
                                        readonly value="{{number_format($user->wallet_balance, 2)}} USDT"
                                        class="bg-gray-50 border border-gray-300 text-orange-500 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -256,15 +255,17 @@
                             </div>
                             <div class="mb-4">
                                 <label for="amount"
-                                       class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Withdraw
-                                    Amount</label>
+                                       class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">@lang('public.withdrawal_amount')
+                                </label>
                                 <div class="relative">
                                     <input type="number" name="amount" id="amount-wallet" value= "{{ old('amount') }}"
+                                           step="0.01" min="0"
+                                           onchange oninput="test()"
                                            class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
                                            required>
                                     <button onclick="maxAmount()" type="button"
                                             class="text-white absolute right-2.5 bottom-2.5 bg-orange-500 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
-                                        Max
+                                        @lang('public.max')
                                     </button>
                                     @error('amount')
                                     <div class="text-sm text-red-600">{{ $message }}</div>
@@ -272,8 +273,9 @@
                                 </div>
                             </div>
                             <div class="mb-4">
-                                <label for="fee" class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Transaction
-                                    Fee</label>
+                                <label for="fee" class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">
+                                    @lang('public.transaction_fee')
+                                </label>
                                 <input type="text" name="fee" id="fee" readonly aria-label="disabled input 2"
                                        value="{{number_format($transaction_fee,2)}} USDT"
                                        class="bg-gray-50 border border-gray-300 text-orange-500 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -284,7 +286,7 @@
                             </div>
 
                             <div class="text-center font-medium text-md mt-2 text-orange-500  dark:text-orange-700">
-                                Withdraw Total
+                                @lang('public.withdrawal_total')
                             </div>
                             <button type="submit" id="total"
                                     class="w-full text-white bg-success hover:ring-success  focus:ring-4 focus:outline-none focus:ring-success font-medium rounded-lg text-sm px-5 py-2.5 text-center">
@@ -313,20 +315,21 @@
 
 @section('script')
     <script>
-        {{--document.addEventListener("DOMContentLoaded", () => {--}}
-        {{--    document.querySelector("#amount-wallet").addEventListener("input", test);--}}
-
-        {{--    function test(e) {--}}
-        {{--        var amount = document.getElementById("amount-wallet").value;--}}
-        {{--        var fee = 0;--}}
-        {{--        fee = (amount / 100) * {{\App\Models\Settings::where('name', 'withdrawal_transaction_fee')->first()->value}};--}}
-        {{--        document.getElementById("fee").setAttribute('value', fee);--}}
-        {{--        document.getElementById("total").innerHTML = amount - fee + ' USDT';--}}
-        {{--    }--}}
-        {{--});--}}
         function maxAmount() {
-            document.getElementById("amount-wallet").setAttribute('value', {{number_format($user->wallet_balance, 2)}});
-            document.getElementById("amount-wallet").innerHTML ={{number_format($user->wallet_balance, 2)}};
+            document.getElementById("amount-wallet").value =  Number({{$user->wallet_balance}});
+            test();
         }
+
+            function test(e) {
+                var amount = document.getElementById("amount-wallet").value;
+                var fee = {{\App\Models\Settings::where('name', 'withdrawal_transaction_fee')->first()->value}};
+                document.getElementById("fee").setAttribute('value', fee);
+
+                if (amount > fee) {
+                    document.getElementById("total").innerHTML = amount - fee + ' USDT';
+                } else {
+                    document.getElementById("total").innerHTML = '0.00 USDT';
+                }
+            }
     </script>
 @endsection
