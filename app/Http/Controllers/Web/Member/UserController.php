@@ -205,14 +205,14 @@ class UserController extends Controller
         // The passwords matches
         if (!Hash::check($request->get('current_password'), $auth->password)) {
 
-            Alert::error('Invalid', 'Current Password is Invalid!');
+            Alert::error('Invalid Action', 'Current Password is Invalid!');
             return back();
         }
 
         // Current password and new password same
         if (strcmp($request->get('current_password'), $request->password) == 0) {
 
-            Alert::warning('Invalid', 'New Password cannot be same as your current password!');
+            Alert::warning('Invalid Action', 'New Password cannot be same as your current password!');
             return back();
         }
 

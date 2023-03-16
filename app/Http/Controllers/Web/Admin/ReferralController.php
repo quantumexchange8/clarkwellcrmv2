@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use Alert;
 use Session;
 
 class ReferralController extends Controller
@@ -67,7 +68,7 @@ class ReferralController extends Controller
 
         if (!$user)
         {
-            Session::flash ('fail_msg', 'Invalid User! Please Try Again Later..');
+            Alert::error ('Invalid User', 'Please Try Again Later..');
             return redirect()->back();
         }
 
@@ -159,7 +160,7 @@ class ReferralController extends Controller
                 $user->upline_referral_id = $new_parent->id;
                 $user->save();
 
-                Session::flash('success_msg', 'Successfully Transferred Customer.');
+                Alert::success('Done', 'Successfully Transferred Customer.');
                 return redirect()->route('referral_tree');
             }
         }
