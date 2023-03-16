@@ -11,7 +11,7 @@ class LocalizationController extends Controller
 {
     public function setLang($locale)
     {
-        if (!in_array($locale, ['en', 'cn'])) {
+        if (!in_array($locale, ['en', 'cn', 'tw'])) {
             abort(400);
         }
 

@@ -5,43 +5,43 @@
 @section('contents')
 
     <div class="flex flex-row">
-        <h1 class="flex-1 font-semibold text-2xl text-gray-500">Broker / {{ $title }} Broker</h1>
-        <a href="{{ route('broker_listing') }}" class="text-xl font-semibold text-[#FFA168]">Back</a>
+        <h1 class="flex-1 font-semibold text-2xl text-gray-500">@lang('public.brokers') / {{ $title }} @lang('public.broker')</h1>
+        <a href="{{ route('broker_listing') }}" class="text-xl font-semibold text-[#FFA168]">@lang('public.back')</a>
     </div>
 
     <form class="space-y-6" action="{{ $submit }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="grid gap-6 mb-6 md:grid-cols-2">
             <div>
-                <label for="name" class="block mb-2 font-bold text-[#FFA168] dark:text-white">Name</label>
+                <label for="name" class="block mb-2 font-bold text-[#FFA168] dark:text-white">@lang('public.name')</label>
                 <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('name') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="Name" name="name" value="{{ @$post->name }}">
                 @error('name')
                 <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
                 @enderror
             </div>
             <div>
-                <label for="url" class="block mb-2 font-bold text-[#FFA168] dark:text-white">URL</label>
+                <label for="url" class="block mb-2 font-bold text-[#FFA168] dark:text-white">@lang('public.url')</label>
                 <input type="text" id="url" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('url') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="URL" name="url" value="{{ @$post->url }}" >
                 @error('url')
                 <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
                 @enderror
             </div>
             <div>
-                <label for="description" class="block mb-2 font-bold text-[#FFA168] dark:text-white">Description</label>
+                <label for="description" class="block mb-2 font-bold text-[#FFA168] dark:text-white">@lang('public.description')</label>
                 <textarea id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('description') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="Broker Description.." name="description" >{{ @$post->description }}</textarea>
                 @error('description')
                 <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
                 @enderror
             </div>
             <div>
-                <label for="note" class="block mb-2 font-bold text-[#FFA168] dark:text-white">Instructor Notes</label>
+                <label for="note" class="block mb-2 font-bold text-[#FFA168] dark:text-white">@lang('public.instructor_note')</label>
                 <textarea id="note" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('note') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="Broker Instructions.." name="note" >{{ @$post->note }}</textarea>
                 @error('note')
                 <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
                 @enderror
             </div>
             <div>
-                <label for="broker_image" class="block mb-2 font-bold text-[#FFA168] dark:text-white">Broker Image</label>
+                <label for="broker_image" class="block mb-2 font-bold text-[#FFA168] dark:text-white">>@lang('public.broker_image')</label>
                 @if($title == 'Edit')
                     <img class="object-cover w-full rounded h-96 md:h-auto md:w-48 md:rounded-none md:rounded-lg mb-4" src="{{ asset('uploads/brokers/' .$broker->broker_image)}}" alt="">
                 @endif
@@ -49,10 +49,10 @@
                 @error('broker_image')
                 <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
                 @enderror
-                <p class="mt-2 text-sm text-gray-500 dark:text-gray-300" id="broker_image_desc">SVG, PNG, JPG or GIF (MAX. 200 x 200 pixels).</p>
+                <p class="mt-2 text-sm text-gray-500 dark:text-gray-300" id="broker_image_desc">@lang('public.broker_image_req')</p>
             </div>
             <div>
-                <label for="qr_image" class="block mb-2 font-bold text-[#FFA168] dark:text-white">QR Code</label>
+                <label for="qr_image" class="block mb-2 font-bold text-[#FFA168] dark:text-white">@lang('public.qr_code')</label>
                 @if($title == 'Edit')
                     <img class="object-cover w-full rounded-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-lg mb-4" src="{{ asset('uploads/brokers/' .$broker->qr_image)}}" alt="">
                 @endif
@@ -60,7 +60,7 @@
                 @error('qr_image')
                 <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
                 @enderror
-                <p class="mt-2 text-sm text-gray-500 dark:text-gray-300" id="qr_image_desc">SVG, PNG, JPG or GIF (MAX. 512 x 256 pixels).</p>
+                <p class="mt-2 text-sm text-gray-500 dark:text-gray-300" id="qr_image_desc">@lang('public.broker_image_req')</p>
             </div>
         </div>
         @if($title == 'Add')
@@ -69,7 +69,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
                 <span class="ml-2">
-                Create Broker Profile
+                @lang('public.create_broker')
             </span>
             </button>
         @elseif($title == 'Edit')
@@ -78,7 +78,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
                 <span class="ml-2">
-                Update Broker Profile
+               @lang('public.update_broker')
             </span>
             </button>
         @endif

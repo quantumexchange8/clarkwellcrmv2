@@ -286,7 +286,7 @@ class MemberController extends Controller
             'total_deposit' => $total_deposit,
             'deposits' => Deposits::get_record($search, $id, 8),
             'deposit_by_group' => $deposit_by_group,
-            'get_broker_sel' => ['' => 'Choose Broker'] + Brokers::get_broker_sel(),
+            'get_broker_sel' => ['' => trans('public.choose_broker')] + Brokers::get_broker_sel(),
         ]);
     }
     public function transfer_network(Request $request)

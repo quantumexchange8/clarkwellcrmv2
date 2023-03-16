@@ -3,7 +3,7 @@
 @section('title') {{ $title }} @endsection
 
 @section('contents')
-    <h1 class="font-semibold text-2xl text-gray-500">Referral / {{ $title }}</h1>
+    <h1 class="font-semibold text-2xl text-gray-500">@lang('public.referrals') / {{ $title }}</h1>
 
     <!-- search -->
     <div class="flex flex-col">
@@ -15,15 +15,15 @@
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     </div>
-                    <input type="text" id="search" class="block w-full p-2.5 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-blue-500" placeholder="Search Email" name="freetext" value="{{ @$search['freetext'] }}">
+                    <input type="text" id="search" class="block w-full p-2.5 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-blue-500" placeholder="@lang('public.search_email')" name="freetext" value="{{ @$search['freetext'] }}">
                 </div>
                 <div class="max-[755px]:flex max-[755px]:flex-col gap-2">
-                    <button type="submit" class="text-white bg-primary hover:bg-primary-600 border border-primary-200 focus:ring-4 focus:outline-none focus:ring-primary-600 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" name="submit" value="search">Search</button>
-                    <button type="submit" class="text-white bg-rose-500 hover:bg-rose-600 border border-rose-200 focus:ring-4 focus:outline-none focus:ring-rose-600 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-rose-800" name="submit" value="reset">Reset</button>
+                    <button type="submit" class="text-white bg-primary hover:bg-primary-600 border border-primary-200 focus:ring-4 focus:outline-none focus:ring-primary-600 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" name="submit" value="search">@lang('public.search')</button>
+                    <button type="submit" class="text-white bg-rose-500 hover:bg-rose-600 border border-rose-200 focus:ring-4 focus:outline-none focus:ring-rose-600 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-rose-800" name="submit" value="reset">@lang('public.reset')</button>
                     <a href="#" class=" text-white py-2 px-5 rounded rounded bg-[#FFA168] hover:bg-orange-400 text-md font-bold float-right">
                         <div class="flex items-center justify-center">
                             <svg class="h-6 w-6 text-white mr-2"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />  <polyline points="17 8 12 3 7 8" />  <line x1="12" y1="3" x2="12" y2="15" /></svg>
-                            <button type="submit" name="submit" value="export"  class=" text-md font-bold">Export Report</button>
+                            <button type="submit" name="submit" value="export"  class=" text-md font-bold">@lang('public.export_report')</button>
                         </div>
                     </a>
                 </div>
@@ -70,31 +70,31 @@
                         <div class="flex items-center space-x-4 ml-12">
                             <div class="font-semibold dark:text-white">
                                 <div class=" text-md">{{$member->rank->rank_short_form}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">Rank</div>
+                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.rank')</div>
                             </div>
                         </div>
                         <div class="flex items-center space-x-4 ml-12">
                             <div class="font-semibold dark:text-white">
                                 <div class=" text-md">${{number_format($member->wallet_balance, 2)}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">Wallet Balance</div>
+                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.wallet_balance')</div>
                             </div>
                         </div>
                         <div class="flex items-center space-x-4 ml-12">
                             <div class="font-semibold dark:text-white">
                                 <div class=" text-md">${{number_format($member->personalDeposits(), 2)}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">Total Personal Deposit</div>
+                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.total_personal_deposit')</div>
                             </div>
                         </div>
                         <div class="flex items-center space-x-4 ml-12">
                             <div class="font-semibold dark:text-white">
                                 <div class=" text-md">${{number_format($member->groupTotalDeposit(), 2)}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">Total Group Deposit</div>
+                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.total_group_deposit')</div>
                             </div>
                         </div>
                         <div class="flex items-center space-x-4 ml-12">
                             <div class="font-semibold dark:text-white">
                                 <div class=" text-md">{{$member->getClientsCount()}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">Direct Downlines</div>
+                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.direct_downlines')</div>
                             </div>
                         </div>
                     </a>
@@ -129,31 +129,31 @@
                         <div class="flex items-center space-x-4 ml-12">
                             <div class="font-semibold dark:text-white">
                                 <div class=" text-md">{{$member->rank->rank_short_form}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">Rank</div>
+                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.rank')</div>
                             </div>
                         </div>
                         <div class="flex items-center space-x-4 ml-12">
                             <div class="font-semibold dark:text-white">
                                 <div class=" text-md">${{number_format($member->wallet_balance, 2)}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">Wallet Balance</div>
+                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.wallet_balance')/div>
                             </div>
                         </div>
                         <div class="flex items-center space-x-4 ml-12">
                             <div class="font-semibold dark:text-white">
                                 <div class=" text-md">${{number_format($member->personalDeposits(), 2)}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">Total Personal Deposit</div>
+                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.total_personal_deposit')</div>
                             </div>
                         </div>
                         <div class="flex items-center space-x-4 ml-12">
                             <div class="font-semibold dark:text-white">
                                 <div class=" text-md">${{number_format($member->groupTotalDeposit(), 2)}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">Total Group Deposit</div>
+                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.total_group_deposit')<</div>
                             </div>
                         </div>
                         <div class="flex items-center space-x-4 ml-12">
                             <div class="font-semibold dark:text-white">
                                 <div class=" text-md">{{$member->getClientsCount()}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">Direct Downlines</div>
+                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.direct_downlines')</div>
                             </div>
                         </div>
                     </a>
@@ -166,9 +166,8 @@
     @else
         <div class="flex p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300" role="alert">
             <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-            <span class="sr-only">Info</span>
             <div>
-                <span class="font-medium">No Record Found!</span>
+                <span class="font-medium">@lang('public.info') :</span>@lang('public.no_record')
             </div>
         </div>
     @endif

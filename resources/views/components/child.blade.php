@@ -34,31 +34,31 @@
                 <div class="flex items-center space-x-4 ml-12">
                     <div class="font-semibold dark:text-white">
                         <div class=" text-md">{{$child->rank->rank_short_form}}</div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">Rank</div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.rank')</div>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4 ml-12">
                     <div class="font-semibold dark:text-white">
                         <div class=" text-md">${{number_format($child->wallet_balance, 2)}}</div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">Wallet Balance</div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.wallet_balance')</div>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4 ml-12">
                     <div class="font-semibold dark:text-white">
                         <div class=" text-md">${{number_format($child->personalDeposits(), 2)}}</div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">Total Personal Deposit</div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.total_personal_deposit')</div>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4 ml-12">
                     <div class="font-semibold dark:text-white">
                         <div class=" text-md">${{number_format($child->groupTotalDeposit(), 2)}}</div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">Total Group Deposit</div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.total_group_deposit')</div>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4 ml-12">
                     <div class="font-semibold dark:text-white">
                         <div class=" text-md">{{$child->getClientsCount()}}</div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">Direct Downlines</div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.direct_downlines')</div>
                     </div>
                 </div>
             </a>
@@ -90,31 +90,31 @@
                 <div class="flex items-center space-x-4 ml-12">
                     <div class="font-semibold dark:text-white">
                         <div class=" text-md">{{$child->rank->rank_short_form}}</div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">Rank</div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.rank')</div>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4 ml-12">
                     <div class="font-semibold dark:text-white">
                         <div class=" text-md">${{number_format($child->wallet_balance, 2)}}</div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">Wallet Balance</div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.wallet_balance')</div>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4 ml-12">
                     <div class="font-semibold dark:text-white">
                         <div class=" text-md">${{number_format($child->personalDeposits(), 2)}}</div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">Total Personal Deposit</div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.total_personal_deposit')</div>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4 ml-12">
                     <div class="font-semibold dark:text-white">
                         <div class=" text-md">${{number_format($child->groupTotalDeposit(), 2)}}</div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">Total Group Deposit</div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.total_group_deposit')</div>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4 ml-12">
                     <div class="font-semibold dark:text-white">
                         <div class=" text-md">{{$child->getClientsCount()}}</div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">Direct Downlines</div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.direct_downlines')</div>
                     </div>
                 </div>
             </a>

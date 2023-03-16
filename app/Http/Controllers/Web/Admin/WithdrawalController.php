@@ -73,7 +73,7 @@ class WithdrawalController extends Controller
             'submit' => route('report_withdrawal'),
             'records' => Withdrawals::get_record($search, 10),
             'search' =>  $search,
-            'get_status_sel' => ['' => 'Please Select Status'] + [1 => 'Processing', 2 => 'Approved', 3 => 'Rejected'],
+            'get_status_sel' => ['' => trans('public.select_status')] + [1 => 'Processing', 2 => 'Approved', 3 => 'Rejected'],
         ]);
     }
 
@@ -118,7 +118,7 @@ class WithdrawalController extends Controller
             'records' => Withdrawals::get_record($search, 10),
             'search' =>  $search,
             'users' => $users,
-            'get_status_sel' => ['' => 'Please Select Status'] + [1 => 'Processing', 2 => 'Approved', 3 => 'Rejected'],
+            'get_status_sel' => ['' => trans('public.select_status')] + [1 => 'Processing', 2 => 'Approved', 3 => 'Rejected'],
         ]);
     }
 
