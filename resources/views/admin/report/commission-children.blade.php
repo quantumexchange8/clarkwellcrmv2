@@ -2,7 +2,7 @@
 
 @section('title') Report-{{ $title }} @endsection
 @section('css')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="{{ asset('css/select2.css') }}" rel="stylesheet" />
 @endsection
 @section('contents')
     <h1 class="font-semibold text-2xl text-gray-500">Report / {{ $title }}</h1>
@@ -27,7 +27,7 @@
             @csrf
             <div class="grid gap-6 mb-6 mt-4 grid-cols-3 max-[1600px]:grid-cols-2 max-[1100px]:grid-cols-1">
                 <div class="relative">
-                    <select  class="js-example-basic-single w-full" name="user_id" >
+                    <select class="js-example-basic-single w-full" name="user_id" >
                         <option selected value="">Select User</option>
                         @foreach($users as $user)
                             <option {{  @$search['user_id'] == $user->id ? "selected" : "" }} value="{{ $user->id }}">{{ $user->name }}</option>
@@ -139,7 +139,13 @@
                             <a href="{{ route('member_details', $record->user->id) }}" class="underline text-[#1A8BFF]">{{ $record->user->name }}</a>
                         </td>
                         <td class="p-4">
-                            {{ $record->user->parent->email }}
+                            @if(empty($record->user->parent))
+                                <div class="text-center">
+                                    -
+                                </div>
+                            @else
+                                {{ $record->user->parent->email }}
+                            @endif
                         </td>
                         <td class="p-4">
                             {{ $record->user->email }}
@@ -311,18 +317,9 @@
                 var id = $(this).attr('id');
                 $(".modal-body #commission_id").val( id );
             });
+
+            $('.js-example-basic-single').select2();
         });
 
-
-
-            $(document).ready(function(e){
-                $('.js-example-basic-single').select2({
-                    placeholder: {
-                        id: null, // the value of the option
-                        text: 'Search Customer..'
-                    },
-                    allowClear: true
-                });
-            });
 </script>
 @endsection

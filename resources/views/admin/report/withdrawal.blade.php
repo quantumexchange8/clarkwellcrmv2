@@ -112,7 +112,7 @@
                             @else
                                 {{ $record->user->name }}
                             @endif
-                            @include('Admin.report.modal')
+                            @include('admin.report.modal')
                         </td>
                         <td class="p-4">
                             {{ $record->user->email }}

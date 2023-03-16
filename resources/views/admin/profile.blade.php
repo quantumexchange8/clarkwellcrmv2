@@ -31,7 +31,7 @@
             <div class="flex items-start rounded-xl bg-[#FDFCF3] shadow-lg">
                 <div class="ml-4 px-12 pb-8 md:mt-6">
                     <div class="flex flex-col items-center p-8">
-                        <div class="relative inline-flex items-center justify-center w-20 h-20 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600">
+                        <div class="relative inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600">
                             @if ($user->profile_image)
                                 <img src="{{ asset('uploads/users/' .$user->profile_image)}}" id="profile_pic_preview" class="relative inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl">
                             @else
@@ -70,3 +70,20 @@
     </div>
 
 @endsection
+
+@section('script')
+    <script>
+        let imageUpload = document.getElementById("file_input");
+        // display file name if file has been selected
+        imageUpload.onchange = function() {
+            let input = this.files[0];
+            let image = document.getElementById('profile_pic_preview');
+            if (input) {
+                image.src =URL.createObjectURL(input);
+            } else {
+                image.src = '/img/profile.png';
+            }
+        };
+    </script>
+@endsection
+

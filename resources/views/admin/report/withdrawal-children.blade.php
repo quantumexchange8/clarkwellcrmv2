@@ -2,7 +2,7 @@
 
 @section('title') Report-{{ $title }} @endsection
 @section('css')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="{{ asset('css/select2.css') }}" rel="stylesheet" />
 @endsection
 @section('contents')
     <h1 class="font-semibold text-2xl text-gray-500">Report / {{ $title }}</h1>
@@ -122,15 +122,15 @@
                             @else
                                 {{ $record->user->name }}
                             @endif
-                            @include('Admin.report.modal')
+                            @include('admin.report.modal')
                         </td>
                         <td class="p-4">
-                            @if($record->user->parent)
-                                {{ $record->user->parent->email }}
-                            @else
+                            @if(empty($record->user->parent))
                                 <div class="text-center">
                                     -
                                 </div>
+                            @else
+                                {{ $record->user->parent->email }}
                             @endif
                         </td>
                         <td class="p-4">
@@ -183,13 +183,7 @@
 
     <script>
         $(document).ready(function(e){
-            $('.js-example-basic-single').select2({
-                placeholder: {
-                    id: null, // the value of the option
-                    text: 'Search Customer..'
-                },
-                allowClear: true
-            });
+            $('.js-example-basic-single').select2();
         });
     </script>
 
