@@ -26,7 +26,7 @@ class Brokers extends Model
         if($search_text){
             foreach($freetext as $freetexts) {
                 $query->where(function ($q) use ($freetexts) {
-                    $q->where('email', 'like', '%' . $freetexts . '%');
+                    $q->where('name', 'like', '%' . $freetexts . '%');
                 });
             }
         }
