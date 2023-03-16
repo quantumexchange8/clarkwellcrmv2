@@ -221,5 +221,55 @@ return array(
     'calculated' => 'Calculated',
     'approved' => 'Approved',
     'rejected' => 'Rejected',
+
+    'done' => 'Done',
+    'try_again' => 'Please Try Again Later',
+    'invalid_action' => 'Invalid Action',
+
+    //BrokersController
+
+    'successfully_added_broker' => 'Successfully Added Broker',
+    'successfully_deleted_broker' => 'Successfully Deleted Broker Profile',
+
+    'invalid_broker' => 'Invalid Broker Profile',
+
+    //CommissionsController
+
+    'invalid_commission' => 'Invalid Commission',
+    'commission_status_error' => 'Only commissions that not yet calculate can be delete',
+    'successfully_deleted_commission' => 'Successfully Deleted Commission',
+
+
+    //DepositController
+
+    'invalid_deposit' => 'Invalid Deposit',
+    'successfully_deleted_deposit' => 'Successfully Deleted Deposit',
+
+    //MemberController
+
+    'successfully_added_member' => 'Successfully Added Member Details',
+    'invalid_user' => 'Invalid User',
+    'successfully_updated_member' => 'Successfully Updated Member Details',
+    'successfully_updated_rank' => 'Successfully Updated Ranking Details',
+
+    //NewsController
+
+    'successfully_added_news' => 'Successfully Created News',
+    'invalid_news' => 'Invalid News',
+    'successfully_updated_news' => 'Successfully Updated News',
+    'successfully_deleted_news' => 'Successfully Deleted News',
+
+    //ReferralController
+    'successfully_transfer_customer' => 'Successfully Transferred Customer',
+
+    //UserController
+
+    'successfully_updated_profile' => 'Successfully Updated Your Profile',
+    'current_password_invalid' => 'Current Password is Invalid',
+    'current_same_password' => 'New Password cannot be same as your current password',
+    'successfully_updated_password' => 'Successfully Updated Password.',
+
+    //WithdrawalController
+    'successfully_updated_withdrawal_status' => 'Successfully Updated Withdrawal Status',
 )
 ?>
