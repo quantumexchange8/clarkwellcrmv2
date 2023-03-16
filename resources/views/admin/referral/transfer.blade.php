@@ -3,7 +3,7 @@
 @section('title') Referrals-{{ $title }} @endsection
 
 @section('css')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="{{ asset('css/select2.css') }}" rel="stylesheet" />
 @endsection
 
 @section('contents')
@@ -67,13 +67,7 @@
 
     <script>
         $(document).ready(function(e){
-            $('.js-example-basic-single').select2({
-                placeholder: {
-                    id: null, // the value of the option
-                    text: 'Search Customer..'
-                },
-                allowClear: true
-            });
+            $('.js-example-basic-single').select2();
         });
     </script>
 

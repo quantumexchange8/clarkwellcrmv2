@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
+use Alert;
 use Session;
 
 class UserController extends Controller
@@ -77,7 +79,7 @@ class UserController extends Controller
                 'name' => 'required|regex:/^[a-zA-Z0-9. -_]+$/u|max:100',
                 'contact_number' => "required|unique:users,contact_number,{$user_id},id",
                 'country' => 'required',
-                'profile_image' => 'nullable|image|dimensions:max_width=250,max_height=250',
+                'profile_image' => 'nullable|image',
             ])->setAttributeNames([
                 'name' => 'Name',
                 'contact_number' => 'Contact Number',
@@ -97,13 +99,15 @@ class UserController extends Controller
                     if ($user->profile_image) {
                         File::delete('uploads/users/' . $user->profile_image);
                     }
-                    $imageName = pathinfo($profile_image->getClientOriginalName(), PATHINFO_FILENAME) .  time() . '.' . $profile_image->getClientOriginalExtension();
-                    $profile_image->move('uploads/users', $imageName);
+                    $imageName = time() . '.' . $profile_image->getClientOriginalExtension();
+                    $resize_upload = Image::make( $profile_image->path() )
+                        ->fit(250, 250);
+                    $resize_upload->save(public_path('/uploads/users/'.$imageName));
                     $user->profile_image = $imageName;
                     $user->save();
                 }
 
-                Session::flash('success_msg', 'Successfully Updated Your Profile!');
+                Alert::success('Done', 'Successfully Updated Your Profile!');
                 return redirect()->route('admin_dashboard');
             }
             $post = (object) $request->all();
