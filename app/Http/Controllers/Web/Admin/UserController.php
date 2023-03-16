@@ -72,7 +72,7 @@ class UserController extends Controller
         $post = $user = User::find($user_id);
 
         if(!$user){
-            Session::flash('fail_msg', 'Invalid User! Please try again later..');
+            Alert::flash('Invalid User', 'Please try again later..');
             return redirect()->route('admin_dashboard');
         }
 
@@ -134,7 +134,7 @@ class UserController extends Controller
         $user = User::find($user_id);
 
         if(!$user){
-            Alert::flash('Error', 'Invalid User, Please try again later.');
+            Alert::error('Invalid User', 'Please try again later.');
             return redirect('/');
         }
         if($request->isMethod('post')){
@@ -152,12 +152,12 @@ class UserController extends Controller
 
                 if (!Hash::check($request->get('current_password'), $user->password)) {
 
-                    Alert::error('Invalid', 'Current Password is Invalid!');
+                    Alert::error('Invalid Action', 'Current Password is Invalid!');
                     return back();
                 }
 
                 if (strcmp($request->get('current_password'), $request->password) == 0) {
-                    Alert::warning('Invalid', 'New Password cannot be same as your current password!');
+                    Alert::warning('Invalid Action', 'New Password cannot be same as your current password!');
                     return back();
                 }
 

@@ -128,7 +128,7 @@ class WithdrawalController extends Controller
 
         if (!$user)
         {
-            Alert::error('Invalid User', 'Please try again..');
+            Alert::error('Invalid User', 'Please try again later..');
             return redirect()->back();
         }
 

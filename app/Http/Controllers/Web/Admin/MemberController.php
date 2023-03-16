@@ -129,7 +129,7 @@ class MemberController extends Controller
 
         if (!$user)
         {
-            Alert::error('Error', 'Invalid User! Please try again later..');
+            Alert::error('Invalid User', 'Please try again later..');
             return redirect()->back();
         }
 
@@ -212,7 +212,7 @@ class MemberController extends Controller
         $validator = null;
 
         if (!$user) {
-            Session::flash('fail_msg', 'Invalid User! Please try again later..');
+            Alert::error('Invalid User', 'Please try again later..');
             return redirect()->back();
         }
 
@@ -352,7 +352,7 @@ class MemberController extends Controller
         }
 
 
-        Session::flash('fail_msg', 'Error, Please try again later..');
+        Alert::error('Invalid Action', 'Please try again later..');
         return redirect()->route('member_listing');
     }
 
