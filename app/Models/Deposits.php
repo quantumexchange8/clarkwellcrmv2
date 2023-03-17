@@ -33,7 +33,7 @@ class Deposits extends Model
 
     public static function getActiveUserDepositAmount()
     {
-        $amount = self::with('user')->whereHas('user', function($q) {
+        $amount = self::where('type', Deposits::TYPE_DEPOSIT)->with('user')->whereHas('user', function($q) {
             $q->where('status', User::STATUS_ACTIVE);
         })->sum('amount');
 

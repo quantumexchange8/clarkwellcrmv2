@@ -283,5 +283,8 @@ return array(
 
 //WithdrawalController
     'successfully_updated_withdrawal_status' => '成功更新提現狀態',
+
+    'type' => '類型',
+    'type_deposit' => '存款'
 )
 ?>

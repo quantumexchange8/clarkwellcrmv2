@@ -35,7 +35,7 @@ class UserController extends Controller
         for ($i = 0; $i < $brokers->count(); $i++) {
             $broker = $brokers[$i];
 
-            $personalTotal = Deposits::where('brokersId', $broker->id)->with('user')
+            $personalTotal = Deposits::where('brokersId', $broker->id)->where('type', Deposits::TYPE_DEPOSIT)->with('user')
                 ->whereHas('user', function($q) {
                 $q->where('status', User::STATUS_ACTIVE);
                 })->sum('amount');
