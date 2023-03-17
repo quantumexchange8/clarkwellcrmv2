@@ -161,7 +161,11 @@ class User extends Authenticatable implements JWTSubject
     public function groupTotalDeposit()
     {
         $users =$this->getChildrenIds();
-        $underlineTotal = Deposits::whereIn('userId', $users)->sum('amount');
+        $group_deposit = Deposits::whereIn('userId', $users)->where('type', Deposits::TYPE_DEPOSIT)->sum('amount');
+        $group_deposit_with= Deposits::whereIn('userId', $users)->where('type', Deposits::TYPE_WITHDRAW)
+            ->where('status', Deposits::STATUS_APPROVED)
+            ->sum('amount');
+        $underlineTotal = $group_deposit - $group_deposit_with;
         $result = $underlineTotal + $this->personalDeposits();
         return $result;
     }
@@ -176,13 +180,31 @@ class User extends Authenticatable implements JWTSubject
     }
     public function personalDepositsByBrokers()
     {
-        $brokers = $this->deposits()->with('broker')->select('brokersId', DB::raw('sum(amount) amount'))->groupBy('brokersId')->get();
+        $dep_type = Deposits::TYPE_DEPOSIT;
+        $with_type = Deposits::TYPE_WITHDRAW;
+        $status = Deposits::STATUS_APPROVED;
+        $brokers = $this->deposits()->with('broker')
+            ->select('brokersId',
+                DB::raw("sum(CASE WHEN type = $dep_type THEN amount END) as dep_amount"),
+                DB::raw("sum(CASE WHEN type = $with_type AND status = $status THEN amount END) as with_total"),
+            )
+            ->groupBy('brokersId')->get();
+        foreach($brokers as $broker) {
+            $broker->amount = $broker->dep_amount - $broker->with_total;
+        }
         return $brokers->sortBy('amount', SORT_REGULAR, true);
     }
     public function personalDeposits()
     {
-        return $this->deposits()->sum('amount');
+        $personal_deposit = $this->deposits()->where('type', Deposits::TYPE_DEPOSIT)->sum('amount');
+        $personal_withdrawed_deposit = $this->deposits()
+            ->where('type', Deposits::TYPE_WITHDRAW)
+            ->where('status', Deposits::STATUS_APPROVED)
+            ->sum('amount');
+
+        return $personal_deposit - $personal_withdrawed_deposit;
     }
+
 
     public function personalCommissions()
     {

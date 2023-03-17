@@ -24,6 +24,13 @@ class Deposits extends Model
         'transaction_at',
     ];
 
+    const STATUS_PENDING = 1;
+    const STATUS_APPROVED = 2;
+    const STATUS_REJECTED = 3;
+
+    const TYPE_DEPOSIT = 1;
+    const TYPE_WITHDRAW = 2;
+
     public static function getActiveUserDepositAmount()
     {
         $amount = self::with('user')->whereHas('user', function($q) {
