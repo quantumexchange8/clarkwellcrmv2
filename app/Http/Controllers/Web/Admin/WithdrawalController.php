@@ -128,7 +128,7 @@ class WithdrawalController extends Controller
 
         if (!$user)
         {
-            Alert::error('Invalid User', 'Please try again later..');
+            Alert::error(trans('public.invalid_action'), trans('public.try_again'));
             return redirect()->back();
         }
 
@@ -146,7 +146,7 @@ class WithdrawalController extends Controller
                 break;
         }
 
-        Alert::success('Done', 'Successfully Updated Withdrawal Status');
+        Alert::success(trans('public.done'), trans('public.successfully_updated_withdrawal_status'));
         return redirect()->back();
 
     }

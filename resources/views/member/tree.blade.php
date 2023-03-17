@@ -126,10 +126,10 @@
                                 <div class="inline-flex mb-4 hover:shadow-2xl">
                                     <a class=" bg-[#FDFCF3] border w-auto border-orange-600 p-4 shadow-lg dark:bg-neutral-700 dark:text-neutral-50 inline-flex"
                                         href="{{url("member/account/$member->id")}}">
-                                        <div class="mt-6 px-4 mr-6 inline-flex items-center justify-center w-10 h-10 bg-rose-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">
-                                            <span class="font-bold text-xl text-gray-600 dark:text-gray-300">{{$count}}</span>
-                                        </div>
                                         <div class="flex items-center space-x-4 sp">
+                                            <div class="mt-6 px-4 mr-6 inline-flex items-center justify-center w-10 h-10 bg-rose-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">
+                                                <span class="font-bold text-xl text-gray-600 dark:text-gray-300">{{$count}}</span>
+                                            </div>
                                             <div class="inline-flex items-center justify-center w-14 h-14 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">
                                                 @if ($member->profile_image)
                                                     <img src="{{ asset('uploads/users/' .$member->profile_image)}}" id="profile_pic_preview" class="inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-green-500 rounded-full shrink-0 grow-0 dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">

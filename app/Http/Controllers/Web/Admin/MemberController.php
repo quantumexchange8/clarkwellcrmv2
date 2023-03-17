@@ -103,7 +103,7 @@ class MemberController extends Controller
                     'status' => $request->input('status'),
                 ]);
 
-                Alert::success('Done', 'Successfully Added Member Details');
+                Alert::success(trans('public.done'), trans('public.successfully_added_member'));
                 return redirect()->route('member_listing');
             }
 
@@ -129,7 +129,7 @@ class MemberController extends Controller
 
         if (!$user)
         {
-            Alert::error('Invalid User', 'Please try again later..');
+            Alert::error(trans('public.invalid_user'), trans('public.try_again'));
             return redirect()->back();
         }
 
@@ -185,7 +185,7 @@ class MemberController extends Controller
                 }
                 $user->update($update_detail);
 
-                Alert::success('Done', 'Successfully Updated Member Details');
+                Alert::success(trans('public.done'), trans('public.successfully_updated_member'));
                 return redirect()->route('member_details', $id);
             }
 
@@ -212,7 +212,7 @@ class MemberController extends Controller
         $validator = null;
 
         if (!$user) {
-            Alert::error('Invalid User', 'Please try again later..');
+            Alert::error(trans('public.invalid_user'), trans('public.try_again'));
             return redirect()->back();
         }
 
@@ -230,7 +230,7 @@ class MemberController extends Controller
                     'rank_update_at' => Carbon::now()->toDateTimeString(),
                 ]);
 
-                Alert::success('Done', 'Successfully Updated Ranking Details');
+                Alert::success(trans('public.done'), trans('public.successfully_updated_rank'));
                 return redirect()->route('member_details', $id);
             }
 
@@ -352,7 +352,7 @@ class MemberController extends Controller
         }
 
 
-        Alert::error('Invalid Action', 'Please try again later..');
+        Alert::error(trans('public.invalid_action'), trans('public.try_again'));
         return redirect()->route('member_listing');
     }
 

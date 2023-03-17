@@ -14,6 +14,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
 use Alert;
@@ -33,6 +34,11 @@ class CommissionsController extends Controller
                         [
                             'file' => 'required|mimes:xlsx, csv, xls',
                             'broker_id' => ['required', Rule::in(Brokers::pluck('id')->toArray())],
+                        ], [
+                            'file.required' => 'Please UPLOAD a file to import',
+                            'file.mimes' => 'File extension must be .xlsx, .csv, .xls',
+
+                            'broker_id' => 'The Broker selection is invalid',
                         ]
                     );
                     $import = new CommissionsImport($request->input('broker_id'));
@@ -142,12 +148,12 @@ class CommissionsController extends Controller
         $route = app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName();
 
         if (!$commission) {
-            Alert::error('Invalid Commission', 'Please try again later..');
+            Alert::error(trans('public.invalid_commission'), trans('public.try_again'));
             return redirect()->route($route);
         }
 
         if ($commission->status ==  Commissions::STATUS_CALCULATED) {
-            Alert::error('Invalid Commission', 'Only commissions that not yet calculate can be delete..');
+            Alert::error(trans('public.invalid_commission'), trans('public.commission_status_error'));
             return redirect()->route($route);
         }
 
@@ -159,7 +165,7 @@ class CommissionsController extends Controller
             'description' => $user->name. ' has DELETED commission with id: '. $commission->id,
         ]);
 
-        Alert::success('Done', "Successfully Deleted Commission!");
+        Alert::success(trans('public.done'), trans('public.successfully_deleted_commission'));
         return redirect()->route($route);
     }
 }

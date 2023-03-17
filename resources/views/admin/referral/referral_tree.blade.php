@@ -135,7 +135,7 @@
                         <div class="flex items-center space-x-4 ml-12">
                             <div class="font-semibold dark:text-white">
                                 <div class=" text-md">${{number_format($member->wallet_balance, 2)}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.wallet_balance')/div>
+                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.wallet_balance')</div>
                             </div>
                         </div>
                         <div class="flex items-center space-x-4 ml-12">

@@ -72,7 +72,7 @@ class UserController extends Controller
         $post = $user = User::find($user_id);
 
         if(!$user){
-            Alert::flash('Invalid User', 'Please try again later..');
+            Alert::flash(trans('public.invalid_user'), trans('public.try_again'));
             return redirect()->route('admin_dashboard');
         }
 
@@ -112,7 +112,7 @@ class UserController extends Controller
                     $user->save();
                 }
 
-                Alert::success('Done', 'Successfully Updated Your Profile!');
+                Alert::success(trans('public.done'), trans('public.successfully_updated_profile'));
                 return redirect()->route('admin_dashboard');
             }
             $post = (object) $request->all();
@@ -134,7 +134,7 @@ class UserController extends Controller
         $user = User::find($user_id);
 
         if(!$user){
-            Alert::error('Invalid User', 'Please try again later.');
+            Alert::error(trans('public.invalid_user'), trans('public.try_again'));
             return redirect('/');
         }
         if($request->isMethod('post')){
@@ -152,19 +152,19 @@ class UserController extends Controller
 
                 if (!Hash::check($request->get('current_password'), $user->password)) {
 
-                    Alert::error('Invalid Action', 'Current Password is Invalid!');
+                    Alert::error(trans('public.invalid_action'), trans('public.current_password_invalid'));
                     return back();
                 }
 
                 if (strcmp($request->get('current_password'), $request->password) == 0) {
-                    Alert::warning('Invalid Action', 'New Password cannot be same as your current password!');
+                    Alert::warning(trans('public.invalid_action'), trans('public.current_same_password'));
                     return back();
                 }
 
                 $user->password = Hash::make($request->password);
                 $user->save();
 
-                Alert::success('Done', 'Successfully Updated Password.');
+                Alert::success(trans('public.done'), trans('public.successfully_updated_password'));
                 return redirect()->route('admin_dashboard');
 
             }

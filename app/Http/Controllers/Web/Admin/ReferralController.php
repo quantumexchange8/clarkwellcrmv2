@@ -68,7 +68,7 @@ class ReferralController extends Controller
 
         if (!$user)
         {
-            Alert::error ('Invalid User', 'Please Try Again Later..');
+            Alert::error (trans('public.invalid_user'), trans('public.try_again'));
             return redirect()->back();
         }
 
@@ -160,7 +160,7 @@ class ReferralController extends Controller
                 $user->upline_referral_id = $new_parent->id;
                 $user->save();
 
-                Alert::success('Done', 'Successfully Transferred Customer.');
+                Alert::success(trans('public.done'), trans('public.successfully_transfer_customer'));
                 return redirect()->route('referral_tree');
             }
         }

@@ -31,6 +31,11 @@ class DepositController extends Controller
                         [
                             'file' => 'required|mimes:xlsx, csv, xls',
                             'broker_id' => ['required', Rule::in(Brokers::pluck('id')->toArray())],
+                        ], [
+                            'file.required' => 'Please UPLOAD a file to import',
+                            'file.mimes' => 'File extension must be .xlsx, .csv, .xls',
+
+                            'broker_id' => 'The Broker selection is invalid',
                         ]
                     );
                     $import = new DepositsImport($request->input('broker_id'));
@@ -139,7 +144,7 @@ class DepositController extends Controller
         $route = app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName();
 
         if (!$deposit) {
-            Alert::error('Invalid Deposit', 'Please try again later..');
+            Alert::error(trans('public.invalid_deposit'), trans('public.try_again'));
             return redirect()->route($route);
         }
 
@@ -151,7 +156,7 @@ class DepositController extends Controller
             'description' => $user->name. ' has DELETED deposit with id: '. $deposit->id,
         ]);
 
-        Alert::success('Done', "Successfully Deleted Deposit!");
+        Alert::success(trans('public.done'), trans('public.successfully_deleted_deposit'));
         return redirect()->route($route);
     }
 }

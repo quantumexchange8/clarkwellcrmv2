@@ -234,6 +234,7 @@ return array(
     //BrokersController
 
     'successfully_added_broker' => 'Successfully Added Broker',
+    'successfully_updated_broker' => 'Successfully Updated Broker',
     'successfully_deleted_broker' => 'Successfully Deleted Broker Profile',
 
     'invalid_broker' => 'Invalid Broker Profile',

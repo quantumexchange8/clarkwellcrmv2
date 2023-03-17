@@ -62,7 +62,7 @@ class NewsController extends Controller
                     'userId' => Auth::user()->id,
                 ]);
 
-                Alert::success('Done', 'Successfully Created News.');
+                Alert::success(trans('public.done'), trans('public.successfully_added_news'));
                 return redirect()->route('news_listing');
             }
 
@@ -83,7 +83,7 @@ class NewsController extends Controller
         $post = $news = Announcements::find($id);
 
         if (!$news) {
-            Alert::error('Invalid News', 'Please try again later..');
+            Alert::error(trans('public.invalid_news'), trans('public.try_again'));
             return redirect()->back();
         }
 
@@ -105,7 +105,7 @@ class NewsController extends Controller
                     'userId' => Auth::user()->id,
                 ]);
 
-                Alert::success('Done', 'Successfully Updated News.');
+                Alert::success(trans('public.done'), trans('public.successfully_updated_news'));
                 return redirect()->route('news_listing');
             }
 
@@ -126,7 +126,7 @@ class NewsController extends Controller
         $news = Announcements::find($news_id);
 
         if (!$news) {
-            Alert::error('Invalid News', 'Please try again later..');
+            Alert::error(trans('public.invalid_news'), trans('public.try_again'));
             return redirect()->route('news_listing');
         }
 
@@ -134,6 +134,6 @@ class NewsController extends Controller
             'deleted_at' => now()
         ]);
 
-        Alert::success('Done', "Successfully Deleted News!");
+        Alert::success(trans('public.done'), trans('public.successfully_deleted_news'));
         return redirect()->route('news_listing');
     }}

@@ -108,7 +108,7 @@ class BrokersController extends Controller
                     'userId' => $user->id
                 ]);
 
-                Alert::success('Done', 'Successfully Added Broker.');
+                Alert::success(trans('public.done'), trans('public.successfully_added_broker'));
                 return redirect()->route('broker_listing');
             }
 
@@ -143,7 +143,7 @@ class BrokersController extends Controller
         $post = $broker = Brokers::find($id);
 
         if (!$broker) {
-            Alert::error('Invalid Broker Profile', 'Please Try Again Later..');
+            Alert::error(trans('public.invalid_broker'), trans('public.try_again'));
             return redirect()->back();
         }
 
@@ -190,7 +190,7 @@ class BrokersController extends Controller
                 $broker->updated_at = now();
                 $broker->save();
 
-                Alert::success('Done', 'Successfully Updated Broker Profile');
+                Alert::success(trans('public.done'), trans('public.successfully_updated_broker'));
                 return redirect()->route('broker_listing');
             }
 
@@ -211,7 +211,7 @@ class BrokersController extends Controller
         $broker = Brokers::find($broker_id);
 
         if (!$broker) {
-            Alert::error('Invalid Broker Profile', 'Please try again later..');
+            Alert::error(trans('public.invalid_broker'), trans('public.try_again'));
             return redirect('broker_listing');
         }
 
@@ -219,7 +219,7 @@ class BrokersController extends Controller
             'deleted_at' => now()
         ]);
 
-        Alert::success('Done', "Successfully Deleted Broker Profile.");
+        Alert::success(trans('public.done'), trans('public.successfully_deleted_broker'));
         return redirect()->route('broker_listing');
     }
 
