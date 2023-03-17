@@ -55,7 +55,8 @@ class DepositController extends Controller
             }
         }
 
-        return back()->with('success', 'User Imported Successfully.');
+        Alert::success(trans('public.done'), trans('public.import_success'));
+        return redirect()->back();
     }
 
     public function listing(Request $request)

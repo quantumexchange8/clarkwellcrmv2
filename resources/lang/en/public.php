@@ -248,6 +248,7 @@ return array(
 
     //DepositController
 
+    'import_success' => 'File Imported Successfully',
     'invalid_deposit' => 'Invalid Deposit',
     'successfully_deleted_deposit' => 'Successfully Deleted Deposit',
 
