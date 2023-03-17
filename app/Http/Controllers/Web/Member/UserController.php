@@ -66,7 +66,7 @@ class UserController extends Controller
     public function updateProfilePicture(Request $request)
     {
         $request->validate([
-            'profile_image' => 'nullable|image|dimensions:max_width=250,max_height=250',
+            'profile_image' => 'nullable|image',
         ]);
         $user = Auth::user();
         $profile_image = $request->file('profile_image');
@@ -80,6 +80,7 @@ class UserController extends Controller
             $user->save();
         }
         $rank = $user->rank;
+        Alert::success(trans('public.done'), trans('public.successfully_updated_profile'));
         return view('member/profile', compact('user', 'rank'));
     }
 

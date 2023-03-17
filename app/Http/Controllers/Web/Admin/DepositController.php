@@ -32,10 +32,10 @@ class DepositController extends Controller
                             'file' => 'required|mimes:xlsx, csv, xls',
                             'broker_id' => ['required', Rule::in(Brokers::pluck('id')->toArray())],
                         ], [
-                            'file.required' => 'Please UPLOAD a file to import',
-                            'file.mimes' => 'File extension must be .xlsx, .csv, .xls',
+                            'file.required' => trans('public.file_required'),
+                            'file.mimes' => trans('public.file_mimes'),
 
-                            'broker_id' => 'The Broker selection is invalid',
+                            'broker_id' => trans('public.broker_id'),
                         ]
                     );
                     $import = new DepositsImport($request->input('broker_id'));
@@ -43,7 +43,7 @@ class DepositController extends Controller
                     $errorMsg = [];
                     if (count($import->failures()) > 0) {
                         foreach ($import->failures() as $failure) {
-                            $tempMsg = 'Error on row ' . ' ' . $failure->row() . '. ' . $failure->errors()[0];
+                            $tempMsg = trans('public.import_error') . ' ' . $failure->row() . '. ' . $failure->errors()[0];
                             array_push($errorMsg, $tempMsg);
                         }
                         return back()->withErrors($errorMsg);

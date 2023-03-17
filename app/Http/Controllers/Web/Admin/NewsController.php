@@ -49,8 +49,8 @@ class NewsController extends Controller
                 'title' => 'required|max:255',
                 'content' => 'required',
             ])->setAttributeNames([
-                'title' => 'Title',
-                'content' => 'Description',
+                'title' => trans('public.title'),
+                'content' => trans('public.description'),
             ]);
 
             if (!$validator->fails()) {
@@ -92,8 +92,8 @@ class NewsController extends Controller
                 'title' => 'required',
                 'content' => 'required',
             ])->setAttributeNames([
-                'title' => 'Title',
-                'content' => 'Description',
+                'title' => trans('public.title'),
+                'content' => trans('public.description'),
             ]);
 
             if (!$validator->fails()) {

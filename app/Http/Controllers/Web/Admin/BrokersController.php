@@ -73,14 +73,14 @@ class BrokersController extends Controller
                 'broker_image' => 'required|image|dimensions:max_width=256,max_height=256',
                 'qr_image' => 'required|image|dimensions:max_width=256,max_height=256',
             ], [
-                'broker_image.dimensions' => 'The broker image required image with 200x200 pixels.',
-                'qr_image.display_length' => 'The maximum dimensions of qr_image is 512x256 pixels',
+                'broker_image.dimensions' => trans('public.broker_image_dimensions'),
+                'qr_image.display_length' => trans('public.qr_image_display_length'),
             ])->setAttributeNames([
-                'url' => 'URL',
-                'description' => 'Description',
-                'note' => 'Instructor Notes',
-                'broker_image' => 'Broker Image',
-                'qr_image' => 'QR Code',
+                'url' => trans('public.url'),
+                'description' => trans('public.description'),
+                'note' => trans('public.instructor_note'),
+                'broker_image' => trans('public.broker_image'),
+                'qr_image' => trans('public.qr_code'),
             ]);
 
             if (!$validator->fails()) {
@@ -156,14 +156,14 @@ class BrokersController extends Controller
                 'broker_image' => 'image|dimensions:max_width=256,max_height=256',
                 'qr_image' => 'image|dimensions:max_width=256,max_height=256',
             ], [
-                'broker_image.dimensions' => 'The broker image required image with 200x200 pixels.',
-                'qr_image.display_length' => 'The maximum dimensions of qr_image is 512x256 pixels',
+                'broker_image.dimensions' => trans('public.broker_image_dimensions'),
+                'qr_image.display_length' => trans('public.qr_image_display_length'),
             ])->setAttributeNames([
-                'url' => 'URL',
-                'description' => 'Description',
-                'note' => 'Instructor Notes',
-                'broker_image' => 'Broker Image',
-                'qr_image' => 'QR Code',
+                'url' => trans('public.url'),
+                'description' => trans('public.description'),
+                'note' => trans('public.instructor_note'),
+                'broker_image' => trans('public.broker_image'),
+                'qr_image' => trans('public.qr_code'),
             ]);
 
             if (!$validator->fails()) {

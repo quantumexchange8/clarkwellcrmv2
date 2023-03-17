@@ -286,5 +286,18 @@ return array(
 
     //WithdrawalController
     'successfully_updated_withdrawal_status' => 'Successfully Updated Withdrawal Status',
+
+    //Custom Attribute Names or Messages
+    'broker_image_dimensions' => 'The broker image required image with 200x200 pixels.',
+    'qr_image_display_length' => 'The maximum dimensions of qr_image is 512x256 pixels',
+    'file_required' => 'Please UPLOAD a file to import',
+    'file_mimes' => 'File extension must be .xlsx, .csv, .xls',
+    'broker_id' => 'The Broker selection is invalid',
+    'import_error' => 'Error on row ',
+    'transaction_date_required' => 'The transaction date field is required.',
+    'transaction_date_regex' => 'The transaction date field format is invalid.',
+    'lot_size_required' => 'The lot size field is required.',
+    'lot_size_numeric' => 'The lot size field must be numeric.',
+    'profile_image' => 'Profile Image',
 )
 ?>

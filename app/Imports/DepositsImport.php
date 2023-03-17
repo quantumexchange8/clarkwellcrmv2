@@ -63,8 +63,8 @@ class DepositsImport implements ToCollection, WithHeadingRow, withValidation, Sk
     public function customValidationMessages()
     {
         return [
-            'transaction_date.required' => 'The transaction date field is required.',
-            'transaction_date.regex' => 'The transaction date field format is invalid.',
+            'transaction_date.required' => trans('public.transaction_date_required'),
+            'transaction_date.regex' => trans('public.transaction_date_regex'),
         ];
     }
 

@@ -77,16 +77,16 @@ class MemberController extends Controller
                 'status' => 'required',
 //                'profile_image' => 'nullable|image',
             ])->setAttributeNames([
-                'name' => 'Name',
-                'contact_number' => 'Contact Number',
-                'email' => 'Email',
-                'password' => 'Password',
-                'confirm_password' => 'Confirm Password',
-                'address' => 'Address',
-                'role' => 'Role',
-                'rankId' => 'Rank',
-                'country' => 'Country',
-                'status' => 'Status',
+                'name' => trans('public.name'),
+                'contact_number' => trans('public.contact'),
+                'email' => trans('public.email'),
+                'password' => trans('public.password'),
+                'confirm_password' => trans('public.password_confirmation'),
+                'address' => trans('public.address'),
+                'role' => trans('public.role'),
+                'rankId' => trans('public.rank'),
+                'country' => trans('public.country'),
+                'status' => trans('public.status'),
 //                'profile_image' => 'Profile Image'
             ]);
 
@@ -147,14 +147,14 @@ class MemberController extends Controller
                 'status' => 'required',
                 'profile_image' => 'nullable|image',
             ])->setAttributeNames([
-                'name' => 'Name',
-                'contact_number' => 'Contact Number',
-                'email' => 'Email',
-                'password' => 'Password',
-                'rankId' => 'Rank',
-                'country' => 'Country',
-                'status' => 'Status',
-                'profile_image' => 'Profile Image'
+                'name' => trans('public.name'),
+                'contact_number' => trans('public.contact'),
+                'email' => trans('public.email'),
+                'password' => trans('public.password'),
+                'rankId' => trans('public.rank'),
+                'country' => trans('public.country'),
+                'status' => trans('public.status'),
+                'profile_image' => trans('public.profile_image'),
             ]);
 
             if (!$validator->fails()) {

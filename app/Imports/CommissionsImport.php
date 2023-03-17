@@ -65,10 +65,10 @@ class CommissionsImport implements ToCollection, WithHeadingRow, withValidation,
     public function customValidationMessages()
     {
         return [
-            'transaction_date.required' => 'The transaction date field is required.',
-            'transaction_date.regex' => 'The transaction date field format is invalid.',
-            'lot_size.required' => 'The lot size field is required.',
-            'lot_size.numeric' => 'The lot size field must be numeric.',
+            'transaction_date.required' => trans('public.transaction_date_required'),
+            'transaction_date.regex' => trans('public.transaction_date_regex'),
+            'lot_size.required' => trans('public.lot_size_required'),
+            'lot_size.numeric' => trans('public.lot_size_numeric'),
         ];
     }
 

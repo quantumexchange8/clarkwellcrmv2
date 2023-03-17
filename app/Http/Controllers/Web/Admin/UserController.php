@@ -84,11 +84,11 @@ class UserController extends Controller
                 'country' => 'required',
                 'profile_image' => 'nullable|image',
             ])->setAttributeNames([
-                'name' => 'Name',
-                'email' => 'Email',
-                'contact_number' => 'Contact Number',
-                'country' => 'Country',
-                'profile_image' => 'Profile Image'
+                'name' => trans('public.name'),
+                'email' => trans('public.email'),
+                'contact_number' => trans('public.contact'),
+                'country' => trans('public.country'),
+                'profile_image' => trans('public.profile_image'),
             ]);
 
             if (!$validator->fails()) {
@@ -144,9 +144,9 @@ class UserController extends Controller
                     Password::min(8)->letters()->numbers()->mixedCase()->symbols()],
                 'password_confirmation' => 'required|same:password'
             ])->setAttributeNames([
-                'current_password' => 'Current Password',
-                'password' => 'New Password',
-                'password_confirmation' => 'Confirm Password'
+                'current_password' => trans('public.current_password'),
+                'password' => trans('public.new_password'),
+                'password_confirmation' => trans('public.confirm_password'),
             ]);
             if (!$validator->fails()) {
 
