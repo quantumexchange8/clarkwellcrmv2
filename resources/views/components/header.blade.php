@@ -9,8 +9,27 @@
         <!-- Icon -->
 
         <button id="dropdownDefaultButton" data-dropdown-toggle="dropdownLanguage" class="text-gray-500 font-bolded text-md px-4 py-2.5 text-center inline-flex items-center" type="button">
-            <span class="fi fi-us mr-3 "></span>
-            EN
+            @switch(app()->getLocale())
+                @case('en')
+                    <span class="fi fi-us mr-3 "></span>
+                    EN
+                    @break
+
+                @case('cn')
+                    <span class="fi fi-cn mr-3 "></span>
+                    简体字
+                    @break
+
+
+                @case('tw')
+                    <span class="fi fi-tw mr-3 "></span>
+                    繁体字
+                    @break
+
+                @default
+                    <span class="fi fi-us mr-3 "></span>
+                    EN
+            @endswitch
         </button>
         <div id="dropdownLanguage" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
