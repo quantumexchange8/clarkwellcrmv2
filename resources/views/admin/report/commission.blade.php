@@ -14,7 +14,7 @@
             </div>
         @endforeach
     @endif
-    <h1 class="font-semibold text-2xl text-gray-500">@lang('public.reports') / {{ $title }}</h1>
+    <h1 class="font-semibold text-2xl text-gray-500">@lang('public.reports') / @lang('public.commissions')</h1>
 
     <!-- component -->
     <div class="flex flex-col">

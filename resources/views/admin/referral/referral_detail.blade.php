@@ -4,7 +4,7 @@
 
 @section('contents')
     <div class="flex flex-row">
-        <h1 class="flex-1 font-semibold text-lg text-gray-500">Referral / {{ $title }} / {{ $user->name }}</h1>
+        <h1 class="flex-1 font-semibold text-lg text-gray-500">@lang('public.referrals') / @lang('public.referrals_tree')  / {{ $user->name }}</h1>
     </div>
 
     <div class="grid grid-cols-2 gap-4 mt-8">
@@ -26,7 +26,7 @@
                 <div class="ml-6">
                     <h2 class="font-semibold text-lg text-[#FFA168] mb-4">{{ $user->rank->name }}</h2>
                     <span class="text-sm text-gray-500">
-                            Rank
+                            @lang('public.rank')
                     </span>
                 </div>
             </a>
@@ -34,13 +34,13 @@
         <div>
             <a href="javascript:void(0)" class="grid grid-cols-2 gap-4 block max-w-lg p-6 bg-[#FDFCF3] border border-orange-300 rounded-lg shadow hover:bg-orange-100 dark:bg-orange-800 dark:border-orange-700 dark:hover:bg-orange-700">
                 <div class="">
-                    <h2 class="font-semibold text-lg text-gray-500 mb-2">Total Direct Clients</h2>
+                    <h2 class="font-semibold text-lg text-gray-500 mb-2">@lang('public.total_clients')</h2>
                     <span class="font-semibold text-lg text-[#FFA168]">
                             {{ $user->getClientsCount() }}
                     </span>
                 </div>
                 <div class="ml-12">
-                    <h2 class="font-semibold text-lg text-gray-500 mb-2">Total Downlines</h2>
+                    <h2 class="font-semibold text-lg text-gray-500 mb-2">@lang('public.total_downline')</h2>
                     <span class="font-semibold text-lg text-[#FFA168]">
                             {{ $user->getDownlinesCount() }}
                     </span>
@@ -54,25 +54,25 @@
             <thead class="border-b-4 text-sm text-gray-700 uppercase dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3 bg-[#FDFCF3] dark:bg-gray-800">
-                    Broker
+                    @lang('public.broker')
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Total Personal Deposit
+                    @lang('public.total_personal_deposit')
                 </th>
                 <th scope="col" class="px-6 py-3 bg-[#FDFCF3] dark:bg-gray-800">
-                    Total Group Deposit
+                    @lang('public.total_group_deposit')
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Total Rebate for Personal Deposit
+                    @lang('public.total_rebate_personal_deposit')
                 </th>
                 <th scope="col" class="px-6 py-3 bg-[#FDFCF3] dark:bg-gray-800">
-                    Total Rebate for Group Deposit
+                    @lang('public.total_rebate_group_deposit')
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Total Downlines
+                    @lang('public.total_downline')
                 </th>
                 <th scope="col" class="px-6 py-3 bg-[#FDFCF3] dark:bg-gray-800">
-                    Total Direct Clients
+                    @lang('public.total_clients')
                 </th>
             </tr>
             </thead>
@@ -106,7 +106,7 @@
 
             <tr class="border-t-4 border-gray-200 dark:border-gray-700 font-bold text-lg">
                 <th scope="row" class="px-6 py-4 font-bold text-orange-600 whitespace-nowrap bg-[#FDFCF3] dark:text-white dark:bg-gray-800">
-                    Total:
+                    @lang('public.total'):
                 </th>
                 <td class="px-6 py-4">
                     ${{number_format( $total['total_personal'],2)}}

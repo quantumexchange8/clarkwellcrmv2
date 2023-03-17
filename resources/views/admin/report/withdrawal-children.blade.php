@@ -5,7 +5,7 @@
     <link href="{{ asset('css/select2.css') }}" rel="stylesheet" />
 @endsection
 @section('contents')
-    <h1 class="font-semibold text-2xl text-gray-500">@lang('public.reports') / {{ $title }}</h1>
+    <h1 class="font-semibold text-2xl text-gray-500">@lang('public.reports') / @lang('public.withdrawal_downline') </h1>
 
     <!-- component -->
     <div class="flex flex-col">

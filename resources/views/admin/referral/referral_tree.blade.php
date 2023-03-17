@@ -3,7 +3,7 @@
 @section('title') {{ $title }} @endsection
 
 @section('contents')
-    <h1 class="font-semibold text-2xl text-gray-500">@lang('public.referrals') / {{ $title }}</h1>
+    <h1 class="font-semibold text-2xl text-gray-500">@lang('public.referrals') / @lang('public.referrals_tree')</h1>
 
     <!-- search -->
     <div class="flex flex-col">

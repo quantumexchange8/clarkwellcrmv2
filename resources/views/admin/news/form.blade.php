@@ -8,7 +8,7 @@
 
 @section('contents')
     <div class="flex flex-row">
-        <h1 class="flex-1 font-semibold text-2xl text-gray-500">@lang('public.news') / {{ $title }}</h1>
+        <h1 class="flex-1 font-semibold text-2xl text-gray-500">@lang('public.news') / {{ $title == 'Add' ? trans('public.create_news') : trans('public.update_news') }}</h1>
         <a href="{{ route('news_listing') }}" class="text-xl font-semibold text-[#FFA168]">@lang('public.back')</a>
     </div>
 

@@ -6,7 +6,7 @@
 
     <div class="flex flex-row">
         @if($title == 'Add')
-            <h1 class="flex-1 font-semibold text-2xl text-gray-500">@lang('public.members') / {{ $title }}</h1>
+            <h1 class="flex-1 font-semibold text-2xl text-gray-500">@lang('public.members') / {{ $title == 'Add' ? trans('public.add_member') : trans('public.update_member') }}</h1>
             <a href="{{ route('member_listing') }}" class=" font-semibold text-md text-gray-500 rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2">
                 <svg class="h-4 w-4 text-white"  fill="none" viewBox="0 0 24 24" stroke="#fb923c">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>

@@ -231,6 +231,14 @@ return array(
     'try_again' => 'Please Try Again Later',
     'invalid_action' => 'Invalid Action',
 
+    //admin title
+    'deposit_downline' => 'Deposits - Downline',
+    'commission_downline' => 'Commissions - Downline',
+    'withdrawal_downline' => 'Withdrawals - Downline',
+    'add_member' => 'Add Member',
+    'update_member' => 'Update Member',
+    'network_transfer' => 'Network Transfer',
+
     //BrokersController
 
     'successfully_added_broker' => 'Successfully Added Broker',

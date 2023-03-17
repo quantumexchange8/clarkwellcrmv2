@@ -7,7 +7,7 @@
 @endsection
 
 @section('contents')
-    <h1 class="font-semibold text-2xl text-gray-500 mb-2">@lang('public.referrals') / {{ $title }}</h1>
+    <h1 class="font-semibold text-2xl text-gray-500 mb-2">@lang('public.referrals') / @lang('public.network_transfer')</h1>
     <p class="text-sm text-gray-400">@lang('public.transfer_message')</p>
     @if($errors->any())
         @foreach($errors->all() as $key => $error)
