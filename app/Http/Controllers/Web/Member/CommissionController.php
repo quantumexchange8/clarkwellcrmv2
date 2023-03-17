@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\Member;
 
+use App\Exports\ExportBonusHistories;
 use App\Exports\ExportCommissions;
 use App\Http\Controllers\Controller;
 use App\Models\BonusHistories;
@@ -75,8 +76,8 @@ class CommissionController extends Controller
                     ]]);
                     break;
                 case 'export':
-//                    $now = Carbon::now()->format('YmdHis');
-//                    return Excel::download(new ExportCommissions($userIds,  $request->input('freetext'), $request->input('transaction_start'), $request->input('filter_broker'), null, $request->input('transaction_end')), $now . '-commissions-records.xlsx');
+                    $now = Carbon::now()->format('YmdHis');
+                    return Excel::download(new ExportBonusHistories(BonusHistories::get_commissions_table($search, $user->id)), $now . '-commissions-records.xlsx');
                 case 'reset':
                     session()->forget('commissions_network_search');
                     break;
@@ -87,7 +88,7 @@ class CommissionController extends Controller
         $search = session('commissions_network_search') ? session('commissions_network_search') : $search;
         return view('member/network', [
             'submit' => route('network_commissions_listing'),
-            'commissions' => BonusHistories::get_commissions_table($search, 10, $user->id),
+            'commissions' => BonusHistories::get_commissions_table($search, $user->id)->paginate(10),
             'brokers' => Brokers::all(),
             'group_total' => $group_total,
             'search' =>  $search,

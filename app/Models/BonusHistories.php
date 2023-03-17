@@ -26,7 +26,7 @@ class BonusHistories extends Model
         'from_commissions_id'
     ];
 
-    public static function get_commissions_table($search, $perpage, $userId)
+    public static function get_commissions_table($search, $userId)
     {
         $query = BonusHistories::sortable()->with('commission')->with('user')->where('upline_id', $userId)->where('downline_id', '!=', $userId);
 
@@ -52,7 +52,7 @@ class BonusHistories extends Model
 
         }
 
-        return $query->paginate($perpage);
+        return $query;
     }
 
     public function user()
