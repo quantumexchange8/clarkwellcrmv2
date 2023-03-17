@@ -299,5 +299,8 @@ return array(
     'lot_size_required' => 'The lot size field is required.',
     'lot_size_numeric' => 'The lot size field must be numeric.',
     'profile_image' => 'Profile Image',
+
+    'type' => 'Type',
+    'type_deposit' => 'Deposit',
 )
 ?>
