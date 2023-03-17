@@ -147,7 +147,7 @@
                         <div class="flex items-center space-x-4 ml-12">
                             <div class="font-semibold dark:text-white">
                                 <div class=" text-md">${{number_format($member->groupTotalDeposit(), 2)}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.total_group_deposit')<</div>
+                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.total_group_deposit')</div>
                             </div>
                         </div>
                         <div class="flex items-center space-x-4 ml-12">
