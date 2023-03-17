@@ -3,9 +3,19 @@
 @section('title') Member Deposit @endsection
 
 @section('contents')
-
+    @if($errors->any())
+        @foreach($errors->all() as $key => $error)
+            <div class="flex p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
+                <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                <span class="sr-only">@lang('public.error_icon')</span>
+                <div>
+                    <span class="font-medium">{{ $error }}</span>
+                </div>
+            </div>
+        @endforeach
+    @endif
     <div class="flex flex-row">
-        <h1 class="flex-1 font-semibold text-2xl text-gray-500">@lang('public.members') / {{ $user->name }}'s @lang('public.deposits')</h1>
+        <h1 class="flex-1 font-semibold text-2xl text-gray-500">@lang('public.members') / {{ $user->name }} - @lang('public.deposits')</h1>
         <a href="{{ route('member_details', $user->id) }}" class="font-semibold text-xl text-[#FFA168]">@lang('public.back')</a>
     </div>
     <div class="mt-8 grid grid-flow-row grid-flow-cols grid-cols-3 gap-3 my-4 max-[1200px]:grid-rows-auto max-[1200px]:grid-cols-none ">
@@ -28,7 +38,7 @@
                     <tr>
                         <td class="text-center text-xl">
                             <div class="font-bold">{{ $user->name }}</div>
-                            <div class="mb-4 text-orange-500 font-semibold">${{ number_format($total_deposit, 2) }}</div>
+                            <div class="mb-4 text-[#FFA168] font-semibold">${{ number_format($total_deposit, 2) }}</div>
                         </td>
                     </tr>
                     @foreach($deposit_by_group as $deposit_group)
@@ -46,7 +56,7 @@
                 @csrf
                 <div class="grid gap-6 grid-cols-2 max-[900px]:grid-cols-1">
                     <div class="w-full">
-                        {!! Form::select('brokersId', $get_broker_sel, @$search['brokersId'], ['class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500']) !!}
+                        {!! Form::select('brokersId', $get_broker_sel, @$search['brokersId'], ['class' => 'bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500']) !!}
                     </div>
                     <div date-rangepicker datepicker-format="yyyy/mm/dd" class="flex items-center">
                         <div class="relative w-full">
@@ -65,7 +75,11 @@
                     </div>
                     <div class="flex">
                         <button type="submit" class="mr-4 text-white bg-primary hover:bg-primary-600 border border-primary-200 focus:ring-4 focus:outline-none focus:ring-primary-600 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" name="submit" value="search">@lang('public.search')</button>
-                        <button type="submit" class="text-white bg-rose-500 hover:bg-red-600 border border-red-200 focus:ring-4 focus:outline-none focus:ring-red-600 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" name="submit" value="reset">@lang('public.reset')</button>
+                        <button type="submit" class="mr-4 text-white bg-rose-500 hover:bg-red-600 border border-red-200 focus:ring-4 focus:outline-none focus:ring-red-600 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" name="submit" value="reset">@lang('public.reset')</button>
+                        <!-- Modal toggle -->
+                        <button data-modal-target="withdrawModal" data-modal-toggle="withdrawModal" class="text-white bg-green-500 hover:bg-green-600 border border-green-200 focus:ring-4 focus:outline-none focus:ring-green-600 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" type="button">
+                            Withdraw Amount
+                        </button>
                     </div>
                 </div>
             </form>
@@ -88,6 +102,12 @@
                             </th>
                             <th scope="col" class="px-6 py-6">
                                 <div class="flex items-center">
+                                    @sortablelink('type', trans('public.type'))
+                                    <a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
+                                </div>
+                            </th>
+                            <th scope="col" class="px-6 py-6">
+                                <div class="flex items-center">
                                     @sortablelink('amount', trans('public.amount'))
                                     <a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
                                 </div>
@@ -103,8 +123,22 @@
                                     <td class="px-6 py-4">
                                         {{ $deposit->broker->name }}
                                     </td>
+                                    <td class="px-6 py-4 text-primary-600 uppercase font-semibold">
+                                        @switch($deposit->type)
+                                            @case(\App\Models\Deposits::TYPE_DEPOSIT)
+                                                <span class="text-primary font-semibold uppercase">@lang('public.type_deposit')</span>
+                                                @break
+
+                                            @case(\App\Models\Deposits::TYPE_WITHDRAW)
+                                                <span class="text-danger font-semibold uppercase">@lang('public.withdraw')</span>
+                                                @break
+
+                                            @default
+                                                <span class="text-primary font-semibold uppercase">@lang('public.type_deposit')</span>
+                                        @endswitch
+                                    </td>
                                     <td class="px-6 py-4">
-                                        {{ $deposit->amount }}
+                                        ${{ $deposit->amount }}
                                     </td>
                             @endforeach
                         </tbody>
@@ -123,6 +157,43 @@
                     </div>
                 </div>
             @endif
+        </div>
+    </div>
+
+    <!-- Main modal -->
+    <div id="withdrawModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
+        <div class="relative w-full h-full max-w-md md:h-auto">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="withdrawModal">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+                <div class="px-6 py-6 lg:px-8">
+                    <h3 class="mb-4 text-xl font-semibold text-[#FFA168] dark:text-white">Withdraw Amount</h3>
+                    <form class="space-y-6" method="post" action="{{ route('withdraw_amount', $user->id) }}">
+                        @csrf
+                        <div>
+                            <label for="email" class="block mb-2 text-md font-medium text-[#FFA168] dark:text-white">Broker</label>
+                            {!! Form::select('brokersId', $get_broker_sel, @old('brokersId'), ['class' => 'bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500']) !!}
+                        </div>
+                        <div>
+                            <label for="amount" class="block mb-2 text-md font-medium text-[#FFA168] dark:text-white">Amount</label>
+                            <input type="number" name="amount" id="amount" placeholder="0.00" class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" autocomplete="off">
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="text-white bg-[#40DD7F] hover:bg-green-400 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                <svg class="h-6 w-6 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <circle cx="12" cy="12" r="9" />  <path d="M9 12l2 2l4 -4" /></svg>
+                                <span class="ml-2">Confirm</span>
+                            </button>
+                            <button type="submit" class="text-white bg-[#FF6262] hover:bg-red-400 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" value="reject" name="status">
+                                <svg class="h-6 w-6 text-white"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <circle cx="12" cy="12" r="10" />  <line x1="15" y1="9" x2="9" y2="15" />  <line x1="9" y1="9" x2="15" y2="15" /></svg>
+                                <span class="ml-2">Cancel</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 

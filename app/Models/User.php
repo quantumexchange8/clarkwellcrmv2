@@ -194,6 +194,25 @@ class User extends Authenticatable implements JWTSubject
         }
         return $brokers->sortBy('amount', SORT_REGULAR, true);
     }
+
+    public function withdrawalAmountValidationByBrokers($id)
+    {
+        $dep_type = Deposits::TYPE_DEPOSIT;
+        $with_type = Deposits::TYPE_WITHDRAW;
+        $status = Deposits::STATUS_APPROVED;
+        $brokers = $this->deposits()
+            ->select('brokersId',
+                DB::raw("sum(CASE WHEN type = $dep_type THEN amount END) as dep_amount"),
+                DB::raw("sum(CASE WHEN type = $with_type AND status = $status THEN amount END) as with_total"),
+            )
+            ->where('brokersId', $id)
+            ->groupBy('brokersId')->get();
+        foreach($brokers as $broker) {
+            $broker->amount = $broker->dep_amount - $broker->with_total;
+        }
+        return $brokers->sortBy('amount', SORT_REGULAR, true);
+    }
+
     public function personalDeposits()
     {
         $personal_deposit = $this->deposits()->where('type', Deposits::TYPE_DEPOSIT)->sum('amount');

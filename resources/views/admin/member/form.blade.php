@@ -60,7 +60,7 @@
                     @enderror
                 </div>
                 <div>
-                    <label for="confirm_password" class="block mb-2 font-semibold text-md text-orange-400 dark:text-whit">@lang('public.password_confirmation')d</label>
+                    <label for="confirm_password" class="block mb-2 font-semibold text-md text-orange-400 dark:text-whit">@lang('public.password_confirmation')</label>
                     <input type="password" id="confirm_password" name="password_confirmation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('password') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="•••••••••" value="{{ @$post->confirm_password ?? @$post->password }}">
                 </div>
             </div>

@@ -90,6 +90,7 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
                 Route::match(['get', 'post'], '/edit/{id}', 'member_edit')->name('member_edit');
                 Route::match(['get', 'post'], '/details/{id}', 'member_details')->name('member_details');
                 Route::match(['get', 'post'], '/deposit/{id}', 'member_deposit')->name('member_deposit');
+                Route::match(['get', 'post'], '/withdraw_amount/{id}', 'withdraw_amount')->name('withdraw_amount');
                 Route::post('/impersonate', 'impersonate')->name('impersonate_user');
             });
 

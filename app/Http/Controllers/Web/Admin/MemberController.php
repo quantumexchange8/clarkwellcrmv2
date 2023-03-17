@@ -272,12 +272,7 @@ class MemberController extends Controller
 
         $search = session('deposit_search') ? session('deposit_search') : $search;
 
-//        $deposits = Deposits::get_record($search, 10);
-
-        $total_deposit = Deposits::query()
-            ->with('user')
-            ->where('userId', $id)
-            ->sum('amount');
+        $total_deposit = $user->personalDeposits();
 
         $deposit_by_group = $user->personalDepositsByBrokers();
 
@@ -289,6 +284,48 @@ class MemberController extends Controller
             'get_broker_sel' => ['' => trans('public.choose_broker')] + Brokers::get_broker_sel(),
         ]);
     }
+
+    public function withdraw_amount(Request $request, $id)
+    {
+        $user = User::find($id);
+        $validator = null;
+
+//        dd($request->all());
+        if ($request->isMethod('post')) {
+            $validator = Validator::make($request->all(), [
+                'brokersId' => 'required',
+                'amount' => 'required|numeric',
+            ])->setAttributeNames([
+                'brokersId' => trans('public.brokers'),
+                'amount' => trans('public.amount'),
+            ]);
+            $amount = $request->input('amount');
+            $broker_id = $request->input('brokersId');
+
+            if($user->withdrawalAmountValidationByBrokers($broker_id)) {
+                foreach ($user->withdrawalAmountValidationByBrokers($broker_id) as $withdrawal_amount)
+                if ($amount > $withdrawal_amount->amount) {
+                    Alert::error(trans('public.invalid_action'), 'Insufficient Amount');
+                    return redirect()->back();
+                }
+            }
+
+            if (!$validator->fails()) {
+                Deposits::create([
+                    'brokersId' => $request->input('brokersId'),
+                    'amount' => $amount,
+                    'userId' => $id,
+                    'type' => 2,
+                    'transaction_at' => now(),
+                ]);
+
+                Alert::success(trans('public.done'), 'Successfully Withdraw' . ' ' . 'from' . ' ' . $user->name);
+                return redirect()->route('member_details', $id);
+            }
+        }
+        return redirect()->route('member_deposit', $id)->withErrors($validator);
+    }
+
     public function transfer_network(Request $request)
     {
         $data = $request->all();
