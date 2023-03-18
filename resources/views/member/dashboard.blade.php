@@ -241,10 +241,8 @@
                 </div>
             </div>
             <div class="flex justify-center mt-6 max-[1320px]:justify-start max-[1000px]:col-span-1 max-[1320px]:col-span-2 ">
-                <div
-                    class="block  rounded-lg bg-[#FDFCF3] text-center shadow-lg dark:bg-neutral-700 w-full border-2">
-                    <div
-                        class="border-b-2 border-neutral-100 py-6 px-6 dark:border-neutral-600 dark:text-neutral-50 flex justify-center text-orange-400 font-bold text-2xl">
+                <div class="block  rounded-lg bg-[#FDFCF3] shadow-lg dark:bg-neutral-700 w-full border-2">
+                    <div class="border-b-2 border-neutral-100 py-6 px-6 dark:border-neutral-600 dark:text-neutral-50 flex justify-center text-orange-400 font-bold text-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                              class="w-6 h-6 mr-3 mt-1">
                             <path fill-rule="evenodd"
@@ -254,34 +252,31 @@
                         </svg>
                         @lang('public.news_and_announcement')
                     </div>
-                    <div class="py-3 truncate overflow-hidden">
-                        <div class="flex flex-col">
-                            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                                    <div class="overflow-hidden">
-                                        <table class="min-w-full text-left text-md font-light  ">
-                                            <tbody>
-                                            @foreach($news_all as $news)
-                                                <tr
-                                                    class=" transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
-                                                    <td class="whitespace-nowrap px-6 py-4 font-medium text-slate-400">
-                                                        {{ date('d-m-Y', strtotime($news->created_at)) }}
-                                                    </td>
-                                                    <td class="whitespace-nowrap px-6 py-4 font-medium text-primary">
-                                                        <button data-modal-target="newsModal-{{ $news->id }}" data-modal-toggle="newsModal-{{ $news->id }}">
-                                                            {{ $news->title }}
-                                                        </button>
-                                                        @include('components.member_news_modal')
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="flow-root px-6">
+                        <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                            @foreach($news_all as $news)
+                                <li class="py-3 sm:py-4 hover:bg-orange-100">
+                                    <a href="#newsModal-{{ $news->id }}" class="w-full"
+                                       data-modal-target="newsModal-{{ $news->id }}" data-modal-toggle="newsModal-{{ $news->id }}"
+                                       data-te-ripple-init
+                                       data-te-ripple-color="light">
+                                        <div class="flex items-center space-x-4">
+                                            <div class="flex-shrink-0 text-sm text-gray-500">
+                                                {{ date('d-m-Y', strtotime($news->created_at)) }}
+                                            </div>
+                                            <div class="flex-1 min-w-0">
+                                                <p class="text-sm font-medium text-primary-600 break-words dark:text-white">
+                                                    {{ $news->title }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                @include('components.member_news_modal')
+                            @endforeach
+                        </ul>
                     </div>
+
                 </div>
             </div>
         </div>

@@ -41,7 +41,7 @@ class UserController extends Controller
             ->where('deleted_at', null)
             ->where('visibility', 1)
             ->orderByDesc('created_at')
-            ->limit(3)
+            ->limit(4)
             ->get();
 
         $shareFB = (new Share)->page($user->url)->facebook()->getRawLinks();
