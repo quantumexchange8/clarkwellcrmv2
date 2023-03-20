@@ -50,9 +50,10 @@ class AuthController extends Controller
 
         if ($token = $this->guard()->setTTL($token_duration)->attempt($credentials)) {
             Session::put('jwt-token', $token);
-
+            Session::put('first_time_logged_in', false);
             if (Auth::user()->role === 1)
             {
+                Session::put('first_time_logged_in', true);
                 return redirect('member/dashboard');
             }
             else if (Auth::user()->role === 2)
