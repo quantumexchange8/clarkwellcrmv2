@@ -131,6 +131,9 @@ return array(
     'password_validation_3' => 'Must include a special character',
     'password_validation_4' => 'Must be between 8-15 words',
 
+    'access' => 'Access',
+    'access_confirmation' => 'Are you sure you want to access this user?',
+
     //admin member commissions
     'choose_broker' => 'Choose Broker',
     'back' => 'Back',
@@ -266,6 +269,9 @@ return array(
     'invalid_user' => 'Invalid User',
     'successfully_updated_member' => 'Successfully Updated Member Details',
     'successfully_updated_rank' => 'Successfully Updated Ranking Details',
+    'invalid_withdrawal' => 'User do not have any deposit records on the selected broker',
+    'insufficient_amount' => 'Insufficient Amount',
+    'success_withdraw' => 'Successfully Withdraw from',
 
     //NewsController
 

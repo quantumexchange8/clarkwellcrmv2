@@ -78,7 +78,7 @@
                         <button type="submit" class="mr-4 text-white bg-rose-500 hover:bg-red-600 border border-red-200 focus:ring-4 focus:outline-none focus:ring-red-600 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" name="submit" value="reset">@lang('public.reset')</button>
                         <!-- Modal toggle -->
                         <button data-modal-target="withdrawModal" data-modal-toggle="withdrawModal" class="text-white bg-green-500 hover:bg-green-600 border border-green-200 focus:ring-4 focus:outline-none focus:ring-green-600 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" type="button">
-                            Withdraw Amount
+                            @lang('public.withdrawal_amount')
                         </button>
                     </div>
                 </div>
@@ -160,7 +160,7 @@
         </div>
     </div>
 
-    <!-- Main modal -->
+    <!-- Withdrawal modal -->
     <div id="withdrawModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
         <div class="relative w-full h-full max-w-md md:h-auto">
             <!-- Modal content -->
@@ -170,25 +170,25 @@
                     <span class="sr-only">Close modal</span>
                 </button>
                 <div class="px-6 py-6 lg:px-8">
-                    <h3 class="mb-4 text-xl font-semibold text-[#FFA168] dark:text-white">Withdraw Amount</h3>
+                    <h3 class="mb-4 text-xl font-semibold text-[#FFA168] dark:text-white">@lang('public.withdrawal_amount')</h3>
                     <form class="space-y-6" method="post" action="{{ route('withdraw_amount', $user->id) }}">
                         @csrf
                         <div>
-                            <label for="email" class="block mb-2 text-md font-medium text-[#FFA168] dark:text-white">Broker</label>
+                            <label for="email" class="block mb-2 text-md font-medium text-[#FFA168] dark:text-white">@lang('public.brokers')</label>
                             {!! Form::select('brokersId', $get_broker_sel, @old('brokersId'), ['class' => 'bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500']) !!}
                         </div>
                         <div>
-                            <label for="amount" class="block mb-2 text-md font-medium text-[#FFA168] dark:text-white">Amount</label>
-                            <input type="number" name="amount" id="amount" placeholder="0.00" class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" autocomplete="off">
+                            <label for="amount" class="block mb-2 text-md font-medium text-[#FFA168] dark:text-white">@lang('public.amount')</label>
+                            <input type="number" name="amount" id="amount" placeholder="0.00" class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" autocomplete="off" min="1">
                         </div>
                         <div class="text-center">
                             <button type="submit" class="text-white bg-[#40DD7F] hover:bg-green-400 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                                 <svg class="h-6 w-6 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <circle cx="12" cy="12" r="9" />  <path d="M9 12l2 2l4 -4" /></svg>
-                                <span class="ml-2">Confirm</span>
+                                <span class="ml-2">@lang('public.delete_confirmed')</span>
                             </button>
-                            <button type="submit" class="text-white bg-[#FF6262] hover:bg-red-400 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" value="reject" name="status">
+                            <button type="button" class="text-white bg-[#FF6262] hover:bg-red-400 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" data-modal-hide="withdrawModal">
                                 <svg class="h-6 w-6 text-white"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <circle cx="12" cy="12" r="10" />  <line x1="15" y1="9" x2="9" y2="15" />  <line x1="9" y1="9" x2="15" y2="15" /></svg>
-                                <span class="ml-2">Cancel</span>
+                                <span class="ml-2">@lang('public.delete_cancel')</span>
                             </button>
                         </div>
                     </form>

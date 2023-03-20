@@ -250,7 +250,6 @@ class MemberController extends Controller
 
         $user = User::find($id);
         $rank = $user->rank;
-        $tempName =  explode(" ",$rank->name);
 
         if ($request->isMethod('post')) {
             $submit_type = $request->input('submit');
@@ -290,7 +289,6 @@ class MemberController extends Controller
         $user = User::find($id);
         $validator = null;
 
-//        dd($request->all());
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(), [
                 'brokersId' => 'required',
@@ -302,10 +300,23 @@ class MemberController extends Controller
             $amount = $request->input('amount');
             $broker_id = $request->input('brokersId');
 
+            $deposits = Deposits::query()
+                ->where('userId', $id)
+                ->where('brokersId', $broker_id)
+                ->where('type', 1)
+                ->where('status', 2)
+                ->where('deleted_at', null)
+                ->get();
+
+            if ($deposits->isEmpty()) {
+                Alert::error(trans('public.invalid_action'), trans('public.invalid_withdrawal'));
+                return redirect()->back();
+            }
+
             if($user->withdrawalAmountValidationByBrokers($broker_id)) {
                 foreach ($user->withdrawalAmountValidationByBrokers($broker_id) as $withdrawal_amount)
                 if ($amount > $withdrawal_amount->amount) {
-                    Alert::error(trans('public.invalid_action'), 'Insufficient Amount');
+                    Alert::error(trans('public.invalid_action'), trans('public.insufficient_amount'));
                     return redirect()->back();
                 }
             }
@@ -319,8 +330,8 @@ class MemberController extends Controller
                     'transaction_at' => now(),
                 ]);
 
-                Alert::success(trans('public.done'), 'Successfully Withdraw' . ' ' . 'from' . ' ' . $user->name);
-                return redirect()->route('member_details', $id);
+                Alert::success(trans('public.done'), trans('public.success_withdraw') . ' ' . $user->name);
+                return redirect()->back();
             }
         }
         return redirect()->route('member_deposit', $id)->withErrors($validator);
