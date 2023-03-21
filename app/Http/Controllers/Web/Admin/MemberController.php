@@ -75,6 +75,7 @@ class MemberController extends Controller
                 'address' => 'required|max:255',
                 'country' => 'required',
                 'status' => 'required',
+                'leader_status' => 'required',
 //                'profile_image' => 'nullable|image',
             ])->setAttributeNames([
                 'name' => trans('public.name'),
@@ -87,6 +88,7 @@ class MemberController extends Controller
                 'rankId' => trans('public.rank'),
                 'country' => trans('public.country'),
                 'status' => trans('public.status'),
+                'leader_status' => trans('public.leader_status'),
 //                'profile_image' => 'Profile Image'
             ]);
 
@@ -101,6 +103,7 @@ class MemberController extends Controller
                     'rankId' => $request->input('rankId'),
                     'country' => $request->input('country'),
                     'status' => $request->input('status'),
+                    'leader_status' => $request->input('leader_status'),
                 ]);
 
                 Alert::success(trans('public.done'), trans('public.successfully_added_member'));
@@ -117,6 +120,7 @@ class MemberController extends Controller
             'get_role_sel' => [1 => trans('public.member'), 2 => trans('public.admin')],
             'get_rank_sel' => Rankings::get_rank_sel(),
             'get_status_sel' => [ 1 => 'Active', 2 => 'Inactive', 3 => 'Suspended' ],
+            'get_leader_status_sel' => [ 0 => 'False', 1 => 'True' ],
             'get_country_sel' => SettingCountry::get_country_sel(),
         ])->withErrors($validator);
     }
@@ -146,6 +150,7 @@ class MemberController extends Controller
                 'country' => 'required',
                 'status' => 'required',
                 'profile_image' => 'nullable|image',
+                'leader_status' => 'required',
             ])->setAttributeNames([
                 'name' => trans('public.name'),
                 'contact_number' => trans('public.contact'),
@@ -155,6 +160,7 @@ class MemberController extends Controller
                 'country' => trans('public.country'),
                 'status' => trans('public.status'),
                 'profile_image' => trans('public.profile_image'),
+                'leader_status' => trans('public.leader_status'),
             ]);
 
             if (!$validator->fails()) {
@@ -165,6 +171,7 @@ class MemberController extends Controller
                     'rankId' => $request->input('rankId'),
                     'country' => $request->input('country'),
                     'status' => $request->input('status'),
+                    'leader_status' => $request->input('leader_status'),
                 ];
 
                 $profile_image = $request->file('profile_image');
@@ -200,6 +207,7 @@ class MemberController extends Controller
             'get_role_sel' => [1 => 'Member', 2 => 'Admin'],
             'get_rank_sel' => Rankings::get_rank_sel(),
             'get_status_sel' => [ 1 => 'Active', 2 => 'Inactive', 3 => 'Suspended' ],
+            'get_leader_status_sel' => [ 0 => 'False', 1 => 'True' ],
             'get_country_sel' => SettingCountry::get_country_sel(),
         ])->withErrors($validator);
     }

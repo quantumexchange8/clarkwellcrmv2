@@ -117,6 +117,10 @@
                     <label for="status" class="block mb-2 font-semibold text-md text-orange-400 dark:text-white">@lang('public.status')</label>
                     {!! Form::select('status', $get_status_sel, @$post->status, ['class' => 'font-medium text-md placeholder:text-gray-400 text-gray-500 bg-gray-50 border border-gray-300 text-md text-gray-500 rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500']) !!}
                 </div>
+                <div>
+                    <label for="leader_status" class="block mb-2 font-semibold text-md text-orange-400 dark:text-white">@lang('public.leader_status')</label>
+                    {!! Form::select('leader_status', $get_leader_status_sel, @$post->leader_status, ['class' => 'font-medium text-md placeholder:text-gray-400 text-gray-500 bg-gray-50 border border-gray-300 text-md text-gray-500 rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500']) !!}
+                </div>
             </div>
             @if($title == 'Add')
                 <button type="submit" class="text-white bg-[#40DD7F] hover:bg-success-800 focus:ring-4 focus:outline-none focus:ring-success-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-success-600 dark:hover:bg-success-700 dark:focus:ring-success-800">@lang('public.member_add')</button>

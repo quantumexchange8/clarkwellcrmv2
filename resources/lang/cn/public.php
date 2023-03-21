@@ -337,6 +337,7 @@ return array(
 
 'first_leader' => '第一任领导人',
 'top_leader' => '最高领导人',
+'leader_status' => '设置领导'
 )
 ?>
 

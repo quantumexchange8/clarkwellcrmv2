@@ -338,6 +338,6 @@ return array(
 
     'first_leader' => 'First Leader',
     'top_leader' => 'Top Leader',
-
+    'leader_status' => 'Leader Status'
 )
 ?>
