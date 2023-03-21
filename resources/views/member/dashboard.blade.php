@@ -486,10 +486,10 @@
     }
 
     $(document).ready(function(){
-        var  first_time= {{ Session::get('first_time_logged_in') }};
-        if (first_time) {
+        var  first_time= "<?php echo $first_time_logged_in; ?>";
+        if (first_time == 1) {
             $('#popModal').show();
-            {{Session::put('first_time_logged_in', false)}};
+            {{Session::put('first_time_logged_in', 0)}};
         }
     });
     function closeNewsModal() {

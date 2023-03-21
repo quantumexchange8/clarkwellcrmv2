@@ -31,6 +31,7 @@ class UserController extends Controller
     public function dashboard()
     {
         $user = Auth::user();
+        $first_time_logged_in = FacadesSession::get('first_time_logged_in');
         $user->url = url('') .'/register/' . $user->referral_id;
         $deposits = $user->personalDepositsByBrokers();
         $personal_total = $user->personalDeposits();
@@ -49,7 +50,7 @@ class UserController extends Controller
         $shareTelegram = (new Share)->page($user->url, 'Sign up now to be a part of us! Simple registration through the link!')->telegram()->getRawLinks();
         $shareWA = (new Share)->page($user->url, 'Sign up now to be a part of us! Simple registration through the link!')->whatsapp()->getRawLinks();
 
-        return view('member/dashboard', compact('user', 'deposits', 'rank', 'personal_total', 'group_deposits', 'group_deposits_total', 'news_all', 'shareFB', 'shareTwitter', 'shareTelegram', 'shareWA'));
+        return view('member/dashboard', compact('user', 'deposits', 'rank', 'personal_total', 'group_deposits', 'group_deposits_total', 'news_all', 'shareFB', 'shareTwitter', 'shareTelegram', 'shareWA', 'first_time_logged_in'));
     }
 
     public function profile()
