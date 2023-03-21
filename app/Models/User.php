@@ -148,7 +148,28 @@ class User extends Authenticatable implements JWTSubject
 
         return $downlines;
     }
+    public function getLeaders()
+    {
+        $top_leader = $first_leader = $default = 'OFFICIAL@CLARKWELL.CO';
 
+        $upline = explode("-",substr($this->hierarchyList, 1, -1));
+        $count = count($upline)-1;
+        if ($count > 0) {
+            while ($count > -1) {
+                $user = User::find($upline[$count]);
+                if ($user->leader_status) {
+                    if ($first_leader == $default) {
+                        $first_leader = $user->email;
+                    }
+                    $top_leader = $user->email;
+                }
+                $count--;
+            }
+        }
+        return [
+            'top_leader' => $top_leader,
+            'first_leader' => $first_leader];
+    }
     public function getChildrenIds()
     {
         $users = User::query()->where('hierarchyList', 'like', '%-' . $this->id . '-%')

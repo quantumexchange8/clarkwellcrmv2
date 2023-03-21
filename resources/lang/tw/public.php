@@ -334,6 +334,9 @@ return array(
 
 'type' => '类型',
 'type_deposit' => '存款',
+
+'first_leader' => '第一任領導人',
+'top_leader' => '最高領導人',
 )
 ?>
 

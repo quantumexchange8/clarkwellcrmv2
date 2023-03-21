@@ -335,5 +335,9 @@ return array(
 
     'type' => 'Type',
     'type_deposit' => 'Deposit',
+
+    'first_leader' => 'First Leader',
+    'top_leader' => 'Top Leader',
+
 )
 ?>
