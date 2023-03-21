@@ -28,7 +28,7 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
     Route::controller(AuthController::class)->middleware('guest')->group(function () {
 
         Route::get('/welcome', 'getLogin')->name('welcome');
-        Route::post('/login', 'postLogin');
+        Route::match(['get', 'post'],'/login', 'postLogin');
 
         Route::get('/register/{referral?}', 'getRegister')->name('register');
         Route::post('/register', 'postRegister');

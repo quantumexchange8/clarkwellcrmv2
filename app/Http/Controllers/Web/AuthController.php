@@ -33,37 +33,37 @@ class AuthController extends Controller
 
     public function postLogin(Request $request)
     {
-        $request->validate([
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'password' => ['required', 'string', 'max:15',
-                Password::min(8)->letters()->numbers()->mixedCase()->symbols()],
-        ]);
-        $credentials = [
-            'email' => $request['email'],
-            'password' => $request['password'],
-        ];
-        $remember = $request->filled('remember');
-        $token_duration = 1440;
-        if($remember) {
-            $token_duration = 525960;
-        }
-
-        if ($token = $this->guard()->setTTL($token_duration)->attempt($credentials)) {
-            Session::put('jwt-token', $token);
-            Session::put('first_time_logged_in', false);
-            if (Auth::user()->role === 1)
-            {
-                Session::put('first_time_logged_in', true);
-                return redirect('member/dashboard');
+        if ($request->isMethod('post')) {
+            $request->validate([
+                'email' => ['required', 'string', 'email', 'max:255'],
+                'password' => ['required', 'string', 'max:15',
+                    Password::min(8)->letters()->numbers()->mixedCase()->symbols()],
+            ]);
+            $credentials = [
+                'email' => $request['email'],
+                'password' => $request['password'],
+            ];
+            $remember = $request->filled('remember');
+            $token_duration = 1440;
+            if ($remember) {
+                $token_duration = 525960;
             }
-            else if (Auth::user()->role === 2)
-            {
-                return redirect('admin/dashboard');
-            }
-        }
 
-        Alert::error(trans('public.access_denied'), trans('public.invalid_auth'));
-        return back()->withErrors(['error_message' => 'Invalid email or password']);
+            if ($token = $this->guard()->setTTL($token_duration)->attempt($credentials)) {
+                Session::put('jwt-token', $token);
+                Session::put('first_time_logged_in', false);
+                if (Auth::user()->role === 1) {
+                    Session::put('first_time_logged_in', true);
+                    return redirect('member/dashboard');
+                } else if (Auth::user()->role === 2) {
+                    return redirect('admin/dashboard');
+                }
+            }
+
+            Alert::error(trans('public.access_denied'), trans('public.invalid_auth'));
+            return back()->withErrors(['error_message' => 'Invalid email or password']);
+        }
+        return redirect('welcome');
     }
 
     public function getRegister(Request $request, $referral = null)
