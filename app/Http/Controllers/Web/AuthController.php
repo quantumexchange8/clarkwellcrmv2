@@ -62,7 +62,7 @@ class AuthController extends Controller
             }
         }
 
-        Alert::error('Access Denied', 'Invalid Email or Password');
+        Alert::error(trans('public.access_denied'), trans('public.invalid_auth'));
         return back()->withErrors(['error_message' => 'Invalid email or password']);
     }
 
@@ -106,7 +106,7 @@ class AuthController extends Controller
         if ($user) {
             $user->setReferralId();
 
-            Alert::success('Done', 'Successfully Created Account! Login to view account');
+            Alert::success(trans('public.done'), trans('public.success_register'));
             return redirect('welcome');
         }
         return back()->withInput($request->input())->withErrors(['error_messages'=>'Fail to crate user, please try again!']);
@@ -158,7 +158,7 @@ class AuthController extends Controller
                 $user->save();
 
                 event(new PasswordReset($user));
-                Alert::success('Done', 'Successfully Reset Password! Login using new password');
+                Alert::success(trans('public.done'), trans('public.success_reset'));
             }
         );
         return $status === PasswordSupport::PASSWORD_RESET

@@ -86,14 +86,14 @@
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
                     <label for="name" class="block mb-2 font-semibold text-md text-orange-400 dark:text-white">@lang('public.name')</label>
-                    <input type="text" id="name" name="name" class="font-medium text-md placeholder:text-gray-400 text-gray-500 bg-gray-50 border border-gray-300  rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 @error('name') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="Full Name" value="{{ @$post->name }}">
+                    <input type="text" id="name" name="name" class="font-medium text-md placeholder:text-gray-400 text-gray-500 bg-gray-50 border border-gray-300  rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 @error('name') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="@lang('public.name')" value="{{ @$post->name }}">
                     @error('name')
                     <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
                     @enderror
                 </div>
                 <div>
                     <label for="address" class="block mb-2 font-semibold text-md text-orange-400 dark:text-white">@lang('public.address')</label>
-                    <input type="text" id="address" name="address" class="font-medium text-md placeholder:text-gray-400 text-gray-500 bg-gray-50 border border-gray-300  rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 @error('address') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="Address" value="{{ @$post->address }}">
+                    <input type="text" id="address" name="address" class="font-medium text-md placeholder:text-gray-400 text-gray-500 bg-gray-50 border border-gray-300  rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 @error('address') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="@lang('public.address')" value="{{ @$post->address }}">
                     @error('address')
                     <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
                     @enderror

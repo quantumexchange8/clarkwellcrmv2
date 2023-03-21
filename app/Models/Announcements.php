@@ -15,7 +15,7 @@ class Announcements extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'title', 'content', 'visibility', 'userId', 'deleted_at'
+        'title', 'content', 'visibility', 'popup_status', 'userId', 'deleted_at'
     ];
 
     protected $casts = [

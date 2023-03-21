@@ -59,6 +59,7 @@ class NewsController extends Controller
                     'title' => $request->input('title'),
                     'content' => $request->input('content'),
                     'visibility' => $request->input('visibility') == 'on' ? 1 : 0,
+                    'popup_status' => $request->input('popup_status') == 'on' ? 1 : 0,
                     'userId' => Auth::user()->id,
                 ]);
 
@@ -102,6 +103,7 @@ class NewsController extends Controller
                     'title' => $request->input('title'),
                     'content' => $request->input('content'),
                     'visibility' => $request->input('visibility') == 'on' ? 1 : 0,
+                    'popup_status' => $request->input('popup_status') == 'on' ? 1 : 0,
                     'userId' => Auth::user()->id,
                 ]);
 

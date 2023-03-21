@@ -28,11 +28,21 @@
             <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
             @enderror
         </div>
-        <label class="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" name="visibility" value="on" class="sr-only peer" @if(@$post->visibility == 1) checked @endif>
-            <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#FFA168]"></div>
-            <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">@lang('public.visible')</span>
-        </label>
+        <div>
+            <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" name="visibility" value="on" class="sr-only peer" @if(@$post->visibility == 1) checked @endif>
+                <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#FFA168]"></div>
+                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">@lang('public.visible')</span>
+            </label>
+        </div>
+        <div>
+            <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" name="popup_status" value="on" class="sr-only peer" @if(@$post->popup_status == 1) checked @endif>
+                <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#FFA168]"></div>
+                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">@lang('public.popup_status')</span>
+            </label>
+        </div>
+
         @if($title == 'Add')
             <button type="submit" class="w-full text-white bg-[#FFA168] hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">@lang('public.create_news')</button>
         @elseif($title = 'Edit')

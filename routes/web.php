@@ -17,6 +17,7 @@ use App\Http\Controllers\Web\AuthController;
 
 
 Route::namespace('Web')->middleware('jwt.set')->group(function () {
+    Route::get('localization/{locale}',[LocalizationController::class, 'setLang']);
 
 
 
@@ -41,7 +42,6 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
 
     // TODO: if token is valid then only perform the action below
     Route::middleware('jwt.verify')->group(function () {
-        Route::get('localization/{locale}',[LocalizationController::class, 'setLang']);
         Route::middleware('role.check:member')->prefix('member')->namespace('Member')->group(function () {
             Route::controller('UserController')->group(function () {
                 Route::get('/dashboard', 'dashboard')->name('member_dashboard');

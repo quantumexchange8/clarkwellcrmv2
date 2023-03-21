@@ -114,7 +114,7 @@ class MemberController extends Controller
            'title' => 'Add',
            'post' => $post,
            'submit' => route('member_add'),
-            'get_role_sel' => [1 => 'Member', 2 => 'Admin'],
+            'get_role_sel' => [1 => trans('public.member'), 2 => trans('public.admin')],
             'get_rank_sel' => Rankings::get_rank_sel(),
             'get_status_sel' => [ 1 => 'Active', 2 => 'Inactive', 3 => 'Suspended' ],
             'get_country_sel' => SettingCountry::get_country_sel(),

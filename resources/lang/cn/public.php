@@ -1,32 +1,55 @@
 <?php
 
 return array(
+    //auth
+    'welcome_back' => '欢迎回来',
+    'remember_me' => '记住账号',
+    'forgot_password' => '忘记密码',
+    'sign_in' => '登录',
+    'access_denied' => '拒绝访问',
+    'invalid_auth' => '无效的电子邮件或密码',
+    'dont_have_acc' => "还没有账户",
+    'register_here' => '注册',
+    'register_des' => '请填写所有详细信息以加入我们。',
+    'select_country' => '请选择你的国家',
+    'tnc' => '我已阅读、理解并接受条款和条件。',
+    'success_register' => '成功创建帐户！登录查看账户',
+    'have_acc' => '已有帐户？',
+    'forgot_yr_pass' => '忘记密码了吗？',
+    'insert_email' => '在此处填写电子邮件地址',
+    'send_email' => '发送',
+    'loading' => '加载中',
+    'sent' => '我们已通过电子邮件发送您的密码重置链接。',
+    'reset_password' => '重设密码',
+    'success_reset' => '成功重置密码！使用新密码登录',
+
     //header
     'wallet_balance' => '钱包余额',
     'wallet' => '钱包',
     'balance' => '余额',
-    'change_password' => '更改密码',
-    'leave_impersonate' => '离开模拟',
-    'logout' => '登出',
+    'change_password' => '修改密码',
+    'leave_impersonate' => '退出模拟登录',
+    'logout' => '退出登录',
     'close' => '关闭',
     'error_icon' => '错误图标',
+
 //sidebar
-    'dashboard' => '仪表板',
+    'dashboard' => '仪表盘',
     'profile' => '个人资料',
-    'broker&fund' => '经纪人与基金',
+    'broker&fund' => '经纪人和基金',
     'broker_list' => '经纪人列表',
     'fund' => '基金',
-    'network_tree' => '会员网络',
+    'network_tree' => '网络树',
     'network' => '网络',
     'commissions' => '佣金',
-    'withdrawals' => '提款',
-    'members' => '会员',
-    'add_members' => '添加新会员',
-    'members_list' => '会员列表',
+    'withdrawals' => '提现',
+    'members' => '成员',
+    'add_members' => '添加新成员',
+    'members_list' => '成员列表',
     'reports' => '报告',
     'deposits' => '存款',
-    'listing' => '列表',
-    'downline_listing' => '下线列表',
+    'listing' => '清单',
+    'downline_listing' => '下线清单',
     'referrals' => '推荐',
     'referrals_tree' => '推荐树',
     'transfer' => '转账',
@@ -40,114 +63,119 @@ return array(
     'more' => '更多',
     'group_deposit' => '团队存款',
     'referral_program' => '推荐计划',
-    'share_referral' => '通过二维码链接或社交媒体平台分享您的推荐链接',
+    'share_referral' => '通过QR链接或社交媒体分享您的推荐链接',
     'referral_id' => '推荐ID',
-    'news_and_announcement' => '新闻与公告',
-    'close_modal' => '关闭模态框',
+    'news_and_announcement' => '新闻和公告',
+    'close_modal' => '关闭弹窗',
 
 //member profile
     'rank' => '等级',
-    'personal_details' => '个人详细资料',
+    'personal_details' => '个人资料',
     'name' => '姓名',
     'email' => '电子邮件',
     'contact' => '联系电话',
     'avatar' => '头像',
-    'change_avatar' => '更换头像',
+    'change_avatar' => '更改头像',
     'location' => '位置',
     'address' => '地址',
     'country' => '国家',
     'upload_avatar' => '上传头像',
     'upload_file' => '上传文件',
-    'profile_pic_req' => '仅支持JPG、JPEG或PNG（最大250x250像素）。',
+    'profile_pic_req' => '仅支持JPG、JPEG或PNG格式（最大250x250像素）。',
     'save' => '保存',
     'cancel' => '取消',
 
 //member broker
-    'instructor_note' => '讲师备注',
-    'click_redirect_message' => '点击此处重定向',
+    'instructor_note' => '导师笔记',
+    'click_redirect_message' => '点击此处进行重定向',
 
 //member fund
     'current_fund' => '当前资金',
 
 //member network tree
-    'last_updated' => '最后更新于：格林尼治时间+8 ',
+    'last_updated' => '最后更新时间：GMT+8',
     'direct_downlines' => '直属下线',
-    'total_personal_deposit' => '个人存款总额',
-    'total_group_deposit' => '团队存款总额',
+    'total_personal_deposit' => '个人存款总计',
+    'total_group_deposit' => '团队存款总计',
 
-//member network tree >
+//member network tree > account
     'view_deposit' => '查看存款',
     'total_rebate_personal_deposit' => '个人存款总返利',
     'total_rebate_group_deposit' => '团队存款总返利',
-    'total_downline' => '总下线',
-    'total_clients' => '总直属客户',
+    'total_downline' => '下线总数',
+    'total_clients' => '直接客户总数',
 
 //member commissions
-    'total_earn' => '总收益',
+    'total_earn' => '总收入',
 
 //member withdrawals
     'withdraw' => '提现',
-    'withdrawal_as_USDT' => '以 USDT 提现',
+    'withdrawal_as_USDT' => '以USDT提现',
     'available_balance' => '可用余额',
     'withdrawal_amount' => '提现金额',
-    'max' => '最大',
-    'transaction_fee' => '交易费',
+    'max' => '最大值',
+    'transaction_fee' => '交易手续费',
     'withdrawal_total' => '提现总额',
 
 //admin dashboard
-    'total_group_sales' => '总团队销售额',
-    'total_withdrawals' => '总提现额',
-    'total_commissions' => '总佣金',
-    'total_members' => '总会员数',
+    'total_group_sales' => '团队销售总额',
+    'total_withdrawals' => '提现总额',
+    'total_commissions' => '佣金总额',
+    'total_members' => '会员总数',
 
 //admin add member form
-    'member_edit' => '编辑资料',
-    'member_access' => '会员访问',
+    'member_edit' => '编辑个人资料',
+    'member_access' => '会员权限',
     'email_address' => '电子邮件地址',
     'role' => '角色',
+    'member' => '成员',
+    'admin' => '行政',
     'password' => '密码',
     'password_confirmation' => '确认密码',
-    'member_details' => '会员详情',
+    'member_details' => '会员详细信息',
     'member_add' => '添加会员',
     'update' => '更新',
 
 //admin member details
     'edit' => '编辑',
-    'rank_details' => '排名详情',
-    'last_rank_up' => '上次晋升',
+    'rank_details' => '等级详细信息',
+    'last_rank_up' => '上次晋升时间',
     'auto' => '自动',
     'manual' => '手动',
     'date_join' => '加入日期',
-    'active' => '活跃',
-    'inactive' => '不活跃',
+    'active' => '激活',
+    'inactive' => '未激活',
     'suspend' => '已暂停',
-    'change_rank' => '更改排名',
+    'change_rank' => '更改等级',
     'auto_rank_up' => '自动晋升',
     'confirm' => '确认',
     'password_type' => '密码类型',
     'password_validation_1' => '必须包含 a-z 和 A-Z',
-    'password_validation_2' => '必须包含一个数字',
-    'password_validation_3' => '必须包含一个特殊字符',
-    'password_validation_4' => '必须为 8-15 个字符',
+    'password_validation_2' => '必须包含数字',
+    'password_validation_3' => '必须包含特殊字符',
+    'password_validation_4' => '长度必须在8到15个字符之间',
 
-//admin member commissions
+    'access' => '权限',
+    'access_confirmation' => '您确定要访问此用户吗？',
+
+//admin member comissions
     'choose_broker' => '选择经纪人',
     'back' => '返回',
     'click_upload' => '点击上传',
-    'or_drap_drop' => '或拖放',
-    'excel_mime_type' => 'xlsx, csv, xls',
-    'file_uploaded' => '文件已上传！',
-    'delete_comm_confirmation' => '确定要删除此佣金吗？',
+    'or_drap_drop' => '或者拖拽上传',
+    'excel_mime_type' => 'xlsx、csv、xls',
+    'file_uploaded' => '文件上传成功！',
+    'delete_comm_confirmation' => '您确定要删除此佣金吗？',
     'delete_confirmed' => '是的，我确定！',
-    'delete_cancel' => '不，取消',
+    'delete_cancel' => '取消',
     'select_user' => '选择用户',
     'upline_email' => '上线电子邮件',
 
 //admin member deposit
-    'delete_deposit_confirmation' => '确定要删除此存款吗？',
+    'delete_deposit_confirmation' => '您确定要删除此存款吗?',
 
 //admin member withdrawal
-    'delete_with_confirmation' => '确定要删除此提现请求吗？',
+    'delete_with_confirmation' => '您确定要删除此提现请求吗？',
     'select_status' => '请选择状态',
     'date_submit' => '提交日期',
     'approve' => '批准',
@@ -156,29 +184,29 @@ return array(
 //admin member transfer
     'transfer_message' => '将客户转移到不同的网络。',
     'choose_customer' => '选择用户',
-    'search_choose_transfer' => '搜索并选择要转移的客户。',
-    'confirm_transfer' => '确认转移',
+    'search_choose_transfer' => '搜索并选择您要转移的客户。',
+    'confirm_transfer' => '确认转账',
 
 //admin broker
     'search_name' => '搜索名称...',
     'add_broker' => '添加经纪人',
-    'remove' => '移除',
-    'delete_broker_confirmation' => '您确定要删除此经纪人资料吗？',
-    'url' => '网址',
-    'description' => '描述',
+    'remove' => '删除',
+    'delete_broker_confirmation' => '您确定要删除此经纪人档案吗？',
+    'url' => 'URL',
+    'description' => '说明',
     'broker_image' => '经纪人图片',
-    'broker_image_req' => 'SVG, PNG, JPG 或 GIF (最大 200 x 200 像素)。',
-    'qr_code' => '二维码',
-    'create_broker' => '创建经纪人资料',
-    'update_broker' => '更新经纪人资料',
-
+    'broker_image_req' => 'SVG，PNG，JPG或GIF（最大200 x 200像素）。',
+    'qr_code' => 'QR码',
+    'create_broker' => '创建经纪人档案',
+    'update_broker' => '更新经纪人档案',
 //admin news
     'create_news' => '创建新闻',
     'update_news' => '更新新闻',
     'visible' => '可见性',
+    'popup_status' => '弹窗',
     'news_title' => '新闻标题',
     'date_created' => '创建日期',
-    'delete_news_confirmation' => '您确定要删除这条新闻吗？',
+    'delete_news_confirmation' => '您确定要删除此新闻吗？',
     'title' => '标题',
 
 //table usage
@@ -187,9 +215,9 @@ return array(
     'select_end_date' => '选择结束日期',
     'to' => '至',
     'select_broker' => '选择经纪人',
-    'search_email' => '搜索邮箱...',
+    'search_email' => '搜索电子邮件...',
     'filter_status' => '按状态筛选',
-    'export_excel' => '导出为 Excel',
+    'export_excel' => '导出为Excel',
     'search' => '搜索',
     'reset' => '重置',
     'export_list' => '导出列表',
@@ -206,86 +234,104 @@ return array(
     'lot_size' => '手数',
     'status' => '状态',
     'action' => '操作',
-    'method' => '方式',
+    'method' => '方法',
     'referral_name' => '推荐人姓名',
     'downline_name' => '下线姓名',
 //navigation
     'showing' => '显示',
-    'of' => '的',
-    'entries' => '条目',
+    'of' => '共',
+    'entries' => '条记录',
     'info' => '信息',
-    'no_record' => '暂无记录。',
+    'no_record' => '没有任何记录',
 //status
-    'process' => '处理中',
-    'calculated' => '已计算',
-    'approved' => '已批准',
-    'rejected' => '已拒绝',
+'process' => '处理中',
+'calculated' => '已计算',
+'approved' => '已批准',
+'rejected' => '已拒绝',
 
 //newly added
-    'new_password' => '新密码',
-    'current_password' => '当前密码',
-    'confirm_password' => '确认新密码',
+'new_password' => '新密码',
+'current_password' => '当前密码',
+'confirm_password' => '确认新密码',
 
-    'done' => '完成',
-    'try_again' => '请稍后再试',
-    'invalid_action' => '无效操作',
+'done' => '完成',
+'try_again' => '请稍后再试。',
+'invalid_action' => '无效的操作',
 
 //admin title
-    'deposit_downline' => '存款 - 下线',
-    'commission_downline' => '佣金 - 下线',
-    'withdrawal_downline' => '提现 - 下线',
-    'add_member' => '添加会员',
-    'update_member' => '更新会员信息',
-    'network_transfer' => '网络转账',
+'deposit_downline' => '存款 - 下线',
+'commission_downline' => '佣金 - 下线',
+'withdrawal_downline' => '提现 - 下线',
+'add_member' => '添加会员',
+'update_member' => '更新会员',
+'network_transfer' => '网络转移',
+
 //BrokersController
 
-    'successfully_added_broker' => '经纪人添加成功',
-    'successfully_updated_broker' => '经纪人信息更新成功',
-    'successfully_deleted_broker' => '成功删除经纪人档案',
+'successfully_added_broker' => '添加经纪人成功',
+'successfully_updated_broker' => '更新经纪人成功',
+'successfully_deleted_broker' => '删除经纪人档案成功',
 
-    'invalid_broker' => '无效经纪人档案',
+'invalid_broker' => '无效的经纪人档案',
 
 //CommissionsController
 
-    'invalid_commission' => '无效佣金',
-    'commission_status_error' => '只能删除尚未计算的佣金',
-    'successfully_deleted_commission' => '成功删除佣金',
+'invalid_commission' => '无效的佣金',
+'commission_status_error' => '只能删除未计算的佣金',
+'successfully_deleted_commission' => '删除佣金成功',
 
 
 //DepositController
 
-    'import_success' => '文件导入成功',
-    'invalid_deposit' => '无效存款',
-    'successfully_deleted_deposit' => '成功删除存款',
+'import_success' => '文件导入成功',
+'invalid_deposit' => '无效的存款',
+'successfully_deleted_deposit' => '删除存款成功',
 
 //MemberController
 
-    'successfully_added_member' => '成功添加会员详情',
-    'invalid_user' => '无效用户',
-    'successfully_updated_member' => '成功更新会员详情',
-    'successfully_updated_rank' => '成功更新排名详情',
+'successfully_added_member' => '成功添加会员详情',
+'invalid_user' => '无效的用户',
+'successfully_updated_member' => '成功更新会员详情',
+'successfully_updated_rank' => '成功更新排名详情',
+'invalid_withdrawal' => '用户在所选经纪人没有任何存款记录',
+'insufficient_amount' => '余额不足',
+'success_withdraw' => '成功提现',
 
 //NewsController
 
-    'successfully_added_news' => '新闻创建成功',
-    'invalid_news' => '无效新闻',
-    'successfully_updated_news' => '新闻更新成功',
-    'successfully_deleted_news' => '成功删除新闻',
+'successfully_added_news' => '成功创建新闻',
+'invalid_news' => '无效的新闻',
+'successfully_updated_news' => '成功更新新闻',
+'successfully_deleted_news' => '成功删除新闻',
 
 //ReferralController
-    'successfully_transfer_customer' => '成功转移客户',
+'successfully_transfer_customer' => '成功转移客户',
 
 //UserController
 
-    'successfully_updated_profile' => '成功更新您的个人资料',
-    'current_password_invalid' => '当前密码无效',
-    'current_same_password' => '新密码不能与当前密码相同',
-    'successfully_updated_password' => '成功更新密码。',
+'successfully_updated_profile' => '成功更新您的个人资料',
+'current_password_invalid' => '当前密码无效',
+'current_same_password' => '新密码不能与当前密码相同',
+'successfully_updated_password' => '成功更新密码。',
 
 //WithdrawalController
-    'successfully_updated_withdrawal_status' => '成功更新提现状态',
+'successfully_updated_withdrawal_status' => '成功更新提现状态',
 
-    'type' => '类型',
-    'type_deposit' => '存款',
+//Custom Attribute Names or Messages
+'broker_image_dimensions' => '经纪人图片需要200x200像素的图片。',
+'qr_image_display_length' => 'QR码图片的最大尺寸为512x256像素',
+'file_required' => '请上传要导入的文件',
+'file_mimes' => '文件扩展名必须为.xlsx，.csv，.xls',
+'broker_id' => '经纪人选择无效',
+'import_error' => '第%s行发生错误',
+'transaction_date_required' => '交易日期字段是必填的。',
+'transaction_date_regex' => '交易日期字段格式无效。',
+'lot_size_required' => '手数字段是必填的。',
+'lot_size_numeric' => '手数字段必须是数字。',
+'profile_image' => '个人资料照片',
+
+'type' => '类型',
+'type_deposit' => '存款',
 )
 ?>
+

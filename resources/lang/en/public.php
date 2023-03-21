@@ -1,6 +1,28 @@
 <?php
 
 return array(
+    //auth
+    'welcome_back' => 'Welcome Back',
+    'remember_me' => 'Remember Me',
+    'forgot_password' => 'Forgot Password',
+    'sign_in' => 'Sign In',
+    'access_denied' => 'Access Denied',
+    'invalid_auth' => 'Invalid Email or Password',
+    'dont_have_acc' => "Don't have an account yet",
+    'register_here' => 'Register Here',
+    'success_register' => 'Successfully Created Account! Login to view account',
+    'register_des' => 'Please fill in all the details to join our great community.',
+    'select_country' => 'Please select your country',
+    'tnc' => 'I have read, understood and accept the terms and conditions.',
+    'have_acc' => 'Already have an account?',
+    'forgot_yr_pass' => 'Forgot Your Password?',
+    'insert_email' => 'Insert email address here.',
+    'send_email' => 'Send Email',
+    'loading' => 'Loading',
+    'sent' => 'We have emailed your password reset link.',
+    'reset_password' => 'Reset Password',
+    'success_reset' => 'Successfully Reset Password! Login using new password',
+
     //header
     'wallet_balance' => 'Wallet Balance',
     'wallet' => 'Wallet',
@@ -106,6 +128,8 @@ return array(
     'member_access' => 'Member Access',
     'email_address' => 'Email Address',
     'role' => 'Role',
+    'member' => 'Member',
+    'admin' => 'Admin',
     'password' => 'Password',
     'password_confirmation' => 'Confirm password',
     'member_details' => 'Member Details',
@@ -180,6 +204,7 @@ return array(
     'create_news' => 'Create News',
     'update_news' => 'Update News',
     'visible' => 'Visibility',
+    'popup_status' => 'Pop Up',
     'news_title' => 'News Title',
     'date_created' => 'Date Created',
     'delete_news_confirmation' => 'Are you sure you want to delete this news?',
