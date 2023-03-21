@@ -141,12 +141,19 @@ class DepositController extends Controller
     {
         $deposit_id = $request->input('deposit_id');
         $deposit = Deposits::find($deposit_id);
+        $capital_available_in_broker = $deposit->user->withdrawalAmountValidationByBrokers($deposit->brokersId)->first();
         $user = Auth::user();
         $route = app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName();
 
         if (!$deposit) {
             Alert::error(trans('public.invalid_deposit'), trans('public.try_again'));
             return redirect()->route($route);
+        }
+        if ($deposit->type == Deposits::TYPE_DEPOSIT) {
+            if ($deposit->amount > $capital_available_in_broker->amount) {
+                Alert::error(trans('public.invalid_action'), trans('public.insufficient_amount'));
+                return redirect()->route($route);
+            }
         }
 
         $deposit->delete();

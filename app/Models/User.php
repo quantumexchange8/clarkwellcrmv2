@@ -184,7 +184,6 @@ class User extends Authenticatable implements JWTSubject
         $with_type = Deposits::TYPE_WITHDRAW;
         $status = Deposits::STATUS_APPROVED;
         $brokers = $this->deposits()->with('broker')
-            ->withTrashed()
             ->select('brokersId',
                 DB::raw("sum(CASE WHEN type = $dep_type THEN amount END) as dep_amount"),
                 DB::raw("sum(CASE WHEN type = $with_type AND status = $status THEN amount END) as with_total"),
@@ -202,7 +201,6 @@ class User extends Authenticatable implements JWTSubject
         $with_type = Deposits::TYPE_WITHDRAW;
         $status = Deposits::STATUS_APPROVED;
         $brokers = $this->deposits()
-            ->withTrashed()
             ->select('brokersId',
                 DB::raw("sum(CASE WHEN type = $dep_type THEN amount END) as dep_amount"),
                 DB::raw("sum(CASE WHEN type = $with_type AND status = $status THEN amount END) as with_total"),
@@ -217,9 +215,9 @@ class User extends Authenticatable implements JWTSubject
 
     public function personalDeposits()
     {
-        $personal_deposit = $this->deposits()->withTrashed()
+        $personal_deposit = $this->deposits()
             ->where('type', Deposits::TYPE_DEPOSIT)->sum('amount');
-        $personal_withdrawed_deposit = $this->deposits()->withTrashed()
+        $personal_withdrawed_deposit = $this->deposits()
             ->where('type', Deposits::TYPE_WITHDRAW)
             ->where('status', Deposits::STATUS_APPROVED)
             ->sum('amount');
