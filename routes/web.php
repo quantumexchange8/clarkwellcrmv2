@@ -45,8 +45,8 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
         Route::middleware('role.check:member')->prefix('member')->namespace('Member')->group(function () {
             Route::controller('UserController')->group(function () {
                 Route::get('/dashboard', 'dashboard')->name('member_dashboard');
-                Route::get('/change-password', 'changePassword');
-                Route::post('/change-password', 'changePasswordSave');
+                Route::match(['get', 'post'], '/change-password', 'changePassword')->name('member_change_password');
+//                Route::post('/change-password', 'changePasswordSave');
                 Route::get('/tree', 'tree');
                 Route::match(['get', 'post'], '/tree', 'tree');
                 Route::get('/profile', 'profile');

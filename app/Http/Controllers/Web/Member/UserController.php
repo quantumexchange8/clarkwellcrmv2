@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 use Jorenvh\Share\Share;
 use Maatwebsite\Excel\Facades\Excel;
@@ -189,42 +190,84 @@ class UserController extends Controller
         }
     }
 
-    public function changePassword()
+    public function changePassword(Request $request)
     {
-        return view('change-password');
+        $validator = null;
+        $user_id = Auth::id();
+        $user = User::find($user_id);
+
+        if(!$user){
+            Alert::error(trans('public.invalid_user'), trans('public.try_again'));
+            return redirect('/');
+        }
+        if($request->isMethod('post')){
+            $validator = Validator::make($request->all(), [
+                'current_password' => 'required|min:8',
+                'password' => ['required', 'string', 'max:15', 'confirmed',
+                    Password::min(8)->letters()->numbers()->mixedCase()->symbols()],
+                'password_confirmation' => 'required|same:password'
+            ])->setAttributeNames([
+                'current_password' => trans('public.current_password'),
+                'password' => trans('public.new_password'),
+                'password_confirmation' => trans('public.confirm_password'),
+            ]);
+            if (!$validator->fails()) {
+
+                // The passwords match
+                if (!Hash::check($request->get('current_password'), $user->password)) {
+
+                    Alert::error(trans('public.invalid_action'), trans('public.current_password_invalid'));
+                    return back();
+                }
+
+                // Current password and new password same
+                if (strcmp($request->get('current_password'), $request->password) == 0) {
+                    Alert::warning(trans('public.invalid_action'), trans('public.current_same_password'));
+                    return back();
+                }
+
+                $user->password = Hash::make($request->password);
+                $user->save();
+
+                Alert::success(trans('public.done'), trans('public.successfully_updated_password'));
+                return redirect()->route('member_dashboard');
+
+            }
+        }
+        return view('change-password')->withErrors($validator);
     }
 
-    public function changePasswordSave(Request $request)
-    {
-
-        $this->validate($request, [
-            'current_password' => 'required|string',
-            'password' => ['required', 'string', 'max:15', 'confirmed',
-                Password::min(8)->letters()->numbers()->mixedCase()->symbols()],
-        ]);
-        $auth = Auth::user();
-
-        // The passwords matches
-        if (!Hash::check($request->get('current_password'), $auth->password)) {
-
-            Alert::error('Invalid Action', 'Current Password is Invalid!');
-            return back();
-        }
-
-        // Current password and new password same
-        if (strcmp($request->get('current_password'), $request->password) == 0) {
-
-            Alert::warning('Invalid Action', 'New Password cannot be same as your current password!');
-            return back();
-        }
-
-        $user = User::find($auth->id);
-        $user->password = Hash::make($request->password);
-        $user->save();
-
-        Alert::success('Done', 'Successfully Updated Password!');
-        return redirect()->route('member_dashboard');
-    }
+//    public function changePasswordSave(Request $request)
+//    {
+//
+//        $this->validate($request, [
+//            'current_password' => 'required|string',
+//            'password' => ['required', 'string', 'max:15', 'confirmed',
+//                Password::min(8)->letters()->numbers()->mixedCase()->symbols()],
+//        ]);
+//        $auth = Auth::user();
+//
+//        // The passwords matches
+//        if (!Hash::check($request->get('current_password'), $auth->password)) {
+//
+//            Alert::error('Invalid Action', 'Current Password is Invalid!');
+//            return back();
+//        }
+//
+//        // Current password and new password same
+//        if (strcmp($request->get('current_password'), $request->password) == 0) {
+//
+//            Alert::warning('Invalid Action', 'New Password cannot be same as your current password!');
+//            return back();
+//        }
+//
+//        $user = User::find($auth->id);
+//        $user->password = Hash::make($request->password);
+//        $user->save();
+//
+//        Alert::success('Done', 'Successfully Updated Password!');
+//        return redirect()->route('member_dashboard');
+//    }
 
     public function leaveImpersonate()
     {

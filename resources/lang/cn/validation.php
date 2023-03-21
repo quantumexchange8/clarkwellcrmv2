@@ -102,6 +102,12 @@ return [
     'url' => ':attribute 必须是一个有效的 URL。',
     'uuid' => ':attribute 必须是一个有效的 UUID。',
 
+    'validation.password.mixed' => ':attribute 必须至少包含一个大写字母和一个小写字母。',
+    'validation.password.letters' => ':attribute 必须包含至少一个字母。',
+    'validation.password.symbols' => ':attribute 必须包含至少一个符号。',
+    'validation.password.numbers' => ':attribute 必须包含至少一个数字。',
+    'validation.password.uncompromised' => '给定的 :attribute 出现在数据泄漏中。请选择不同的 :attribute。',
+
     /*
         |--------------------------------------------------------------------------
         | Custom Validation Language Lines

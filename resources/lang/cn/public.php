@@ -12,6 +12,8 @@ return array(
     'register_here' => '注册',
     'register_des' => '请填写所有详细信息以加入我们。',
     'select_country' => '请选择你的国家',
+    'referral_code' => '推荐码（选修的）',
+    'invalid_referral_code' => '无效的推荐代码',
     'tnc' => '我已阅读、理解并接受条款和条件。',
     'success_register' => '成功创建帐户！登录查看账户',
     'have_acc' => '已有帐户？',

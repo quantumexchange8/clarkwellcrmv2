@@ -174,7 +174,7 @@
                                 @lang('public.referral_id'): <span class="text-orange-500 font-semibold">{{$user->referral_id}}</span>
                             </p>
                             <div class="flex w-full ">
-                                <button onclick="copyLink()"
+                                <button id="copyLink"
                                         class="inline-flex items-center px-3 text-sm text-orange-500 bg-orange-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                          stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -469,31 +469,34 @@
 @endsection
 
 @section('script')
-<script>
-    function copyLink() {
-        // Get the text field
-        var copyText = document.getElementById("refLink");
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function(){
+            var copyText = document.getElementById("refLink");
+            var  first_time= "<?php echo $first_time_logged_in; ?>";
+            if (first_time == 1) {
+                $('#popModal').show();
+                {{Session::put('first_time_logged_in', 0)}};
+            }
 
-        // Select the text field
-        copyText.select();
-        copyText.setSelectionRange(0, 99999); // For mobile devices
+            $("#copyLink").click(function(){
+                copyText.select();
+                copyText.setSelectionRange(0, 99999); // For mobile devices
 
-        // Copy the text inside the text field
-        navigator.clipboard.writeText(copyText.value);
+                // Copy the text inside the text field
+                navigator.clipboard.writeText(copyText.value);
 
-        // Alert the copied text
-        alert("Link Copied");
-    }
-
-    $(document).ready(function(){
-        var  first_time= "<?php echo $first_time_logged_in; ?>";
-        if (first_time == 1) {
-            $('#popModal').show();
-            {{Session::put('first_time_logged_in', 0)}};
+                // Alert the copied text
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Link Copied',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                })
+            });
+        });
+        function closeNewsModal() {
+            $('#popModal').hide();
         }
-    });
-    function closeNewsModal() {
-        $('#popModal').hide();
-    }
-</script>
+    </script>
 @endsection

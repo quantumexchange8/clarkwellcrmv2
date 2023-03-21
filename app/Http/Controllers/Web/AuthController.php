@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Password as PasswordSupport;
@@ -33,19 +34,26 @@ class AuthController extends Controller
 
     public function postLogin(Request $request)
     {
-        if ($request->isMethod('post')) {
-            $request->validate([
-                'email' => ['required', 'string', 'email', 'max:255'],
-                'password' => ['required', 'string', 'max:15',
-                    Password::min(8)->letters()->numbers()->mixedCase()->symbols()],
-            ]);
+        $validator = null;
+
+        $validator = Validator::make($request->all(), [
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'string', 'max:15',
+                Password::min(8)->letters()->numbers()->mixedCase()->symbols()],
+        ])->setAttributeNames([
+            'email' => trans('public.email'),
+            'password' => trans('public.password'),
+        ]);
+
+        if (!$validator->fails())
+        {
             $credentials = [
                 'email' => $request['email'],
                 'password' => $request['password'],
             ];
             $remember = $request->filled('remember');
             $token_duration = 1440;
-            if ($remember) {
+            if($remember) {
                 $token_duration = 525960;
             }
 
@@ -63,7 +71,7 @@ class AuthController extends Controller
             Alert::error(trans('public.access_denied'), trans('public.invalid_auth'));
             return back()->withErrors(['error_message' => 'Invalid email or password']);
         }
-        return redirect('welcome');
+        return redirect('welcome')->withErrors($validator);
     }
 
     public function getRegister(Request $request, $referral = null)
@@ -80,6 +88,7 @@ class AuthController extends Controller
         if ($request->referral) {
             $temp_user = User::where('referral_id', $request->referral)->first();
             if (!$temp_user) {
+                Alert::error(trans('public.invalid_action'), trans('public.invalid_referral_code'));
                 return back()->withInput($request->input())->withErrors(['error_messages'=>'Invalid referral code!']);
             }
             $upline_user_id = $temp_user->id;

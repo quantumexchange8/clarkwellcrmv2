@@ -40,4 +40,17 @@ class UserRegisterRequest extends FormRequest
             'referral' => 'nullable|exists:users,referral_id'
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => trans('public.name'),
+            'phone' => trans('public.contact'),
+            'email' => trans('public.email'),
+            'password' => trans('public.password'),
+            'address' => trans('public.address'),
+            'country' => trans('public.country'),
+            'referral' => trans('public.referral_code'),
+        ];
+    }
 }

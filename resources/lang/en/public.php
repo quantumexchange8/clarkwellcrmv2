@@ -13,6 +13,8 @@ return array(
     'success_register' => 'Successfully Created Account! Login to view account',
     'register_des' => 'Please fill in all the details to join our great community.',
     'select_country' => 'Please select your country',
+    'referral_code' => 'Referral Code(Optional)',
+    'invalid_referral_code' => 'Invalid Referral Code',
     'tnc' => 'I have read, understood and accept the terms and conditions.',
     'have_acc' => 'Already have an account?',
     'forgot_yr_pass' => 'Forgot Your Password?',
