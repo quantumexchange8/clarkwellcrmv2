@@ -90,6 +90,12 @@
                             <span class="text-danger font-semibold text-lg text-gray-500">@lang('public.suspend')</span>
                         @endif
                     </div>
+                    <div class="mt-10 px-4">
+                        <h2 class="font-semibold text-lg text-orange-400 mb-4">@lang('public.leader_status')</h2>
+                        <span class="font-semibold text-lg text-gray-500">
+                            {{ $user->leader_status ? 'Yes' : 'No'}}
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
