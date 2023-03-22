@@ -38,32 +38,32 @@ return array(
 //sidebar
     'dashboard' => '仪表盘',
     'profile' => '个人资料',
-    'broker&fund' => '经纪人和基金',
-    'broker_list' => '经纪人列表',
+    'broker&fund' => '外汇券商和基金',
+    'broker_list' => '外汇券商列表',
     'fund' => '基金',
-    'network_tree' => '网络树',
-    'network' => '网络',
-    'commissions' => '佣金',
+    'network_tree' => '我的市场体系',
+    'network' => '市场返佣',
+    'commissions' => '个人返佣',
     'withdrawals' => '提现',
     'members' => '成员',
     'add_members' => '添加新成员',
     'members_list' => '成员列表',
     'reports' => '报告',
-    'deposits' => '存款',
+    'deposits' => '托管',
     'listing' => '清单',
     'downline_listing' => '下线清单',
     'referrals' => '推荐',
     'referrals_tree' => '推荐树',
     'transfer' => '转账',
-    'brokers' => '经纪人',
+    'brokers' => '外汇券商',
     'news' => '新闻',
     'open_sidebar' => '打开侧边栏',
 
 //member dashboard
-    'personal_deposit' => '个人存款',
+    'personal_deposit' => '个人托管',
     'total' => '总计',
     'more' => '更多',
-    'group_deposit' => '团队存款',
+    'group_deposit' => '团队托管',
     'referral_program' => '推荐计划',
     'share_referral' => '通过QR链接或社交媒体分享您的推荐链接',
     'referral_id' => '推荐ID',
@@ -88,22 +88,22 @@ return array(
     'cancel' => '取消',
 
 //member broker
-    'instructor_note' => '导师笔记',
-    'click_redirect_message' => '点击此处进行重定向',
+    'instructor_note' => '笔记',
+    'click_redirect_message' => '注册链接',
 
 //member fund
-    'current_fund' => '当前资金',
+    'current_fund' => '总委托金额',
 
 //member network tree
     'last_updated' => '最后更新时间：GMT+8',
     'direct_downlines' => '直属下线',
-    'total_personal_deposit' => '个人存款总计',
-    'total_group_deposit' => '团队存款总计',
+    'total_personal_deposit' => '个人托管总计',
+    'total_group_deposit' => '团队托管总计',
 
 //member network tree > account
-    'view_deposit' => '查看存款',
-    'total_rebate_personal_deposit' => '个人存款总返利',
-    'total_rebate_group_deposit' => '团队存款总返利',
+    'view_deposit' => '查看托管',
+    'total_rebate_personal_deposit' => '个人托管总返利',
+    'total_rebate_group_deposit' => '团队托管总返利',
     'total_downline' => '下线总数',
     'total_clients' => '直接客户总数',
 
@@ -122,7 +122,7 @@ return array(
 //admin dashboard
     'total_group_sales' => '团队销售总额',
     'total_withdrawals' => '提现总额',
-    'total_commissions' => '佣金总额',
+    'total_commissions' => '个人返佣总额',
     'total_members' => '会员总数',
 
 //admin add member form
@@ -161,20 +161,20 @@ return array(
     'access_confirmation' => '您确定要访问此用户吗？',
 
 //admin member comissions
-    'choose_broker' => '选择经纪人',
+    'choose_broker' => '选择外汇券商',
     'back' => '返回',
     'click_upload' => '点击上传',
     'or_drap_drop' => '或者拖拽上传',
     'excel_mime_type' => 'xlsx、csv、xls',
     'file_uploaded' => '文件上传成功！',
-    'delete_comm_confirmation' => '您确定要删除此佣金吗？',
+    'delete_comm_confirmation' => '您确定要删除此个人返佣吗？',
     'delete_confirmed' => '是的，我确定！',
     'delete_cancel' => '取消',
     'select_user' => '选择用户',
     'upline_email' => '上线电子邮件',
 
 //admin member deposit
-    'delete_deposit_confirmation' => '您确定要删除此存款吗?',
+    'delete_deposit_confirmation' => '您确定要删除此托管吗?',
 
 //admin member withdrawal
     'delete_with_confirmation' => '您确定要删除此提现请求吗？',
@@ -191,16 +191,16 @@ return array(
 
 //admin broker
     'search_name' => '搜索名称...',
-    'add_broker' => '添加经纪人',
+    'add_broker' => '添加外汇券商',
     'remove' => '删除',
-    'delete_broker_confirmation' => '您确定要删除此经纪人档案吗？',
+    'delete_broker_confirmation' => '您确定要删除此外汇券商档案吗？',
     'url' => 'URL',
     'description' => '说明',
-    'broker_image' => '经纪人图片',
+    'broker_image' => '外汇券商图片',
     'broker_image_req' => 'SVG，PNG，JPG或GIF（最大200 x 200像素）。',
     'qr_code' => 'QR码',
-    'create_broker' => '创建经纪人档案',
-    'update_broker' => '更新经纪人档案',
+    'create_broker' => '创建外汇券商档案',
+    'update_broker' => '更新外汇券商档案',
 //admin news
     'create_news' => '创建新闻',
     'update_news' => '更新新闻',
@@ -216,7 +216,7 @@ return array(
     'select_start_date' => '选择开始日期',
     'select_end_date' => '选择结束日期',
     'to' => '至',
-    'select_broker' => '选择经纪人',
+    'select_broker' => '选择外汇券商',
     'search_email' => '搜索电子邮件...',
     'filter_status' => '按状态筛选',
     'export_excel' => '导出为Excel',
@@ -225,20 +225,20 @@ return array(
     'export_list' => '导出列表',
     'export_report' => '导出报告',
     'import' => '导入',
-    'import_commissions' => '导入佣金',
-    'import_deposits' => '导入存款',
+    'import_commissions' => '导入个人返佣',
+    'import_deposits' => '导入托管',
     'download_template' => '下载模板',
 
 //table header
     'date' => '日期',
-    'broker' => '经纪人',
+    'broker' => '外汇券商',
     'amount' => '金额',
     'lot_size' => '手数',
     'status' => '状态',
     'action' => '操作',
     'method' => '方法',
     'referral_name' => '推荐人姓名',
-    'downline_name' => '下线姓名',
+    'downline_name' => '姓名',
 //navigation
     'showing' => '显示',
     'of' => '共',
@@ -261,8 +261,8 @@ return array(
 'invalid_action' => '无效的操作',
 
 //admin title
-'deposit_downline' => '存款 - 下线',
-'commission_downline' => '佣金 - 下线',
+'deposit_downline' => '托管 - 下线',
+'commission_downline' => '个人返佣 - 下线',
 'withdrawal_downline' => '提现 - 下线',
 'add_member' => '添加会员',
 'update_member' => '更新会员',
@@ -270,24 +270,24 @@ return array(
 
 //BrokersController
 
-'successfully_added_broker' => '添加经纪人成功',
-'successfully_updated_broker' => '更新经纪人成功',
-'successfully_deleted_broker' => '删除经纪人档案成功',
+'successfully_added_broker' => '添加外汇券商成功',
+'successfully_updated_broker' => '更新外汇券商成功',
+'successfully_deleted_broker' => '删除外汇券商档案成功',
 
-'invalid_broker' => '无效的经纪人档案',
+'invalid_broker' => '无效的外汇券商档案',
 
 //CommissionsController
 
-'invalid_commission' => '无效的佣金',
-'commission_status_error' => '只能删除未计算的佣金',
-'successfully_deleted_commission' => '删除佣金成功',
+'invalid_commission' => '无效的个人返佣',
+'commission_status_error' => '只能删除未计算的个人返佣',
+'successfully_deleted_commission' => '删除个人返佣成功',
 
 
 //DepositController
 
 'import_success' => '文件导入成功',
-'invalid_deposit' => '无效的存款',
-'successfully_deleted_deposit' => '删除存款成功',
+'invalid_deposit' => '无效的托管',
+'successfully_deleted_deposit' => '删除托管成功',
 
 //MemberController
 
@@ -295,7 +295,7 @@ return array(
 'invalid_user' => '无效的用户',
 'successfully_updated_member' => '成功更新会员详情',
 'successfully_updated_rank' => '成功更新排名详情',
-'invalid_withdrawal' => '用户在所选经纪人没有任何存款记录',
+'invalid_withdrawal' => '用户在所选外汇券商没有任何托管记录',
 'insufficient_amount' => '余额不足',
 'success_withdraw' => '成功提现',
 
@@ -320,11 +320,11 @@ return array(
 'successfully_updated_withdrawal_status' => '成功更新提现状态',
 
 //Custom Attribute Names or Messages
-'broker_image_dimensions' => '经纪人图片需要200x200像素的图片。',
+'broker_image_dimensions' => '外汇券商图片需要200x200像素的图片。',
 'qr_image_display_length' => 'QR码图片的最大尺寸为512x256像素',
 'file_required' => '请上传要导入的文件',
 'file_mimes' => '文件扩展名必须为.xlsx，.csv，.xls',
-'broker_id' => '经纪人选择无效',
+'broker_id' => '外汇券商选择无效',
 'import_error' => '第%s行发生错误',
 'transaction_date_required' => '交易日期字段是必填的。',
 'transaction_date_regex' => '交易日期字段格式无效。',
@@ -333,7 +333,7 @@ return array(
 'profile_image' => '个人资料照片',
 
 'type' => '类型',
-'type_deposit' => '存款',
+'type_deposit' => '托管',
 
 'first_leader' => '第一任领导人',
 'top_leader' => '最高领导人',

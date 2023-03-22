@@ -89,7 +89,7 @@ return array(
 
     //member broker
     'instructor_note' => 'Instructor Notes',
-    'click_redirect_message' => 'Click here to redirect',
+    'click_redirect_message' => 'Registration Link',
 
     //member fund
     'current_fund' => 'Current funds',
@@ -239,7 +239,7 @@ return array(
     'action' => 'Action',
     'method' => 'Method',
     'referral_name' => 'Referral Name',
-    'downline_name' => 'Downline Name',
+    'downline_name' => 'Name',
     //navigation
     'showing' => 'Showing',
     'of' => 'of',

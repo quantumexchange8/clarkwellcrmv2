@@ -59,7 +59,7 @@
                             </div>
                             <div class="flex items-center">
                                 <p class="text-medium leading-relaxed text-gray-500 dark:text-gray-400 px-2">
-                                    @lang('public.click_redirect_message'):
+                                    {{$broker->name}} @lang('public.click_redirect_message'):
                                     <a target="_blank" href="{{$broker->url}}" class="text-primary break-all">{{$broker->url}}</a>
                                 </p>
                                 <img class ="h-48 w-48 ml-auto" src="{{ asset('uploads/brokers/' .$broker->qr_image)}}">

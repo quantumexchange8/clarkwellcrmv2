@@ -38,32 +38,32 @@ return array(
 //sidebar
     'dashboard' => '儀表板',
     'profile' => '個人資料',
-    'broker&fund' => '經紀人和基金',
-    'broker_list' => '經紀人列表',
+    'broker&fund' => '外匯券商和基金',
+    'broker_list' => '外匯券商列表',
     'fund' => '基金',
-    'network_tree' => '網絡樹',
-    'network' => '網絡',
-    'commissions' => '佣金',
+    'network_tree' => '我的市場體系',
+    'network' => '市場返佣',
+    'commissions' => '個人返佣',
     'withdrawals' => '提現',
     'members' => '成員',
     'add_members' => '添加新成員',
     'members_list' => '成員列表',
     'reports' => '報告',
-    'deposits' => '存款',
+    'deposits' => '託管',
     'listing' => '清單',
     'downline_listing' => '下線清單',
     'referrals' => '推薦',
     'referrals_tree' => '推薦樹',
     'transfer' => '轉賬',
-    'brokers' => '經紀人',
+    'brokers' => '外匯券商',
     'news' => '新聞',
     'open_sidebar' => '打開側邊欄',
 
 //member dashboard
-    'personal_deposit' => '個人存款',
+    'personal_deposit' => '個人託管',
     'total' => '總計',
     'more' => '更多',
-    'group_deposit' => '團隊存款',
+    'group_deposit' => '團隊託管',
     'referral_program' => '推薦計劃',
     'share_referral' => '通過 QR 鏈接或社交媒體分享您的推薦鏈接',
     'referral_id' => '推薦 ID',
@@ -88,22 +88,22 @@ return array(
     'cancel' => '取消',
 
 //member broker
-    'instructor_note' => '導師筆記',
-    'click_redirect_message' => '點擊此處進行重定向',
+    'instructor_note' => '筆記',
+    'click_redirect_message' => '注册链接',
 
 //member fund
-    'current_fund' => '當前資金',
+    'current_fund' => '總委託金額',
 
 //member network tree
     'last_updated' => '最後更新時間：GMT+8',
     'direct_downlines' => '直屬下線',
-    'total_personal_deposit' => '個人存款總計',
-    'total_group_deposit' => '團隊存款總計',
+    'total_personal_deposit' => '個人託管總計',
+    'total_group_deposit' => '團隊託管總計',
 
 //member network tree > account
-    'view_deposit' => '查看存款',
-    'total_rebate_personal_deposit' => '個人存款總返利',
-    'total_rebate_group_deposit' => '團隊存款總返利',
+    'view_deposit' => '查看託管',
+    'total_rebate_personal_deposit' => '個人託管總返利',
+    'total_rebate_group_deposit' => '團隊託管總返利',
     'total_downline' => '下線總數',
     'total_clients' => '直接客戶總數',
 
@@ -122,7 +122,7 @@ return array(
 //admin dashboard
     'total_group_sales' => '團隊銷售總額',
     'total_withdrawals' => '提現總額',
-    'total_commissions' => '佣金總額',
+    'total_commissions' => '個人返佣總額',
     'total_members' => '會員總數',
 
 //admin add member form
@@ -161,20 +161,20 @@ return array(
     'access_confirmation' => '您確定要訪問此用戶嗎？',
 
 //admin member comissions
-    'choose_broker' => '選擇經紀人',
+    'choose_broker' => '選擇外匯券商',
     'back' => '返回',
     'click_upload' => '點擊上傳',
     'or_drap_drop' => '或者拖曳上傳',
     'excel_mime_type' => 'xlsx、csv、xls',
     'file_uploaded' => '檔案上傳成功！',
-    'delete_comm_confirmation' => '您確定要刪除此佣金嗎？',
+    'delete_comm_confirmation' => '您確定要刪除此個人返佣嗎？',
     'delete_confirmed' => '是的，我確定！',
     'delete_cancel' => '取消',
     'select_user' => '選擇使用者',
     'upline_email' => '上線電子郵件',
 
 //admin member deposit
-    'delete_deposit_confirmation' => '您確定要刪除此存款嗎？',
+    'delete_deposit_confirmation' => '您確定要刪除此託管嗎？',
 
 //admin member withdrawal
     'delete_with_confirmation' => '您確定要刪除此提款請求嗎？',
@@ -191,16 +191,16 @@ return array(
 
 //admin broker
     'search_name' => '搜尋名稱...',
-    'add_broker' => '新增經紀人',
+    'add_broker' => '新增外匯券商',
     'remove' => '移除',
-    'delete_broker_confirmation' => '您確定要刪除此經紀人檔案嗎？',
+    'delete_broker_confirmation' => '您確定要刪除此外匯券商檔案嗎？',
     'url' => 'URL',
     'description' => '說明',
-    'broker_image' => '經紀人圖片',
+    'broker_image' => '外匯券商圖片',
     'broker_image_req' => 'SVG、PNG、JPG或GIF（最大200 x 200像素）。',
     'qr_code' => 'QR碼',
-    'create_broker' => '建立經紀人檔案',
-    'update_broker' => '更新經紀人檔案',
+    'create_broker' => '建立外匯券商檔案',
+    'update_broker' => '更新外匯券商檔案',
 //admin news
     'create_news' => '建立新聞',
     'update_news' => '更新新聞',
@@ -216,7 +216,7 @@ return array(
     'select_start_date' => '選擇開始日期',
     'select_end_date' => '選擇結束日期',
     'to' => '至',
-    'select_broker' => '選擇經紀人',
+    'select_broker' => '選擇外匯券商',
     'search_email' => '搜尋電子郵件...',
     'filter_status' => '按狀態篩選',
     'export_excel' => '匯出為Excel',
@@ -225,20 +225,20 @@ return array(
     'export_list' => '匯出清單',
     'export_report' => '匯出報告',
     'import' => '匯入',
-    'import_commissions' => '匯入佣金',
-    'import_deposits' => '匯入存款',
+    'import_commissions' => '匯入個人返佣',
+    'import_deposits' => '匯入託管',
     'download_template' => '下載範本',
 
 //table header
     'date' => '日期',
-    'broker' => '經紀人',
+    'broker' => '外匯券商',
     'amount' => '金額',
     'lot_size' => '手數',
     'status' => '狀態',
     'action' => '操作',
     'method' => '方式',
     'referral_name' => '推薦人姓名',
-    'downline_name' => '下線姓名',
+    'downline_name' => '姓名',
 //navigation
     'showing' => '顯示',
     'of' => '共',
@@ -261,8 +261,8 @@ return array(
 'invalid_action' => '無效的操作',
 
 //admin title
-'deposit_downline' => '存款 - 下线',
-'commission_downline' => '佣金 - 下线',
+'deposit_downline' => '託管 - 下线',
+'commission_downline' => '個人返佣 - 下线',
 'withdrawal_downline' => '提款 - 下线',
 'add_member' => '新增會員',
 'update_member' => '更新會員',
@@ -270,24 +270,24 @@ return array(
 
 //BrokersController
 
-'successfully_added_broker' => '成功添加經紀人',
-'successfully_updated_broker' => '成功更新經紀人',
-'successfully_deleted_broker' => '成功刪除經紀人檔案',
+'successfully_added_broker' => '成功添加外匯券商',
+'successfully_updated_broker' => '成功更新外匯券商',
+'successfully_deleted_broker' => '成功刪除外匯券商檔案',
 
-'invalid_broker' => '無效的經紀人檔案',
+'invalid_broker' => '無效的外匯券商檔案',
 
 //CommissionsController
 
-'invalid_commission' => '無效的佣金',
-'commission_status_error' => '只有尚未計算的佣金才能刪除',
-'successfully_deleted_commission' => '成功刪除佣金',
+'invalid_commission' => '無效的個人返佣',
+'commission_status_error' => '只有尚未計算的個人返佣才能刪除',
+'successfully_deleted_commission' => '成功刪除個人返佣',
 
 
 //DepositController
 
 'import_success' => '檔案已成功匯入',
-'invalid_deposit' => '無效的存款',
-'successfully_deleted_deposit' => '成功刪除存款',
+'invalid_deposit' => '無效的託管',
+'successfully_deleted_deposit' => '成功刪除託管',
 
 //MemberController
 
@@ -295,7 +295,7 @@ return array(
 'invalid_user' => '無效的用戶',
 'successfully_updated_member' => '成功更新會員詳細資料',
 'successfully_updated_rank' => '成功更新會員等級詳細資料',
-'invalid_withdrawal' => '用戶在所選經紀人沒有任何提款記錄',
+'invalid_withdrawal' => '用戶在所選外匯券商沒有任何提款記錄',
 'insufficient_amount' => '金額不足',
 'success_withdraw' => '成功提款',
 
@@ -333,7 +333,7 @@ return array(
 'profile_image' => '个人资料图片',
 
 'type' => '类型',
-'type_deposit' => '存款',
+'type_deposit' => '託管',
 
 'first_leader' => '第一任領導人',
 'top_leader' => '最高領導人',

@@ -112,7 +112,7 @@
                         {{$user->name}}
                     </h4>
                     <div
-                        class="border-b-2 border-neutral-200 py-6 px-6 dark:border-neutral-600 dark:text-neutral-50 flex justify-center text-orange-400 font-bold text-2xl">
+                        class=" border-neutral-200 py-6 px-6 dark:border-neutral-600 dark:text-neutral-50 flex justify-center text-orange-400 font-bold text-2xl">
 
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                              class="w-6 h-6 mr-3 mt-1">
@@ -121,27 +121,6 @@
                                   clip-rule="evenodd"/>
                         </svg>
                         {{$rank->name}}
-                    </div>
-                    <div class="py-3 ">
-
-                        <h5 class="my-3 text-xl font-bold leading-tight text-orange-400 dark:text-neutral-50 inline-flex">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                 class="w-6 h-6 mr-3">
-                                <path
-                                    d="M2.273 5.625A4.483 4.483 0 015.25 4.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 3H5.25a3 3 0 00-2.977 2.625zM2.273 8.625A4.483 4.483 0 015.25 7.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 6H5.25a3 3 0 00-2.977 2.625zM5.25 9a3 3 0 00-3 3v6a3 3 0 003 3h13.5a3 3 0 003-3v-6a3 3 0 00-3-3H15a.75.75 0 00-.75.75 2.25 2.25 0 01-4.5 0A.75.75 0 009 9H5.25z"/>
-                            </svg>
-
-                            @lang('public.wallet_balance'):
-                        </h5>
-                        <h5 class="my-px text-xl font-bold leading-tight text-neutral-800 dark:text-neutral-50">
-                            {{$user->wallet_balance}}
-                        </h5>
-                        <div
-                            href=""
-                            class="mt-6 inline-block rounded px-6  pb-2 text-md font-medium leading-normal text-primary hover:text-orange-500   "
-                            data-te-ripple-init
-                            data-te-ripple-color="light">
-                        </div>
                     </div>
                 </div>
             </div>

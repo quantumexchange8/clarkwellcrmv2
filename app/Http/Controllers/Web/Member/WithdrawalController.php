@@ -55,7 +55,8 @@ class WithdrawalController extends Controller
         $user = Auth::user();
         if ($request->amount > $user->wallet_balance)
         {
-            return back()->withInput()->withErrors(["error_messages" => "Withdrawal amount cannot more than wallet balance."]);
+            $message = trans('public.invalid_action').', '.trans('public.insufficient_amount');
+            return back()->withInput()->withErrors(["error_messages" => $message]);
         }
 
         $settings = Settings::getKeyValue();
