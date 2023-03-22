@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
+use Intervention\Image\Facades\Image;
 use Jorenvh\Share\Share;
 use Maatwebsite\Excel\Facades\Excel;
 use Alert;
@@ -63,6 +64,63 @@ class UserController extends Controller
 
 
         return view('member/profile', compact('user', 'rank'));
+    }
+
+    public function verification(Request $request)
+    {
+        $post = $user = Auth::user();
+        $validator = null;
+        if ($request->isMethod('post')) {
+            $validator = Validator::make($request->all(), [
+                'front_id_image' => 'nullable|image|max:5120',
+                'back_id_image' => 'nullable|image|max:5120',
+            ])->setAttributeNames([
+                'front_id_image' => trans('public.front_id'),
+                'back_id_image' => trans('public.back_id'),
+            ]);
+
+
+            if (!$validator->fails()) {
+                $front_id_image = $request->file('front_id_image');
+                if ($front_id_image) {
+                    if ($user->front_id_image) {
+                        File::delete('uploads/users/' . $user->$front_id_image);
+                    }
+                    $imageName = time() . '.' . $front_id_image->getClientOriginalExtension();
+                    $resize_upload = Image::make( $front_id_image->path() );
+                    $resize_upload->save(public_path('/uploads/users/'.$imageName));
+                    $user->front_id_image = $imageName;
+                }
+
+
+                $back_id_image = $request->file('back_id_image');
+                if ($back_id_image) {
+                    if ($user->back_id_image) {
+                        File::delete('uploads/users/' . $user->back_id_image);
+                    }
+                    $imageName = time() . '.' . $back_id_image->getClientOriginalExtension();
+                    $resize_upload = Image::make( $back_id_image->path() );
+                    $resize_upload->save(public_path('/uploads/users/'.$imageName));
+                    $user->back_id_image = $imageName;
+                }
+
+                if ($user->back_id_image && $user->front_id_image) {
+                    $user->kyc_approval_status = User::KYC_STATUS_PENDING_VERIFICATION;
+                }
+                $user->save();
+                Alert::success(trans('public.done'), trans('public.successfully_updated_broker'));
+                return redirect()->route('member_verification');
+            }
+            $post = (object) $request->all();
+        }
+
+        return view('member/verification', [
+            'user' => $user,
+            'post' => $post,
+            'get_country_sel' => SettingCountry::get_country_sel(),
+            'submit' => route('member_verification'),
+        ])->withErrors($validator);
+
     }
 
     public function updateProfilePicture(Request $request)

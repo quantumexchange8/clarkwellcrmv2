@@ -38,6 +38,8 @@ return array(
 //sidebar
     'dashboard' => '儀表板',
     'profile' => '個人資料',
+    'profile_details' => '個人資料細節',
+    'profile_verification' => '個人資料核驗',
     'broker&fund' => '外匯券商和基金',
     'broker_list' => '外匯券商列表',
     'fund' => '基金',
@@ -337,7 +339,17 @@ return array(
 
 'first_leader' => '第一任領導人',
 'top_leader' => '最高領導人',
-'leader_status' => '設置領導'
+'leader_status' => '設置領導',
+
+'member_verification_message' => '為了您的資金安全，您需要上傳所有文件以完成賬戶驗證，然後才能處理提款。',
+    'upload_id' => 'Upload ID',
+    'front_id' => '身份證掃描件 (正面)',
+    'back_id' => '身份證掃描件 (背面)',
+    'id_req' => '您可上傳png、jpeg或者jpg等格式的文件，大小不超過5MB。',
+
+    'kyc_approval' => 'KYC Approval',
+    'approval' => 'Approval',
+    'copy_id' => 'Copy Of Your ID',
 )
 ?>
 

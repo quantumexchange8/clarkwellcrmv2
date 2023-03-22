@@ -3,6 +3,24 @@
 @section('title') Profile @endsection
 
 @section('contents')
+    <nav class="flex " aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-3 text-lg font-semibold">
+            <li class="inline-flex items-center">
+                <p href="#" class="inline-flex items-center text-gray-700 hover:text-orange-600 dark:text-gray-400 dark:hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7 mr-4">
+                        <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" />
+                    </svg>
+                    @lang('public.profile')
+                </p>
+            </li>
+            <li>
+                <div class="flex items-center">
+                    <svg aria-hidden="true" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                    <p href="#" class="ml-1  text-gray-700 hover:text-orange-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">@lang('public.profile_details')</p>
+                </div>
+            </li>
+        </ol>
+    </nav>
         <div class="grid grid-flow-row grid-flow-cols grid-cols-3 gap-3 my-4 max-[1200px]:grid-rows-auto max-[1200px]:grid-cols-none ">
             <div class="flex justify-center max-[1200px]:justify-start ">
                 <div class="block rounded-lg bg-[#FDFCF3] border-2 text-center shadow-lg dark:bg-neutral-700 w-full">

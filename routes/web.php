@@ -50,6 +50,7 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
                 Route::get('/tree', 'tree');
                 Route::match(['get', 'post'], '/tree', 'tree');
                 Route::get('/profile', 'profile');
+                Route::match(['get', 'post'], '/verification', 'verification')->name('member_verification');
                 Route::get('/account/{id}', 'account');
                 Route::post('/export-network', 'exportExcel');
                 Route::post('/update-profile-pic', 'updateProfilePicture');
@@ -86,6 +87,8 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
 
             Route::controller('MemberController')->prefix('member')->group(function () {
                 Route::match(['get', 'post'], '/listing', 'member_listing')->name('member_listing');
+                Route::match(['get', 'post'], '/kyc-listing', 'member_kyc_listing')->name('member_kyc_listing');
+                Route::post('/kyc-approval', 'approval')->name('member_kyc_approval');
                 Route::match(['get', 'post'], '/add', 'member_add')->name('member_add');
                 Route::match(['get', 'post'], '/edit/{id}', 'member_edit')->name('member_edit');
                 Route::match(['get', 'post'], '/details/{id}', 'member_details')->name('member_details');

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use Intervention\Image\Facades\Image;
 use Maatwebsite\Excel\Facades\Excel;
@@ -412,5 +413,50 @@ class MemberController extends Controller
         return redirect()->route('member_listing');
     }
 
+    public function member_kyc_listing(Request $request)
+    {
+        $search = array();
 
+        if ($request->isMethod('post')) {
+            $submit_type = $request->input('submit');
+
+            switch ($submit_type) {
+                case 'search':
+                    session(['member_kyc_search' => [
+                        'freetext' =>  $request->input('freetext'),
+                        'kyc_approval' => 'true',
+                    ]]);
+                    break;
+                case 'reset':
+                    session()->forget('member_kyc_search');
+                    break;
+            }
+        }
+
+        $search = session('member_kyc_search') ? session('member_kyc_search') : $search;
+
+        return view('admin.member.kyc-approval', [
+            'submit' => route('member_kyc_listing'),
+            'records' => User::get_record($search, 10, true),
+            'search' =>  $search,
+            'title' => 'KYC Approval'
+        ]);
+    }
+
+    public function approval(Request $request)
+    {
+        $user = User::find($request->input('user_id'));
+
+        if ($user->kyc_approval_status != User::KYC_STATUS_PENDING_VERIFICATION) {
+            return back()->withErrors(["error" => "Only pending status can perform approval action."]);
+        } else if ($user->kyc_approval_status == User::KYC_STATUS_VERIFIED) {
+            return back()->withErrors(["error" => "User already verified."]);
+        }
+
+        $user->kyc_approval_status = User::KYC_STATUS_VERIFIED;
+        $user->save();
+
+        Alert::success(trans('public.done'), trans('public.successfully_updated_broker'));
+        return redirect()->route('member_kyc_listing');
+    }
 }

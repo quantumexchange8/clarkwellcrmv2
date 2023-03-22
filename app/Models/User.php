@@ -18,6 +18,12 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable, SoftDeletes, Sortable;
 
+
+    //kyc approval status
+    const KYC_STATUS_NOT_VERIFY = 1;
+    const KYC_STATUS_PENDING_VERIFICATION = 2;
+    const KYC_STATUS_VERIFIED = 3;
+
     //use status section
     const STATUS_ACTIVE = 1;
     const STATUS_INACTIVE = 2;
@@ -111,9 +117,13 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
 
-    public static function get_record($search, $perpage)
+    public static function get_record($search, $perpage, $kyc = false)
     {
         $query = User::sortable()->where('role', 1);
+
+        if ($kyc) {
+            $query->where('kyc_approval_status', User::KYC_STATUS_PENDING_VERIFICATION);
+        }
 
         $search_text = @$search['freetext'] ?? NULL;
         $freetext = explode(' ', $search_text);

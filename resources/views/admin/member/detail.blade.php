@@ -96,6 +96,18 @@
                             {{ $user->leader_status ? 'Yes' : 'No'}}
                         </span>
                     </div>
+                    <div class="mt-10 px-4">
+                        <h2 class="font-semibold text-lg text-orange-400 mb-4">@lang('public.kyc_approval_status')</h2>
+                        <span class="font-semibold text-lg text-gray-500">
+                            @if($user->kyc_approval_status == 3)
+                                <span class="text-success font-semibold uppercase">@lang('public.kyc_verified')</span>
+                            @elseif($user->kyc_approval_status == 2)
+                                <span class="text-warning font-semibold uppercase">@lang('public.kyc_pending_verify')</span>
+                            @elseif($user->kyc_approval_status == 1)
+                                <span class="text-danger font-semibold uppercase">@lang('public.kyc_not_verify')</span>
+                            @endif
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>

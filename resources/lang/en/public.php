@@ -38,6 +38,8 @@ return array(
     //sidebar
     'dashboard' => 'Dashboard',
     'profile' => 'Profile',
+    'profile_details' => 'Profile Details',
+    'profile_verification' => 'Profile Verification',
     'broker&fund' => 'Broker & Funds',
     'broker_list' => 'Broker List',
     'fund' => 'Funds',
@@ -338,6 +340,21 @@ return array(
 
     'first_leader' => 'First Leader',
     'top_leader' => 'Top Leader',
-    'leader_status' => 'Leader Status'
+    'leader_status' => 'Leader Status',
+
+    'member_verification_message' => 'For security of your funds, you are required to upload all documents to complete account verification before withdrawals can be processed.',
+    'upload_id' => 'Upload ID',
+    'front_id' => 'Copy Of Your ID (Front)',
+    'back_id' => 'Copy Of Your ID (Back)',
+    'id_req' => 'You can upload document in .png, .jpeg or .jpg formats of max 5MB size only.',
+
+    'kyc_approval' => 'KYC Approval',
+    'approval' => 'Approval',
+    'copy_id' => 'Copy Of Your ID',
+    'kyc_approval_status' => 'KYC Approval Status',
+    'kyc_not_verify' => 'Not Verify',
+    'kyc_pending_verify' => 'Pending Verification',
+    'kyc_verified' => 'Verified',
+    'view_id' => 'View Copy of ID'
 )
 ?>

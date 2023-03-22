@@ -35,6 +35,9 @@
                     <li>
                         <a href="{{ route('member_listing') }}" class="{{ request()->is('admin/member/listing') || request()->is('admin/member/details/*') || request()->is('admin/member/edit/*') || request()->is('admin/member/deposit/*') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 text-base font-semibold transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.members_list')</a>
                     </li>
+                    <li>
+                        <a href="{{ route('member_kyc_listing') }}" class="{{ request()->is('admin/member/kyc-listing') || request()->is('admin/member/details/*') || request()->is('admin/member/edit/*') || request()->is('admin/member/deposit/*') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 text-base font-semibold transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.kyc_approval')</a>
+                    </li>
                 </ul>
             </li>
             <li>

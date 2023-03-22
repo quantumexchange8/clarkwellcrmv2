@@ -38,6 +38,8 @@ return array(
 //sidebar
     'dashboard' => '仪表盘',
     'profile' => '个人资料',
+    'profile_details' => '个人资料细节',
+    'profile_verification' => '个人资料核验',
     'broker&fund' => '外汇券商和基金',
     'broker_list' => '外汇券商列表',
     'fund' => '基金',
@@ -337,7 +339,17 @@ return array(
 
 'first_leader' => '第一任领导人',
 'top_leader' => '最高领导人',
-'leader_status' => '设置领导'
+'leader_status' => '设置领导',
+
+'member_verification_message' => '为了您的资金安全，您需要上传所有文件以完成账户验证，然后才能处理提款。',
+    'upload_id' => 'Upload ID',
+    'front_id' => '身份证扫描件 (正面)',
+    'back_id' => '身份证扫描件 (背面)',
+    'id_req' => '您可上传png、jpeg 或者 jpg等格式的文件，大小不超过5MB。',
+
+    'kyc_approval' => 'KYC Approval',
+    'approval' => 'Approval',
+    'copy_id' => 'Copy Of Your ID',
 )
 ?>
 
