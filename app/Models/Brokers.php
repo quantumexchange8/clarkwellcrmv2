@@ -2,23 +2,26 @@
 
 namespace App\Models;
 
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Brokers extends Model
+class Brokers extends Model implements TranslatableContract
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Translatable;
 
     protected $guarded = [];
     protected $casts = [];
 
     public $sortable = ['name'];
+    public $translatedAttributes = ['name', 'description', 'note'];
 
     public static function get_record($search, $perpage)
     {
-        $query = Brokers::where('deleted_at', null);
+        $query = Brokers::translatedIn(app()->getLocale())->where('deleted_at', null);
 
         $search_text = @$search['freetext'] ?? NULL;
         $freetext = explode(' ', $search_text);

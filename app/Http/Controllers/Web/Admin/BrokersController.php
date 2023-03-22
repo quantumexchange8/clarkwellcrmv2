@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBrokerRequest;
 use App\Http\Requests\UpdateBrokerRequest;
 use App\Models\Brokers;
+use App\Models\BrokersTranslation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -41,9 +42,16 @@ class BrokersController extends Controller
 
         $search = session('broker_search') ? session('broker_search') : $search;
 
+
+        $posts = Brokers::translatedIn(app()->getLocale())
+            ->latest()
+            ->take(10)
+            ->get();
+
         return view('admin.broker.listing', [
             'title' => 'Listing',
             'records' => Brokers::get_record($search, 10),
+            'posts' => $posts,
             'search' =>  $search,
         ]);
     }
@@ -51,9 +59,30 @@ class BrokersController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function store(StoreBrokerRequest $request)
     {
-        //
+        $user = Auth::user();
+        $brokerImageName = $qrImageName = null;
+        $brokerImage = $request->file('broker_image');
+        if ($brokerImage) {
+            $brokerImageName = pathinfo($brokerImage->getClientOriginalName(), PATHINFO_FILENAME) . time() . '.' . $brokerImage->getClientOriginalExtension();
+            $brokerImage->move($this->path_url, $brokerImageName);
+        }
+
+        $qrImage = $request->file('qr_image');
+        if ($qrImage) {
+            $qrImageName = pathinfo($qrImage->getClientOriginalName(), PATHINFO_FILENAME) . time() . '.' . $qrImage->getClientOriginalExtension();
+            $qrImage->move($this->path_url, $qrImageName);
+        }
+
+        Brokers::create($request->validated()+[
+            'url' => $request->url,
+            'broker_image' => $brokerImageName,
+            'qr_image' => $qrImageName,
+            'userId' => $user->id]);
+
+        Alert::success(trans('public.done'), trans('public.successfully_added_broker'));
+        return redirect()->route('broker_listing');
     }
 
     /**
@@ -65,17 +94,30 @@ class BrokersController extends Controller
         $post = null;
 
         if ($request->isMethod('post')) {
+
             $validator = Validator::make($request->all(), [
-                'name' => 'required',
-                'description' => 'required',
-                'note' => 'required',
+                'en.name' => 'required',
+                'cn.name' => 'required',
+                'tw.name' => 'required',
+                'en.description' => 'required',
+                'cn.description' => 'required',
+                'tw.description' => 'required',
+                'en.note' => 'required',
+                'cn.note' => 'required',
+                'tw.note' => 'required',
                 'url' => 'required|url',
-                'broker_image' => 'required|image|dimensions:max_width=256,max_height=256',
-                'qr_image' => 'required|image|dimensions:max_width=256,max_height=256',
-            ], [
-                'broker_image.dimensions' => trans('public.broker_image_dimensions'),
-                'qr_image.display_length' => trans('public.qr_image_display_length'),
+                'broker_image' => 'required|image',
+                'qr_image' => 'required|image',
             ])->setAttributeNames([
+                'en.name' => trans('public.name').' (EN)',
+                'cn.name' => trans('public.name').' (CN)',
+                'tw.name' => trans('public.name').' (TW)',
+                'en.description' => trans('public.description').' (EN)',
+                'cn.description' => trans('public.description').' (CN)',
+                'tw.description' => trans('public.description').' (TW)',
+                'en.note' => trans('public.note').' (EN)',
+                'cn.note' => trans('public.note').' (CN)',
+                'tw.note' => trans('public.note').' (TW)',
                 'url' => trans('public.url'),
                 'description' => trans('public.description'),
                 'note' => trans('public.instructor_note'),
@@ -83,7 +125,26 @@ class BrokersController extends Controller
                 'qr_image' => trans('public.qr_code'),
             ]);
 
-            if (!$validator->fails()) {
+            if (!$validator->fails())
+            {
+                $brokers_data = [
+                    'en' => [
+                        'name'       => $request->input('en.name'),
+                        'description' => $request->input('en.description'),
+                        'note' => $request->input('en.note'),
+                    ],
+                    'cn' => [
+                        'name'       => $request->input('cn.name'),
+                        'description' => $request->input('cn.description'),
+                        'note' => $request->input('cn.note'),
+                    ],
+                    'tw' => [
+                        'name'       => $request->input('tw.name'),
+                        'description' => $request->input('tw.description'),
+                        'note' => $request->input('tw.note'),
+                    ],
+                ];
+
                 $user = Auth::user();
                 $brokerImageName = $qrImageName = null;
                 $brokerImage = $request->file('broker_image');
@@ -98,10 +159,7 @@ class BrokersController extends Controller
                     $qrImage->move($this->path_url, $qrImageName);
                 }
 
-                Brokers::create([
-                    'name' => $request->name,
-                    'description' => $request->description,
-                    'note' => $request->note,
+                Brokers::create($brokers_data+[
                     'url' => $request->url,
                     'broker_image' => $brokerImageName,
                     'qr_image' => $qrImageName,
@@ -111,7 +169,6 @@ class BrokersController extends Controller
                 Alert::success(trans('public.done'), trans('public.successfully_added_broker'));
                 return redirect()->route('broker_listing');
             }
-
             $post = (object) $request->all();
         }
 
@@ -149,16 +206,28 @@ class BrokersController extends Controller
 
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(), [
-                'name' => 'required',
-                'description' => 'required',
-                'note' => 'required',
+                'en.name' => 'required',
+                'cn.name' => 'required',
+                'tw.name' => 'required',
+                'en.description' => 'required',
+                'cn.description' => 'required',
+                'tw.description' => 'required',
+                'en.note' => 'required',
+                'cn.note' => 'required',
+                'tw.note' => 'required',
                 'url' => 'required|url',
-                'broker_image' => 'image|dimensions:max_width=256,max_height=256',
-                'qr_image' => 'image|dimensions:max_width=256,max_height=256',
-            ], [
-                'broker_image.dimensions' => trans('public.broker_image_dimensions'),
-                'qr_image.display_length' => trans('public.qr_image_display_length'),
+                'broker_image' => 'image',
+                'qr_image' => 'image',
             ])->setAttributeNames([
+                'en.name' => trans('public.name').' (EN)',
+                'cn.name' => trans('public.name').' (CN)',
+                'tw.name' => trans('public.name').' (TW)',
+                'en.description' => trans('public.description').' (EN)',
+                'cn.description' => trans('public.description').' (CN)',
+                'tw.description' => trans('public.description').' (TW)',
+                'en.note' => trans('public.note').' (EN)',
+                'cn.note' => trans('public.note').' (CN)',
+                'tw.note' => trans('public.note').' (TW)',
                 'url' => trans('public.url'),
                 'description' => trans('public.description'),
                 'note' => trans('public.instructor_note'),
@@ -183,12 +252,28 @@ class BrokersController extends Controller
                     $broker->qr_image = $qrImageName;
                 }
 
-                $broker->name = $request->name;
-                $broker->description = $request->description;
-                $broker->note = $request->note;
-                $broker->url = $request->url;
-                $broker->updated_at = now();
-                $broker->save();
+                $brokers_data = [
+                    'en' => [
+                        'name'       => $request->input('en.name'),
+                        'description' => $request->input('en.description'),
+                        'note' => $request->input('en.note'),
+                    ],
+                    'cn' => [
+                        'name'       => $request->input('cn.name'),
+                        'description' => $request->input('cn.description'),
+                        'note' => $request->input('cn.note'),
+                    ],
+                    'tw' => [
+                        'name'       => $request->input('tw.name'),
+                        'description' => $request->input('tw.description'),
+                        'note' => $request->input('tw.note'),
+                    ],
+                ];
+
+                $broker->update($brokers_data+[
+                    'url' => $request->input('url'),
+                    'updated_at' => now(),
+                ]);
 
                 Alert::success(trans('public.done'), trans('public.successfully_updated_broker'));
                 return redirect()->route('broker_listing');

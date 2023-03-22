@@ -31,14 +31,18 @@
             </div>
         </form>
     </div>
+
     @if($records->isNotEmpty())
         <div class="grid grid-cols-2 gap-6 my-4 max-[1100px]:grid-rows-auto max-[1450px]:grid-cols-1 max-[1100px]:grid-cols-1">
         @foreach($records as $record)
             <div class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 mb-4">
+{{--                @dd($record->broker_image)--}}
                 <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="{{ asset('uploads/brokers/' .$record->broker_image)}}" alt="">
                 <div class="flex flex-col justify-between p-4 leading-normal">
                     <p class="mb-2 text-xs text-gray-500">@lang('public.last_updated') {{ $record->updated_at }}</p>
-                    <p class="mb-3 text-2xl font-bold text-[#FFA168]">{{ $record->name }}</p>
+                    <p class="mb-3 text-2xl font-bold text-[#FFA168]">
+                        {{ $record->name }}
+                    </p>
                     <div>
                         <a href="{{ route('broker_edit', $record->id) }}" class="text-sm text-[#23A6F0] font-semibold">@lang('public.edit') </a>
                         <a href="javascript:void(0)" class="text-sm text-[#E93C3C] font-semibold ml-2 delete"
