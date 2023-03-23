@@ -19,38 +19,34 @@
                         </svg>
                         @lang('public.personal_deposit')
                     </div>
-                    <div class="py-3">
-                        <h5 class="my-3 text-xl font-bold leading-tight text-neutral-800 dark:text-neutral-50">
-                            @lang('public.total'): ${{number_format($personal_total,2)}}
-                        </h5>
-                        <div class="flex flex-col">
-                            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                                    <div class="overflow-hidden">
-                                        <table class="min-w-full text-left text-md font-light">
-                                            <tbody>
-                                            @foreach ($deposits->slice(0, 2) as $deposit)
-                                                <tr
-                                                    class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
-                                                    <td class="whitespace-nowrap px-6 py-4 font-medium text-orange-400">{{$deposit->broker->name}}</td>
-                                                    <td class="whitespace-nowrap px-6 py-4 font-bold float-right">{{number_format($deposit->amount,2)}}</td>
-
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="w-full max-w-md p-6 bg-[#FDFCF3]">
+                        <div class="flex items-center justify-between mb-4">
+                            <h5 class="my-2 text-xl text-[#696057] font-bold leading-none dark:text-white">
+                                @lang('public.total'): ${{number_format($personal_total,2)}}
+                            </h5>
+                            <a href="javascript:void(0)" class="font-medium text-blue-600 hover:underline dark:text-blue-500" data-modal-target="personalModal" data-modal-toggle="personalModal" data-te-ripple-init data-te-ripple-color="light">
+                                @lang('public.more')
+                            </a>
+                        </div>
+                        <div class="flow-root">
+                            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                                @foreach ($deposits->slice(0, 2) as $deposit)
+                                    <li class="py-3 sm:py-4">
+                                        <div class="flex items-center space-x-4">
+                                            <div class="flex-1 min-w-0">
+                                                <p class="text-left text-sm font-bold text-orange-400 truncate dark:text-white">
+                                                    {{$deposit->broker->name}}
+                                                </p>
+                                            </div>
+                                            <div class="inline-flex items-center text-base font-semibold text-[#696057] dark:text-white">
+                                                ${{number_format($deposit->amount,2)}}
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
-                    <button
-                    data-modal-target="personalModal" data-modal-toggle="personalModal"
-                    class="mb-3 inline-block rounded px-6 pb-2 text-md font-medium leading-normal text-primary hover:text-orange-500"
-                    data-te-ripple-init
-                    data-te-ripple-color="light">
-                    @lang('public.more')...
-                </button>
                 </div>
             </div>
             <div class="flex justify-center max-[1320px]:justify-start">
@@ -67,53 +63,44 @@
                             <path
                                 d="M2.25 18a.75.75 0 000 1.5c5.4 0 10.63.722 15.6 2.075 1.19.324 2.4-.558 2.4-1.82V18.75a.75.75 0 00-.75-.75H2.25z"/>
                         </svg>
-
                         @lang('public.group_deposit')
                     </div>
-                    <div class="py-3">
-                        <h5 class="my-3 text-xl font-bold leading-tight text-neutral-800 dark:text-neutral-50">
-                            @lang('public.total'): ${{number_format($group_deposits_total,2)}}
-                        </h5>
-                        <div class="flex flex-col">
-                            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                                    <div class="overflow-hidden">
-                                        <table class="min-w-full text-left text-md font-light">
-                                            <tbody>
-                                            @foreach ($group_deposits->slice(0,2) as $group_deposit)
-                                                <tr
-                                                    class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
-                                                    <td class="whitespace-nowrap px-6 py-4 font-medium text-orange-400">{{$group_deposit->name}}</td>
-                                                    <td class="whitespace-nowrap px-6 py-4 font-bold float-right">
-                                                        ${{number_format($group_deposit->total,2)}}</td>
-
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="w-full max-w-md p-6 bg-[#FDFCF3]">
+                        <div class="flex items-center justify-between mb-4">
+                            <h5 class="my-2 text-xl text-[#696057] font-bold leading-none dark:text-white">
+                                @lang('public.total'): ${{number_format($group_deposits_total,2)}}
+                            </h5>
+                            <a href="javascript:void(0)" class="font-medium text-blue-600 hover:underline dark:text-blue-500" data-modal-target="groupModal" data-modal-toggle="groupModal" data-te-ripple-init data-te-ripple-color="light">
+                                @lang('public.more')
+                            </a>
+                        </div>
+                        <div class="flow-root">
+                            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                                @foreach ($group_deposits->slice(0,2) as $group_deposit)
+                                    <li class="py-3 sm:py-4">
+                                        <div class="flex items-center space-x-4">
+                                            <div class="flex-1 min-w-0">
+                                                <p class="text-left text-sm font-bold text-orange-400 truncate dark:text-white">
+                                                    {{$group_deposit->name}}
+                                                </p>
+                                            </div>
+                                            <div class="inline-flex items-center text-base font-semibold text-[#696057] dark:text-white">
+                                                ${{number_format($group_deposit->total,2)}}
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
-                    <button
-                        data-modal-target="groupModal" data-modal-toggle="groupModal"
-                        class="mb-3 inline-block rounded px-6  pb-2 text-md font-medium leading-normal text-primary hover:text-orange-500"
-                        data-te-ripple-init
-                        data-te-ripple-color="light">
-                        @lang('public.more')...
-                    </button>
                 </div>
             </div>
             <div class="flex justify-center max-[1320px]:justify-start max-[1000px]:h-auto">
-                <div
-                    class="block rounded-lg bg-[#FDFCF3] text-center shadow-lg dark:bg-neutral-700 w-full  border-2">
-                    <h4 class="mt-12 px-12 text-xl font-bold leading-tight text-neutral-800 dark:text-neutral-50 max-lg:hidden">
+                <div class="p-4 block rounded-lg bg-[#FDFCF3] text-center shadow-lg dark:bg-neutral-700 w-full border-2">
+                    <h4 class="px-12 text-xl font-bold leading-tight text-[#696057] dark:text-neutral-50 max-lg:hidden">
                         {{$user->name}}
                     </h4>
-                    <div
-                        class="border-b-2 border-neutral-200 py-6 px-6 dark:border-neutral-600 dark:text-neutral-50 flex justify-center text-orange-400 font-bold text-2xl">
-
+                    <div class="border-b-2 border-neutral-200 py-4 px-4 dark:border-neutral-600 dark:text-neutral-50 flex justify-center text-orange-400 font-bold text-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                              class="w-6 h-6 mr-3 mt-1">
                             <path fill-rule="evenodd"
@@ -123,44 +110,49 @@
                         {{$rank->name}}
                     </div>
                     <div class="py-3 ">
-                        <div>
-                            <h5 class="my-3 text-xl font-bold leading-tight text-orange-400 dark:text-neutral-50 inline-flex">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                     class="w-6 h-6 mr-3">
-                                    <path
-                                        d="M2.273 5.625A4.483 4.483 0 015.25 4.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 3H5.25a3 3 0 00-2.977 2.625zM2.273 8.625A4.483 4.483 0 015.25 7.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 6H5.25a3 3 0 00-2.977 2.625zM5.25 9a3 3 0 00-3 3v6a3 3 0 003 3h13.5a3 3 0 003-3v-6a3 3 0 00-3-3H15a.75.75 0 00-.75.75 2.25 2.25 0 01-4.5 0A.75.75 0 009 9H5.25z"/>
-                                </svg>
-
-                                @lang('public.personal_daily_deposit'):
-                            </h5>
-                            <h5 class="my-px text-xl font-bold leading-tight text-neutral-800 dark:text-neutral-50">
-                                ${{number_format($user->userDailyWeeklyDeposit(), 2)}}
-                            </h5>
+                        <div class="flow-root">
+                            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                                <li class="py-3 sm:py-4">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="flex-shrink-0">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                                 class="w-6 h-6 text-orange-400">
+                                                <path
+                                                    d="M2.273 5.625A4.483 4.483 0 015.25 4.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 3H5.25a3 3 0 00-2.977 2.625zM2.273 8.625A4.483 4.483 0 015.25 7.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 6H5.25a3 3 0 00-2.977 2.625zM5.25 9a3 3 0 00-3 3v6a3 3 0 003 3h13.5a3 3 0 003-3v-6a3 3 0 00-3-3H15a.75.75 0 00-.75.75 2.25 2.25 0 01-4.5 0A.75.75 0 009 9H5.25z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="flex-1 min-w-0 text-left">
+                                            <p class="text-orange-400 font-semibold truncate dark:text-white">
+                                                @lang('public.personal_daily_deposit')
+                                            </p>
+                                        </div>
+                                        <div class="inline-flex items-center text-base font-semibold text-[#696057] dark:text-white">
+                                            ${{number_format($user->userDailyWeeklyDeposit(), 2)}}
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="py-3 sm:py-4">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="flex-shrink-0">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                                 class="w-6 h-6 text-orange-400">
+                                                <path
+                                                    d="M2.273 5.625A4.483 4.483 0 015.25 4.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 3H5.25a3 3 0 00-2.977 2.625zM2.273 8.625A4.483 4.483 0 015.25 7.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 6H5.25a3 3 0 00-2.977 2.625zM5.25 9a3 3 0 00-3 3v6a3 3 0 003 3h13.5a3 3 0 003-3v-6a3 3 0 00-3-3H15a.75.75 0 00-.75.75 2.25 2.25 0 01-4.5 0A.75.75 0 009 9H5.25z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="flex-1 min-w-0 text-left">
+                                            <p class="text-orange-400 font-semibold truncate dark:text-white">
+                                                @lang('public.personal_weekly_deposit')
+                                            </p>
+                                        </div>
+                                        <div class="inline-flex items-center text-base font-semibold text-[#696057] dark:text-white">
+                                            ${{number_format($user->userDailyWeeklyDeposit(true), 2)}}
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
-
-                        <div>
-                            <h5 class="my-3 text-xl font-bold leading-tight text-orange-400 dark:text-neutral-50 inline-flex">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                     class="w-6 h-6 mr-3">
-                                    <path
-                                        d="M2.273 5.625A4.483 4.483 0 015.25 4.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 3H5.25a3 3 0 00-2.977 2.625zM2.273 8.625A4.483 4.483 0 015.25 7.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 6H5.25a3 3 0 00-2.977 2.625zM5.25 9a3 3 0 00-3 3v6a3 3 0 003 3h13.5a3 3 0 003-3v-6a3 3 0 00-3-3H15a.75.75 0 00-.75.75 2.25 2.25 0 01-4.5 0A.75.75 0 009 9H5.25z"/>
-                                </svg>
-
-                                @lang('public.personal_weekly_deposit'):
-                            </h5>
-                            <h5 class="my-px text-xl font-bold leading-tight text-neutral-800 dark:text-neutral-50">
-                                ${{number_format($user->userDailyWeeklyDeposit(true), 2)}}
-                            </h5>
-                        </div>
-
-{{--                        <div--}}
-{{--                            href=""--}}
-{{--                            class="mt-6 inline-block rounded px-6  pb-2 text-md font-medium leading-normal text-primary hover:text-orange-500   "--}}
-{{--                            data-te-ripple-init--}}
-{{--                            data-te-ripple-color="light">--}}
-{{--                        </div>--}}
                     </div>
-
                 </div>
             </div>
             <div class="flex justify-center col-span-2 mt-6 max-[1000px]:col-span-1 max-[1250px]:justify-start">
@@ -329,36 +321,37 @@
                         </button>
                     </div>
                     <!-- Modal body -->
-                    <div class="p-6 space-y-6">
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-
-                            <tbody>
-                            @foreach($deposits as $deposit)
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-orange-50 dark:hover:bg-gray-600">
-                                    <th scope="row"
-                                        class="flex-inline px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <div class="px-6 py-4 space-y-6 overflow-auto">
+                        <div class="flow-root">
+                            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                                @foreach($deposits as $deposit)
+                                    <li class="py-3 sm:py-4">
                                         <div class="flex items-center space-x-4">
-                                            @if ($deposit->broker->broker_image)
-                                                <img src="{{ asset('uploads/brokers/' .$deposit->broker->broker_image)}}" class="w-10 h-10 rounded-full bg-rose-400" alt="">
-                                            @else
-                                                <img class="w-10 h-10 rounded-full bg-rose-400" alt="">
-                                            @endif
-                                            <div
-                                                class="font-semibold dark:text-white text-orange-400 text-md">{{$deposit->broker->name}}</div>
+                                            <div class="flex-shrink-0">
+                                                @if ($deposit->broker->broker_image)
+                                                    <img src="{{ asset('uploads/brokers/' .$deposit->broker->broker_image)}}" class="w-10 h-10 rounded-full bg-rose-400" alt="">
+                                                @else
+                                                    <img class="w-10 h-10 rounded-full bg-rose-400" alt="">
+                                                @endif
+                                            </div>
+                                            <div class="flex-1 min-w-0 text-left">
+                                                <p class="text-orange-400 font-semibold truncate dark:text-white">
+                                                    {{$deposit->broker->name}}
+                                                </p>
+                                            </div>
+                                            <div class="inline-flex items-center text-base font-semibold text-[#696057] dark:text-white">
+                                                ${{number_format($deposit->amount,2)}}
+                                            </div>
                                         </div>
-                                    </th>
-                                    <td class="px-6 py-4 float-right font-semibold text-gray-800 mt-3">
-                                        {{number_format($deposit->amount,2)}}
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- Modal footer -->
-                    <div
-                        class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600 place-content-end mr-6">
-                        <p class="font-bold text-xl text-orange-400">@lang('public.total'): ${{number_format($personal_total,2)}}</p>
+                                    </li>
+                                @endforeach
+                            </ul>
+                            <div class="flex items-center float-right mt-4">
+                                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    <p class="font-bold text-xl text-orange-400">@lang('public.total'): ${{number_format($personal_total,2)}}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -397,7 +390,7 @@
                         </button>
                     </div>
                     <!-- Modal body -->
-                    <div class="px-6 py-4 space-y-6 overflow-auto overflow-y-scroll">
+                    <div class="px-6 py-4 space-y-6 overflow-auto">
                         <div class="flow-root">
                             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                                 @foreach ($group_deposits as $group_deposit)
@@ -416,7 +409,7 @@
                                                         {{$group_deposit->name}}
                                                     </p>
                                                 </div>
-                                                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                                <div class="inline-flex items-center text-base font-semibold text-[#696057] dark:text-white">
                                                     ${{number_format($group_deposit->total,2)}}
                                                 </div>
                                             </div>
@@ -438,7 +431,7 @@
                                                             {{ $deposit['broker']['name'] }}
                                                         </p>
                                                     </div>
-                                                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                                    <div class="inline-flex items-center text-sm font-semibold text-[#696057] dark:text-white">
                                                         ${{number_format($deposit['amount'],2) }}
                                                     </div>
                                                 </div>

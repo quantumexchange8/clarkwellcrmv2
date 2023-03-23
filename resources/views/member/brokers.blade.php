@@ -34,8 +34,11 @@
                     <p class="mb-3 font-normal text-gray-400 dark:text-gray-400">{{$broker->description}}</p>
                         <h5 class="mb-2 text-lg font-bold tracking-tight text-orange-400 dark:text-white"> @lang('public.instructor_note'):</h5>
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{$broker->note}}</p>
-                        <button data-modal-target="brokerModal{{$broker->id}}" data-modal-toggle="brokerModal{{$broker->id}}" class="flex mx-auto items-center px-3 py-2 text-md font-medium text-center text-white bg-orange-500 rounded-lg hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
-                            @lang('public.more')...
+                        <button data-modal-target="brokerModal{{$broker->id}}" data-modal-toggle="brokerModal{{$broker->id}}" class="flex mx-auto items-center px-3 py-2 text-md font-medium text-center text-white bg-orange-400 rounded-lg hover:bg-orange-500 focus:ring-4 focus:outline-none focus:ring-orange-300 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1 -ml-1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            @lang('public.more')
                     </button>
                 </div>
             </div>
