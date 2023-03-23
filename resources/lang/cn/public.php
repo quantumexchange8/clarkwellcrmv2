@@ -354,11 +354,20 @@ return array(
     'kyc_approval' => '成员审核',
     'approval' => '审核',
     'copy_id' => '您的身份证复印件',
-    'kyc_approval_status' => 'KYC Approval Status',
-    'kyc_not_verify' => 'Not Verify',
-    'kyc_pending_verify' => 'Pending Verification',
-    'kyc_verified' => 'Verified',
-    'view_id' => 'View Copy of ID',
+    'kyc_approval_status' => '成员审核状态',
+    'kyc_not_verify' => '未审核',
+    'kyc_pending_verify' => '待审核',
+    'kyc_verified' => '已审核',
+    'view_id' => '查看身份证扫描件',
+    'successfully_uploaded_ic' => '成功上传您的身份证扫描件!',
+    'fail_uploaded_ic' => '您的户口已审核!',
+    'successfully_approve_kyc' => '成功更新成员审核状态!',
+    'kyc_approval_confirmation' => '您确定要批准此成员的审核状态吗?',
+
+    'personal_daily_deposit' => '个人每日托管总计',
+    'personal_weekly_deposit' => '个人每周托管总计',
+    'unnecessary_withdraw' => '最终提款金额将等于或小于 0',
+    'withdrawal_pending_request' => '每次只允许一个提款请求，请等待上一个请求的批准',
 )
 ?>
 

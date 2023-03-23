@@ -354,11 +354,20 @@ return array(
     'kyc_approval' => '成員審核',
     'approval' => '審核',
     'copy_id' => '您的身份證複印件',
-    'kyc_approval_status' => 'KYC Approval Status',
-    'kyc_not_verify' => 'Not Verify',
-    'kyc_pending_verify' => 'Pending Verification',
-    'kyc_verified' => 'Verified',
-    'view_id' => 'View Copy of ID',
+    'kyc_approval_status' => '成員審核状态',
+    'kyc_not_verify' => '未審核',
+    'kyc_pending_verify' => '待審核',
+    'kyc_verified' => '已審核',
+    'view_id' => '查看身份證掃描件',
+    'successfully_uploaded_ic' => '成功上傳您的身份證掃描件!',
+    'fail_uploaded_ic' => '您的戶口已審核!',
+    'successfully_approve_kyc' => '成功更新成員審核状态!',
+    'kyc_approval_confirmation' => '您確定要批准此成員的審核状态嗎?',
+
+    'personal_daily_deposit' => '個人每日託管總計',
+    'personal_weekly_deposit' => '個人每週託管總計',
+    'unnecessary_withdraw' => '最終提款金額將等於或小於 0',
+    'withdrawal_pending_request' => '每次只允許一個提款請求，請等待上一個請求的批准',
 )
 ?>
 
