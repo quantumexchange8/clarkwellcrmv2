@@ -24,6 +24,7 @@ return array(
     'sent' => '我們已通過電子郵件發送您的密碼重置鏈接。',
     'reset_password' => '重設密碼',
     'success_reset' => '成功重置密碼！使用新密碼登錄',
+    'required_tnc' => '如果您想繼續，請選中此框',
 
     //header
     'wallet_balance' => '錢包餘額',
@@ -72,6 +73,12 @@ return array(
     'referral_id' => '推薦 ID',
     'news_and_announcement' => '新聞和公告',
     'close_modal' => '關閉彈窗',
+    'IB' => '初級經紀人',
+    'SIB' => '中級經紀人',
+    'MIB' => '高級經紀人',
+    'UM' => '單位經理',
+    'RM' => '區域經理',
+    'Trader' => '會員',
 
 //member profile
     'rank' => '等級',

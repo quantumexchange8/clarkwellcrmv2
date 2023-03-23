@@ -35,7 +35,7 @@
     </nav>
 
     <div
-        class="w-full h-auto p-4 text-center border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 mt-6 bg-[#FDFCF3]">
+        class="w-full h-auto p-4 text-center border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 mt-4 bg-[#FDFCF3]">
         <p class="mb-5 text-base text-gray-500 sm:text-lg dark:text-gray-400">
             @lang('public.member_verification_message')
         </p>
@@ -43,10 +43,8 @@
         <form class="space-y-6" action="{{ route('member_verification') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="grid gap-6 mb-6 md:grid-cols-2">
-
                 <div>
-                    <label for="front_id_image"
-                           class="block mb-2 font-bold text-[#FFA168] dark:text-white">@lang('public.front_id')</label>
+                    <p class="block mb-2 font-bold text-2xl text-[#FFA168]">@lang('public.front_id')</p>
                     @if($user->front_id_image)
                         <div class="flex justify-center item-center">
                             <img
@@ -54,20 +52,19 @@
                                 src="{{ asset('uploads/users/'.$user->front_id_image)}}" alt="">
                         </div>
                     @endif
-                    <input
-                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 @error('front_id_image') block w-full text-sm text-red-900 border border-red-500 rounded-lg cursor-pointer bg-red-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 @enderror"
-                        aria-describedby="front_id_image_desc" id="file_input" type="file" name="front_id_image"
-                        value="{{ @$user->front_id_image }}">
-                    @error('front_id_image')
-                    <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
-                    @enderror
-                    <p class="mt-2 text-sm text-gray-500 dark:text-gray-300"
-                       id="front_id_image_desc">@lang('public.id_req')</p>
+                    <div class="flex items-center justify-center w-full">
+                        <label for="dropzone-front" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">@lang('public.click_upload')</span> @lang('public.or_drap_drop')</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">@lang('public.id_req')</p>
+                            </div>
+                            <input id="dropzone-front" type="file" name="front_id_image" class="hidden" />
+                        </label>
+                    </div>
                 </div>
-
                 <div>
-                    <label for="back_id_image"
-                           class="block mb-2 font-bold text-[#FFA168] dark:text-white">@lang('public.back_id')</label>
+                    <p class="block mb-2 font-bold text-2xl text-[#FFA168]">@lang('public.back_id')</p>
                     @if($user->back_id_image)
                         <div class="flex justify-center item-center">
                             <img
@@ -75,15 +72,16 @@
                                 src="{{ asset('uploads/users/' .$user->back_id_image)}}" alt="">
                         </div>
                     @endif
-                    <input
-                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 @error('back_id_image') block w-full text-sm text-red-900 border border-red-500 rounded-lg cursor-pointer bg-red-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 @enderror"
-                        aria-describedby="back_id_image_desc" id="file_input" type="file" name="back_id_image"
-                        value="{{ @$user->back_id_image }}">
-                    @error('back_id_image')
-                    <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
-                    @enderror
-                    <p class="mt-2 text-sm text-gray-500 dark:text-gray-300"
-                       id="back_id_image_desc">@lang('public.id_req')</p>
+                    <div class="flex items-center justify-center w-full">
+                        <label for="dropzone-back" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">@lang('public.click_upload')</span> @lang('public.or_drap_drop')</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">@lang('public.id_req')</p>
+                            </div>
+                            <input id="dropzone-back" type="file" name="back_id_image" class="hidden" />
+                        </label>
+                    </div>
                 </div>
             </div>
 
@@ -100,19 +98,4 @@
         </form>
     </div>
 
-@endsection
-@section('script')
-    <script>
-        let imageUpload = document.getElementById("file_input");
-        // display file name if file has been selected
-        imageUpload.onchange = function () {
-            let input = this.files[0];
-            let image = document.getElementById('profile_pic_preview');
-            if (input) {
-                image.src = URL.createObjectURL(input);
-            } else {
-                image.src = '/img/profile.png';
-            }
-        };
-    </script>
 @endsection

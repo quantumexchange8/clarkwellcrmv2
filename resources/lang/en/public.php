@@ -24,6 +24,7 @@ return array(
     'sent' => 'We have emailed your password reset link.',
     'reset_password' => 'Reset Password',
     'success_reset' => 'Successfully Reset Password! Login using new password',
+    'required_tnc' => 'Please check this box if you want to proceed',
 
     //header
     'wallet_balance' => 'Wallet Balance',
@@ -72,6 +73,12 @@ return array(
     'referral_id' => 'Referral ID',
     'news_and_announcement' => 'News & Announcements',
     'close_modal' => 'Close modal',
+    'IB' => 'Introducing Broker',
+    'SIB' => 'Senior Introducing Broker',
+    'MIB' => 'Master Introducing Broker',
+    'UM' => 'Unit Manager',
+    'RM' => 'Regional Manager',
+    'Trader' => 'Trader',
 
     //member profile
     'rank' => 'Rank',

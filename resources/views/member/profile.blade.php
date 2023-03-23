@@ -24,15 +24,15 @@
         <div class="grid grid-flow-row grid-flow-cols grid-cols-3 gap-3 my-4 max-[1200px]:grid-rows-auto max-[1200px]:grid-cols-none ">
             <div class="flex justify-center max-[1200px]:justify-start ">
                 <div class="block rounded-lg bg-[#FDFCF3] border-2 text-center shadow-lg dark:bg-neutral-700 w-full">
-                    <div class="py-8 px-6  dark:text-neutral-50 flex text-orange-400 font-bold text-3xl">
+                    <div class="pt-6 pb-4 px-6 dark:text-neutral-50 flex text-orange-400 font-bold text-3xl">
                         @lang('public.rank')
                     </div>
-                    <div class="py-2">
-                        <div class="relative inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600">
-                            <span class="font-bold text-white dark:text-gray-300 text-4xl">{{$rank->rank_short_form}}</span>
+                    <div class="py-1">
+                        <div class="relative inline-flex items-center justify-center w-28 h-28 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600">
+                            <span class="font-bold text-white dark:text-gray-300 text-3xl">{{$rank->rank_short_form}}</span>
                         </div>
-                        <h5 class="my-6 text-xl font-bold leading-tight text-gray-600 dark:text-neutral-50">
-                            {{$rank->name}}
+                        <h5 class="my-6 text-xl font-bold leading-tight text-[#696057] dark:text-neutral-50">
+                            @lang('public.'. $rank->rank_short_form )
                         </h5>
                     </div>
                 </div>
@@ -45,16 +45,16 @@
                     <div class="grid grid-cols-2 max-[1200px]:grid-cols-none">
                         <div class="px-12 py-4 col-span-2 max-[1200px]:col-span-1">
                             <p class="font-medium text-gray-500 dark:text-gray-400 "> @lang('public.name'):</p>
-                            <h5 class="mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{$user->name}}</h5>
+                            <h5 class="mb-2 text-xl font-semibold tracking-tight text-[#696057] dark:text-white">{{$user->name}}</h5>
                         </div>
                         <div class="px-12 py-4 ">
                             <p class="font-medium text-gray-500 dark:text-gray-400 "> @lang('public.email'):</p>
-                            <h5 class="mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{$user->email}}</h5>
+                            <h5 class="mb-2 text-xl font-semibold tracking-tight text-[#696057] dark:text-white">{{$user->email}}</h5>
                         </div>
                         <div class="px-12 py-4">
                             <p class="font-medium text-gray-500 dark:text-gray-400 "> @lang('public.contact'):</p>
                             <div class="flex items-center space-x-4">
-                                <h5 class=" text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{$user->contact_number}}</h5>
+                                <h5 class=" text-xl font-semibold tracking-tight text-[#696057] dark:text-white">{{$user->contact_number}}</h5>
                             </div>
                         </div>
                     </div>
@@ -67,9 +67,9 @@
                     </div>
                     <div class="">
                         @if ($user->profile_image)
-                            <img src="{{ asset('uploads/users/' .$user->profile_image)}}" class="relative inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
+                            <img src="{{ asset('uploads/users/' .$user->profile_image)}}" class="relative inline-flex items-center justify-center w-28 h-28 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
                         @else
-                            <img src="{{url('/img/profile.png')}}" class="relative inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
+                            <img src="{{url('/img/profile.png')}}" class="relative inline-flex items-center justify-center w-28 h-28 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
                         @endif
                     </div>
                     <button data-modal-target="avatarModal" data-modal-toggle="avatarModal" type="button" class="font-semibold my-6 text-white bg-orange-400 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 rounded-lg text-sm px-5 py-2.5  dark:bg-orange-600 dark:hover:bg-orange-700 focus:outline-none dark:focus:ring-orange-800">
@@ -85,7 +85,7 @@
                     <div class="grid grid-cols-2 max-[1400px]:grid-cols-none">
                         <div class="px-12 py-4 ">
                             <p class="font-medium text-gray-500 dark:text-gray-400 "> @lang('public.address'):</p>
-                            <h5 class="mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                            <h5 class="mb-2 text-xl font-semibold tracking-tight text-[#696057] dark:text-white">
                                 {{$user->address}}
                             </h5>
                         </div>
@@ -95,7 +95,7 @@
                                 @if($user->countryFlag)
                                 <span class="fi fi-{{$user->countryFlag}} "></span>
                                 @endif
-                                <h5 class=" text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{$user->country}}</h5>
+                                <h5 class=" text-xl font-semibold tracking-tight text-[#696057] dark:text-white">{{$user->country}}</h5>
                             </div>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
                 <!-- Modal body -->
                 <div class="p-6 space-y-2 ">
 
-                    <img class="mx-auto w-32 h-32 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 bg-rose-500" id="profile_pic_preview"
+                    <img class="mx-auto w-32 h-32 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 bg-gray-100" id="profile_pic_preview"
                     @if ($user->profile_image)
                         src="{{ asset('uploads/users/' .$user->profile_image)}}"
                     @else

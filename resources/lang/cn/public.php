@@ -24,6 +24,7 @@ return array(
     'sent' => '我们已通过电子邮件发送您的密码重置链接。',
     'reset_password' => '重设密码',
     'success_reset' => '成功重置密码！使用新密码登录',
+    'required_tnc' => '如果您想继续，请选中此框',
 
     //header
     'wallet_balance' => '钱包余额',
@@ -72,6 +73,12 @@ return array(
     'referral_id' => '推荐ID',
     'news_and_announcement' => '新闻和公告',
     'close_modal' => '关闭弹窗',
+    'IB' => '初级经纪人',
+    'SIB' => '中级经纪人',
+    'MIB' => '高级经纪人',
+    'UM' => '单位经理',
+    'RM' => '区域经理',
+    'Trader' => '会员',
 
 //member profile
     'rank' => '等级',
