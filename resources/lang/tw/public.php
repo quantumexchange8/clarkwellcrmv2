@@ -90,7 +90,7 @@ return array(
     'cancel' => '取消',
 
 //member broker
-    'instructor_note' => '筆記',
+    'instructor_note' => '備註',
     'click_redirect_message' => '注册链接',
 
 //member fund
@@ -194,6 +194,9 @@ return array(
 //admin broker
     'search_name' => '搜尋名稱...',
     'add_broker' => '新增外匯券商',
+    'en' => '英文',
+    'cn' => '簡體',
+    'tw' => '繁體',
     'remove' => '移除',
     'delete_broker_confirmation' => '您確定要刪除此外匯券商檔案嗎？',
     'url' => 'URL',

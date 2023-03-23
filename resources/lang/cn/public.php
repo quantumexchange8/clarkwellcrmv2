@@ -90,7 +90,7 @@ return array(
     'cancel' => '取消',
 
 //member broker
-    'instructor_note' => '笔记',
+    'instructor_note' => '备注',
     'click_redirect_message' => '注册链接',
 
 //member fund
@@ -194,6 +194,9 @@ return array(
 //admin broker
     'search_name' => '搜索名称...',
     'add_broker' => '添加外汇券商',
+    'en' => '英文',
+    'cn' => '简体',
+    'tw' => '繁体',
     'remove' => '删除',
     'delete_broker_confirmation' => '您确定要删除此外汇券商档案吗？',
     'url' => 'URL',

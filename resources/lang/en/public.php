@@ -194,6 +194,9 @@ return array(
     //admin broker
     'search_name' => 'Search Name...',
     'add_broker' => 'Add Broker',
+    'en' => 'EN',
+    'cn' => 'CN',
+    'tw' => 'TW',
     'remove' => 'Remove',
     'delete_broker_confirmation' => 'Are you sure you want to delete this broker profile?',
     'url' => 'URL',

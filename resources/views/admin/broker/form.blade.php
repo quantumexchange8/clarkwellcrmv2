@@ -74,7 +74,6 @@
                         <p class="mt-2 text-sm text-gray-500 dark:text-gray-300" id="qr_image_desc">@lang('public.broker_image_req')</p>
                     </div>
                 </div>
-{{--                @dd($broker_trans->tbl_brokers)--}}
                 <div class="lg:col-span-2">
                     <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
                         <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
@@ -89,8 +88,8 @@
                         @foreach(config('translatable.locales') as $locale)
                             <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="{{ $locale }}" role="tabpanel" aria-labelledby="{{ $locale }}-tab">
                                 <div class="mb-6">
-                                    <label for="name[{{ $locale }}]" class="block mb-2 font-bold text-[#FFA168] dark:text-white">@lang('public.name') ({{ strtoupper($locale) }})</label>
-                                    <input type="text" id="name[{{ $locale }}]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error($locale.'.name') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="@lang('public.name') ({{ strtoupper($locale) }})" name="{{ $locale }}[name]"
+                                    <label for="name[{{ $locale }}]" class="block mb-2 font-bold text-[#FFA168] dark:text-white">@lang('public.name') ( @lang('public.'.$locale ) )</label>
+                                    <input type="text" id="name[{{ $locale }}]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error($locale.'.name') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="@lang('public.name') ( @lang('public.'.$locale ) )" name="{{ $locale }}[name]"
                                            @if($title == 'Add')
                                                value="{{ @$post->$locale['name'] }}"
                                            @else
@@ -103,15 +102,15 @@
                                 </div>
                                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                                     <div>
-                                        <label for="description[{{ $locale }}]" class="block mb-2 font-bold text-[#FFA168] dark:text-white">@lang('public.description') ({{ strtoupper($locale) }})</label>
-                                        <textarea id="description[{{ $locale }}]" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error($locale.'.description') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="@lang('public.description') ({{ strtoupper($locale) }})" name="{{ $locale }}[description]" >@if($title == 'Add'){{ @$post->$locale['description'] }}@else{{ @$post->translate($locale)->description }}@endif</textarea>
+                                        <label for="description[{{ $locale }}]" class="block mb-2 font-bold text-[#FFA168] dark:text-white">@lang('public.description') ( @lang('public.'.$locale ) )</label>
+                                        <textarea id="description[{{ $locale }}]" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error($locale.'.description') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="@lang('public.description') ( @lang('public.'.$locale ) )" name="{{ $locale }}[description]" >@if($title == 'Add'){{ @$post->$locale['description'] }}@else{{ @$post->translate($locale)->description }}@endif</textarea>
                                         @error($locale.'.description')
                                         <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div>
-                                        <label for="note[{{ $locale }}]" class="block mb-2 font-bold text-[#FFA168] dark:text-white">@lang('public.instructor_note') ({{ strtoupper($locale) }})</label>
-                                        <textarea id="note[{{ $locale }}]" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error($locale.'.note') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="@lang('public.instructor_note') ({{ strtoupper($locale) }})" name="{{ $locale }}[note]" >@if($title == 'Add'){{ @$post->$locale['note'] }}@else{{ @$post->translate($locale)->note }}@endif</textarea>
+                                        <label for="note[{{ $locale }}]" class="block mb-2 font-bold text-[#FFA168] dark:text-white">@lang('public.instructor_note') ( @lang('public.'.$locale ) )</label>
+                                        <textarea id="note[{{ $locale }}]" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error($locale.'.note') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="@lang('public.instructor_note') ( @lang('public.'.$locale ) )" name="{{ $locale }}[note]" >@if($title == 'Add'){{ @$post->$locale['note'] }}@else{{ @$post->translate($locale)->note }}@endif</textarea>
                                         @error($locale.'.note')
                                         <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
                                         @enderror
