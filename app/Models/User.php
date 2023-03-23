@@ -270,6 +270,33 @@ class User extends Authenticatable implements JWTSubject
         return $result;
     }
 
+    public function userDailyWeeklyDeposit($week = false)
+    {
+        $start_date = $end_date = Carbon::now();
+        if ($week) {
+            $start_date = $start_date->startOfWeek()->subWeek();
+            $end_date = $start_date->copy()->endOfWeek();
+        } else {
+            $start_date = $end_date = $start_date->subDay();
+        }
+
+        $start_date = Carbon::parse($start_date)->startOfDay()->format('Y-m-d H:i:s');
+        $end_date = Carbon::parse($end_date)->endOfDay()->format('Y-m-d H:i:s');
+
+        $personal_deposit = $this->deposits()
+            ->whereBetween('transaction_at', [$start_date, $end_date])
+            ->where('type', Deposits::TYPE_DEPOSIT)
+            ->sum('amount');
+        $personal_withdrawed_deposit = $this->deposits()
+            ->whereBetween('transaction_at', [$start_date, $end_date])
+            ->where('type', Deposits::TYPE_WITHDRAW)
+            ->where('status', Deposits::STATUS_APPROVED)
+            ->sum('amount');
+
+        return $personal_deposit - $personal_withdrawed_deposit;
+    }
+
+
     public function getRole()
     {
         $temp_role = self::listRole();

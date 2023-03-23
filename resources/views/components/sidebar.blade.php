@@ -34,9 +34,11 @@
                     <li>
                         <a href="{{ url('member/profile') }}" class="{{ request()->is('member/profile') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.profile_details')</a>
                     </li>
+                    @if (Auth::user()->kyc_approval_status != App\Models\User::KYC_STATUS_VERIFIED)
                     <li>
                         <a href="{{ url('member/verification') }}" class="{{ request()->is('member/verification') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.profile_verification')</a>
                     </li>
+                        @endif
                 </ul>
             </li>
             <li>

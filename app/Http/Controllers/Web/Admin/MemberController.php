@@ -456,7 +456,7 @@ class MemberController extends Controller
         $user->kyc_approval_status = User::KYC_STATUS_VERIFIED;
         $user->save();
 
-        Alert::success(trans('public.done'), trans('public.successfully_updated_broker'));
+        Alert::success(trans('public.done'), trans('public.successfully_approve_kyc'));
         return redirect()->route('member_kyc_listing');
     }
 }

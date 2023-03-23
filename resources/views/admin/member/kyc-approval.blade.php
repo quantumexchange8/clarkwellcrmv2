@@ -274,7 +274,7 @@
                                   d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                         <div class="modal-body">
-                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">@lang('public.access_confirmation')</h3>
+                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">@lang('public.kyc_approval_confirmation')</h3>
                             <input type="hidden" name="user_id" id="user_id">
                         </div>
                         <button type="submit" value="{{App\Models\User::KYC_STATUS_VERIFIED}}" name="approval"

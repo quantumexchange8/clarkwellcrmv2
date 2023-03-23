@@ -71,7 +71,14 @@ class UserController extends Controller
         $post = $user = Auth::user();
         $validator = null;
         if ($request->isMethod('post')) {
-            $validator = Validator::make($request->all(), [
+            if ($user->kyc_approval_status ==  User::KYC_STATUS_VERIFIED)
+            {
+                Alert::error(trans('public.invalid_action'), trans('public.fail_uploaded_ic'));
+                return redirect()->route('member_verification');
+            }
+
+
+                $validator = Validator::make($request->all(), [
                 'front_id_image' => 'nullable|image|max:5120',
                 'back_id_image' => 'nullable|image|max:5120',
             ])->setAttributeNames([
@@ -108,7 +115,7 @@ class UserController extends Controller
                     $user->kyc_approval_status = User::KYC_STATUS_PENDING_VERIFICATION;
                 }
                 $user->save();
-                Alert::success(trans('public.done'), trans('public.successfully_updated_broker'));
+                Alert::success(trans('public.done'), trans('public.successfully_uploaded_ic'));
                 return redirect()->route('member_verification');
             }
             $post = (object) $request->all();

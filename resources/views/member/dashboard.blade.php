@@ -112,7 +112,7 @@
                         {{$user->name}}
                     </h4>
                     <div
-                        class=" border-neutral-200 py-6 px-6 dark:border-neutral-600 dark:text-neutral-50 flex justify-center text-orange-400 font-bold text-2xl">
+                        class="border-b-2 border-neutral-200 py-6 px-6 dark:border-neutral-600 dark:text-neutral-50 flex justify-center text-orange-400 font-bold text-2xl">
 
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                              class="w-6 h-6 mr-3 mt-1">
@@ -122,6 +122,45 @@
                         </svg>
                         {{$rank->name}}
                     </div>
+                    <div class="py-3 ">
+                        <div>
+                            <h5 class="my-3 text-xl font-bold leading-tight text-orange-400 dark:text-neutral-50 inline-flex">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                     class="w-6 h-6 mr-3">
+                                    <path
+                                        d="M2.273 5.625A4.483 4.483 0 015.25 4.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 3H5.25a3 3 0 00-2.977 2.625zM2.273 8.625A4.483 4.483 0 015.25 7.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 6H5.25a3 3 0 00-2.977 2.625zM5.25 9a3 3 0 00-3 3v6a3 3 0 003 3h13.5a3 3 0 003-3v-6a3 3 0 00-3-3H15a.75.75 0 00-.75.75 2.25 2.25 0 01-4.5 0A.75.75 0 009 9H5.25z"/>
+                                </svg>
+
+                                @lang('public.personal_daily_deposit'):
+                            </h5>
+                            <h5 class="my-px text-xl font-bold leading-tight text-neutral-800 dark:text-neutral-50">
+                                ${{number_format($user->userDailyWeeklyDeposit(), 2)}}
+                            </h5>
+                        </div>
+
+                        <div>
+                            <h5 class="my-3 text-xl font-bold leading-tight text-orange-400 dark:text-neutral-50 inline-flex">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                     class="w-6 h-6 mr-3">
+                                    <path
+                                        d="M2.273 5.625A4.483 4.483 0 015.25 4.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 3H5.25a3 3 0 00-2.977 2.625zM2.273 8.625A4.483 4.483 0 015.25 7.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 6H5.25a3 3 0 00-2.977 2.625zM5.25 9a3 3 0 00-3 3v6a3 3 0 003 3h13.5a3 3 0 003-3v-6a3 3 0 00-3-3H15a.75.75 0 00-.75.75 2.25 2.25 0 01-4.5 0A.75.75 0 009 9H5.25z"/>
+                                </svg>
+
+                                @lang('public.personal_weekly_deposit'):
+                            </h5>
+                            <h5 class="my-px text-xl font-bold leading-tight text-neutral-800 dark:text-neutral-50">
+                                ${{number_format($user->userDailyWeeklyDeposit(true), 2)}}
+                            </h5>
+                        </div>
+
+{{--                        <div--}}
+{{--                            href=""--}}
+{{--                            class="mt-6 inline-block rounded px-6  pb-2 text-md font-medium leading-normal text-primary hover:text-orange-500   "--}}
+{{--                            data-te-ripple-init--}}
+{{--                            data-te-ripple-color="light">--}}
+{{--                        </div>--}}
+                    </div>
+
                 </div>
             </div>
             <div class="flex justify-center col-span-2 mt-6 max-[1000px]:col-span-1 max-[1250px]:justify-start">
@@ -166,55 +205,55 @@
                                        class="select-all rounded-none rounded-r-lg bg-orange-50 border text-orange-500 focus:ring-orange-500 focus:border-orange-500 block flex-1 min-w-0 text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
                                        placeholder="elonmusk">
                             </div>
-                            <div class="mt-3">
-                                <button type="button"
-                                        onclick=" window.open('{{$shareFB}}','_blank')"
-                                        class="text-white bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
-                                    <svg class="w-6 h-6" viewBox="0 0 48 48" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M36 12.5997H31.2489H29.9871C28.9009 12.5997 28.0203 13.4803 28.0203 14.5666V21.4674H36L34.8313 29.0643H28.0203V43H19.2451V29.0643H12V21.4674H19.1515L19.2451 14.2563L19.2318 12.9471C19.1879 8.60218 22.6745 5.04434 27.0194 5.0004C27.0459 5.00013 27.0724 5 27.0989 5H36V12.5997Z"
-                                            fill="#ffffff" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                                <button type="button"
-                                        onclick=" window.open('{{$shareTwitter}}','_blank')"
-                                        class="text-white bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
-                                    <svg class="w-6 h-6" viewBox="0 0 48 48" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M5 35.7622C6.92886 36.8286 20.8914 44.8773 30.8199 38.674C40.7483 32.4707 40.2006 21.7833 40.2006 16.886C41.1 15.0018 43 14.0439 43 8.9438C41.1337 10.6678 39.2787 11.2544 37.435 10.7036C35.6287 7.94957 33.1435 6.73147 29.9794 7.04934C25.2333 7.52614 23.4969 12.1825 24.0079 18.2067C16.6899 21.9074 10.9515 15.524 7.99418 10.7036C7.00607 14.4999 6.0533 19.0576 7.99418 24.0995C9.2881 27.4607 12.3985 30.3024 17.3254 32.6246C12.3323 35.3308 8.22382 36.3766 5 35.7622Z"
-                                            fill="#ffffff" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                                <button type="button"
-                                        onclick=" window.open('{{$shareTelegram}}','_blank')"
-                                        class="text-white bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
-                                    <svg class="w-6 h-6" viewBox="0 0 48 48" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M41.4193 7.30899C41.4193 7.30899 45.3046 5.79399 44.9808 9.47328C44.8729 10.9883 43.9016 16.2908 43.1461 22.0262L40.5559 39.0159C40.5559 39.0159 40.3401 41.5048 38.3974 41.9377C36.4547 42.3705 33.5408 40.4227 33.0011 39.9898C32.5694 39.6652 24.9068 34.7955 22.2086 32.4148C21.4531 31.7655 20.5897 30.4669 22.3165 28.9519L33.6487 18.1305C34.9438 16.8319 36.2389 13.8019 30.8426 17.4812L15.7331 27.7616C15.7331 27.7616 14.0063 28.8437 10.7686 27.8698L3.75342 25.7055C3.75342 25.7055 1.16321 24.0823 5.58815 22.459C16.3807 17.3729 29.6555 12.1786 41.4193 7.30899Z"
-                                            fill="#ffffff"/>
-                                    </svg>
-                                </button>
-                                <button type="button"
-                                        onclick=" window.open('{{$shareWA}}','_blank')"
-                                        class="text-white bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
-                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="w-6 h-6"
-                                         viewBox="0,0,256,256" style="fill:#000000;">
-                                        <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1"
-                                           stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"
-                                           stroke-dasharray="" stroke-dashoffset="0" font-family="none"
-                                           font-weight="none" font-size="none" text-anchor="none"
-                                           style="mix-blend-mode: normal">
-                                            <g transform="scale(8.53333,8.53333)">
-                                                <path
-                                                    d="M15,3c-6.627,0 -12,5.373 -12,12c0,2.25121 0.63234,4.35007 1.71094,6.15039l-1.60352,5.84961l5.97461,-1.56836c1.74732,0.99342 3.76446,1.56836 5.91797,1.56836c6.627,0 12,-5.373 12,-12c0,-6.627 -5.373,-12 -12,-12zM10.89258,9.40234c0.195,0 0.39536,-0.00119 0.56836,0.00781c0.214,0.005 0.44692,0.02067 0.66992,0.51367c0.265,0.586 0.84202,2.05608 0.91602,2.20508c0.074,0.149 0.12644,0.32453 0.02344,0.51953c-0.098,0.2 -0.14897,0.32105 -0.29297,0.49805c-0.149,0.172 -0.31227,0.38563 -0.44727,0.51563c-0.149,0.149 -0.30286,0.31238 -0.13086,0.60938c0.172,0.297 0.76934,1.27064 1.65234,2.05664c1.135,1.014 2.09263,1.32561 2.39063,1.47461c0.298,0.149 0.47058,0.12578 0.64258,-0.07422c0.177,-0.195 0.74336,-0.86411 0.94336,-1.16211c0.195,-0.298 0.39406,-0.24644 0.66406,-0.14844c0.274,0.098 1.7352,0.8178 2.0332,0.9668c0.298,0.149 0.49336,0.22275 0.56836,0.34375c0.077,0.125 0.07708,0.72006 -0.16992,1.41406c-0.247,0.693 -1.45991,1.36316 -2.00391,1.41016c-0.549,0.051 -1.06136,0.24677 -3.56836,-0.74023c-3.024,-1.191 -4.93108,-4.28828 -5.08008,-4.48828c-0.149,-0.195 -1.21094,-1.61031 -1.21094,-3.07031c0,-1.465 0.76811,-2.18247 1.03711,-2.48047c0.274,-0.298 0.59492,-0.37109 0.79492,-0.37109z"></path>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                </button>
-                            </div>
+{{--                            <div class="mt-3">--}}
+{{--                                <button type="button"--}}
+{{--                                        onclick=" window.open('{{$shareFB}}','_blank')"--}}
+{{--                                        class="text-white bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">--}}
+{{--                                    <svg class="w-6 h-6" viewBox="0 0 48 48" fill="none"--}}
+{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
+{{--                                        <path--}}
+{{--                                            d="M36 12.5997H31.2489H29.9871C28.9009 12.5997 28.0203 13.4803 28.0203 14.5666V21.4674H36L34.8313 29.0643H28.0203V43H19.2451V29.0643H12V21.4674H19.1515L19.2451 14.2563L19.2318 12.9471C19.1879 8.60218 22.6745 5.04434 27.0194 5.0004C27.0459 5.00013 27.0724 5 27.0989 5H36V12.5997Z"--}}
+{{--                                            fill="#ffffff" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>--}}
+{{--                                    </svg>--}}
+{{--                                </button>--}}
+{{--                                <button type="button"--}}
+{{--                                        onclick=" window.open('{{$shareTwitter}}','_blank')"--}}
+{{--                                        class="text-white bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">--}}
+{{--                                    <svg class="w-6 h-6" viewBox="0 0 48 48" fill="none"--}}
+{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
+{{--                                        <path--}}
+{{--                                            d="M5 35.7622C6.92886 36.8286 20.8914 44.8773 30.8199 38.674C40.7483 32.4707 40.2006 21.7833 40.2006 16.886C41.1 15.0018 43 14.0439 43 8.9438C41.1337 10.6678 39.2787 11.2544 37.435 10.7036C35.6287 7.94957 33.1435 6.73147 29.9794 7.04934C25.2333 7.52614 23.4969 12.1825 24.0079 18.2067C16.6899 21.9074 10.9515 15.524 7.99418 10.7036C7.00607 14.4999 6.0533 19.0576 7.99418 24.0995C9.2881 27.4607 12.3985 30.3024 17.3254 32.6246C12.3323 35.3308 8.22382 36.3766 5 35.7622Z"--}}
+{{--                                            fill="#ffffff" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>--}}
+{{--                                    </svg>--}}
+{{--                                </button>--}}
+{{--                                <button type="button"--}}
+{{--                                        onclick=" window.open('{{$shareTelegram}}','_blank')"--}}
+{{--                                        class="text-white bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">--}}
+{{--                                    <svg class="w-6 h-6" viewBox="0 0 48 48" fill="none"--}}
+{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
+{{--                                        <path--}}
+{{--                                            d="M41.4193 7.30899C41.4193 7.30899 45.3046 5.79399 44.9808 9.47328C44.8729 10.9883 43.9016 16.2908 43.1461 22.0262L40.5559 39.0159C40.5559 39.0159 40.3401 41.5048 38.3974 41.9377C36.4547 42.3705 33.5408 40.4227 33.0011 39.9898C32.5694 39.6652 24.9068 34.7955 22.2086 32.4148C21.4531 31.7655 20.5897 30.4669 22.3165 28.9519L33.6487 18.1305C34.9438 16.8319 36.2389 13.8019 30.8426 17.4812L15.7331 27.7616C15.7331 27.7616 14.0063 28.8437 10.7686 27.8698L3.75342 25.7055C3.75342 25.7055 1.16321 24.0823 5.58815 22.459C16.3807 17.3729 29.6555 12.1786 41.4193 7.30899Z"--}}
+{{--                                            fill="#ffffff"/>--}}
+{{--                                    </svg>--}}
+{{--                                </button>--}}
+{{--                                <button type="button"--}}
+{{--                                        onclick=" window.open('{{$shareWA}}','_blank')"--}}
+{{--                                        class="text-white bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">--}}
+{{--                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="w-6 h-6"--}}
+{{--                                         viewBox="0,0,256,256" style="fill:#000000;">--}}
+{{--                                        <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1"--}}
+{{--                                           stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"--}}
+{{--                                           stroke-dasharray="" stroke-dashoffset="0" font-family="none"--}}
+{{--                                           font-weight="none" font-size="none" text-anchor="none"--}}
+{{--                                           style="mix-blend-mode: normal">--}}
+{{--                                            <g transform="scale(8.53333,8.53333)">--}}
+{{--                                                <path--}}
+{{--                                                    d="M15,3c-6.627,0 -12,5.373 -12,12c0,2.25121 0.63234,4.35007 1.71094,6.15039l-1.60352,5.84961l5.97461,-1.56836c1.74732,0.99342 3.76446,1.56836 5.91797,1.56836c6.627,0 12,-5.373 12,-12c0,-6.627 -5.373,-12 -12,-12zM10.89258,9.40234c0.195,0 0.39536,-0.00119 0.56836,0.00781c0.214,0.005 0.44692,0.02067 0.66992,0.51367c0.265,0.586 0.84202,2.05608 0.91602,2.20508c0.074,0.149 0.12644,0.32453 0.02344,0.51953c-0.098,0.2 -0.14897,0.32105 -0.29297,0.49805c-0.149,0.172 -0.31227,0.38563 -0.44727,0.51563c-0.149,0.149 -0.30286,0.31238 -0.13086,0.60938c0.172,0.297 0.76934,1.27064 1.65234,2.05664c1.135,1.014 2.09263,1.32561 2.39063,1.47461c0.298,0.149 0.47058,0.12578 0.64258,-0.07422c0.177,-0.195 0.74336,-0.86411 0.94336,-1.16211c0.195,-0.298 0.39406,-0.24644 0.66406,-0.14844c0.274,0.098 1.7352,0.8178 2.0332,0.9668c0.298,0.149 0.49336,0.22275 0.56836,0.34375c0.077,0.125 0.07708,0.72006 -0.16992,1.41406c-0.247,0.693 -1.45991,1.36316 -2.00391,1.41016c-0.549,0.051 -1.06136,0.24677 -3.56836,-0.74023c-3.024,-1.191 -4.93108,-4.28828 -5.08008,-4.48828c-0.149,-0.195 -1.21094,-1.61031 -1.21094,-3.07031c0,-1.465 0.76811,-2.18247 1.03711,-2.48047c0.274,-0.298 0.59492,-0.37109 0.79492,-0.37109z"></path>--}}
+{{--                                            </g>--}}
+{{--                                        </g>--}}
+{{--                                    </svg>--}}
+{{--                                </button>--}}
+{{--                            </div>--}}
                         </div>
                     </div>
                 </div>

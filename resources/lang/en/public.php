@@ -358,6 +358,13 @@ return array(
     'kyc_not_verify' => 'Not Verify',
     'kyc_pending_verify' => 'Pending Verification',
     'kyc_verified' => 'Verified',
-    'view_id' => 'View Copy of ID'
+    'view_id' => 'View Copy of ID',
+    'successfully_uploaded_ic' => 'Successfully uploaded your ID!',
+    'fail_uploaded_ic' => 'Your account had been verified!',
+    'successfully_approve_kyc' => 'Successfully updated user KYC approval status!',
+    'kyc_approval_confirmation' => 'Are you sure you want to approve the KYC status of this user?',
+
+    'personal_daily_deposit' => 'Personal Daily Deposit',
+    'personal_weekly_deposit' => 'Personal Weekly Deposit',
 )
 ?>
