@@ -366,5 +366,7 @@ return array(
 
     'personal_daily_deposit' => 'Personal Daily Deposit',
     'personal_weekly_deposit' => 'Personal Weekly Deposit',
+    'unnecessary_withdraw' => 'Final withdraw amount will be equal or less than 0.',
+    'withdrawal_pending_request' => 'Only one withdrawal requests allow each time, kindly wait for approval for previous request.',
 )
 ?>

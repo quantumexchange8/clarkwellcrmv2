@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use Alert;
 
 class WithdrawalController extends Controller
 {
@@ -53,10 +54,13 @@ class WithdrawalController extends Controller
     public function store(StoreWithdrawalRequest $request)
     {
         $user = Auth::user();
-        if ($request->amount > $user->wallet_balance)
+        if (Withdrawals::where('requested_by_user', 140)->where('status', Withdrawals::STATUS_PENDING)->exists()) {
+            Alert::warning(trans('public.invalid_action'), trans('public.withdrawal_pending_request'));
+            return back()->withInput();
+        } elseif ($request->amount > $user->wallet_balance)
         {
-            $message = trans('public.invalid_action').', '.trans('public.insufficient_amount');
-            return back()->withInput()->withErrors(["error_messages" => $message]);
+            Alert::warning(trans('public.invalid_action'), trans('public.insufficient_amount'));
+            return back()->withInput();
         }
 
         $settings = Settings::getKeyValue();
@@ -66,7 +70,8 @@ class WithdrawalController extends Controller
 
         if ($amount <= 0)
         {
-            return back()->withInput()->withErrors(["error_messages" => "Final withdraw amount will be equal or less than 0."]);
+            Alert::warning(trans('public.invalid_action'), trans('public.unnecessary_withdraw'));
+            return back()->withInput();
         }
 
         $withdrawal = Withdrawals::create([
