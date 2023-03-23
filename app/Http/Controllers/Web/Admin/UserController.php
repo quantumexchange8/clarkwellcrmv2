@@ -140,8 +140,8 @@ class UserController extends Controller
         if($request->isMethod('post')){
             $validator = Validator::make($request->all(), [
                 'current_password' => 'required|min:8',
-                'password' => ['required', 'string', 'max:15', 'confirmed',
-                    Password::min(8)->letters()->numbers()->mixedCase()->symbols()],
+                'password' => ['required', 'string', 'confirmed',
+                    Password::min(6)->letters()->numbers()],
                 'password_confirmation' => 'required|same:password'
             ])->setAttributeNames([
                 'current_password' => trans('public.current_password'),

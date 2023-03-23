@@ -122,9 +122,7 @@
                             </td>
                             <td class="p-4">
                                 @if(empty($record->parent))
-                                    <div class="text-center">
-                                        -
-                                    </div>
+                                    <span class="bg-gray-500 text-gray-100 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">No Upline</span>
                                 @else
                                     {{ $record->parent->email }}
                                 @endif

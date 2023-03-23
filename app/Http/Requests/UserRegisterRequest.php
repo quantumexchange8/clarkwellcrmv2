@@ -32,8 +32,8 @@ class UserRegisterRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email',
-            'password' => ['required', 'string', 'max:15', 'confirmed',
-                Password::min(8)->letters()->numbers()->mixedCase()->symbols()],
+            'password' => ['required', 'string', 'confirmed',
+                Password::min(6)->letters()->numbers()],
             'phone' => 'required|string|unique:users,contact_number',
             'address' => 'string|required|max:255',
             'country' => 'required|string',

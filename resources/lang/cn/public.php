@@ -40,9 +40,10 @@ return array(
     'profile' => '个人资料',
     'profile_details' => '个人资料细节',
     'profile_verification' => '个人资料核验',
-    'broker&fund' => '外汇券商和基金',
-    'broker_list' => '外汇券商列表',
+    'broker&fund' => '经纪商和基金',
+    'broker_list' => '经纪商列表',
     'fund' => '基金',
+    'network_plan' => '我的市场计划',
     'network_tree' => '我的市场体系',
     'network' => '市场返佣',
     'commissions' => '个人返佣',
@@ -157,7 +158,7 @@ return array(
     'password_validation_1' => '必须包含 a-z 和 A-Z',
     'password_validation_2' => '必须包含数字',
     'password_validation_3' => '必须包含特殊字符',
-    'password_validation_4' => '长度必须在8到15个字符之间',
+    'password_validation_4' => '至少 6 个字符',
 
     'access' => '权限',
     'access_confirmation' => '您确定要访问此用户吗？',
@@ -202,7 +203,7 @@ return array(
     'url' => 'URL',
     'description' => '说明',
     'broker_image' => '外汇券商图片',
-    'broker_image_req' => 'SVG，PNG，JPG或GIF（最大200 x 200像素）。',
+    'broker_image_req' => 'SVG，PNG，JPG或GIF。',
     'qr_code' => 'QR码',
     'create_broker' => '创建外汇券商档案',
     'update_broker' => '更新外汇券商档案',
@@ -250,109 +251,114 @@ return array(
     'entries' => '条记录',
     'info' => '信息',
     'no_record' => '没有任何记录',
-//status
-'process' => '处理中',
-'calculated' => '已计算',
-'approved' => '已批准',
-'rejected' => '已拒绝',
+    //status
+    'process' => '处理中',
+    'calculated' => '已计算',
+    'approved' => '已批准',
+    'rejected' => '已拒绝',
 
-//newly added
-'new_password' => '新密码',
-'current_password' => '当前密码',
-'confirm_password' => '确认新密码',
+    //newly added
+    'new_password' => '新密码',
+    'current_password' => '当前密码',
+    'confirm_password' => '确认新密码',
 
-'done' => '完成',
-'try_again' => '请稍后再试。',
-'invalid_action' => '无效的操作',
+    'done' => '完成',
+    'try_again' => '请稍后再试。',
+    'invalid_action' => '无效的操作',
 
-//admin title
-'deposit_downline' => '托管 - 下线',
-'commission_downline' => '个人返佣 - 下线',
-'withdrawal_downline' => '提现 - 下线',
-'add_member' => '添加会员',
-'update_member' => '更新会员',
-'network_transfer' => '网络转移',
+    //admin title
+    'deposit_downline' => '托管 - 下线',
+    'commission_downline' => '个人返佣 - 下线',
+    'withdrawal_downline' => '提现 - 下线',
+    'add_member' => '添加会员',
+    'update_member' => '更新会员',
+    'network_transfer' => '网络转移',
 
-//BrokersController
+    //BrokersController
 
-'successfully_added_broker' => '添加外汇券商成功',
-'successfully_updated_broker' => '更新外汇券商成功',
-'successfully_deleted_broker' => '删除外汇券商档案成功',
+    'successfully_added_broker' => '添加外汇券商成功',
+    'successfully_updated_broker' => '更新外汇券商成功',
+    'successfully_deleted_broker' => '删除外汇券商档案成功',
 
-'invalid_broker' => '无效的外汇券商档案',
+    'invalid_broker' => '无效的外汇券商档案',
 
-//CommissionsController
+    //CommissionsController
 
-'invalid_commission' => '无效的个人返佣',
-'commission_status_error' => '只能删除未计算的个人返佣',
-'successfully_deleted_commission' => '删除个人返佣成功',
+    'invalid_commission' => '无效的个人返佣',
+    'commission_status_error' => '只能删除未计算的个人返佣',
+    'successfully_deleted_commission' => '删除个人返佣成功',
 
 
-//DepositController
+    //DepositController
 
-'import_success' => '文件导入成功',
-'invalid_deposit' => '无效的托管',
-'successfully_deleted_deposit' => '删除托管成功',
+    'import_success' => '文件导入成功',
+    'invalid_deposit' => '无效的托管',
+    'successfully_deleted_deposit' => '删除托管成功',
 
-//MemberController
+    //MemberController
 
-'successfully_added_member' => '成功添加会员详情',
-'invalid_user' => '无效的用户',
-'successfully_updated_member' => '成功更新会员详情',
-'successfully_updated_rank' => '成功更新排名详情',
-'invalid_withdrawal' => '用户在所选外汇券商没有任何托管记录',
-'insufficient_amount' => '余额不足',
-'success_withdraw' => '成功提现',
+    'successfully_added_member' => '成功添加会员详情',
+    'invalid_user' => '无效的用户',
+    'successfully_updated_member' => '成功更新会员详情',
+    'successfully_updated_rank' => '成功更新排名详情',
+    'invalid_withdrawal' => '用户在所选外汇券商没有任何托管记录',
+    'insufficient_amount' => '余额不足',
+    'success_withdraw' => '成功提现',
 
-//NewsController
+    //NewsController
 
-'successfully_added_news' => '成功创建新闻',
-'invalid_news' => '无效的新闻',
-'successfully_updated_news' => '成功更新新闻',
-'successfully_deleted_news' => '成功删除新闻',
+    'successfully_added_news' => '成功创建新闻',
+    'invalid_news' => '无效的新闻',
+    'successfully_updated_news' => '成功更新新闻',
+    'successfully_deleted_news' => '成功删除新闻',
 
-//ReferralController
-'successfully_transfer_customer' => '成功转移客户',
+    //ReferralController
+    'successfully_transfer_customer' => '成功转移客户',
 
-//UserController
+    //UserController
 
-'successfully_updated_profile' => '成功更新您的个人资料',
-'current_password_invalid' => '当前密码无效',
-'current_same_password' => '新密码不能与当前密码相同',
-'successfully_updated_password' => '成功更新密码。',
+    'successfully_updated_profile' => '成功更新您的个人资料',
+    'current_password_invalid' => '当前密码无效',
+    'current_same_password' => '新密码不能与当前密码相同',
+    'successfully_updated_password' => '成功更新密码。',
 
-//WithdrawalController
-'successfully_updated_withdrawal_status' => '成功更新提现状态',
+    //WithdrawalController
+    'successfully_updated_withdrawal_status' => '成功更新提现状态',
 
-//Custom Attribute Names or Messages
-'broker_image_dimensions' => '外汇券商图片需要200x200像素的图片。',
-'qr_image_display_length' => 'QR码图片的最大尺寸为512x256像素',
-'file_required' => '请上传要导入的文件',
-'file_mimes' => '文件扩展名必须为.xlsx，.csv，.xls',
-'broker_id' => '外汇券商选择无效',
-'import_error' => '第%s行发生错误',
-'transaction_date_required' => '交易日期字段是必填的。',
-'transaction_date_regex' => '交易日期字段格式无效。',
-'lot_size_required' => '手数字段是必填的。',
-'lot_size_numeric' => '手数字段必须是数字。',
-'profile_image' => '个人资料照片',
+    //Custom Attribute Names or Messages
+    'broker_image_dimensions' => '外汇券商图片需要200x200像素的图片。',
+    'qr_image_display_length' => 'QR码图片的最大尺寸为512x256像素',
+    'file_required' => '请上传要导入的文件',
+    'file_mimes' => '文件扩展名必须为.xlsx，.csv，.xls',
+    'broker_id' => '外汇券商选择无效',
+    'import_error' => '第%s行发生错误',
+    'transaction_date_required' => '交易日期字段是必填的。',
+    'transaction_date_regex' => '交易日期字段格式无效。',
+    'lot_size_required' => '手数字段是必填的。',
+    'lot_size_numeric' => '手数字段必须是数字。',
+    'profile_image' => '个人资料照片',
 
-'type' => '类型',
-'type_deposit' => '托管',
+    'type' => '类型',
+    'type_deposit' => '托管',
 
-'first_leader' => '第一任领导人',
-'top_leader' => '最高领导人',
-'leader_status' => '设置领导',
+    'first_leader' => '第一任领导人',
+    'top_leader' => '最高领导人',
+    'leader_status' => '设置领导',
 
-'member_verification_message' => '为了您的资金安全，您需要上传所有文件以完成账户验证，然后才能处理提款。',
+    'member_verification_message' => '为了您的资金安全，您需要上传所有文件以完成账户验证，然后才能处理提款。',
     'upload_id' => 'Upload ID',
     'front_id' => '身份证扫描件 (正面)',
     'back_id' => '身份证扫描件 (背面)',
     'id_req' => '您可上传png、jpeg 或者 jpg等格式的文件，大小不超过5MB。',
 
-    'kyc_approval' => 'KYC Approval',
-    'approval' => 'Approval',
-    'copy_id' => 'Copy Of Your ID',
+    'kyc_approval' => '成员审核',
+    'approval' => '审核',
+    'copy_id' => '您的身份证复印件',
+    'kyc_approval_status' => 'KYC Approval Status',
+    'kyc_not_verify' => 'Not Verify',
+    'kyc_pending_verify' => 'Pending Verification',
+    'kyc_verified' => 'Verified',
+    'view_id' => 'View Copy of ID',
 )
 ?>
 

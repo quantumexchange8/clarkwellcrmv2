@@ -40,9 +40,10 @@ return array(
     'profile' => '個人資料',
     'profile_details' => '個人資料細節',
     'profile_verification' => '個人資料核驗',
-    'broker&fund' => '外匯券商和基金',
-    'broker_list' => '外匯券商列表',
+    'broker&fund' => '經紀商和基金',
+    'broker_list' => '經紀商列表',
     'fund' => '基金',
+    'network_plan' => '我的市場計劃',
     'network_tree' => '我的市場體系',
     'network' => '市場返佣',
     'commissions' => '個人返佣',
@@ -157,7 +158,7 @@ return array(
     'password_validation_1' => '必須包含 a-z 和 A-Z',
     'password_validation_2' => '必須包含數字',
     'password_validation_3' => '必須包含特殊字符',
-    'password_validation_4' => '長度必須在8到15個字符之間',
+    'password_validation_4' => '至少 6 個字符',
 
     'access' => '權限',
     'access_confirmation' => '您確定要訪問此用戶嗎？',
@@ -202,7 +203,7 @@ return array(
     'url' => 'URL',
     'description' => '說明',
     'broker_image' => '外匯券商圖片',
-    'broker_image_req' => 'SVG、PNG、JPG或GIF（最大200 x 200像素）。',
+    'broker_image_req' => 'SVG、PNG、JPG或GIF。',
     'qr_code' => 'QR碼',
     'create_broker' => '建立外匯券商檔案',
     'update_broker' => '更新外匯券商檔案',
@@ -350,9 +351,14 @@ return array(
     'back_id' => '身份證掃描件 (背面)',
     'id_req' => '您可上傳png、jpeg或者jpg等格式的文件，大小不超過5MB。',
 
-    'kyc_approval' => 'KYC Approval',
-    'approval' => 'Approval',
-    'copy_id' => 'Copy Of Your ID',
+    'kyc_approval' => '成員審核',
+    'approval' => '審核',
+    'copy_id' => '您的身份證複印件',
+    'kyc_approval_status' => 'KYC Approval Status',
+    'kyc_not_verify' => 'Not Verify',
+    'kyc_pending_verify' => 'Pending Verification',
+    'kyc_verified' => 'Verified',
+    'view_id' => 'View Copy of ID',
 )
 ?>
 

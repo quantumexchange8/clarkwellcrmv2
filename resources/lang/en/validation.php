@@ -129,11 +129,11 @@ return [
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',
 
-    'validation.password.mixed' => 'The :attribute must contain at least one uppercase and one lowercase letter.',
-    'validation.password.letters' => 'The :attribute must contain at least one letter.',
-    'validation.password.symbols' => 'The :attribute must contain at least one symbol.',
-    'validation.password.numbers' => 'The :attribute must contain at least one number.',
-    'validation.password.uncompromised' => 'The given :attribute has appeared in a data leak. Please choose a different :attribute.',
+    'validation_password_mixed' => 'The :attribute must contain at least one uppercase and one lowercase letter.',
+    'validation_password_letters' => 'The :attribute must contain at least one letter.',
+    'validation_password_symbols' => 'The :attribute must contain at least one symbol.',
+    'validation_password_numbers' => 'The :attribute must contain at least one number.',
+    'validation_password_uncompromised' => 'The given :attribute has appeared in a data leak. Please choose a different :attribute.',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

@@ -132,7 +132,7 @@
                             {{ $record->broker->name }}
                         </td>
                         <td class="p-4">
-                            {{ $record->transaction_at }}
+                            {{ date_format($record->transaction_at, 'Y-m-d') }}
                         </td>
                         <td class="p-4">
                             {{ $record->lot_size }}

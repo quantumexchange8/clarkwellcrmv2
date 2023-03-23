@@ -32,9 +32,7 @@
                     <div data-popover id="popover-description" role="tooltip" class="absolute z-10 invisible inline-block text-sm font-light text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400">
                         <div class="p-3 space-y-2">
                             <h3 class="font-semibold text-gray-900 dark:text-white">@lang('public.password_type')</h3>
-                            <p>@lang('public.password_validation_1')</p>
                             <p>@lang('public.password_validation_2')</p>
-                            <p>@lang('public.password_validation_3')</p>
                             <p>@lang('public.password_validation_4')</p>
                         </div>
                         <div data-popper-arrow></div>

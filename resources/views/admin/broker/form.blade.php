@@ -8,37 +8,6 @@
         <h1 class="flex-1 font-semibold text-2xl text-gray-500">@lang('public.brokers') / {{ ($title)== 'Add' ? trans('public.add_broker') : trans('public.update_broker') }} </h1>
         <a href="{{ route('broker_listing') }}" class="text-xl font-semibold text-[#FFA168]">@lang('public.back')</a>
     </div>
-{{--    <form action="{{ route('brokers.store') }}" method="post">--}}
-{{--        @csrf--}}
-{{--        @foreach(config('translatable.locales') as $locale)--}}
-{{--            <div class="mt-4">--}}
-{{--                <label for="name[{{ $locale }}]">--}}
-{{--                    Name ( {{ strtoupper($locale) }} )--}}
-{{--                </label>--}}
-{{--                <input type="text" id="name[{{ $locale }}]" name="{{ $locale }}[name]" value="{{ old($locale. 'name') }}">--}}
-{{--            </div>--}}
-
-{{--            <div class="mt-4">--}}
-{{--                <label for="description[{{ $locale }}]">--}}
-{{--                    Description ( {{ strtoupper($locale) }} )--}}
-{{--                </label>--}}
-{{--                <textarea type="text" id="description[{{ $locale }}]" name="{{ $locale }}[description]">--}}
-{{--                {{ old($locale. 'description') }}--}}
-{{--            </textarea>--}}
-{{--            </div>--}}
-
-{{--            <div class="mt-4">--}}
-{{--                <label for="note[{{ $locale }}]">--}}
-{{--                    Note ( {{ strtoupper($locale) }} )--}}
-{{--                </label>--}}
-{{--                <textarea type="text" id="note[{{ $locale }}]" name="{{ $locale }}[note]">--}}
-{{--                {{ old($locale. 'note') }}--}}
-{{--            </textarea>--}}
-{{--            </div>--}}
-{{--        @endforeach--}}
-{{--        <button type="submit">Submit</button>--}}
-{{--    </form>--}}
-
     <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
         <form class="space-y-6" action="{{ $submit }}" method="post" enctype="multipart/form-data">
             @csrf
@@ -79,7 +48,7 @@
                         <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
                             @foreach(config('translatable.locales') as $locale)
                                 <li class="mr-2" role="presentation">
-                                    <button class="inline-block p-4 border-b-2 rounded-t-lg" id="{{ $locale }}-tab" data-tabs-target="#{{ $locale }}" type="button" role="tab" aria-controls="{{ $locale }}" aria-selected="false">{{ strtoupper($locale) }}</button>
+                                    <button class="inline-block p-4 border-b-2 rounded-t-lg" id="{{ $locale }}-tab" data-tabs-target="#{{ $locale }}" type="button" role="tab" aria-controls="{{ $locale }}" aria-selected="false">@lang('public.'.$locale )</button>
                                 </li>
                             @endforeach
                         </ul>

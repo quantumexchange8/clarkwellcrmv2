@@ -38,8 +38,8 @@ class AuthController extends Controller
 
         $validator = Validator::make($request->all(), [
             'email' => ['required', 'string', 'email', 'max:255'],
-            'password' => ['required', 'string', 'max:15',
-                Password::min(8)->letters()->numbers()->mixedCase()->symbols()],
+            'password' => ['required', 'string',
+                Password::min(6)->letters()->numbers()],
         ])->setAttributeNames([
             'email' => trans('public.email'),
             'password' => trans('public.password'),
@@ -154,8 +154,8 @@ class AuthController extends Controller
         $request->validate([
             'token' => 'required',
             'email' => 'required|email',
-            'password' => ['required', 'string', 'max:15', 'confirmed',
-                Password::min(8)->letters()->numbers()->mixedCase()->symbols()],
+            'password' => ['required', 'string', 'confirmed',
+                Password::min(6)->letters()->numbers()],
         ]);
         $status = PasswordSupport::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),

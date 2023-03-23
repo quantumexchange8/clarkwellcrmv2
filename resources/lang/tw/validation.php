@@ -129,11 +129,11 @@ return [
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',
 
-    'validation.password.mixed' => 'The :attribute must contain at least one uppercase and one lowercase letter.',
-    'validation.password.letters' => 'The :attribute must contain at least one letter.',
-    'validation.password.symbols' => 'The :attribute must contain at least one symbol.',
-    'validation.password.numbers' => 'The :attribute must contain at least one number.',
-    'validation.password.uncompromised' => 'The given :attribute has appeared in a data leak. Please choose a different :attribute.',
+    'validation_password_mixed' => ':attribute 必須至少包含一個大寫字母和一個小寫字母。',
+    'validation_password_letters' => ':attribute 必須包含至少一個字母。',
+    'validation_password_symbols' => ':attribute 必須包含至少一個符號。',
+    'validation_password_numbers' => ':attribute 必須包含至少一個數字。',
+    'validation_password_uncompromised' => '給定的 :attribute 出現在數據洩漏中。請選擇不同的 :attribute。',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
