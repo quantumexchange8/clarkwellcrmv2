@@ -19,7 +19,7 @@
                         </svg>
                         @lang('public.personal_deposit')
                     </div>
-                    <div class="w-full max-w-md p-6 bg-[#FDFCF3]">
+                    <div class="w-full max-w-md p-6 mx-auto bg-[#FDFCF3]">
                         <div class="flex items-center justify-between mb-4">
                             <h5 class="my-2 text-xl text-[#696057] font-bold leading-none dark:text-white">
                                 @lang('public.total'): ${{number_format($personal_total,2)}}
@@ -65,7 +65,7 @@
                         </svg>
                         @lang('public.group_deposit')
                     </div>
-                    <div class="w-full max-w-md p-6 bg-[#FDFCF3]">
+                    <div class="w-full max-w-md p-6 mx-auto bg-[#FDFCF3]">
                         <div class="flex items-center justify-between mb-4">
                             <h5 class="my-2 text-xl text-[#696057] font-bold leading-none dark:text-white">
                                 @lang('public.total'): ${{number_format($group_deposits_total,2)}}
@@ -297,7 +297,7 @@
                 <!-- Modal content -->
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                     <!-- Modal header -->
-                    <div class="flex items-start justify-between p-6 border-b rounded-t dark:border-gray-600 text-orange-500">
+                    <div class="flex items-start justify-between p-6 border-b rounded-t dark:border-gray-600 text-orange-400">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                              class="w-6 h-6 mr-3 mt-1">
                             <path fill-rule="evenodd"
@@ -324,27 +324,39 @@
                     <div class="px-6 py-4 space-y-6 overflow-auto">
                         <div class="flow-root">
                             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-                                @foreach($deposits as $deposit)
-                                    <li class="py-3 sm:py-4">
-                                        <div class="flex items-center space-x-4">
-                                            <div class="flex-shrink-0">
-                                                @if ($deposit->broker->broker_image)
-                                                    <img src="{{ asset('uploads/brokers/' .$deposit->broker->broker_image)}}" class="w-10 h-10 rounded-full bg-rose-400" alt="">
-                                                @else
-                                                    <img class="w-10 h-10 rounded-full bg-rose-400" alt="">
-                                                @endif
+                                @if($deposits->count() > 0)
+                                    @foreach($deposits as $deposit)
+                                        <li class="py-3 sm:py-4">
+                                            <div class="flex items-center space-x-4">
+                                                <div class="flex-shrink-0">
+                                                    @if ($deposit->broker->broker_image)
+                                                        <img src="{{ asset('uploads/brokers/' .$deposit->broker->broker_image)}}" class="w-10 h-10 rounded-full bg-rose-400" alt="">
+                                                    @else
+                                                        <img class="w-10 h-10 rounded-full bg-rose-400" alt="">
+                                                    @endif
+                                                </div>
+                                                <div class="flex-1 min-w-0 text-left">
+                                                    <p class="text-orange-400 font-semibold truncate dark:text-white">
+                                                        {{$deposit->broker->name}}
+                                                    </p>
+                                                </div>
+                                                <div class="inline-flex items-center text-base font-semibold text-[#696057] dark:text-white">
+                                                    ${{number_format($deposit->amount,2)}}
+                                                </div>
                                             </div>
-                                            <div class="flex-1 min-w-0 text-left">
-                                                <p class="text-orange-400 font-semibold truncate dark:text-white">
-                                                    {{$deposit->broker->name}}
-                                                </p>
-                                            </div>
-                                            <div class="inline-flex items-center text-base font-semibold text-[#696057] dark:text-white">
-                                                ${{number_format($deposit->amount,2)}}
+                                        </li>
+                                    @endforeach
+                                @else
+                                    <li>
+                                        <div class="w-full flex p-4 mb-4 text-sm text-warning-800 border border-warning-300 rounded-lg bg-warning-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800" role="alert">
+                                            <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                                            <span class="sr-only">@lang('public.info')</span>
+                                            <div>
+                                                <span class="font-medium">@lang('public.info'):</span> @lang('public.no_record')
                                             </div>
                                         </div>
                                     </li>
-                                @endforeach
+                                @endif
                             </ul>
                             <div class="flex items-center float-right mt-4">
                                 <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
@@ -358,12 +370,12 @@
         </div>
 
         <!-- Group Deposit Modal -->
-        <div id="groupModal" tabindex="-1" aria-hidden="true" class="my-auto fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal h-auto	">
-            <div class="relative w-full h-full max-w-2xl ">
+        <div id="groupModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
+            <div class="relative w-full h-full max-w-2xl md:h-auto">
                 <!-- Modal content -->
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 overflow-auto ">
                     <!-- Modal header -->
-                    <div class="flex items-start justify-between p-6 border-b rounded-t dark:border-gray-600 text-orange-500 overflow-auto ">
+                    <div class="flex items-start justify-between p-6 border-b rounded-t dark:border-gray-600 text-orange-400 overflow-auto ">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                              class="w-6 h-6 mr-3 mt-1">
                             <path d="M12 7.5a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z"/>
@@ -393,52 +405,64 @@
                     <div class="px-6 py-4 space-y-6 overflow-auto">
                         <div class="flow-root">
                             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-                                @foreach ($group_deposits as $group_deposit)
-                                    <li class="py-3 sm:py-4 accordion-flush-{{$group_deposit->id}}" data-accordion="collapse" data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
-                                        <a href="javascript:void(0)" id="accordion-flush-heading-{{$group_deposit->id}}">
-                                            <div class="flex items-center space-x-4" data-accordion-target="#accordion-flush-body-{{$group_deposit->id}}" aria-expanded="true" aria-controls="accordion-flush-body-{{$group_deposit->id}}">
-                                                <div class="flex-shrink-0">
-                                                    @if ($group_deposit->profile_image)
-                                                        <img src="{{ asset('uploads/users/' .$group_deposit->profile_image)}}" class="w-10 h-10 rounded-full bg-red-400" alt="">
-                                                    @else
-                                                        <img src="{{url('/img/profile.png')}}" class="w-10 h-10 rounded-full bg-orange-400" alt="">
-                                                    @endif
-                                                </div>
-                                                <div class="flex-1 min-w-0">
-                                                    <p class="font-semibold text-orange-400 text-md break-words">
-                                                        {{$group_deposit->name}}
-                                                    </p>
-                                                </div>
-                                                <div class="inline-flex items-center text-base font-semibold text-[#696057] dark:text-white">
-                                                    ${{number_format($group_deposit->total,2)}}
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <div id="accordion-flush-body-{{$group_deposit->id}}" class="hidden" aria-labelledby="accordion-flush-heading-{{$group_deposit->id}}">
-                                        @foreach($group_deposit->deposits as $deposit)
-                                            <li class="pl-6 py-2 sm:py-3">
-                                                <div class="flex items-center space-x-4">
+                                @if($group_deposits->count() > 0)
+                                    @foreach ($group_deposits as $group_deposit)
+                                        <li class="py-3 sm:py-4 accordion-flush-{{$group_deposit->id}}" data-accordion="collapse" data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
+                                            <a href="javascript:void(0)" id="accordion-flush-heading-{{$group_deposit->id}}">
+                                                <div class="flex items-center space-x-4" data-accordion-target="#accordion-flush-body-{{$group_deposit->id}}" aria-expanded="true" aria-controls="accordion-flush-body-{{$group_deposit->id}}">
                                                     <div class="flex-shrink-0">
-                                                        @if ($deposit['broker']['broker_image'])
-                                                            <img src="{{ asset('uploads/brokers/' .$deposit['broker']['broker_image'])}}" class="w-10 h-10 rounded-full bg-rose-400" alt="">
+                                                        @if ($group_deposit->profile_image)
+                                                            <img src="{{ asset('uploads/users/' .$group_deposit->profile_image)}}" class="w-10 h-10 rounded-full bg-red-400" alt="">
                                                         @else
-                                                            <img class="w-10 h-10 rounded-full bg-rose-400" alt="">
+                                                            <img src="{{url('/img/profile.png')}}" class="w-10 h-10 rounded-full bg-orange-400" alt="">
                                                         @endif
                                                     </div>
                                                     <div class="flex-1 min-w-0">
-                                                        <p class="text-md text-[#C8C0B4] font-semibold break-words">
-                                                            {{ $deposit['broker']['name'] }}
+                                                        <p class="font-semibold text-orange-400 text-md break-words">
+                                                            {{$group_deposit->name}}
                                                         </p>
                                                     </div>
-                                                    <div class="inline-flex items-center text-sm font-semibold text-[#696057] dark:text-white">
-                                                        ${{number_format($deposit['amount'],2) }}
+                                                    <div class="inline-flex items-center text-base font-semibold text-[#696057] dark:text-white">
+                                                        ${{number_format($group_deposit->total,2)}}
                                                     </div>
                                                 </div>
-                                            </li>
-                                        @endforeach
-                                    </div>
-                                @endforeach
+                                            </a>
+                                        </li>
+                                        <div id="accordion-flush-body-{{$group_deposit->id}}" class="hidden" aria-labelledby="accordion-flush-heading-{{$group_deposit->id}}">
+                                            @foreach($group_deposit->deposits as $deposit)
+                                                <li class="pl-6 py-2 sm:py-3">
+                                                    <div class="flex items-center space-x-4">
+                                                        <div class="flex-shrink-0">
+                                                            @if ($deposit['broker']['broker_image'])
+                                                                <img src="{{ asset('uploads/brokers/' .$deposit['broker']['broker_image'])}}" class="w-10 h-10 rounded-full bg-rose-400" alt="">
+                                                            @else
+                                                                <img class="w-10 h-10 rounded-full bg-rose-400" alt="">
+                                                            @endif
+                                                        </div>
+                                                        <div class="flex-1 min-w-0">
+                                                            <p class="text-md text-[#C8C0B4] font-semibold break-words">
+                                                                {{ $deposit['broker']['name'] }}
+                                                            </p>
+                                                        </div>
+                                                        <div class="inline-flex items-center text-sm font-semibold text-[#696057] dark:text-white">
+                                                            ${{number_format($deposit['amount'],2) }}
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <li>
+                                        <div class="w-full flex p-4 mb-4 text-sm text-warning-800 border border-warning-300 rounded-lg bg-warning-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800" role="alert">
+                                            <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                                            <span class="sr-only">@lang('public.info')</span>
+                                            <div>
+                                                <span class="font-medium">@lang('public.info'):</span> @lang('public.no_record')
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endif
                             </ul>
                             <div class="flex items-center float-right mt-4">
                                 <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">

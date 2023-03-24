@@ -32,16 +32,16 @@
     </div>
 
     @if($members->isNotEmpty())
-        <div class="relative overflow-x-auto lg:max-w-[972px] xl:max-w-[1100px] 2xl:max-w-[1200px]">
+
         @foreach ($members as $member)
             @php
                 $count = 1
             @endphp
             @if (count($member->children))
                 <!-- Parent with children -->
-                <div class="inline-flex mb-4 w-auto justify-center items-center toggle-{{$member->id}}">
+                <div class="flex justify-start items-center mb-4 w-full toggle-{{$member->id}}" id="parentContainer">
                     <button
-                        class="inline-flex items-center justify-center w-10 h-10 bg-[#FFA168] hover:bg-orange-400 rounded-full shrink-0 grow-0 mr-4 dark:bg-gray-600 hide"
+                        class="inline-flex items-center justify-center w-8 h-8 bg-[#FFA168] hover:bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600 hide mr-4"
                         type="button"
                         id="{{ $member->id }}">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-white transform rotate-180" id="svgPlus{{ $member->id }}">
@@ -49,120 +49,120 @@
                         </svg>
                         <svg class="h-6 w-6 text-white" style="display: none" id="svgMinus{{ $member->id }}"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="5" y1="12" x2="19" y2="12" /></svg>
                     </button>
-                    <a class=" bg-[#FDFCF3] border w-auto border-orange-600 p-4 shadow-lg hover:shadow-2xl dark:bg-neutral-700 dark:text-neutral-50 inline-flex"
-                        href="{{ route('referral_detail', $member->id) }}">
-                        <div class="flex items-center space-x-4 sp">
-                            <div class="inline-flex items-center justify-center w-10 h-10 bg-rose-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">
-                                <span class="font-bold text-xl text-white">{{$count}}</span>
+                    <a href="{{ route('referral_detail', $member->id) }}" class="border border-gray-200 rounded-lg shadow-lg hover:shadow-2xl dark:bg-gray-800 w-full" id="bgColor-{{$count}}">
+                        <div class="w-full container md:p-4 p-4 md:flex md:items-center md:justify-between">
+                            <div class="flex flex-initial items-center space-x-2 w-auto">
+                                <div class="inline-flex items-center justify-center mr-2 w-8 h-8 rounded-full shrink-0 grow-0 dark:bg-gray-600" id="parentColor-{{$count}}">
+                                    <span class="font-bold text-lg text-white">{{$count}}</span>
+                                </div>
+                                <div class="inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">
+                                    @if ($member->profile_image)
+                                        <img src="{{ asset('uploads/users/' .$member->profile_image)}}" id="profile_pic_preview" class="inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
+                                    @else
+                                        <img src="{{url('/img/profile.png')}}" id="profile_pic_preview" class="inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
+                                    @endif
+                                </div>
+                                <div class="font-semibold dark:text-white xs:truncate">
+                                    <div class=" text-md">{{$member->name}}</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">{{$member->email}}</div>
+                                </div>
                             </div>
-                            <div class="inline-flex items-center justify-center w-14 h-14 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">
-                                @if ($member->profile_image)
-                                    <img src="{{ asset('uploads/users/' .$member->profile_image)}}" id="profile_pic_preview" class="inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
-                                @else
-                                    <img src="{{url('/img/profile.png')}}" id="profile_pic_preview" class="inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
-                                @endif
+                            <div class="flex flex-wrap items-center space-x-3 ml-6">
+                                <div class="font-semibold dark:text-white">
+                                    <div class=" text-md">{{$member->rank->rank_short_form}}</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">@lang('public.rank')</div>
+                                </div>
                             </div>
-                            <div class="font-semibold dark:text-white">
-                                <div class=" text-md">{{$member->name}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">{{$member->email}}</div>
+                            <div class="flex flex-wrap items-center space-x-3 ml-6">
+                                <div class="font-semibold dark:text-white">
+                                    <div class=" text-md">${{number_format($member->wallet_balance, 2)}}</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">@lang('public.wallet_balance')</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex items-center space-x-4 ml-12">
-                            <div class="font-semibold dark:text-white">
-                                <div class=" text-md">{{$member->rank->rank_short_form}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.rank')</div>
+                            <div class="flex flex-wrap items-center space-x-3 ml-6">
+                                <div class="font-semibold dark:text-white">
+                                    <div class=" text-md">${{number_format($member->personalDeposits(), 2)}}</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">@lang('public.total_personal_deposit')</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex items-center space-x-4 ml-12">
-                            <div class="font-semibold dark:text-white">
-                                <div class=" text-md">${{number_format($member->wallet_balance, 2)}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.wallet_balance')</div>
+                            <div class="flex flex-wrap items-center space-x-3 ml-6">
+                                <div class="font-semibold dark:text-white">
+                                    <div class=" text-md">${{number_format($member->groupTotalDeposit(), 2)}}</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">@lang('public.total_group_deposit')</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex items-center space-x-4 ml-12">
-                            <div class="font-semibold dark:text-white">
-                                <div class=" text-md">${{number_format($member->personalDeposits(), 2)}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.total_personal_deposit')</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-4 ml-12">
-                            <div class="font-semibold dark:text-white">
-                                <div class=" text-md">${{number_format($member->groupTotalDeposit(), 2)}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.total_group_deposit')</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-4 ml-12">
-                            <div class="font-semibold dark:text-white">
-                                <div class=" text-md">{{$member->getClientsCount()}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.direct_downlines')</div>
+                            <div class="flex flex-wrap items-center space-x-3 ml-6">
+                                <div class="font-semibold dark:text-white">
+                                    <div class=" text-md">{{$member->getClientsCount()}}</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">@lang('public.direct_downlines')</div>
+                                </div>
                             </div>
                         </div>
                     </a>
                 </div>
-                <div class="!visible hidden hideContent-{{ $member->id }} ml-6" id="collapseExample-{{$member->id}}" data-te-collapse-item>
+                <div class="!visible hidden hideContent-{{ $member->id }} ml-6 childContainer" id="collapseExample-{{$member->id}}" data-te-collapse-item>
                     @include('admin.referral.child', [
                     'children' => $member->children,
                     'count' => $count
                     ])
                 </div>
             @else
-                <div class="inline-flex mb-4 hover:shadow-2xl">
-                    <a
-                        class=" bg-[#FDFCF3] border w-auto border-orange-600 p-4 shadow-lg dark:bg-neutral-700 dark:text-neutral-50 inline-flex"
-                        href="{{ route('referral_detail', $member->id) }}">
-                        <div class="flex items-center space-x-4 sp">
-                            <div class="inline-flex items-center justify-center w-10 h-10 bg-rose-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">
-                                <span class="font-bold text-md text-white">{{$count}}</span>
+                <a href="{{ route('referral_detail', $member->id) }}" id="parentContainer">
+                    <div class="rounded-lg border border-gray-200 rounded-lg shadow-lg hover:shadow-2xl mb-4 dark:bg-gray-800 w-full" id="bgColor-{{ $count }}">
+                        <div class="w-full container md:p-4 p-4 md:flex md:items-center md:justify-between">
+                            <div class="flex flex-initial items-center space-x-2 w-auto" >
+                                <div class="inline-flex items-center justify-center mr-2 w-8 h-8 rounded-full shrink-0 grow-0 dark:bg-gray-600" id="parentColor-{{$count}}">
+                                    <span class="font-bold text-lg text-white">{{$count}}</span>
+                                </div>
+                                <div class="inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">
+                                    @if ($member->profile_image)
+                                        <img src="{{ asset('uploads/users/' .$member->profile_image)}}" id="profile_pic_preview" class="inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
+                                    @else
+                                        <img src="{{url('/img/profile.png')}}" id="profile_pic_preview" class="inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
+                                    @endif
+                                </div>
+                                <div class="font-semibold dark:text-white xs:truncate">
+                                    <div class=" text-md">{{$member->name}}</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">{{$member->email}}</div>
+                                </div>
                             </div>
-                            <div class="inline-flex items-center justify-center w-14 h-14 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">
-                                @if ($member->profile_image)
-                                    <img src="{{ asset('uploads/users/' .$member->profile_image)}}" id="profile_pic_preview" class="inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-green-500 rounded-full shrink-0 grow-0 dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
-                                @else
-                                    <img src="{{url('/img/profile.png')}}" id="profile_pic_preview" class="inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-green-500 rounded-full shrink-0 grow-0 dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
-                                @endif
+                            <div class="flex flex-wrap items-center space-x-3 ml-6">
+                                <div class="font-semibold dark:text-white">
+                                    <div class=" text-md">{{$member->rank->rank_short_form}}</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">@lang('public.rank')</div>
+                                </div>
                             </div>
-                            <div class="font-semibold dark:text-white">
-                                <div class=" text-md">{{$member->name}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">{{$member->email}}</div>
+                            <div class="flex flex-wrap items-center space-x-3 ml-6">
+                                <div class="font-semibold dark:text-white">
+                                    <div class=" text-md">${{number_format($member->wallet_balance, 2)}}</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">@lang('public.wallet_balance')</div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap items-center space-x-3 ml-6">
+                                <div class="font-semibold dark:text-white">
+                                    <div class=" text-md">${{number_format($member->personalDeposits(), 2)}}</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">@lang('public.total_personal_deposit')</div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap items-center space-x-3 ml-6">
+                                <div class="font-semibold dark:text-white">
+                                    <div class=" text-md">${{number_format($member->groupTotalDeposit(), 2)}}</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">@lang('public.total_group_deposit')</div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap items-center space-x-3 ml-6">
+                                <div class="font-semibold dark:text-white">
+                                    <div class=" text-md">{{$member->getClientsCount()}}</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">@lang('public.direct_downlines')</div>
+                                </div>
                             </div>
                         </div>
-                        <div class="flex items-center space-x-4 ml-12">
-                            <div class="font-semibold dark:text-white">
-                                <div class=" text-md">{{$member->rank->rank_short_form}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.rank')</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-4 ml-12">
-                            <div class="font-semibold dark:text-white">
-                                <div class=" text-md">${{number_format($member->wallet_balance, 2)}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.wallet_balance')</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-4 ml-12">
-                            <div class="font-semibold dark:text-white">
-                                <div class=" text-md">${{number_format($member->personalDeposits(), 2)}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.total_personal_deposit')</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-4 ml-12">
-                            <div class="font-semibold dark:text-white">
-                                <div class=" text-md">${{number_format($member->groupTotalDeposit(), 2)}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.total_group_deposit')</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-4 ml-12">
-                            <div class="font-semibold dark:text-white">
-                                <div class=" text-md">{{$member->getClientsCount()}}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.direct_downlines')</div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                    </div>
+                </a>
+
             @endif
         @endforeach
 
-
-    </div>
     @else
         <div class="flex p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300" role="alert">
             <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
@@ -178,6 +178,30 @@
 
     <script>
         $(document).ready(function(e) {
+            var color = ["#DB93A5", "#C3B8AA", "#698396", "#C6AC85", "#874741", "#98df8a", "#d62728", "#ff9896", "#9467bd", "#c5b0d5", "#8c564b", "#c49c94", "#e377c2", "#f7b6d2", "#7f7f7f", "#c7c7c7", "#bcbd22", "#dbdb8d", "#aec7e8", "#9edae5", "#393b79", "#5254a3", "#6b6ecf", "#9c9ede", "#637939", "#8ca252", "#b5cf6b", "#8c6d31", "#bd9e39", "#e7ba52", "#843c39", "#ad494a", "#d6616b", "#e7969c", "#7b4173", "#a55194", "#ff7f0e", "#de9ed6", "#3182bd", "#6baed6", "#9ecae1", "#c6dbef", "#e6550d", "#fd8d3c", "#fdae6b", "#fdd0a2", "#31a354", "#74c476", "#a1d99b", "#c7e9c0"]
+
+            var bgColor = ["#FBECDB", "#F3CBBD", "#E6D1D2", "#DAD5D6", "#CCD4BF", "#B6D8F2", "#F4CFDF", "#D2D4EC", "#E4D9FF", "#F3D1FF", "#FFE6FF", "#FFE9E6", "#FFF0F5", "#F6F1D1", "#FDF0D5", "#E4F4B2", "#C4E4D9", "#B1C7D9", "#C3B8E9", "#F7DDE9", "#FFDEE1", "#FFF4E6", "#FFF8DC", "#C5E5E9", "#BEE9E2", "#FFECF5", "#FCEFF9", "#FFE3E3", "#F5C3C2", "#FFC5B5", "#FFE08C", "#F8E09C", "#BEEB9F", "#9ED2D6", "#D2A5D5", "#E1B1A7", "#FFC6A9", "#FFA69E", "#ECD5E3", "#D4E6F1", "#A9D0F5", "#C6B1E6", "#F2C2CD", "#F4B3B2", "#F4CD9B", "#E3D3B3", "#D3E2C3", "#C9E4F5", "#AACCEA", "#B6A1E6", "#D2A8FF", "#A9B4FF", "#D4A8E8", "#D2C4A4", "#BFD4BF", "#A9D4D4"]
+
+            $("#parentContainer #parentColor-{{ @$count }}").each(function(i) {
+                $(this).css('background', color[{{$count - 1}}]);
+            });
+
+            $("#parentContainer #bgColor-{{ @$count }}").each(function(i) {
+                $(this).css('background', bgColor[{{@$count - 1}}]);
+            });
+
+            let counter = 1;
+            while (counter <= 500) {
+                counter = counter + 1;
+                $("#childContainer #childColor-"+counter).each(function(i) {
+                    $(this).css('background', color[counter - 1]);
+                });
+
+                $("#childContainer #childBg-"+counter).each(function(i) {
+                    $(this).css('background', bgColor[counter - 1]);
+                });
+            }
+
             $('.hide').on('click', function() {
                 var id = $(this).attr('id');
                 $(".hideContent-"+id).toggle('fast');

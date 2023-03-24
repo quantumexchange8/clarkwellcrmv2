@@ -27,7 +27,7 @@
             @foreach($brokers as $broker)
             <div class="max-w-sm bg-[#FDFCF3] border border-orange-200 rounded-lg shadow hover:shadow-2xl">
                 <div class="flex flex-row items-center justify-center ml-6 mt-6 align-baseline shrink-0 grow-0">
-                    <img class="w-24 h-24 mb-3 object-contain shrink-0 grow-0 rounded-full shadow-lg justify-center bg-orange-400" src="{{ asset('uploads/brokers/' .$broker->broker_image)}}" />
+                    <img class="w-24 h-24 mb-3 object-contain shrink-0 grow-0 rounded-full shadow-lg justify-center bg-gray-50" src="{{ asset('uploads/brokers/' .$broker->broker_image)}}" />
                     <h5 class="ml-4 text-2xl font-bold text-orange-500 dark:text-white">{{$broker->name}}</h5>
                 </div>
                 <div class="p-5">
@@ -54,7 +54,7 @@
                         </button>
                         <div class="p-6 space-y-2">
                             <div class="flex items-center space-x-4">
-                                <img class="w-20 h-20 rounded-full bg-rose-400" src="{{ asset('uploads/brokers/' .$broker->broker_image)}}" alt="">
+                                <img class="w-20 h-20 rounded-full bg-gray-50" src="{{ asset('uploads/brokers/' .$broker->broker_image)}}" alt="">
                                 <div class="font-medium dark:text-white">
                                     <div class="text-xl text-orange-400 font-bold">{{$broker->name}}</div>
                                     <div class="text-md text-gray-500 dark:text-gray-400">{{$broker->description}}</div>
