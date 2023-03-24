@@ -9,7 +9,7 @@
 
     <div class="grid grid-cols-2 gap-4 mt-8">
         <div>
-            <a href="javascript:void(0)" class="flex flex-col items-center bg-[#FDFCF3] border border-orange-300 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-orange-100 dark:border-orange-700 dark:bg-orange-800 dark:hover:bg-orange-700">
+            <a href="javascript:void(0)" class="flex flex-col p-4 items-center bg-[#FDFCF3] border border-orange-300 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-orange-100 dark:border-orange-700 dark:bg-orange-800 dark:hover:bg-orange-700">
                 <div class="inline-flex items-center m-4 justify-center w-20 h-20 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-orange-600">
                     @if ($user->profile_image)
                         <img src="{{ asset('uploads/users/' .$user->profile_image)}}" id="profile_pic_preview" class="inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
@@ -17,13 +17,13 @@
                         <img src="{{url('/img/profile.png')}}" id="profile_pic_preview" class="inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
                     @endif
                 </div>
-                <div class="flex flex-col justify-between p-4 leading-normal">
+                <div class="flex flex-col justify-between p-4 leading-normal truncate">
                     <h2 class="font-semibold text-lg text-[#FFA168] mb-4">{{ $user->name }}</h2>
                     <span class="text-sm text-gray-500">
                             {{ $user->email }}
                     </span>
                 </div>
-                <div class="ml-6">
+                <div class="mx-2 px-2 truncate">
                     <h2 class="font-semibold text-lg text-[#FFA168] mb-4">{{ $user->rank->name }}</h2>
                     <span class="text-sm text-gray-500">
                             @lang('public.rank')
@@ -32,14 +32,14 @@
             </a>
         </div>
         <div>
-            <a href="javascript:void(0)" class="grid grid-cols-2 gap-4 block max-w-lg p-6 bg-[#FDFCF3] border border-orange-300 rounded-lg shadow hover:bg-orange-100 dark:bg-orange-800 dark:border-orange-700 dark:hover:bg-orange-700">
-                <div class="">
+            <a href="javascript:void(0)" class="flex flex-col p-10 items-center bg-[#FDFCF3] border border-orange-300 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-orange-100 dark:border-orange-700 dark:bg-orange-800 dark:hover:bg-orange-700">
+                <div class="flex flex-col mx-4 justify-between leading-normal">
                     <h2 class="font-semibold text-lg text-gray-500 mb-2">@lang('public.total_clients')</h2>
                     <span class="font-semibold text-lg text-[#FFA168]">
                             {{ $user->getClientsCount() }}
                     </span>
                 </div>
-                <div class="ml-12">
+                <div>
                     <h2 class="font-semibold text-lg text-gray-500 mb-2">@lang('public.total_downline')</h2>
                     <span class="font-semibold text-lg text-[#FFA168]">
                             {{ $user->getDownlinesCount() }}

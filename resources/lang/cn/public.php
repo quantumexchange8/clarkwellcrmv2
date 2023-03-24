@@ -182,6 +182,7 @@ return array(
     'delete_cancel' => '取消',
     'select_user' => '选择用户',
     'upline_email' => '上线电子邮件',
+    'no_upline' => '没有上线',
 
 //admin member deposit
     'delete_deposit_confirmation' => '您确定要删除此托管吗?',
@@ -353,7 +354,7 @@ return array(
     'leader_status' => '设置领导',
 
     'member_verification_message' => '为了您的资金安全，您需要上传所有文件以完成账户验证，然后才能处理提款。',
-    'upload_id' => 'Upload ID',
+    'upload_id' => '上传',
     'front_id' => '身份证扫描件 (正面)',
     'back_id' => '身份证扫描件 (背面)',
     'id_req' => '您可上传png、jpeg 或者 jpg等格式的文件，大小不超过5MB。',

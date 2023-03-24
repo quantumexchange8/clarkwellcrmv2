@@ -182,6 +182,7 @@ return array(
     'delete_cancel' => 'No, cancel',
     'select_user' => 'Select User',
     'upline_email' => 'Upline Email',
+    'no_upline' => 'No Upline',
 
     //admin member deposit
     'delete_deposit_confirmation' => 'Are you sure you want to delete this deposit?',

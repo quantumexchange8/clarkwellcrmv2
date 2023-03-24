@@ -122,7 +122,7 @@
                             </td>
                             <td class="p-4">
                                 @if(empty($record->parent))
-                                    <span class="bg-gray-500 text-gray-100 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">No Upline</span>
+                                    <span class="bg-gray-500 text-gray-100 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">@lang('public.no_upline')</span>
                                 @else
                                     {{ $record->parent->email }}
                                 @endif
@@ -147,11 +147,11 @@
                             </td>
                             <td class="p-4">
                                 @if($record->status == 1)
-                                    <span class="text-success font-semibold uppercase">Active</span>
+                                    <span class="text-success font-semibold uppercase">@lang('public.active')</span>
                                 @elseif($record->status == 2)
-                                    <span class="text-warning font-semibold uppercase">Inactive</span>
+                                    <span class="text-warning font-semibold uppercase">@lang('public.inactive')</span>
                                 @elseif($record->status == 3)
-                                    <span class="text-danger font-semibold uppercase">Suspended</span>
+                                    <span class="text-danger font-semibold uppercase">@lang('public.suspend')</span>
                                 @endif
                             </td>
                             <td class="p-4 text-center">

@@ -182,6 +182,7 @@ return array(
     'delete_cancel' => '取消',
     'select_user' => '選擇使用者',
     'upline_email' => '上線電子郵件',
+    'no_upline' => '沒有上線',
 
 //admin member deposit
     'delete_deposit_confirmation' => '您確定要刪除此託管嗎？',
@@ -353,7 +354,7 @@ return array(
 'leader_status' => '設置領導',
 
 'member_verification_message' => '為了您的資金安全，您需要上傳所有文件以完成賬戶驗證，然後才能處理提款。',
-    'upload_id' => 'Upload ID',
+    'upload_id' => '上傳',
     'front_id' => '身份證掃描件 (正面)',
     'back_id' => '身份證掃描件 (背面)',
     'id_req' => '您可上傳png、jpeg或者jpg等格式的文件，大小不超過5MB。',
