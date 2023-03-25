@@ -32,137 +32,139 @@
     </div>
 
     @if($members->isNotEmpty())
-
-        @foreach ($members as $member)
-            @php
-                $count = 1
-            @endphp
-            @if (count($member->children))
-                <!-- Parent with children -->
-                <div class="flex justify-start items-center mb-4 w-full toggle-{{$member->id}}" id="parentContainer">
-                    <button
-                        class="inline-flex items-center justify-center w-8 h-8 bg-[#FFA168] hover:bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600 hide mr-4"
-                        type="button"
-                        id="{{ $member->id }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-white transform rotate-180" id="svgPlus{{ $member->id }}">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg>
-                        <svg class="h-6 w-6 text-white" style="display: none" id="svgMinus{{ $member->id }}"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="5" y1="12" x2="19" y2="12" /></svg>
-                    </button>
-                    <a href="{{ route('referral_detail', $member->id) }}" class="border border-gray-200 rounded-lg shadow-lg hover:shadow-2xl dark:bg-gray-800 w-full" id="bgColor-{{$count}}">
-                        <div class="w-full container md:p-4 p-4 md:flex md:items-center md:justify-between">
-                            <div class="flex flex-initial items-center space-x-2 w-auto">
-                                <div class="inline-flex items-center justify-center mr-2 w-8 h-8 rounded-full shrink-0 grow-0 dark:bg-gray-600" id="parentColor-{{$count}}">
-                                    <span class="font-bold text-lg text-white">{{$count}}</span>
+        <div class="relative overflow-x-auto lg:max-w-[972px] xl:max-w-[1100px] 2xl:max-w-[1200px]" id="parentContainer">
+            @foreach ($members as $member)
+                @php
+                    $count = 1
+                @endphp
+                @if (count($member->children))
+                    <!-- Parent with children -->
+                    <div class="inline-flex mb-4 w-auto justify-center items-center toggle-{{$member->id}}">
+                        <button
+                            class="inline-flex items-center justify-center w-8 h-8 bg-[#FFA168] hover:bg-orange-400 rounded-full shrink-0 grow-0 mr-4 dark:bg-gray-600 hide"
+                            type="button"
+                            id="{{ $member->id }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-white transform rotate-180" id="svgPlus{{ $member->id }}">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                            <svg class="h-6 w-6 text-white" style="display: none" id="svgMinus{{ $member->id }}"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="5" y1="12" x2="19" y2="12" /></svg>
+                        </button>
+                        <a class="w-auto p-4 shadow-lg hover:shadow-2xl rounded-lg dark:bg-neutral-700 dark:text-neutral-50 inline-flex"
+                           href="{{ route('referral_detail', $member->id) }}" id="bgColor-{{ $count }}">
+                            <div class="flex items-center space-x-4 sp">
+                                <div class="inline-flex items-center justify-center w-8 h-8 rounded-full shrink-0 grow-0 dark:bg-gray-600" id="parentColor-{{ $count }}">
+                                    <span class="font-bold text-xl text-white">{{$count}}</span>
                                 </div>
-                                <div class="inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">
+                                <div class="inline-flex items-center justify-center w-14 h-14 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">
                                     @if ($member->profile_image)
                                         <img src="{{ asset('uploads/users/' .$member->profile_image)}}" id="profile_pic_preview" class="inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
                                     @else
                                         <img src="{{url('/img/profile.png')}}" id="profile_pic_preview" class="inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
                                     @endif
                                 </div>
-                                <div class="font-semibold dark:text-white xs:truncate">
+                                <div class="font-semibold dark:text-white">
                                     <div class=" text-md">{{$member->name}}</div>
-                                    <div class="text-sm text-gray-600 dark:text-gray-400">{{$member->email}}</div>
+                                    <div class="text-sm text-gray-500 dark:text-gray-400">{{$member->email}}</div>
                                 </div>
                             </div>
-                            <div class="flex flex-wrap items-center space-x-3 ml-6">
+                            <div class="flex items-center space-x-4 ml-12">
                                 <div class="font-semibold dark:text-white">
                                     <div class=" text-md">{{$member->rank->rank_short_form}}</div>
-                                    <div class="text-sm text-gray-600 dark:text-gray-400">@lang('public.rank')</div>
+                                    <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.rank')</div>
                                 </div>
                             </div>
-                            <div class="flex flex-wrap items-center space-x-3 ml-6">
+                            <div class="flex items-center space-x-4 ml-12">
                                 <div class="font-semibold dark:text-white">
                                     <div class=" text-md">${{number_format($member->wallet_balance, 2)}}</div>
-                                    <div class="text-sm text-gray-600 dark:text-gray-400">@lang('public.wallet_balance')</div>
+                                    <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.wallet_balance')</div>
                                 </div>
                             </div>
-                            <div class="flex flex-wrap items-center space-x-3 ml-6">
+                            <div class="flex items-center space-x-4 ml-12">
                                 <div class="font-semibold dark:text-white">
                                     <div class=" text-md">${{number_format($member->personalDeposits(), 2)}}</div>
-                                    <div class="text-sm text-gray-600 dark:text-gray-400">@lang('public.total_personal_deposit')</div>
+                                    <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.total_personal_deposit')</div>
                                 </div>
                             </div>
-                            <div class="flex flex-wrap items-center space-x-3 ml-6">
+                            <div class="flex items-center space-x-4 ml-12">
                                 <div class="font-semibold dark:text-white">
                                     <div class=" text-md">${{number_format($member->groupTotalDeposit(), 2)}}</div>
-                                    <div class="text-sm text-gray-600 dark:text-gray-400">@lang('public.total_group_deposit')</div>
+                                    <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.total_group_deposit')</div>
                                 </div>
                             </div>
-                            <div class="flex flex-wrap items-center space-x-3 ml-6">
+                            <div class="flex items-center space-x-4 ml-12">
                                 <div class="font-semibold dark:text-white">
                                     <div class=" text-md">{{$member->getClientsCount()}}</div>
-                                    <div class="text-sm text-gray-600 dark:text-gray-400">@lang('public.direct_downlines')</div>
+                                    <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.direct_downlines')</div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="!visible hidden hideContent-{{ $member->id }} ml-6 childContainer" id="collapseExample-{{$member->id}}" data-te-collapse-item>
-                    @include('admin.referral.child', [
-                    'children' => $member->children,
-                    'count' => $count
-                    ])
-                </div>
-            @else
-                <a href="{{ route('referral_detail', $member->id) }}" id="parentContainer">
-                    <div class="rounded-lg border border-gray-200 rounded-lg shadow-lg hover:shadow-2xl mb-4 dark:bg-gray-800 w-full" id="bgColor-{{ $count }}">
-                        <div class="w-full container md:p-4 p-4 md:flex md:items-center md:justify-between">
-                            <div class="flex flex-initial items-center space-x-2 w-auto" >
-                                <div class="inline-flex items-center justify-center mr-2 w-8 h-8 rounded-full shrink-0 grow-0 dark:bg-gray-600" id="parentColor-{{$count}}">
-                                    <span class="font-bold text-lg text-white">{{$count}}</span>
-                                </div>
-                                <div class="inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">
-                                    @if ($member->profile_image)
-                                        <img src="{{ asset('uploads/users/' .$member->profile_image)}}" id="profile_pic_preview" class="inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
-                                    @else
-                                        <img src="{{url('/img/profile.png')}}" id="profile_pic_preview" class="inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
-                                    @endif
-                                </div>
-                                <div class="font-semibold dark:text-white xs:truncate">
-                                    <div class=" text-md">{{$member->name}}</div>
-                                    <div class="text-sm text-gray-600 dark:text-gray-400">{{$member->email}}</div>
-                                </div>
-                            </div>
-                            <div class="flex flex-wrap items-center space-x-3 ml-6">
-                                <div class="font-semibold dark:text-white">
-                                    <div class=" text-md">{{$member->rank->rank_short_form}}</div>
-                                    <div class="text-sm text-gray-600 dark:text-gray-400">@lang('public.rank')</div>
-                                </div>
-                            </div>
-                            <div class="flex flex-wrap items-center space-x-3 ml-6">
-                                <div class="font-semibold dark:text-white">
-                                    <div class=" text-md">${{number_format($member->wallet_balance, 2)}}</div>
-                                    <div class="text-sm text-gray-600 dark:text-gray-400">@lang('public.wallet_balance')</div>
-                                </div>
-                            </div>
-                            <div class="flex flex-wrap items-center space-x-3 ml-6">
-                                <div class="font-semibold dark:text-white">
-                                    <div class=" text-md">${{number_format($member->personalDeposits(), 2)}}</div>
-                                    <div class="text-sm text-gray-600 dark:text-gray-400">@lang('public.total_personal_deposit')</div>
-                                </div>
-                            </div>
-                            <div class="flex flex-wrap items-center space-x-3 ml-6">
-                                <div class="font-semibold dark:text-white">
-                                    <div class=" text-md">${{number_format($member->groupTotalDeposit(), 2)}}</div>
-                                    <div class="text-sm text-gray-600 dark:text-gray-400">@lang('public.total_group_deposit')</div>
-                                </div>
-                            </div>
-                            <div class="flex flex-wrap items-center space-x-3 ml-6">
-                                <div class="font-semibold dark:text-white">
-                                    <div class=" text-md">{{$member->getClientsCount()}}</div>
-                                    <div class="text-sm text-gray-600 dark:text-gray-400">@lang('public.direct_downlines')</div>
-                                </div>
-                            </div>
-                        </div>
+                        </a>
                     </div>
-                </a>
+                    <div class="!visible hidden hideContent-{{ $member->id }} ml-6" id="collapseExample-{{$member->id}}" data-te-collapse-item>
+                        @include('admin.referral.child', [
+                        'children' => $member->children,
+                        'count' => $count
+                        ])
+                    </div>
+                @else
+                    <div class="inline-flex mb-4 hover:shadow-2xl">
+                        <a
+                            class="w-auto p-4 shadow-lg rounded-lg dark:bg-neutral-700 dark:text-neutral-50 inline-flex"
+                            href="{{ route('referral_detail', $member->id) }}" id="bgColor-{{ $count }}">
+                            <div class="flex items-center space-x-4 sp">
+                                <div class="inline-flex items-center justify-center w-8 h-8 rounded-full shrink-0 grow-0 dark:bg-gray-600" id="parentColor-{{ $count }}">
+                                    <span class="font-bold text-md text-white">{{$count}}</span>
+                                </div>
+                                <div class="inline-flex items-center justify-center w-14 h-14 overflow-hidden bg-orange-400 rounded-full shrink-0 grow-0 dark:bg-gray-600">
+                                    @if ($member->profile_image)
+                                        <img src="{{ asset('uploads/users/' .$member->profile_image)}}" id="profile_pic_preview" class="inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-green-500 rounded-full shrink-0 grow-0 dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
+                                    @else
+                                        <img src="{{url('/img/profile.png')}}" id="profile_pic_preview" class="inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-green-500 rounded-full shrink-0 grow-0 dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
+                                    @endif
+                                </div>
+                                <div class="font-semibold dark:text-white">
+                                    <div class=" text-md">{{$member->name}}</div>
+                                    <div class="text-sm text-gray-500 dark:text-gray-400">{{$member->email}}</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 ml-12">
+                                <div class="font-semibold dark:text-white">
+                                    <div class=" text-md">{{$member->rank->rank_short_form}}</div>
+                                    <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.rank')</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 ml-12">
+                                <div class="font-semibold dark:text-white">
+                                    <div class=" text-md">${{number_format($member->wallet_balance, 2)}}</div>
+                                    <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.wallet_balance')</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 ml-12">
+                                <div class="font-semibold dark:text-white">
+                                    <div class=" text-md">${{number_format($member->personalDeposits(), 2)}}</div>
+                                    <div class="text-sm text-gray-500 dark:text-gray-400">
+                                        @lang('public.total_personal_deposit')
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 ml-12">
+                                <div class="font-semibold dark:text-white">
+                                    <div class=" text-md">${{number_format($member->groupTotalDeposit(), 2)}}</div>
+                                    <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.total_group_deposit')</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 ml-12">
+                                <div class="font-semibold dark:text-white">
+                                    <div class=" text-md">{{$member->getClientsCount()}}</div>
+                                    <div class="text-sm text-gray-500 dark:text-gray-400">@lang('public.direct_downlines')</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endif
+            @endforeach
 
-            @endif
-        @endforeach
 
+        </div>
     @else
         <div class="flex p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300" role="alert">
             <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
