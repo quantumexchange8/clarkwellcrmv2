@@ -66,7 +66,7 @@ class MemberController extends Controller
 
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(), [
-                'name' => 'required|regex:/^[a-zA-Z0-9. -_]+$/u|max:100',
+                'name' => 'required|regex:/^[a-zA-Z0-9\p{Han}. -_]+$/u|max:100',
                 'contact_number' => "required|unique:users,contact_number",
                 'email' => "required|unique:users,email",
                 'password' => ['required', 'string', 'confirmed',
@@ -142,7 +142,7 @@ class MemberController extends Controller
 
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(), [
-                'name' => 'required|regex:/^[a-zA-Z0-9. -_]+$/u|max:100',
+                'name' => 'required|regex:/^[a-zA-Z0-9\p{Han}. -_]+$/u|max:100',
                 'contact_number' => "required|unique:users,contact_number,{$user->id},id",
                 'email' => "required|unique:users,email,{$user->id},id",
                 'password' => ['required', 'string', 'confirmed',

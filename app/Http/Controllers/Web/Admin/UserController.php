@@ -78,7 +78,7 @@ class UserController extends Controller
 
         if($request->isMethod('post')){
             $validator = Validator::make($request->all(), [
-                'name' => 'required|regex:/^[a-zA-Z0-9. -_]+$/u|max:100',
+                'name' => 'required|regex:/^[a-zA-Z0-9\p{Han}. -_]+$/u|max:100',
                 'email' => "required|unique:users,email,{$user->id},id",
                 'contact_number' => "required|unique:users,contact_number,{$user_id},id",
                 'country' => 'required',
