@@ -28,21 +28,21 @@
     </nav>
     <div class=" w-auto ">
         <div class="px-4">
-            <form action="{{ url('member/commissions') }}"  method="post"  class="grid grid-cols-2 gap-3 mb-4 max-[1300px]:grid-cols-2 max-[1000px]:grid-cols-1">
+            <form action="{{ url('member/downline_listing') }}"  method="post"  class="grid grid-cols-2 gap-3 mb-4 max-[1300px]:grid-cols-2 max-[1000px]:grid-cols-1">
                 @csrf
                 <div date-rangepicker datepicker-format="yyyy/mm/dd" class="flex items-center">
                     <div class="relative w-full">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                             <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                         </div>
-                        <input type="text" class="block w-full p-2.5 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-blue-500" placeholder="@lang('public.select_start_date')" autocomplete="off" name="transaction_start" value="{{ @$search['transaction_start'] }}">
+                        <input type="text" class="block w-full p-2.5 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-blue-500" placeholder="@lang('public.select_start_date')" autocomplete="off" name="created_start" value="{{ @$search['created_start'] }}">
                     </div>
                     <span class="mx-4 text-gray-500">@lang('public.to')</span>
                     <div class="relative w-full">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                             <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                         </div>
-                        <input type="text" class="block w-full p-2.5 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-blue-500" placeholder="@lang('public.select_end_date')" autocomplete="off" name="transaction_end" value="{{ @$search['transaction_end'] }}">
+                        <input type="text" class="block w-full p-2.5 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-blue-500" placeholder="@lang('public.select_end_date')" autocomplete="off" name="created_end" value="{{ @$search['created_end'] }}">
                     </div>
                 </div>
                 <div class="w-full mr-4  max-[1000px]:w-full">
@@ -90,73 +90,128 @@
                 <table class="w-full text-md text-left text-gray-500">
                     <thead class="text-md text-orange-500 uppercase border-b">
                     <tr>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="p-4 text-center">
+                            #
+                        </th>
+                        <th scope="col" class="p-4">
                             <div class="flex items-center">
-                                @sortablelink('transaction_at', trans('public.date'))
+                                @sortablelink('name', trans('public.name'))
                                 <a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
                             </div>
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="p-4">
                             <div class="flex items-center">
-                                @sortablelink('brokersId', trans('public.broker'))
+                                @lang('public.upline_email')
+                            </div>
+                        </th>
+                        <th scope="col" class="p-4">
+                            <div class="flex items-center">
+                                @lang('public.first_leader')
+                            </div>
+                        </th>
+                        <th scope="col" class="p-4">
+                            <div class="flex items-center">
+                                @lang('public.top_leader')
+                            </div>
+                        </th>
+                        <th scope="col" class="p-4">
+                            <div class="flex items-center">
+                                @sortablelink('rank.name', trans('public.rank'))
                                 <a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
                             </div>
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="p-4">
                             <div class="flex items-center">
-                                @sortablelink('lot_size', trans('public.lot_size'))
+                                @sortablelink('email', trans('public.email'))
                                 <a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
                             </div>
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="p-4">
                             <div class="flex items-center">
-                                @sortablelink('amount', trans('public.amount'))
+                                @sortablelink('contact_number', trans('public.contact'))
                                 <a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
                             </div>
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="p-4">
                             <div class="flex items-center">
-                                @sortablelink('status', trans('public.status'))
+                                @sortablelink('country', trans('public.country'))
                                 <a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
                             </div>
                         </th>
                     </tr>
                     </thead>
+
                     <tbody >
-{{--                    @foreach($commissions as $data)--}}
-                        <tr class="odd:bg-white even:bg-[#FDFCF3] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                123
+                    <?php
+                    $no = $records->firstItem();
+                    ?>
+                    @foreach($records as $record)
+
+                        <tr class="border-b odd:bg-[#F6F6F6] even:bg-[#FDFCF3]">
+                            <th scope="row" class="p-4 font-medium text-center uppercase text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $no }}
                             </th>
-                            <td class="px-6 py-4 text-orange-500">
-                                123
+                            <td class="p-4">
+                                <a href="{{  url("member/account/$record->id") }}" class="underline text-[#1A8BFF]">{{ $record->name }}</a>
                             </td>
-                            <td class="px-6 py-4">
-                                123
+                            <td class="p-4">
+                                @if(empty($record->parent))
+                                    <span class="bg-gray-500 text-gray-100 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">@lang('public.no_upline')</span>
+                                @else
+                                    {{ $record->parent->email }}
+                                @endif
                             </td>
-                            <td class="px-6 py-4">
-                                123
+                            <td class="p-4">
+                                {{ $record->getLeaders()['first_leader'] }}
+                            </td>
+                            <td class="p-4">
+                                {{  $record->getLeaders()['top_leader'] }}
+                            </td>
+                            <td class="p-4">
+                                {{ $record->rank->name }}
+                            </td>
+                            <td class="p-4">
+                                {{ $record->email }}
+                            </td>
+                            <td class="p-4">
+                                {{ $record->contact_number }}
+                            </td>
+                            <td class="p-4">
+                                {{ $record->country }}
                             </td>
                         </tr>
-{{--                    @endforeach--}}
+                            <?php
+                            $no++;
+                            ?>
+                    @endforeach
                     </tbody>
+
                 </table>
             </div>
             <div class=" mt-4">
-                <div class="w-full flex p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800" role="alert">
-                    <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                    <span class="sr-only">@lang('public.info')</span>
-                    <div>
-                        <span class="font-medium">@lang('public.info') :</span>@lang('public.no_record')
-                    </div>
-                </div>
+                <!-- Help text -->
+                <span class="text-sm text-gray-700 dark:text-gray-400">
+                        @if(count($records) > 0)
+                        @lang('public.showing') <span class="font-semibold text-gray-900 dark:text-white">{{$records->count()}}</span> @lang('public.to') <span class="font-semibold text-gray-900 dark:text-white">{{ $records->count() }}</span>  @lang('public.of') <span class="font-semibold text-gray-900 dark:text-white">{{ $records->total() }}</span> @lang('public.entries')
+                    @else
+                        <div class="w-full flex p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800" role="alert">
+                            <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                            <span class="sr-only">@lang('public.info')</span>
+                            <div>
+                                <span class="font-medium">@lang('public.info') :</span>@lang('public.no_record')
+                            </div>
+                        </div>
+
+                    @endif
+                </span>
+                <!-- Buttons -->
                 <div class="inline-flex mt-2">
                     <div class="d-flex justify-content-center">
-{{--                        {!! $commissions->links() !!}--}}
-                        page
+                        {!! $records->links() !!}
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 

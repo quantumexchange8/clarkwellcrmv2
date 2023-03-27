@@ -117,9 +117,12 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
 
-    public static function get_record($search, $kyc = false)
+    public static function get_record($search, $kyc = false, $member_id = null)
     {
         $query = User::sortable()->where('role', 1);
+        if ($member_id) {
+            $query->where('hierarchyList', 'like', '%-' . $member_id . '-%');
+        }
         $search_text = @$search['freetext'] ?? NULL;
         $freetext = explode(' ', $search_text);
 

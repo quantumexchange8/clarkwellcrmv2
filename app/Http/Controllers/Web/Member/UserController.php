@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\Member;
 
 use App\Exports\ExportCommissions;
+use App\Exports\ExportUser;
 use App\Exports\NetworkExport;
 use App\Http\Controllers\Controller;
 use App\Models\ActionLogs;
@@ -333,7 +334,45 @@ class UserController extends Controller
 
     public function downline_listing(Request $request)
     {
-        return view('member.downline-listing');
+        $user = Auth::user();
+        $start_date =  Carbon::now()->startOfDay()->format('Y-m-d H:i:s');
+        $end_date = Carbon::now()->endOfDay()->format('Y-m-d H:i:s');
+        $search =   session('member_downline_search') ? session('member_downline_search') : session(['member_downline_search' => [
+            'created_start' => $start_date,
+            'created_end' => $end_date,
+        ]]);
+
+        if ($request->isMethod('post')) {
+            $submit_type = $request->input('submit');
+
+            switch ($submit_type) {
+                case 'search':
+                    session(['member_downline_search' => [
+                        'freetext' =>  $request->input('freetext'),
+                        'created_start' => $request->input('created_start'),
+                        'created_end' => $request->input('created_end'),
+                    ]]);
+                    break;
+                case 'export':
+                    $now = Carbon::now()->format('YmdHis');
+                    return Excel::download(new ExportUser(User::get_record(session('member_downline_search'), false, $user->id)), $now . '-users-records.xlsx');
+                case 'reset':
+                    session(['member_downline_search' => [
+                        'created_start' => $start_date,
+                        'created_end' => $end_date,
+                    ]]);
+                    break;
+            }
+        }
+
+        $search = session('member_downline_search') ? session('member_downline_search') : $search;
+
+
+        return view('member.downline-listing', [
+            'submit' => route('member_downline_listing'),
+            'records' => User::get_record($search, false, $user->id)->paginate(10),
+            'search' =>  $search,
+        ]);
     }
 
     public function leaveImpersonate()
