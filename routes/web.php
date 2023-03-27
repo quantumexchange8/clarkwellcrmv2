@@ -51,6 +51,7 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
                 Route::match(['get', 'post'], '/tree', 'tree');
                 Route::get('/profile', 'profile');
                 Route::match(['get', 'post'], '/verification', 'verification')->name('member_verification');
+                Route::match(['get', 'post'], '/downline_listing', 'downline_listing')->name('member_downline_listing');
                 Route::get('/account/{id}', 'account');
                 Route::post('/export-network', 'exportExcel');
                 Route::post('/update-profile-pic', 'updateProfilePicture');

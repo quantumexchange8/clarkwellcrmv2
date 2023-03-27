@@ -222,6 +222,7 @@ class MemberController extends Controller
             case 'en':
                 $userCountry = SettingCountry::where('name', $user->country)->first();
                 $country_trans = $user->country;
+
                 break;
 
             case 'cn':
@@ -229,10 +230,16 @@ class MemberController extends Controller
                 $country_trans = $userCountry->name_cn;
 
                 break;
+
             case 'tw':
                 $userCountry = SettingCountry::where('name', $user->country)->first();
                 $country_trans = $userCountry->name_tw;
+
                 break;
+
+            default:
+                $userCountry = SettingCountry::where('name', $user->country)->first();
+                $country_trans = $user->country;
         }
 
         if (!$user) {

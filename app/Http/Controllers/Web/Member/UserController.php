@@ -64,6 +64,7 @@ class UserController extends Controller
             case 'en':
                 $userCountry = SettingCountry::where('name', $user->country)->first();
                 $country_trans = $user->country;
+
                 break;
 
             case 'cn':
@@ -71,10 +72,16 @@ class UserController extends Controller
                 $country_trans = $userCountry->name_cn;
 
                 break;
+
             case 'tw':
                 $userCountry = SettingCountry::where('name', $user->country)->first();
                 $country_trans = $userCountry->name_tw;
+
                 break;
+
+            default:
+                $userCountry = SettingCountry::where('name', $user->country)->first();
+                $country_trans = $user->country;
         }
 
         $user->countryFlag = $userCountry->code ?? null;
@@ -324,37 +331,10 @@ class UserController extends Controller
         return view('change-password')->withErrors($validator);
     }
 
-//    public function changePasswordSave(Request $request)
-//    {
-//
-//        $this->validate($request, [
-//            'current_password' => 'required|string',
-//            'password' => ['required', 'string', 'max:15', 'confirmed',
-//                Password::min(8)->letters()->numbers()->mixedCase()->symbols()],
-//        ]);
-//        $auth = Auth::user();
-//
-//        // The passwords matches
-//        if (!Hash::check($request->get('current_password'), $auth->password)) {
-//
-//            Alert::error('Invalid Action', 'Current Password is Invalid!');
-//            return back();
-//        }
-//
-//        // Current password and new password same
-//        if (strcmp($request->get('current_password'), $request->password) == 0) {
-//
-//            Alert::warning('Invalid Action', 'New Password cannot be same as your current password!');
-//            return back();
-//        }
-//
-//        $user = User::find($auth->id);
-//        $user->password = Hash::make($request->password);
-//        $user->save();
-//
-//        Alert::success('Done', 'Successfully Updated Password!');
-//        return redirect()->route('member_dashboard');
-//    }
+    public function downline_listing(Request $request)
+    {
+        return view('member.downline-listing');
+    }
 
     public function leaveImpersonate()
     {
