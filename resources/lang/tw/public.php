@@ -58,7 +58,7 @@ return array(
     'downline_listing' => '下線清單',
     'referrals' => '推薦',
     'referrals_tree' => '推薦樹',
-    'transfer' => '轉賬',
+    'transfer' => '轉移',
     'brokers' => '外匯券商',
     'news' => '新聞',
     'open_sidebar' => '打開側邊欄',

@@ -59,11 +59,32 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $rank = $user->rank;
-        $userCountry = SettingCountry::where('name', $user->country)->first();
+
+        switch (app()->getLocale()) {
+            case 'en':
+                $userCountry = SettingCountry::where('name', $user->country)->first();
+                $country_trans = $user->country;
+                break;
+
+            case 'cn':
+                $userCountry = SettingCountry::where('name', $user->country)->first();
+                $country_trans = $userCountry->name_cn;
+
+                break;
+            case 'tw':
+                $userCountry = SettingCountry::where('name', $user->country)->first();
+                $country_trans = $userCountry->name_tw;
+                break;
+        }
+
         $user->countryFlag = $userCountry->code ?? null;
 
 
-        return view('member/profile', compact('user', 'rank'));
+        return view('member/profile', [
+            'user' => $user,
+            'rank' => $rank,
+            'country_trans' => $country_trans,
+        ]);
     }
 
     public function verification(Request $request)

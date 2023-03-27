@@ -19,11 +19,11 @@
         <a href="{{ route('member_details', $user->id) }}" class="font-semibold text-xl text-[#FFA168]">@lang('public.back')</a>
     </div>
     <div class="mt-8 grid grid-flow-row grid-flow-cols grid-cols-3 gap-3 my-4 max-[1200px]:grid-rows-auto max-[1200px]:grid-cols-none ">
-        <div class="relative overflow-x-auto  max-[1200px]:col-span-3 mb-4">
-            <table class="w-full text-sm text-left border-2 border-orange-500 bg-[#FDFCF3] text-gray-500 dark:text-gray-400">
+        <div class="relative overflow-x-auto max-[1200px]:col-span-3 mb-4">
+            <table class="w-full text-sm text-left border-2 border-orange-300 bg-[#FDFCF3] shadow-lg text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th class="flex items-center  border-orange-500 justify-center bg-[#FDFCF3]">
+                    <th class="flex items-center justify-center bg-[#FDFCF3]">
                         <div class="my-6 relative inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600">
                             @if ($user->profile_image)
                                 <img src="{{ asset('uploads/users/' .$user->profile_image)}}" id="profile_pic_preview" class="relative inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl">
@@ -42,7 +42,7 @@
                         </td>
                     </tr>
                     @foreach($deposit_by_group as $deposit_group)
-                        <tr class="border border-orange-500">
+                        <tr class="border border-orange-300">
                             <td class="flex items-center justify-center">
                                 <span class="m-4">{{ $deposit_group->broker->name }} : <b>${{ number_format($deposit_group->amount, 2) }}</b></span>
                             </td>

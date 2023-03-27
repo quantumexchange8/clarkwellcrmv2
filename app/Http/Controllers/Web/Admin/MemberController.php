@@ -216,9 +216,23 @@ class MemberController extends Controller
     public function member_details(Request $request, $id)
     {
         $post = $user = User::find($id);
-        $rank = $user->rank;
-        $tempName =  explode(" ",$rank->name);
         $validator = null;
+        switch (app()->getLocale()) {
+            case 'en':
+                $userCountry = SettingCountry::where('name', $user->country)->first();
+                $country_trans = $user->country;
+                break;
+
+            case 'cn':
+                $userCountry = SettingCountry::where('name', $user->country)->first();
+                $country_trans = $userCountry->name_cn;
+
+                break;
+            case 'tw':
+                $userCountry = SettingCountry::where('name', $user->country)->first();
+                $country_trans = $userCountry->name_tw;
+                break;
+        }
 
         if (!$user) {
             Alert::error(trans('public.invalid_user'), trans('public.try_again'));
@@ -250,6 +264,7 @@ class MemberController extends Controller
             'user' => $user,
             'post' => $post,
             'get_rank_sel' => Rankings::get_rank_sel(),
+            'country_trans' => $country_trans,
         ])->withErrors($validator);
     }
 

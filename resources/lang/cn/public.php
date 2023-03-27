@@ -58,7 +58,7 @@ return array(
     'downline_listing' => '下线清单',
     'referrals' => '推荐',
     'referrals_tree' => '推荐树',
-    'transfer' => '转账',
+    'transfer' => '转移',
     'brokers' => '外汇券商',
     'news' => '新闻',
     'open_sidebar' => '打开侧边栏',

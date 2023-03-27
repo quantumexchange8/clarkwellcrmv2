@@ -34,8 +34,12 @@
                 <h5 class="font-bold text-lg text-gray-600 text-center mt-4 mb-2">{{ $user->name }}</h5>
                 <span class="font-semibold text-lg text-orange-400 text-center">{{ $user->rank->rank_short_form }}</span>
                 <div class="items-center mt-4 md:mt-6">
-                    <span class="font-semibold text-lg text-orange-400 mt-4">@lang('public.last_rank_up'):</span> <br>
-                    <span class="font-semibold text-lg text-gray-600">{{\Carbon\Carbon::parse($user->rank_update_at)->format('Y-m-d')}} {{$user->auto_rank_up ? '('.trans('public.auto').')' : '('.trans('public.manual').')'}}</span>
+                    <p class="font-semibold text-lg text-orange-400 mt-4">@lang('public.last_rank_up'):</p>
+                    <div class="font-semibold text-lg text-gray-600">{{\Carbon\Carbon::parse($user->rank_update_at)->format('Y-m-d')}} <br>
+                        <span class="bg-gray-300 text-gray-800 text-sm font-medium shadow-lg px-2.5 py-1.5 rounded dark:bg-gray-700 dark:text-gray-300">
+                            {{$user->auto_rank_up ? trans('public.auto') : trans('public.manual')}}
+                        </span>
+                    </div>
                 </div>
                 <div class="flex mt-4 space-x-3 md:mt-6">
                     <button
@@ -71,7 +75,22 @@
                     <div class="mt-10 px-4">
                         <h2 class="font-semibold text-lg text-orange-400 mb-4">@lang('public.country')</h2>
                         <span class="font-semibold text-lg text-gray-500">
-                            {{ $user->country }}
+                            @switch(app()->getLocale())
+                                @case('en')
+                                    <h5 class=" text-lg font-semibold text-gray-500 dark:text-white">{{ $country_trans }}</h5>
+                                    @break
+
+                                @case('cn')
+                                    <h5 class=" text-lg font-semibold text-gray-500 dark:text-white">{{ $country_trans }}</h5>
+                                    @break
+
+                                @case('tw')
+                                    <h5 class=" text-lg font-semibold text-gray-500 dark:text-white">{{ $country_trans }}</h5>
+                                    @break
+
+                                @default
+                                    <h5 class=" text-lg font-semibold text-gray-500 dark:text-white">{{ $country_trans }}</h5>
+                            @endswitch
                         </span>
                     </div>
                     <div class="mt-10 px-4">

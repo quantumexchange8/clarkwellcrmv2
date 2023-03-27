@@ -73,7 +73,23 @@
                             </option>
                             @foreach ($countries as $country)
                                 <option value="{{ $country }}" @selected(old('country') == $country)>
-                                    {{ $country->name }}
+                                    @switch(app()->getLocale())
+                                        @case('en')
+                                            {{ $country->name }}
+                                            @break
+
+                                        @case('cn')
+                                            {{ $country->name_cn }}
+                                            @break
+
+                                        @case('tw')
+                                            {{ $country->name_tw }}
+                                            @break
+
+                                        @default
+                                            <span class="fi fi-us mr-3 "></span>
+                                            {{ $country->name }}
+                                    @endswitch
                                 </option>
                             @endforeach
                         </select>
