@@ -65,7 +65,7 @@
                 </button>
             </h2>
             <div id="accordion-collapse-body-{{$broker->id}}" class="hidden" aria-labelledby="accordion-collapse-heading-{{$broker->id}}">
-                <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
+                <div class="p-5 border border-t-0 border-orange-200 dark:border-gray-700">
                     <span class="font-bold text-lg  text-md text-orange-400 underline border-l-4 border-orange-400 pl-4 -ml-5">{{ $broker->name }}</span>
                     <div class="grid grid-cols-3 gap-8 mt-4 max-[1350px]:grid-rows-auto max-[1350px]:grid-cols-2 max-[950px]:grid-cols-1">
                         <div class="max-w-sm rounded overflow-hidden shadow-lg text-white" style="background: #40DD7F;">
