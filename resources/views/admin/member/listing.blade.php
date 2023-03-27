@@ -143,7 +143,7 @@
                                 {{ $record->contact_number }}
                             </td>
                             <td class="p-4">
-                                {{ $record->country }}
+                                {{ $record->getTranslatedCountry() }}
                             </td>
                             <td class="p-4">
                                 @if($record->status == 1)

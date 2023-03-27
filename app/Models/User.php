@@ -192,6 +192,28 @@ class User extends Authenticatable implements JWTSubject
         return $users;
     }
 
+    public function getTranslatedCountry()
+    {
+        $country = SettingCountry::where('name', $this->country)->first();
+        switch (app()->getLocale()) {
+
+            case 'cn':
+                $country = $country->name_cn;
+
+                break;
+
+            case 'tw':
+                $country = $country->name_tw;
+
+                break;
+
+            default:
+                $country = $country->name;
+        }
+
+        return $country;
+    }
+
     public function groupTotalDeposit()
     {
         $users =$this->getChildrenIds();
