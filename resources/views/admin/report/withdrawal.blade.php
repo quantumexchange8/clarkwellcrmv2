@@ -37,6 +37,7 @@
                 <div>
                     <button type="submit" class="text-white bg-primary hover:bg-primary-600 border border-primary-200 focus:ring-4 focus:outline-none focus:ring-primary-600 font-medium rounded-lg text-sm max-[770px]:w-full w-auto mb-2 px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" name="submit" value="search">@lang('public.search')</button>
                     <button type="submit" class="text-white bg-rose-500 hover:bg-rose-600 border border-rose-200 focus:ring-4 focus:outline-none focus:ring-rose-600 font-medium rounded-lg text-sm max-[770px]:w-full w-auto mb-2 px-5 py-2.5 text-center dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-red-800" name="submit" value="reset">@lang('public.reset')</button>
+                    <button type="button" data-modal-target="importModal" data-modal-toggle="importModal" class="text-white bg-gray-400 hover:bg-gray-600 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-600 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">@lang('public.import')</button>
                     <button type="submit" name="submit" value="export" class="text-md justify-center text-center text-white py-2 px-6 rounded bg-[#FFA168] hover:bg-orange-400 font-bold float-right flex items-center max-[770px]:w-full max-[760px]:mt-2">
                         <svg class="h-6 w-6 text-white mr-2"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />  <polyline points="17 8 12 3 7 8" />  <line x1="12" y1="3" x2="12" y2="15" /></svg>
                         @lang('public.export_report')
@@ -166,5 +167,82 @@
         </div>
     @endif
 
+    <!-- Import Modal -->
+    <div id="importModal" tabindex="-1" aria-hidden="true"
+         class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+        <div class="relative w-full h-full max-w-md md:h-auto">
+            <!-- Modal content -->
 
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <button type="button"
+                        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-md p-4 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                        data-modal-hide="importModal">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="sr-only">@lang('public.close_modal')</span>
+                </button>
+                <div class="px-6 py-6 lg:px-8">
+                    <form method="post" action="{{ route('import_deposit') }}" enctype="multipart/form-data">@csrf
+                        <h3 class="mb-4 text-xl font-semibold inline-block text-orange-500 dark:text-white">@lang('public.import_withdrawals')</h3>
+                        <span class="pl-2 inline-flex pt-2 text-black text-lg font-bold">
+                            <button type="submit" name="submit" value="download" class="text-xs text-blue-600 dark:text-blue-500 underline ">@lang('public.download_template')</button>
+                    </span>
+                        <div class="w-5/12 mb-4 mr-4 max-[1000px]:w-full">
+                            <select id="broker" name="broker_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500">
+                                <option selected value="all">@lang('public.select_broker')</option>
+                                @foreach($brokers as $broker)
+                                    <option value="{{ $broker->id }}">{{ $broker->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-4">
+
+                            <div class="flex items-center mb-4 justify-center w-full">
+                                <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                    <div id="content" class="flex flex-col items-center justify-center pt-5 pb-6">
+                                        <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">@lang('public.click_upload')</span> @lang('public.or_drap_drop')</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">@lang('public.excel_mime_type')</p>
+                                    </div>
+                                    <input id="dropzone-file" name="file" type="file"  accept=".xlsx, .csv, .xls" class="hidden" onchange="onchangeFileUpload()"/>
+                                </label>
+                            </div>
+
+                        </div>
+                        <div class="flex items-center  mb-4 justify-center w-full">
+                            <button type="submit" class="text-white bg-orange-400 hover:bg-orange-600 border border-orange-200 focus:ring-4 focus:outline-none focus:ring-blue-600 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" name="submit" value="import">Import</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+@endsection
+
+@section('script')
+    <script>
+        function onchangeFileUpload(){
+            document.getElementById("content").innerHTML =
+                `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 019 9v.375M10.125 2.25A3.375 3.375 0 0113.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 013.375 3.375M9 15l2.25 2.25L15 12" />
+</svg>
+                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">@lang('public.file_uploaded')</p>
+                `
+        }
+
+        $(document).ready(function(e) {
+            $('.delete').on('click', function() {
+                var id = $(this).attr('id');
+                $(".modal-body #deposit_id").val( id );
+            });
+        });
+
+    </script>
 @endsection

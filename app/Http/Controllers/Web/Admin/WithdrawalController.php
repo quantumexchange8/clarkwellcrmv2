@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Admin;
 use App\Exports\ExportWithdrawal;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreWithdrawalRequest;
+use App\Models\Brokers;
 use App\Models\User;
 use App\Models\Withdrawals;
 use Carbon\Carbon;
@@ -76,6 +77,7 @@ class WithdrawalController extends Controller
             'submit' => route('report_withdrawal'),
             'records' => Withdrawals::get_record($search)->paginate(10),
             'search' =>  $search,
+            'brokers' => Brokers::all(),
             'get_status_sel' => ['' => trans('public.select_status')] + [1 => 'Processing', 2 => 'Approved', 3 => 'Rejected'],
         ]);
     }
@@ -121,6 +123,7 @@ class WithdrawalController extends Controller
             'records' => Withdrawals::get_record($search)->paginate(10),
             'search' =>  $search,
             'users' => $users,
+            'brokers' => Brokers::all(),
             'get_status_sel' => ['' => trans('public.select_status')] + [1 => 'Processing', 2 => 'Approved', 3 => 'Rejected'],
         ]);
     }
