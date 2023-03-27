@@ -157,6 +157,7 @@ class AuthController extends Controller
             'password' => ['required', 'string', 'confirmed',
                 Password::min(6)->letters()->numbers()],
         ]);
+
         $status = PasswordSupport::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user, $password) {
