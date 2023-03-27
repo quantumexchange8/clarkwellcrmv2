@@ -23,6 +23,7 @@ class Withdrawals extends Model
         'amount',
         'status',
         'created_at',
+        'address'
     ];
 
     const STATUS_PENDING = 1;
