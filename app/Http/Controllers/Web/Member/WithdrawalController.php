@@ -54,7 +54,7 @@ class WithdrawalController extends Controller
     public function store(StoreWithdrawalRequest $request)
     {
         $user = Auth::user();
-        if (Withdrawals::where('requested_by_user', 140)->where('status', Withdrawals::STATUS_PENDING)->exists()) {
+        if (Withdrawals::where('requested_by_user', $user->id)->where('status', Withdrawals::STATUS_PENDING)->exists()) {
             Alert::warning(trans('public.invalid_action'), trans('public.withdrawal_pending_request'));
             return back()->withInput();
         } elseif ($request->amount > $user->wallet_balance)

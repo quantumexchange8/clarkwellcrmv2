@@ -107,7 +107,7 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
                 Route::post('/import-deposits', [DepositController::class, 'store'])->name('import_deposit');
                 Route::match(['get', 'post'], '/withdrawals/listing', [WithdrawalController::class, 'listing'])->name('report_withdrawal');
                 Route::match(['get', 'post'], '/withdrawals/children', [WithdrawalController::class, 'listingChildren'])->name('report_withdrawal_children');
-                Route::match(['get', 'post'], '/withdrawal/withdrawal_request/{id}', [WithdrawalController::class, 'withdrawal_request'])->name('withdrawal_request');
+                Route::match(['get', 'post'], '/withdrawal/withdrawal_request/{id}', [WithdrawalController::class, 'approval'])->name('withdrawal_request');
             });
 
             Route::controller('ReferralController')->prefix('referral')->group(function () {
