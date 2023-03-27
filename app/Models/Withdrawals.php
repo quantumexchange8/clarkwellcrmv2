@@ -47,7 +47,7 @@ class Withdrawals extends Model
         return $amount;
     }
 
-    public static function get_withdrawals_table($search, $perpage, $userId)
+    public static function get_withdrawals_table($search, $userId)
     {
         $query = Withdrawals::sortable()->where('requested_by_user', $userId);
 
@@ -61,10 +61,10 @@ class Withdrawals extends Model
             $query->where('status', $search['filter_status']);
         }
 
-        return $query->orderby('created_at')->paginate($perpage);
+        return $query->orderby('created_at');
     }
 
-    public static function get_record($search, $perpage)
+    public static function get_record($search)
     {
         $query = Withdrawals::sortable()->whereHas('user', function ($query) {
             return $query->where('role', 1);
@@ -76,7 +76,8 @@ class Withdrawals extends Model
         if($search_text){
             foreach($freetext as $freetexts) {
                 $query->whereHas('user', function ($q) use ($freetexts) {
-                    $q->where('email', 'like', '%' . $freetexts . '%');
+                    $q->where('email', 'like', '%' . $freetexts . '%')
+                        ->orWhere('name', 'like', '%' . $freetexts . '%');
                 });
             }
         }
@@ -102,7 +103,7 @@ class Withdrawals extends Model
 
         }
 
-        return $query->orderbyDesc('id')->paginate($perpage);
+        return $query->orderbyDesc('created_at');
     }
 
     /**

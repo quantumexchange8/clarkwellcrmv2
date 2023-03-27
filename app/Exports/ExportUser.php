@@ -9,49 +9,23 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class ExportUser implements FromCollection, WithHeadings
 {
-    private $filterUser;
-    private $searchText;
-    private $startDate;
-    private $endDate;
+    private $query;
 
-    public function __construct($userId=null, $searchText=null, $startDate=null, $endDate=null)
+    public function __construct($query)
     {
-        $this->filterUser = $userId;
-        $this->searchText = $searchText;
-        $this->startDate = $startDate;
-        $this->endDate = $endDate;
+        $this->query = $query;
     }
 
     public function collection()
     {
-        $query = User::query()->where('role', User::ROLE_MEMBER);
-
-        if ($this->filterUser) {
-            $query->where('id', '=', $this->filterUser);
-        }
-
-        $search_text = $this->searchText ?? NULL;
-        $freetext = explode(' ', $search_text);
-
-        if($search_text){
-            foreach($freetext as $freetexts) {
-                $query->where(function ($q) use ($freetexts) {
-                    $q->where('email', 'like', '%' . $freetexts . '%');
-                });
-            }
-        }
-
-        if ($this->startDate && $this->endDate) {
-            $start_date = Carbon::parse($this->startDate)->startOfDay()->format('Y-m-d H:i:s');
-            $end_date = Carbon::parse($this->endDate)->endOfDay()->format('Y-m-d H:i:s');
-            $query->whereBetween('created_at', [$start_date, $end_date]);
-        }
-
-        $records = $query->get();
+        $records = $this->query->get();
         $result = array();
         foreach($records as $user){
             $result[] = array(
                 'name' => $user->name,
+                'upline'=> $user->parent ? $user->parent->email : null,
+                'first_leader'=> $user->getLeaders()['first_leader'],
+                'top_leader'=> $user->getLeaders()['top_leader'],
                 'rank' => $user->rank->name,
                 'email' => $user->email,
                 'contact' => $user->contact_number,
@@ -68,6 +42,9 @@ class ExportUser implements FromCollection, WithHeadings
     {
         return [
             'Name',
+            'Upline Email',
+            'First Leader Email',
+            'Top Leader Email',
             'Rank',
             'Email',
             'Contact',

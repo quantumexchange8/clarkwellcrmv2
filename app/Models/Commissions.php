@@ -39,7 +39,7 @@ class Commissions extends Model
         return $amount;
     }
 
-    public static function get_commissions_table($search, $perpage, $userId, $children = [])
+    public static function get_commissions_table($search, $userId, $children = [])
     {
         $query = Commissions::sortable();
         if (count($children) > 0) {
@@ -70,10 +70,10 @@ class Commissions extends Model
 
         }
 
-        return $query->orderby('transaction_at')->paginate($perpage);
+        return $query->orderby('transaction_at');
     }
 
-    public static function get_record($search, $perpage)
+    public static function get_record($search)
     {
         $query = Commissions::sortable()->whereHas('user', function ($query) {
            return $query->where('role', 1);
@@ -85,7 +85,8 @@ class Commissions extends Model
         if($search_text){
             foreach($freetext as $freetexts) {
                 $query->whereHas('user', function ($q) use ($freetexts) {
-                    $q->where('email', 'like', '%' . $freetexts . '%');
+                    $q->where('email', 'like', '%' . $freetexts . '%')
+                        ->orWhere('name', 'like', '%' . $freetexts . '%');
                 });
             }
         }
@@ -109,7 +110,7 @@ class Commissions extends Model
 
         }
 
-        return $query->orderbyDesc('id')->paginate($perpage);
+        return $query->orderbyDesc('transaction_at');
     }
 
     public static function listProcessingStatus()

@@ -30,7 +30,8 @@ class NetworkExport implements FromCollection, WithHeadings
             if ($searchTerms) {
                 $user = User::find($this->filterUser);
                 foreach ($freetext as $freetexts) {
-                    $query->where('email', 'like', '%' . $freetexts . '%');
+                    $query->where('email', 'like', '%' . $freetexts . '%')
+                        ->orWhere('name', 'like', '%' . $freetexts . '%');
                 }
                 $query->whereIn('id', $user->getChildrenIds())
                     ->take(1);
@@ -45,7 +46,8 @@ class NetworkExport implements FromCollection, WithHeadings
             $freetext = explode(' ', $searchTerms);
             if ($searchTerms) {
                 foreach ($freetext as $freetexts) {
-                    $query->where('email', 'like', '%' . $freetexts . '%');
+                    $query->where('email', 'like', '%' . $freetexts . '%')
+                        ->orWhere('name', 'like', '%' . $freetexts . '%');
                 }
                 $query->take(1);
             } else {

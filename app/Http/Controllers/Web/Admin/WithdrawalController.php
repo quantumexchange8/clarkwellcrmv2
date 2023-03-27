@@ -59,7 +59,7 @@ class WithdrawalController extends Controller
                     break;
                 case 'export':
                     $now = Carbon::now()->format('YmdHis');
-                    return Excel::download(new ExportWithdrawal(null, $request->input('status'), $request->input('created_start'), $request->input('freetext'), null, $request->input('created_end')), $now . '-withdrawal-records.xlsx');
+                    return Excel::download(new ExportWithdrawal( Withdrawals::get_record(session('report_withdrawal'))), $now . '-withdrawal-records.xlsx');
                 case 'reset':
                     session()->forget('report_withdrawal');
                     break;
@@ -71,7 +71,7 @@ class WithdrawalController extends Controller
         return view('admin.report.withdrawal', [
             'title' => 'Withdrawals',
             'submit' => route('report_withdrawal'),
-            'records' => Withdrawals::get_record($search, 10),
+            'records' => Withdrawals::get_record($search)->paginate(10),
             'search' =>  $search,
             'get_status_sel' => ['' => trans('public.select_status')] + [1 => 'Processing', 2 => 'Approved', 3 => 'Rejected'],
         ]);
@@ -103,7 +103,7 @@ class WithdrawalController extends Controller
                     break;
                 case 'export':
                     $now = Carbon::now()->format('YmdHis');
-                    return Excel::download(new ExportWithdrawal(null, $request->input('status'), $request->input('created_start'), null, $request->input('user_id'), $request->input('created_end')), $now . '-withdrawal-records.xlsx');
+                    return Excel::download(new ExportWithdrawal(Withdrawals::get_record( session('report_withdrawal_children'))), $now . '-withdrawal-records.xlsx');
                 case 'reset':
                     session()->forget('report_withdrawal_children');
                     break;
@@ -115,7 +115,7 @@ class WithdrawalController extends Controller
         return view('admin.report.withdrawal-children', [
             'title' => 'Withdrawals - Downline',
             'submit' => route('report_withdrawal_children'),
-            'records' => Withdrawals::get_record($search, 10),
+            'records' => Withdrawals::get_record($search)->paginate(10),
             'search' =>  $search,
             'users' => $users,
             'get_status_sel' => ['' => trans('public.select_status')] + [1 => 'Processing', 2 => 'Approved', 3 => 'Rejected'],

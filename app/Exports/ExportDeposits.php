@@ -13,71 +13,27 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
     * @return \Illuminate\Support\Collection
     */
 class ExportDeposits implements FromCollection, WithHeadings {
-    private $filterUser;
-    private $searchText;
-    private $startDate;
-    private $filterBroker;
-    private $filterChildren;
+    private $query;
 
-    private $endDate;
-
-    public function __construct($userId=[], $searchText=null,  $startDate=null, $filterBroker=null, $filterChildren=null, $endDate=null)
+    public function __construct($query)
     {
-        $this->filterUser = $userId;
-        $this->searchText = $searchText;
-        $this->startDate = $startDate;
-        $this->filterBroker = $filterBroker;
-        $this->filterChildren =  $filterChildren;
-        $this->endDate = $endDate;
+        $this->query = $query;
     }
     public function collection()
     {
-        $query = DB::table('deposits')->addSelect('deposits.*')
-            ->leftjoin('users','users.id','=','deposits.userId') ->addSelect('users.email as userEmail')
-            ->leftjoin('brokers','brokers.id','=','deposits.brokersId')->addSelect('brokers.name as brokerName');
-        if ($this->filterUser) {
-            $query->whereIn('deposits.userId', $this->filterUser);
-        }
-        if ($this->filterBroker && $this->filterBroker != 'all') {
-            $query->where('deposits.brokersId', $this->filterBroker);
-        }
 
-        if ($this->startDate && $this->endDate) {
-            $start_date = Carbon::parse($this->startDate)->startOfDay()->format('Y-m-d H:i:s');
-            $end_date = Carbon::parse($this->endDate)->endOfDay()->format('Y-m-d H:i:s');
-            $query->whereBetween('deposits.transaction_at', [$start_date, $end_date]);
-        }
-
-        $search_text = $this->searchText ?? NULL;
-        $freetext = explode(' ', $search_text);
-
-        if($search_text){
-            foreach($freetext as $freetexts) {
-                $query->where('users.email', 'like', '%' . $freetexts . '%');
-            }
-        }
-
-        if ($this->filterChildren) {
-            $users = User::find($this->filterChildren);
-            $users_id = [];
-            if ($users) {
-                $users_id[] = $users->id;
-                $users_id = array_merge($users->getChildrenIds(), $users_id);
-            }
-
-            $query->whereIn('deposits.userId', $users_id);
-        }
-
-        $records = $query->whereNull('deposits.deleted_at')->orderBy('deposits.transaction_at', 'DESC')->get();
-
+        $records = $this->query->get();
         $result = array();
         foreach($records as $deposits){
             $result[] = array(
-                'transaction_date' => Carbon::parse($deposits->transaction_at)->format('Y-m-d H:i:s'),
+                'name' => $deposits->user->name,
+                'email' => $deposits->user->email,
+                'upline_email' => $deposits->user->parent ? $deposits->user->parent->email : null,
+                'broker' => $deposits->broker->name,
+                'transaction_date' => Carbon::parse($deposits->transaction_at)->format('Y-m-d'),
                 'amount' =>  number_format((float)$deposits->amount, 2, '.', ''),
-                'email' => $deposits->userEmail,
-                'broker' => $deposits->brokerName,
-                'upload_date' => Carbon::parse($deposits->created_at)->format('Y-m-d H:i:s'),
+                'type' => $deposits->type == Deposits::TYPE_DEPOSIT ? 'Deposit' : 'Withdrawal',
+                'upload_date' => Carbon::parse($deposits->created_at)->format('Y-m-d'),
             );
         }
 
@@ -88,10 +44,13 @@ class ExportDeposits implements FromCollection, WithHeadings {
     public function headings(): array
     {
         return [
+            'Client Name',
+            'Client Email',
+            'Upline Email',
+            'Broker',
             'Transaction Date',
             'Amount',
-            'Client Email',
-            'Broker',
+            'Type',
             'Uploaded Date',
         ];
     }

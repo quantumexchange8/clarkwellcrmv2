@@ -37,7 +37,7 @@ class CommissionController extends Controller
                     break;
                 case 'export':
                     $now = Carbon::now()->format('YmdHis');
-                    return Excel::download(new ExportCommissions($userIds,  null, $request->input('transaction_start'), $request->input('filter_broker'), null, $request->input('transaction_end')), $now . '-commissions-records.xlsx');
+                    return Excel::download(new ExportCommissions(Commissions::get_commissions_table(session('commissions_self_search') , $user->id)), $now . '-commissions-records.xlsx');
                 case 'reset':
                     session()->forget('commissions_self_search');
                     break;
@@ -48,7 +48,7 @@ class CommissionController extends Controller
 
         return view('member/commissions', [
             'submit' => route('commissions_listing'),
-            'commissions' => Commissions::get_commissions_table($search, 10, $user->id),
+            'commissions' => Commissions::get_commissions_table($search, $user->id)->paginate(10),
             'brokers' => Brokers::all(),
             'personal_total' => $user->personalCommissions(),
             'search' =>  $search,
@@ -77,7 +77,7 @@ class CommissionController extends Controller
                     break;
                 case 'export':
                     $now = Carbon::now()->format('YmdHis');
-                    return Excel::download(new ExportBonusHistories(BonusHistories::get_commissions_table($search, $user->id)), $now . '-commissions-records.xlsx');
+                    return Excel::download(new ExportBonusHistories(BonusHistories::get_commissions_table(session('commissions_network_search'), $user->id)), $now . '-commissions-records.xlsx');
                 case 'reset':
                     session()->forget('commissions_network_search');
                     break;

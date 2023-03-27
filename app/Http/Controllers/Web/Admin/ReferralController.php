@@ -47,6 +47,7 @@ class ReferralController extends Controller
             foreach ($freetext as $freetexts) {
                 $members = User::where('role', User::ROLE_MEMBER)
                     ->where('email', 'like', '%' . $freetexts . '%')
+                    ->orWhere('name', 'like', '%' . $freetexts . '%')
                     ->take(1)
                     ->get();
             }

@@ -117,23 +117,22 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
 
-    public static function get_record($search, $perpage, $kyc = false)
+    public static function get_record($search, $kyc = false)
     {
         $query = User::sortable()->where('role', 1);
-
-        if ($kyc) {
-            $query->where('kyc_approval_status', User::KYC_STATUS_PENDING_VERIFICATION);
-        }
-
         $search_text = @$search['freetext'] ?? NULL;
         $freetext = explode(' ', $search_text);
 
         if($search_text){
             foreach($freetext as $freetexts) {
                 $query->where(function ($q) use ($freetexts) {
-                    $q->where('email', 'like', '%' . $freetexts . '%');
+                    $q->where('email', 'like', '%' . $freetexts . '%')
+                        ->orWhere('name', 'like', '%' . $freetexts . '%');
                 });
             }
+        }
+        if ($kyc) {
+            $query->where('kyc_approval_status', User::KYC_STATUS_PENDING_VERIFICATION);
         }
 
         if (@$search['created_start'] && @$search['created_end']) {
@@ -142,7 +141,7 @@ class User extends Authenticatable implements JWTSubject
             $query->whereBetween('created_at', [$start_date, $end_date]);
         }
 
-        return $query->orderbyDesc('created_at')->paginate($perpage);
+        return $query->orderbyDesc('created_at');
     }
 
     public function getClientsCount()

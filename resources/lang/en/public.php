@@ -232,7 +232,7 @@ return array(
     'select_end_date' => 'Select Date End',
     'to' => 'to',
     'select_broker' => 'Select Broker',
-    'search_email' => 'Search Email...',
+    'search_email' => 'Search Email Or Name...',
     'filter_status' => 'Filter by Status',
     'export_excel' => 'Export as Excel',
     'search' => 'Search',

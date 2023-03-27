@@ -34,7 +34,7 @@ class WithdrawalController extends Controller
                     break;
                 case 'export':
                     $now = Carbon::now()->format('YmdHis');
-                    return Excel::download(new ExportWithdrawal($user->id, $request->input('filter_status'), $request->input('created_start'), null, null, $request->input('created_end')), $now . '-withdrawal-records.xlsx');
+                    return Excel::download(new ExportWithdrawal(Withdrawals::get_withdrawals_table(session('withdrawal_search'), $user->id)), $now . '-withdrawal-records.xlsx');
                 case 'reset':
                     session()->forget('withdrawal_search');
                     break;
@@ -45,7 +45,7 @@ class WithdrawalController extends Controller
 
         return view('member/withdrawal', [
             'submit' => route('withdrawals_listing'),
-            'withdrawals' => Withdrawals::get_withdrawals_table($search, 10, $user->id),
+            'withdrawals' => Withdrawals::get_withdrawals_table($search, $user->id)->paginate(10),
             'user' => $user,
             'transaction_fee' => $settings['withdrawal_transaction_fee'] ?? 0,
             'search' =>  $search,

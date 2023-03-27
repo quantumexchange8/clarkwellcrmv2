@@ -256,7 +256,8 @@ class UserController extends Controller
         if ($searchTerms) {
             $query =  User::query();
             foreach ($freetext as $freetexts) {
-                $query->where('email', 'like', '%' . $freetexts . '%');
+                $query->where('email', 'like', '%' . $freetexts . '%')
+                    ->orWhere('name', 'like', '%' . $freetexts . '%');
 
             }
             $members = $query->whereIn('id', $user->getChildrenIds())->take(1)->get();

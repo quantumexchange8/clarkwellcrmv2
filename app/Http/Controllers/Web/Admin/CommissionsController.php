@@ -79,7 +79,7 @@ class CommissionsController extends Controller
                     break;
                 case 'export':
                     $now = Carbon::now()->format('YmdHis');
-                    return Excel::download(new ExportCommissions(null,  $request->input('freetext'), $request->input('transaction_start'), null, null, $request->input('transaction_end')), $now . '-commissions-records.xlsx');
+                    return Excel::download(new ExportCommissions(Commissions::get_record( session('admin_commissions_search'))), $now . '-commissions-records.xlsx');
                 case 'reset':
                     session()->forget('admin_commissions_search');
                     break;
@@ -91,7 +91,7 @@ class CommissionsController extends Controller
         return view('admin.report.commission', [
             'title' => 'Commissions',
             'submit' => route('member_listing'),
-            'records' => Commissions::get_record($search, 10),
+            'records' => Commissions::get_record($search)->paginate(10),
             'search' =>  $search,
             'brokers' => Brokers::all(),
         ]);
@@ -122,7 +122,7 @@ class CommissionsController extends Controller
                     break;
                 case 'export':
                     $now = Carbon::now()->format('YmdHis');
-                    return Excel::download(new ExportCommissions(null,  null, $request->input('transaction_start'), null, $request->input('user_id'), $request->input('transaction_end')), $now . '-commissions-records.xlsx');
+                    return Excel::download(new ExportCommissions(Commissions::get_record(session('admin_commissions_children_search'))), $now . '-commissions-records.xlsx');
                 case 'reset':
                     session()->forget('admin_commissions_children_search');
                     break;
@@ -134,7 +134,7 @@ class CommissionsController extends Controller
         return view('admin.report.commission-children', [
             'title' => 'Commissions - Downline',
             'submit' => route('report_commission_children'),
-            'records' => Commissions::get_record($search, 10),
+            'records' => Commissions::get_record($search)->paginate(10),
             'search' =>  $search,
             'users' => $users,
             'brokers' => Brokers::all(),

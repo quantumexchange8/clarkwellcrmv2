@@ -43,7 +43,7 @@ class MemberController extends Controller
                     break;
                 case 'export':
                     $now = Carbon::now()->format('YmdHis');
-                    return Excel::download(new ExportUser(null, $request->input('freetext'), $request->input('created_start'), $request->input('created_end')), $now . '-users-records.xlsx');
+                    return Excel::download(new ExportUser(User::get_record(session('member_search'))), $now . '-users-records.xlsx');
                 case 'reset':
                     session()->forget('member_search');
                     break;
@@ -52,9 +52,10 @@ class MemberController extends Controller
 
         $search = session('member_search') ? session('member_search') : $search;
 
+
         return view('admin.member.listing', [
             'submit' => route('member_listing'),
-            'records' => User::get_record($search, 10),
+            'records' => User::get_record($search)->paginate(10),
             'search' =>  $search,
         ]);
     }
@@ -439,7 +440,6 @@ class MemberController extends Controller
                 case 'search':
                     session(['member_kyc_search' => [
                         'freetext' =>  $request->input('freetext'),
-                        'kyc_approval' => 'true',
                     ]]);
                     break;
                 case 'reset':
@@ -452,7 +452,7 @@ class MemberController extends Controller
 
         return view('admin.member.kyc-approval', [
             'submit' => route('member_kyc_listing'),
-            'records' => User::get_record($search, 10, true),
+            'records' => User::get_record($search, true)->paginate(10),
             'search' =>  $search,
             'title' => 'KYC Approval'
         ]);

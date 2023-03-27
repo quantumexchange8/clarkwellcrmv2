@@ -78,7 +78,7 @@ class Deposits extends Model
         return $query->orderbyDesc('transaction_at')->paginate($perpage);
     }
 
-    public static function get_report_record($search, $perpage)
+    public static function get_report_record($search)
     {
         $query = Deposits::sortable()->whereHas('user', function ($query) {
             return $query->where('role', 1);
@@ -91,7 +91,8 @@ class Deposits extends Model
 
             foreach($freetext as $freetexts) {
                 $query->whereHas('user', function ($q) use ($freetexts) {
-                    $q->where('email', 'like', '%' . $freetexts . '%');
+                    $q->where('email', 'like', '%' . $freetexts . '%')
+                    ->orWhere('name', 'like', '%' . $freetexts . '%');
                 });
             }
 
@@ -115,7 +116,7 @@ class Deposits extends Model
             $query->whereBetween('transaction_at', [$start_date, $end_date]);
         }
 
-        return $query->orderbyDesc('id')->paginate($perpage);
+        return $query->orderbyDesc('transaction_at');
     }
 
     public function user()

@@ -231,7 +231,7 @@ return array(
     'select_end_date' => '选择结束日期',
     'to' => '至',
     'select_broker' => '选择外汇券商',
-    'search_email' => '搜索电子邮件...',
+    'search_email' => '搜索电子邮件或名称...',
     'filter_status' => '按状态筛选',
     'export_excel' => '导出为Excel',
     'search' => '搜索',

@@ -76,7 +76,7 @@ class DepositController extends Controller
                     break;
                 case 'export':
                     $now = Carbon::now()->format('YmdHis');
-                    return Excel::download(new ExportDeposits(null,  $request->input('freetext'), $request->input('transaction_start'), null, null, $request->input('transaction_end')), $now . '-deposits-records.xlsx');
+                    return Excel::download(new ExportDeposits( Deposits::get_report_record(session('admin_deposits_search'))), $now . '-deposits-records.xlsx');
                 case 'reset':
                     session()->forget('admin_deposits_search');
                     break;
@@ -88,7 +88,7 @@ class DepositController extends Controller
         return view('admin.report.deposit', [
             'title' => 'Deposits',
             'submit' => route('report_deposits'),
-            'records' => Deposits::get_report_record($search, 10),
+            'records' => Deposits::get_report_record($search)->paginate(10),
             'search' =>  $search,
             'brokers' => Brokers::all(),
         ]);
@@ -118,7 +118,7 @@ class DepositController extends Controller
                     break;
                 case 'export':
                     $now = Carbon::now()->format('YmdHis');
-                    return Excel::download(new ExportDeposits(null,  $request->input('freetext'), $request->input('transaction_start'), null, $request->input('user_id'), $request->input('transaction_end')), $now . '-deposits-records.xlsx');
+                    return Excel::download(new ExportDeposits( Deposits::get_report_record(session('admin_deposits_children_search'))), $now . '-deposits-records.xlsx');
                 case 'reset':
                     session()->forget('admin_deposits_children_search');
                     break;
@@ -130,7 +130,7 @@ class DepositController extends Controller
         return view('admin.report.deposit-children', [
             'title' => 'Deposits - Downline',
             'submit' => route('report_deposits_children'),
-            'records' => Deposits::get_report_record($search, 10),
+            'records' => Deposits::get_report_record($search)->paginate(10),
             'search' =>  $search,
             'users' => $users,
             'brokers' => Brokers::all(),
