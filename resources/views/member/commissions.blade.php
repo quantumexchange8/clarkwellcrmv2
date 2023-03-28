@@ -142,7 +142,7 @@
                                     {{ number_format($data->lot_size,2) }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    $ {{ number_format($data->comissions_amount,2) }}
+                                    $ {{ number_format($data->commissions_amount,2) }}
                                 </td>
                                 @switch($data->status)
                                     @case(\App\Models\Commissions::STATUS_PENDING)
