@@ -30,7 +30,7 @@ class PerformanceBonus extends Model
 
     public static function get_report_record($search)
     {
-        $query = PerformanceBonus::sortable()->whereHas('downline', function ($query) {
+        $query = PerformanceBonus::sortable()->whereHas('upline', function ($query) {
             return $query->where('role', 1);
         });
 
@@ -39,7 +39,7 @@ class PerformanceBonus extends Model
 
         if($search_text){
             foreach($freetext as $freetexts) {
-                $query->whereHas('downline', function ($q) use ($freetexts) {
+                $query->whereHas('upline', function ($q) use ($freetexts) {
                     $q->where('name', 'like', '%' . $freetexts . '%');
                 });
             }
@@ -56,7 +56,7 @@ class PerformanceBonus extends Model
 
     public static function get_record($search, $user_id)
     {
-        $query = PerformanceBonus::sortable()->where('downline_id', $user_id);
+        $query = PerformanceBonus::sortable()->where('upline_id', $user_id);
 
         $search_text = @$search['freetext'] ?? NULL;
         $freetext = explode(' ', $search_text);

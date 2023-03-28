@@ -58,7 +58,7 @@ class MemberController extends Controller
             'submit' => route('member_listing'),
             'records' => User::get_record($search)->paginate(10),
             'search' =>  $search,
-            'get_status_sel' => [ 'members' => 'Members', 'leaders' => 'Leaders' ],
+            'get_status_sel' => [ 'members' => trans('public.members'), 'leaders' => trans('public.leader') ],
         ]);
     }
 

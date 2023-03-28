@@ -253,7 +253,7 @@ return array(
     'action' => 'Action',
     'method' => 'Method',
     'referral_name' => 'Referral Name',
-    'downline_name' => 'Name',
+    'downline_name' => 'Downline Name',
     //navigation
     'showing' => 'Showing',
     'of' => 'of',
@@ -350,6 +350,7 @@ return array(
     'type' => 'Type',
     'type_deposit' => 'Deposit',
 
+    'leader' => 'Leader',
     'first_leader' => 'First Leader',
     'top_leader' => 'Top Leader',
     'leader_status' => 'Leader Status',
@@ -387,5 +388,7 @@ return array(
     'commission_amount' => 'Commission Amount',
     'bonus' => 'Bonus (%)',
     'bonus_amount' => 'Bonus Amount',
+    'approve_claim' => 'Successfully Approve Performance Bonus',
+    'reject_claim' => 'Performance Bonus has been Rejected',
 )
 ?>

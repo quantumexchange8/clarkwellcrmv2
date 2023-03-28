@@ -252,7 +252,7 @@ return array(
     'action' => '操作',
     'method' => '方法',
     'referral_name' => '推荐人姓名',
-    'downline_name' => '姓名',
+    'downline_name' => '下线姓名',
 //navigation
     'showing' => '显示',
     'of' => '共',
@@ -350,6 +350,7 @@ return array(
     'type' => '类型',
     'type_deposit' => '托管',
 
+    'leader' => '领导',
     'first_leader' => '第一任领导人',
     'top_leader' => '最高领导人',
     'leader_status' => '设置领导',
@@ -387,6 +388,8 @@ return array(
     'commission_amount' => '佣金金额',
     'bonus' => '奖金 (%)',
     'bonus_amount' => '奖金金额',
+    'approve_claim' => '绩效奖金审批成功',
+    'reject_claim' => '绩效奖金已被拒绝',
 )
 ?>
 

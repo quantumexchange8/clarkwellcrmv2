@@ -252,7 +252,7 @@ return array(
     'action' => '操作',
     'method' => '方式',
     'referral_name' => '推薦人姓名',
-    'downline_name' => '姓名',
+    'downline_name' => '下綫姓名',
 //navigation
     'showing' => '顯示',
     'of' => '共',
@@ -350,6 +350,7 @@ return array(
 'type' => '类型',
 'type_deposit' => '託管',
 
+'leader' => '領導',
 'first_leader' => '第一任領導人',
 'top_leader' => '最高領導人',
 'leader_status' => '設置領導',
@@ -387,6 +388,8 @@ return array(
     'commission_amount' => '佣金金額',
     'bonus' => '獎金 (%)',
     'bonus_amount' => '獎金金額',
+    'approve_claim' => '績效獎金審批成功',
+    'reject_claim' => '績效獎金已被拒絕',
 )
 ?>
 

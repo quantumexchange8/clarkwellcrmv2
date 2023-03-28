@@ -90,7 +90,7 @@ class WithdrawalController extends Controller
             'records' => Withdrawals::get_record($search)->paginate(10),
             'search' =>  $search,
             'brokers' => Brokers::all(),
-            'get_status_sel' => ['' => trans('public.select_status')] + [1 => 'Processing', 2 => 'Approved', 3 => 'Rejected'],
+            'get_status_sel' => ['' => trans('public.select_status')] + [1 => trans('public.process'), 2 => trans('public.approved'), 3 => trans('public.rejected')],
         ]);
     }
 
@@ -136,7 +136,7 @@ class WithdrawalController extends Controller
             'search' =>  $search,
             'users' => $users,
             'brokers' => Brokers::all(),
-            'get_status_sel' => ['' => trans('public.select_status')] + [1 => 'Processing', 2 => 'Approved', 3 => 'Rejected'],
+            'get_status_sel' => ['' => trans('public.select_status')] + [1 => trans('public.process'), 2 => trans('public.approved'), 3 => trans('public.rejected')],
         ]);
     }
 

@@ -55,7 +55,7 @@ class PerformanceBonusController extends Controller
 
         $approval = $request->input('status');
         $performance_bonus = PerformanceBonus::find($id);
-        $user = $performance_bonus->downline;
+        $user = $performance_bonus->upline;
 
         if ($performance_bonus->is_claimed != 'pending') {
             Alert::error(trans('public.invalid_action'), trans('public.invalid_status'));
@@ -69,16 +69,19 @@ class PerformanceBonusController extends Controller
                 ]);
                 $user->wallet_balance  = $user->wallet_balance + $performance_bonus->bonus_amount;
                 $user->save();
+
+                Alert::success(trans('public.done'), trans('public.approve_claim'));
                 break;
 
             case 'reject':
                 $performance_bonus->update([
                     'is_claimed' => 'rejected',
                 ]);
+
+                Alert::success(trans('public.done'), trans('public.reject_claim'));
                 break;
         }
 
-        Alert::success(trans('public.done'), trans('public.successfully_claim'));
         return back();
     }
 }

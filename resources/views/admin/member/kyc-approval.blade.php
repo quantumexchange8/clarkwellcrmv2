@@ -149,8 +149,8 @@
                             </button>
                             <!-- Main modal -->
                             <div id="defaultModal-{{$record->id}}" tabindex="-1" aria-hidden="true"
-                                 class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
-                                <div class="relative w-full h-full max-w-7xl md:h-auto">
+                                 class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-auto">
+                                <div class="relative w-full h-2/3 max-w-4xl md:h-auto">
                                     <!-- Modal content -->
                                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                         <!-- Modal header -->
@@ -177,11 +177,13 @@
                                                 <div class="grid grid-cols-2 gap-4">
                                                     <div class="flex justify-center item-center">
                                                         <img
+                                                            class="h-full my-auto"
                                                             src="{{ asset('uploads/users/' .$record->front_id_image)}}"
                                                             alt="">
                                                     </div>
                                                     <div class="flex justify-center item-center">
                                                         <img
+                                                            class="h-full justify-center my-auto"
                                                             src="{{ asset('uploads/users/' .$record->back_id_image)}}"
                                                             alt="">
                                                     </div>
