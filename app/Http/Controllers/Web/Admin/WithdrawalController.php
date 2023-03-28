@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Admin;
 use App\Exports\ExportWithdrawal;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreWithdrawalRequest;
+use App\Imports\WithdrawalImport;
 use App\Models\Brokers;
 use App\Models\User;
 use App\Models\Withdrawals;
@@ -30,12 +31,23 @@ class WithdrawalController extends Controller
             Alert::error(trans('public.invalid_action'), trans('public.try_again'));
             return back()->withErrors(["error" => "Only pending status can perform approval action."]);
         } else if ($approval == 'approve' && ($withdrawal->amount + $withdrawal->transaction_fee) > $user->wallet_balance) {
-            Alert::error(trans('public.invalid_action'), trans('public.try_again'));
+            Alert::error(trans('public.invalid_action'), trans('public.insufficient_amount'));
             return back()->withErrors(["error" => "User's wallet balance insufficient to approve."]);
         }
+        switch ($request->input('status')) {
+            case 'approve':
+                $withdrawal->update([
+                    'status' => Withdrawals::STATUS_APPROVED,
+                ]);
+                break;
 
-        $withdrawal->status = Withdrawals::STATUS_APPROVED;
-        $withdrawal->save();
+            case 'reject':
+                $withdrawal->update([
+                    'status' => Withdrawals::STATUS_REJECTED,
+                ]);
+                break;
+        }
+
         if ($withdrawal->status == Withdrawals::STATUS_APPROVED) {
 
             $user->wallet_balance  = $user->wallet_balance - $withdrawal->amount - $withdrawal->transaction_fee;
@@ -155,5 +167,41 @@ class WithdrawalController extends Controller
         Alert::success(trans('public.done'), trans('public.successfully_updated_withdrawal_status'));
         return redirect()->back();
 
+    }
+
+    public function store(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $submit_type = $request->input('submit');
+
+            switch ($submit_type) {
+                case 'import':
+                    $request->validate(
+                        [
+                            'file' => 'required|mimes:xlsx, csv, xls',
+                        ], [
+                            'file.required' => trans('public.file_required'),
+                            'file.mimes' => trans('public.file_mimes'),
+                        ]
+                    );
+                    $import = new WithdrawalImport();
+                    $import->import($request->file('file'));
+                    $errorMsg = [];
+                    if (count($import->failures()) > 0) {
+                        foreach ($import->failures() as $failure) {
+                            $tempMsg = trans('public.import_error') . ' ' . $failure->row() . '. ' . $failure->errors()[0];
+                            array_push($errorMsg, $tempMsg);
+                        }
+                        return back()->withErrors($errorMsg);
+                    }
+                    break;
+                case 'download':
+                    $filePath = public_path('ClarkWell_Withdrawal_Import_Template.xlsx');
+                    return response()->download($filePath);
+            }
+        }
+
+        Alert::success(trans('public.done'), trans('public.import_success'));
+        return redirect()->back();
     }
 }

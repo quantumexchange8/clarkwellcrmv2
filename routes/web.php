@@ -123,6 +123,7 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
             });
             Route::controller('WithdrawalController')->group(function () {
                 Route::post('/approval-withdrawal/{id}', 'approval');
+                Route::post('/import-withdrawal', 'store')->name('import_withdrawal');
             });
 
             Route::controller('BrokersController')->prefix('broker')->group(function () {
