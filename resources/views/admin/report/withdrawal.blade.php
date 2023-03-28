@@ -3,6 +3,17 @@
 @section('title') Report-Withdrawal @endsection
 
 @section('contents')
+    @if($errors->any())
+        @foreach($errors->all() as $key => $error)
+            <div class="flex p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
+                <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                <span class="sr-only">@lang('public.error_icon')</span>
+                <div>
+                    <span class="font-medium">{{ $error }}</span>
+                </div>
+            </div>
+        @endforeach
+    @endif
     <h1 class="font-semibold text-2xl text-gray-500">@lang('public.reports') / @lang('public.withdrawals') </h1>
 
     <!-- component -->
@@ -168,52 +179,52 @@
     @endif
 
     <!-- Import Modal -->
-{{--    <div id="importModal" tabindex="-1" aria-hidden="true"--}}
-{{--         class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">--}}
-{{--        <div class="relative w-full h-full max-w-md md:h-auto">--}}
-{{--            <!-- Modal content -->--}}
+    <div id="importModal" tabindex="-1" aria-hidden="true"
+         class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+        <div class="relative w-full h-full max-w-md md:h-auto">
+            <!-- Modal content -->
 
-{{--            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">--}}
-{{--                <button type="button"--}}
-{{--                        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-md p-4 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"--}}
-{{--                        data-modal-hide="importModal">--}}
-{{--                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"--}}
-{{--                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                        <path fill-rule="evenodd"--}}
-{{--                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"--}}
-{{--                              clip-rule="evenodd"></path>--}}
-{{--                    </svg>--}}
-{{--                    <span class="sr-only">@lang('public.close_modal')</span>--}}
-{{--                </button>--}}
-{{--                <div class="px-6 py-6 lg:px-8">--}}
-{{--                    <form method="post" action="{{ route('import_withdrawal') }}" enctype="multipart/form-data">@csrf--}}
-{{--                        <h3 class="mb-4 text-xl font-semibold inline-block text-orange-500 dark:text-white">@lang('public.import_withdrawals')</h3>--}}
-{{--                        <span class="pl-2 inline-flex pt-2 text-black text-lg font-bold">--}}
-{{--                            <button type="submit" name="submit" value="download" class="text-xs text-blue-600 dark:text-blue-500 underline ">@lang('public.download_template')</button>--}}
-{{--                    </span>--}}
-{{--                        <div class="mb-4 mt-4">--}}
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <button type="button"
+                        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-md p-4 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                        data-modal-hide="importModal">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="sr-only">@lang('public.close_modal')</span>
+                </button>
+                <div class="px-6 py-6 lg:px-8">
+                    <form method="post" action="{{ route('import_withdrawal') }}" enctype="multipart/form-data">@csrf
+                        <h3 class="mb-4 text-xl font-semibold inline-block text-orange-500 dark:text-white">@lang('public.import_withdrawals')</h3>
+                        <span class="pl-2 inline-flex pt-2 text-black text-lg font-bold">
+                            <button type="submit" name="submit" value="download" class="text-xs text-blue-600 dark:text-blue-500 underline ">@lang('public.download_template')</button>
+                    </span>
+                        <div class="mb-4 mt-4">
 
-{{--                            <div class="flex items-center mb-4 justify-center w-full">--}}
-{{--                                <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">--}}
-{{--                                    <div id="content" class="flex flex-col items-center justify-center pt-5 pb-6">--}}
-{{--                                        <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>--}}
-{{--                                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">@lang('public.click_upload')</span> @lang('public.or_drap_drop')</p>--}}
-{{--                                        <p class="text-xs text-gray-500 dark:text-gray-400">@lang('public.excel_mime_type')</p>--}}
-{{--                                    </div>--}}
-{{--                                    <input id="dropzone-file" name="file" type="file"  accept=".xlsx, .csv, .xls" class="hidden" onchange="onchangeFileUpload()"/>--}}
-{{--                                </label>--}}
-{{--                            </div>--}}
+                            <div class="flex items-center mb-4 justify-center w-full">
+                                <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                    <div id="content" class="flex flex-col items-center justify-center pt-5 pb-6">
+                                        <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">@lang('public.click_upload')</span> @lang('public.or_drap_drop')</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">@lang('public.excel_mime_type')</p>
+                                    </div>
+                                    <input id="dropzone-file" name="file" type="file"  accept=".xlsx, .csv, .xls" class="hidden" onchange="onchangeFileUpload()"/>
+                                </label>
+                            </div>
 
-{{--                        </div>--}}
-{{--                        <div class="flex items-center  mb-4 justify-center w-full">--}}
-{{--                            <button type="submit" class="text-white bg-orange-400 hover:bg-orange-600 border border-orange-200 focus:ring-4 focus:outline-none focus:ring-blue-600 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" name="submit" value="import">Import</button>--}}
-{{--                        </div>--}}
+                        </div>
+                        <div class="flex items-center  mb-4 justify-center w-full">
+                            <button type="submit" class="text-white bg-orange-400 hover:bg-orange-600 border border-orange-200 focus:ring-4 focus:outline-none focus:ring-blue-600 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" name="submit" value="import">Import</button>
+                        </div>
 
-{{--                    </form>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 @endsection

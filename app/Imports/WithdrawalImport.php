@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Deposits;
+use App\Models\Settings;
 use App\Models\User;
 use App\Models\Withdrawals;
 use Carbon\Carbon;
@@ -32,33 +33,43 @@ class WithdrawalImport implements ToCollection, WithHeadingRow, withValidation, 
      */
     public function collection(Collection $rows)
     {
-        dd($rows);
         foreach ($rows as $key=>$row) {
 
             $user = User::where('email', $row['email'])->first();
-            $transactionDate = Carbon::instance(Date::excelToDateTimeObject($row['transaction_date']))->format('Y-m-d H:i:s');
             $perform_action = true;
-            $type = Deposits::TYPE_DEPOSIT;
+            $msg = null;
 
-            if ($row['type'] == Deposits::TYPE_WITHDRAW) {
-                $capital_available_in_broker = $user->withdrawalAmountValidationByBrokers($this->brokerId)->first();
-                $capital_available_in_broker = $capital_available_in_broker->amount ?? 0;
-                $type = Deposits::TYPE_WITHDRAW;
-                if ($row['amount'] > $capital_available_in_broker) {
-                    $perform_action = false;
-                    $failures[] = new Failure($key+2, 'amount', [trans('public.invalid_action') . ', ' . trans('public.insufficient_amount')], $row->toArray());
-                    $this->failures = array_merge($this->failures, $failures);
-                }
+
+            $settings = Settings::getKeyValue();
+            $amount = round( $row['amount'], 2);
+            $fee = $settings['withdrawal_transaction_fee'];
+
+            if ($amount - $fee <= 0)
+            {
+                $perform_action = false;
+                $msg = [trans('public.invalid_action') . ', ' . trans('public.unnecessary_withdraw')];
+            } elseif ($row['status'] == Withdrawals::STATUS_APPROVED && $amount > $user->wallet_balance) {
+                $perform_action = false;
+                $msg = [trans('public.invalid_action') . ', ' . trans('public.insufficient_amount')];
             }
+
             if ($perform_action) {
-                Withdrawals::create([
-                    'network' => $request->network,
-                    'amount' => $amount,
-                    'address' => $request->address,
+                $withdrawal = Withdrawals::create([
+                    'network' => $row['network'],
+                    'amount' => round($amount - $fee, 2),
+                    'address' => $row['address'],
                     'transaction_fee' => $fee,
-                    'status' => Withdrawals::STATUS_PENDING,
+                    'status' => $row['status'],
                     'requested_by_user' => $user->id,
                 ]);
+                if ($withdrawal->status == Withdrawals::STATUS_APPROVED) {
+
+                    $user->wallet_balance  = $user->wallet_balance - $withdrawal->amount - $withdrawal->transaction_fee;
+                    $user->save();
+                }
+            } else {
+                $failures[] = new Failure($key+2, 'amount', $msg , $row->toArray());
+                $this->failures = array_merge($this->failures, $failures);
             }
         }
     }
@@ -69,8 +80,10 @@ class WithdrawalImport implements ToCollection, WithHeadingRow, withValidation, 
 
         return [
             'email' => 'required|email|exists:users,email',
-            'network' =>  ['required', Rule::in([Deposits::TYPE_DEPOSIT, Deposits::TYPE_WITHDRAW])],
+            'address' => 'required',
+            'network' =>  ['required', Rule::in([Withdrawals::TRC20, Withdrawals::ERC20, Withdrawals::BEP20])],
             'amount' => ['required', 'numeric',],
+            'status' =>  ['required', Rule::in([Withdrawals::STATUS_PENDING, Withdrawals::STATUS_APPROVED, Withdrawals::STATUS_REJECTED])],
         ];
     }
 
