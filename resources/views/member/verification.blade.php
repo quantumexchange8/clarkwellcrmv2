@@ -48,18 +48,18 @@
                     @if($user->front_id_image)
                         <div class="flex justify-center item-center">
                             <img
-                                class="object-cover w-full rounded-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-lg mb-4"
+                                class="object-cover w-full rounded-lg h-96 md:h-auto md:w-64 md:rounded-none md:rounded-lg mb-4"
                                 src="{{ asset('uploads/users/'.$user->front_id_image)}}" alt="">
                         </div>
                     @endif
                     <div class="flex items-center justify-center w-full">
                         <label for="dropzone-front" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6" id="content-front">
                                 <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
                                 <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">@lang('public.click_upload')</span> @lang('public.or_drap_drop')</p>
                                 <p class="text-xs text-gray-500 dark:text-gray-400">@lang('public.id_req')</p>
                             </div>
-                            <input id="dropzone-front" type="file" name="front_id_image" class="hidden" />
+                            <input id="dropzone-front" type="file" name="front_id_image" class="hidden" onchange="onchangeFrontUpload()"/>
                         </label>
                     </div>
                 </div>
@@ -68,18 +68,18 @@
                     @if($user->back_id_image)
                         <div class="flex justify-center item-center">
                             <img
-                                class="object-cover w-full rounded-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-lg mb-4"
+                                class="object-cover w-full rounded-lg h-96 md:h-auto md:w-64 md:rounded-none md:rounded-lg mb-4"
                                 src="{{ asset('uploads/users/' .$user->back_id_image)}}" alt="">
                         </div>
                     @endif
                     <div class="flex items-center justify-center w-full">
                         <label for="dropzone-back" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6" id="content-back">
                                 <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
                                 <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">@lang('public.click_upload')</span> @lang('public.or_drap_drop')</p>
                                 <p class="text-xs text-gray-500 dark:text-gray-400">@lang('public.id_req')</p>
                             </div>
-                            <input id="dropzone-back" type="file" name="back_id_image" class="hidden" />
+                            <input id="dropzone-back" type="file" name="back_id_image" class="hidden" onchange="onchangeBackUpload()"/>
                         </label>
                     </div>
                 </div>
@@ -98,4 +98,29 @@
         </form>
     </div>
 
+@endsection
+
+@section('script')
+
+    <script>
+        function onchangeFrontUpload(){
+            document.getElementById("content-front").innerHTML =
+                `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 019 9v.375M10.125 2.25A3.375 3.375 0 0113.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 013.375 3.375M9 15l2.25 2.25L15 12" />
+</svg>
+                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">@lang('public.file_uploaded')</p>
+                `
+        }
+
+        function onchangeBackUpload(){
+            document.getElementById("content-back").innerHTML =
+                `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 019 9v.375M10.125 2.25A3.375 3.375 0 0113.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 013.375 3.375M9 15l2.25 2.25L15 12" />
+</svg>
+                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">@lang('public.file_uploaded')</p>
+                `
+        }
+
+
+    </script>
 @endsection
