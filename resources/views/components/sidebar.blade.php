@@ -85,10 +85,15 @@
                     <span class="flex-1 ml-3 text-left whitespace-nowrap {{ request()->is('member/withdrawals') ? 'font-semibold text-lg text-orange-400' : 'font-semibold text-lg text-gray-500'}}" sidebar-toggle-item>@lang('public.wallet')</span>
                     <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                 </button>
-                <ul id="dropdown-wallet" class="{{ request()->is('member/withdrawals') ? '' : 'hidden' }} py-2 space-y-2 font-semibold">
+                <ul id="dropdown-wallet" class="{{ request()->is('member/withdrawals') || request()->is('member/performance_bonus') ? '' : 'hidden' }} py-2 space-y-2 font-semibold">
                     <li>
                         <a href="{{ url('member/withdrawals') }}" class="{{ request()->is('member/withdrawals') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.withdrawals')</a>
                     </li>
+                    @if(auth()->user()->rank->position >= 5)
+                        <li>
+                            <a href="{{ url('member/performance_bonus') }}" class="{{ request()->is('member/performance_bonus') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.performance_bonus')</a>
+                        </li>
+                    @endif
                 </ul>
             </li>
         </ul>

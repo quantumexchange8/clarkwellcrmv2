@@ -1,6 +1,6 @@
 @extends('layouts.master-admin')
 
-@section('title') Member Listing @endsection
+@section('title') {{ $title }} @endsection
 
 @section('contents')
     <h1 class="font-semibold text-2xl text-gray-500">@lang('public.reports') / @lang('public.performance_bonus')</h1>

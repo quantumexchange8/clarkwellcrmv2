@@ -40,7 +40,7 @@ class PerformanceBonusController extends Controller
         $search = session('admin_performance_bonus_search') ? session('admin_performance_bonus_search') : $search;
 
         return view('admin.report.performance_bonus', [
-            'title' => 'Performance Deposit',
+            'title' => 'Performance Bonus',
             'submit' => route('performance_bonus_listing'),
             'records' => PerformanceBonus::get_report_record($search)->paginate(10),
             'search' =>  $search,

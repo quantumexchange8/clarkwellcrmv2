@@ -77,6 +77,9 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
                 Route::match(['get', 'post'], '/withdrawals', 'index')->name('withdrawals_listing');
                 Route::post('/store-withdrawal', 'store');
             });
+            Route::controller('PerformanceBonusController')->group(function () {
+                Route::match(['get', 'post'], '/performance_bonus', 'listing')->name('member_performance_bonus');
+            });
         });
 
         Route::middleware('role.check:Admin')->prefix('admin')->namespace('Admin')->group(function () {

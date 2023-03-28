@@ -54,6 +54,30 @@ class PerformanceBonus extends Model
         return $query->orderbyDesc('created_at');
     }
 
+    public static function get_record($search, $user_id)
+    {
+        $query = PerformanceBonus::sortable()->where('downline_id', $user_id);
+
+        $search_text = @$search['freetext'] ?? NULL;
+        $freetext = explode(' ', $search_text);
+
+        if($search_text){
+            foreach($freetext as $freetexts) {
+                $query->whereHas('upline', function ($q) use ($freetexts) {
+                    $q->where('name', 'like', '%' . $freetexts . '%');
+                });
+            }
+        }
+
+        if (@$search['created_start'] && @$search['created_end']) {
+            $start_date = Carbon::parse(@$search['created_start'])->startOfDay()->format('Y-m-d H:i:s');
+            $end_date = Carbon::parse(@$search['created_end'])->endOfDay()->format('Y-m-d H:i:s');
+            $query->whereBetween('created_at', [$start_date, $end_date]);
+        }
+
+        return $query->orderbyDesc('created_at');
+    }
+
     public function downline()
     {
         return $this->belongsTo(User::class, 'downline_id', 'id');
