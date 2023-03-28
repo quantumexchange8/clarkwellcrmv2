@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
+use App\Exports\ExportPerformanceBonus;
 use App\Http\Controllers\Controller;
 use App\Models\PerformanceBonus;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Alert;
-
+use Maatwebsite\Excel\Facades\Excel;
 class PerformanceBonusController extends Controller
 {
     public function performance_bonus_listing(Request $request)
@@ -28,7 +29,7 @@ class PerformanceBonusController extends Controller
                     break;
                 case 'export':
                     $now = Carbon::now()->format('YmdHis');
-                    return Excel::download(new ExportDeposits( Deposits::get_report_record(session('admin_deposits_search'))), $now . '-deposits-records.xlsx');
+                    return Excel::download(new ExportPerformanceBonus( PerformanceBonus::get_report_record(session('admin_performance_bonus_search'))), $now . '-performance-bonus-records.xlsx');
 
                 case 'reset':
                     session()->forget('admin_performance_bonus_search');
