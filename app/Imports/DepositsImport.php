@@ -81,6 +81,17 @@ class DepositsImport implements ToCollection, WithHeadingRow, withValidation, Sk
         ];
     }
 
+    public function customValidationAttributes(): array
+    {
+        return [
+            'email' => trans('public.email'),
+            'transaction_date' => trans('public.transaction_date'),
+            'type' => trans('public.method'),
+            'amount' => trans('public.amount'),
+        ];
+    }
+
+
     public function customValidationMessages()
     {
         return [

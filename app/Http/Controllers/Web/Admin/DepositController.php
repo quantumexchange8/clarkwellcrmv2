@@ -43,7 +43,7 @@ class DepositController extends Controller
                     $errorMsg = [];
                     if (count($import->failures()) > 0) {
                         foreach ($import->failures() as $failure) {
-                            $tempMsg = trans('public.import_error') . ' ' . $failure->row() . '. ' . $failure->errors()[0];
+                            $tempMsg = trans('public.import_error', ['row' => $failure->row()]) . $failure->errors()[0];
                             array_push($errorMsg, $tempMsg);
                         }
                         return back()->withErrors($errorMsg);

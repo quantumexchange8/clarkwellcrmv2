@@ -87,6 +87,17 @@ class WithdrawalImport implements ToCollection, WithHeadingRow, withValidation, 
         ];
     }
 
+    public function customValidationAttributes(): array
+    {
+        return [
+            'email' => trans('public.email'),
+            'address' => trans('public.address'),
+            'network' => trans('public.method'),
+            'amount' => trans('public.amount'),
+            'status' => trans('public.status'),
+        ];
+    }
+
     public function customValidationMessages()
     {
         return [

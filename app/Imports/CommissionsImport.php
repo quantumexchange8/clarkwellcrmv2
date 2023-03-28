@@ -62,6 +62,15 @@ class CommissionsImport implements ToCollection, WithHeadingRow, withValidation,
         ];
     }
 
+    public function customValidationAttributes(): array
+    {
+        return [
+            'email' => trans('public.email'),
+            'transaction_date' => trans('public.transaction_date'),
+            'lot_size' => trans('public.lot_size'),
+        ];
+    }
+
     public function customValidationMessages()
     {
         return [

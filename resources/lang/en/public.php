@@ -340,7 +340,7 @@ return array(
     'file_required' => 'Please UPLOAD a file to import',
     'file_mimes' => 'File extension must be .xlsx, .csv, .xls',
     'broker_id' => 'The Broker selection is invalid',
-    'import_error' => 'Error on row ',
+    'import_error' => 'Error on row :row.',
     'transaction_date_required' => 'The transaction date field is required.',
     'transaction_date_regex' => 'The transaction date field format is invalid.',
     'lot_size_required' => 'The lot size field is required.',
