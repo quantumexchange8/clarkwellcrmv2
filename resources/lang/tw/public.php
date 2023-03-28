@@ -376,6 +376,16 @@ return array(
     'personal_weekly_deposit' => '個人每週託管總計',
     'unnecessary_withdraw' => '最終提款金額將等於或小於 0',
     'withdrawal_pending_request' => '每次只允許一個提款請求，請等待上一個請求的批准',
+
+    //performance bonus
+    'performance_bonus' => '績效獎金',
+    'pending' => '待辦',
+    'downline_rank' => '下線排名',
+    'upline_name' => '上線姓名',
+    'upline_rank' => '上線排名',
+    'commission_amount' => '佣金金額',
+    'bonus' => '獎金 (%)',
+    'bonus_amount' => '獎金金額',
 )
 ?>
 

@@ -376,6 +376,16 @@ return array(
     'personal_weekly_deposit' => '个人每周托管总计',
     'unnecessary_withdraw' => '最终提款金额将等于或小于 0',
     'withdrawal_pending_request' => '每次只允许一个提款请求，请等待上一个请求的批准',
+
+    //performance bonus
+    'performance_bonus' => '绩效奖金',
+    'pending' => '待办',
+    'downline_rank' => '下线排名',
+    'upline_name' => '上线姓名',
+    'upline_rank' => '上线排名',
+    'commission_amount' => '佣金金额',
+    'bonus' => '奖金 (%)',
+    'bonus_amount' => '奖金金额',
 )
 ?>
 

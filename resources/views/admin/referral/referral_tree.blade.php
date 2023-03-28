@@ -185,7 +185,7 @@
             var bgColor = ["#FBECDB", "#F3CBBD", "#E6D1D2", "#DAD5D6", "#CCD4BF", "#B6D8F2", "#F4CFDF", "#D2D4EC", "#E4D9FF", "#F3D1FF", "#FFE6FF", "#FFE9E6", "#FFF0F5", "#F6F1D1", "#FDF0D5", "#E4F4B2", "#C4E4D9", "#B1C7D9", "#C3B8E9", "#F7DDE9", "#FFDEE1", "#FFF4E6", "#FFF8DC", "#C5E5E9", "#BEE9E2", "#FFECF5", "#FCEFF9", "#FFE3E3", "#F5C3C2", "#FFC5B5", "#FFE08C", "#F8E09C", "#BEEB9F", "#9ED2D6", "#D2A5D5", "#E1B1A7", "#FFC6A9", "#FFA69E", "#ECD5E3", "#D4E6F1", "#A9D0F5", "#C6B1E6", "#F2C2CD", "#F4B3B2", "#F4CD9B", "#E3D3B3", "#D3E2C3", "#C9E4F5", "#AACCEA", "#B6A1E6", "#D2A8FF", "#A9B4FF", "#D4A8E8", "#D2C4A4", "#BFD4BF", "#A9D4D4"]
 
             $("#parentContainer #parentColor-{{ @$count }}").each(function(i) {
-                $(this).css('background', color[{{$count - 1}}]);
+                $(this).css('background', color[{{ @$count - 1}}]);
             });
 
             $("#parentContainer #bgColor-{{ @$count }}").each(function(i) {

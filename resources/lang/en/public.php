@@ -377,5 +377,15 @@ return array(
     'personal_weekly_deposit' => 'Personal Weekly Deposit',
     'unnecessary_withdraw' => 'Final withdraw amount will be equal or less than 0.',
     'withdrawal_pending_request' => 'Only one withdrawal requests allow each time, kindly wait for approval for previous request.',
+
+    //performance bonus
+    'performance_bonus' => 'Performance Bonus',
+    'pending' => 'Pending',
+    'downline_rank' => 'Downline Rank',
+    'upline_name' => 'Upline Name',
+    'upline_rank' => 'Upline Rank',
+    'commission_amount' => 'Commission Amount',
+    'bonus' => 'Bonus (%)',
+    'bonus_amount' => 'Bonus Amount',
 )
 ?>
