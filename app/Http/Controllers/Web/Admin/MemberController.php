@@ -39,6 +39,7 @@ class MemberController extends Controller
                         'freetext' =>  $request->input('freetext'),
                         'created_start' => $request->input('created_start'),
                         'created_end' => $request->input('created_end'),
+                        'status' => $request->input('status'),
                     ]]);
                     break;
                 case 'export':
@@ -57,6 +58,7 @@ class MemberController extends Controller
             'submit' => route('member_listing'),
             'records' => User::get_record($search)->paginate(10),
             'search' =>  $search,
+            'get_status_sel' => [ 'members' => 'Members', 'leaders' => 'Leaders' ],
         ]);
     }
 

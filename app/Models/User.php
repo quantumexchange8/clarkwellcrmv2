@@ -128,11 +128,25 @@ class User extends Authenticatable implements JWTSubject
         $freetext = explode(' ', $search_text);
 
         if($search_text){
+            $query2 = clone $query;
             foreach($freetext as $freetexts) {
-                $query->where(function ($q) use ($freetexts) {
+                $query2->where(function ($q) use ($freetexts) {
                     $q->where('email', 'like', '%' . $freetexts . '%')
                         ->orWhere('name', 'like', '%' . $freetexts . '%');
                 });
+            }
+            if (@$search['status'] && @$search['status'] =='leaders') {
+                $query2->where('leader_status', true);
+
+                $leaders = $query2->pluck('id')->toArray();
+
+                $query->where(function ($q) use ($leaders) {
+                    foreach($leaders as $leader) {
+                        $q->where('hierarchyList', 'like', '%-' . $leader . '-%');
+                    }
+                });
+            } else {
+                $query = $query2;
             }
         }
         if ($kyc) {
