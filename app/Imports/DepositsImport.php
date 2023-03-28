@@ -6,8 +6,10 @@ use App\Models\Brokers;
 use App\Models\Deposits;
 use App\Models\User;
 use Carbon\Carbon;
+use Closure;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
@@ -39,24 +41,43 @@ class DepositsImport implements ToCollection, WithHeadingRow, withValidation, Sk
     public function collection(Collection $rows)
     {
         foreach ($rows as $key=>$row) {
+
             $user = User::where('email', $row['email'])->first();
             $transactionDate = Carbon::instance(Date::excelToDateTimeObject($row['transaction_date']))->format('Y-m-d H:i:s');
+            $perform_action = true;
+            $type = Deposits::TYPE_DEPOSIT;
+
+            if ($row['type'] == Deposits::TYPE_WITHDRAW) {
+                $capital_available_in_broker = $user->withdrawalAmountValidationByBrokers($this->brokerId)->first();
+                $capital_available_in_broker = $capital_available_in_broker->amount ?? 0;
+                $type = Deposits::TYPE_WITHDRAW;
+                if ($row['amount'] > $capital_available_in_broker) {
+                    $perform_action = false;
+                    $failures[] = new Failure($key+2, 'amount', [trans('public.invalid_action') . ', ' . trans('public.insufficient_amount')], $row->toArray());
+                    $this->failures = array_merge($this->failures, $failures);
+                }
+            }
+            if ($perform_action) {
                 Deposits::create([
                     'amount' => round($row['amount'], 2),
                     'transaction_at' => $transactionDate,
                     'userId' => $user->id,
-                    'brokersId' =>  $this->brokerId
+                    'brokersId' =>  $this->brokerId,
+                    'type' => $type,
                 ]);
+            }
         }
     }
 
 
     public function rules(): array
     {
+
         return [
             'email' => 'required|email|exists:users,email',
             'transaction_date' => 'required|regex:/[0-9]+[.]?[0-9]*/|',
-            'amount' => 'required|numeric',
+            'type' =>  ['required', Rule::in([Deposits::TYPE_DEPOSIT, Deposits::TYPE_WITHDRAW])],
+            'amount' => ['required', 'numeric',],
         ];
     }
 
