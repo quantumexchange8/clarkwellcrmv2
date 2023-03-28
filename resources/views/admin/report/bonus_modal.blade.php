@@ -18,7 +18,7 @@
                                     <!-- Image + name -->
                                     <header>
                                         <div class="flex mb-2">
-                                            <a class="relative inline-flex items-start mr-5" target="_blank" href="#">
+                                            <a class="relative inline-flex items-start mr-5" target="_blank" href="{{ route('member_details', @$record->downline->id) }}">
                                                 <div class="relative inline-flex items-center justify-center w-20 h-20 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600">
                                                     @if (@$record->downline->profile_image)
                                                         <img src="{{ asset('uploads/users/' .@$record->downline->profile_image)}}" id="profile_pic_preview" class="relative inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
@@ -26,15 +26,15 @@
                                                         <img src="{{url('/img/profile.png')}}" id="profile_pic_preview" class="relative inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
                                                     @endif
                                                 </div>
+                                                <div class="mt-4 ml-2 pr-1">
+                                                    <div class="inline-flex text-gray-800 hover:text-gray-900">
+                                                        <h2 class="text-2xl leading-snug flex inline-flex justify-center items-center font-semibold">{{ $record->downline->name }}
+                                                            <span class="bg-gray-200 text-gray-800 text-sm font-semibold mx-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">@lang('public.'. $record->downline->rank->rank_short_form )</span>
+                                                        </h2>
+                                                    </div>
+                                                    <p class="font-medium text-xl text-gray-500 dark:text-gray-400 ">{{ $record->downline->email }}</p>
+                                                </div>
                                             </a>
-                                            <div class="mt-4 pr-1">
-                                                <a class="inline-flex text-gray-800 hover:text-gray-900" href="#">
-                                                    <h2 class="text-2xl leading-snug flex inline-flex justify-center items-center font-semibold">{{ $record->downline->name }}
-                                                        <span class="bg-gray-200 text-gray-800 text-sm font-semibold mx-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">@lang('public.'. $record->downline->rank->rank_short_form )</span>
-                                                    </h2>
-                                                </a>
-                                                <p class="font-medium text-xl text-gray-500 dark:text-gray-400 ">{{ $record->downline->email }}</p>
-                                            </div>
                                         </div>
                                     </header>
                                 </div>

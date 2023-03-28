@@ -26,13 +26,13 @@
                                                         <img src="{{url('/img/profile.png')}}" id="profile_pic_preview" class="relative inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl object-contain">
                                                     @endif
                                                 </div>
+                                                <div class="mt-4 ml-2 pr-1">
+                                                    <div class="inline-flex text-gray-800 hover:text-gray-900">
+                                                        <h2 class="text-xl leading-snug justify-center font-semibold">{{ $record->user->name }}</h2>
+                                                    </div>
+                                                    <p class="font-medium text-gray-500 dark:text-gray-400 ">{{ $record->user->email }}</p>
+                                                </div>
                                             </a>
-                                            <div class="mt-4 pr-1">
-                                                <a class="inline-flex text-gray-800 hover:text-gray-900" href="#">
-                                                    <h2 class="text-xl leading-snug justify-center font-semibold">{{ $record->user->name }}</h2>
-                                                </a>
-                                                <p class="font-medium text-gray-500 dark:text-gray-400 ">{{ $record->user->email }}</p>
-                                            </div>
                                         </div>
                                     </header>
                                 </div>

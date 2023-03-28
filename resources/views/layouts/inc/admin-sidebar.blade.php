@@ -21,6 +21,9 @@
                 </a>
             </li>
             <li>
+                @php
+                    $kyc_approval_count = \App\Models\User::where('kyc_approval_status', 2)->count();
+                @endphp
                 <button type="button" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-members" data-collapse-toggle="dropdown-members">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 {{ request()->is('admin/member/*') ? 'text-orange-400' : 'text-gray-500'}}">
                         <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
@@ -36,11 +39,19 @@
                         <a href="{{ route('member_listing') }}" class="{{ request()->is('admin/member/listing') || request()->is('admin/member/details/*') || request()->is('admin/member/edit/*') || request()->is('admin/member/deposit/*') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 text-base font-semibold transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.members_list')</a>
                     </li>
                     <li>
-                        <a href="{{ route('member_kyc_listing') }}" class="{{ request()->is('admin/member/kyc-listing') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 text-base font-semibold transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.kyc_approval')</a>
+                        <a href="{{ route('member_kyc_listing') }}" class="{{ request()->is('admin/member/kyc-listing') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 text-base font-semibold transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">
+                            @lang('public.kyc_approval')
+                            @if($kyc_approval_count > 0)
+                                <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-yellow-200 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ $kyc_approval_count }}</span>
+                            @endif
+                        </a>
                     </li>
                 </ul>
             </li>
             <li>
+                @php
+                    $withdrawal_count = \App\Models\Withdrawals::where('status', 1)->count();
+                @endphp
                 <button type="button" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-report" data-collapse-toggle="dropdown-report">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 {{ request()->is('admin/report/*') ? 'text-orange-400' : 'text-gray-500'}}">
                         <path fill-rule="evenodd" d="M5.625 1.5H9a3.75 3.75 0 013.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 013.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 01-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875zM9.75 17.25a.75.75 0 00-1.5 0V18a.75.75 0 001.5 0v-.75zm2.25-3a.75.75 0 01.75.75v3a.75.75 0 01-1.5 0v-3a.75.75 0 01.75-.75zm3.75-1.5a.75.75 0 00-1.5 0V18a.75.75 0 001.5 0v-5.25z" clip-rule="evenodd" />
@@ -80,15 +91,29 @@
                     </li>
                     <li>
                         <button type="button" class="flex items-center w-full p-2 transition duration-75 rounded-lg pl-8 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500" aria-controls="dropdown-withdrawals" data-collapse-toggle="dropdown-withdrawals-child">
-                            <span class="flex-1 ml-3 text-left whitespace-nowrap text-sm {{ request()->is('admin/report/withdrawals/*') ? 'font-semibold text-lg text-orange-400' : 'font-semibold text-lg text-gray-500'}}" sidebar-toggle-item>@lang('public.withdrawals')</span>
+                            <span class="flex-1 ml-3 text-left whitespace-nowrap text-sm {{ request()->is('admin/report/withdrawals/*') ? 'font-semibold text-lg text-orange-400' : 'font-semibold text-lg text-gray-500'}}" sidebar-toggle-item>@lang('public.withdrawals')
+                                @if($kyc_approval_count > 0)
+                                    <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-yellow-200 rounded-full dark:bg-blue-900 dark:text-blue-300">!</span>
+                                @endif
+                            </span>
                             <svg sidebar-toggle-item class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                         </button>
                         <ul id="dropdown-withdrawals-child" class="{{ request()->is('admin/report/withdrawals/*') ? '' : 'hidden' }} py-2 space-y-2 ml-4">
                             <li>
-                                <a href="{{ route('report_withdrawal') }}" class="{{ request()->is('admin/report/withdrawals/listing') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-normal text-gray-500">@lang('public.listing')</a>
+                                <a href="{{ route('report_withdrawal') }}" class="{{ request()->is('admin/report/withdrawals/listing') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-normal text-gray-500">
+                                    @lang('public.listing')
+                                    @if($withdrawal_count > 0)
+                                        <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-yellow-200 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ $withdrawal_count }}</span>
+                                    @endif
+                                </a>
                             </li>
                             <li>
-                                <a href="{{ route('report_withdrawal_children') }}" class="{{ request()->is('admin/report/withdrawals/children') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 text-base font-semibold transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-normal text-gray-500">@lang('public.downline_listing')</a>
+                                <a href="{{ route('report_withdrawal_children') }}" class="{{ request()->is('admin/report/withdrawals/children') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 text-base font-semibold transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-normal text-gray-500">
+                                    @lang('public.downline_listing')
+                                    @if($withdrawal_count > 0)
+                                        <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-yellow-200 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ $withdrawal_count }}</span>
+                                    @endif
+                                </a>
                             </li>
                         </ul>
                     </li>
