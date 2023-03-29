@@ -147,13 +147,13 @@
                         <td class="p-4">
                             ${{number_format( $record->bonus_amount, 2)}}
                         </td>
-                        <td class="p-4">
+                        <td class="py-4 px-6">
                             @if($record->is_claimed == 'pending')
-                                <span class="bg-yellow-100 text-yellow-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300 uppercase">@lang('public.'.$record->is_claimed)</span>
+                                <span class="bg-yellow-100 flex items-center justify-center text-yellow-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300 uppercase">@lang('public.'.$record->is_claimed)</span>
                             @elseif($record->is_claimed == 'approved')
-                                <span class="bg-success-100 text-success-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-success-900 dark:text-success-300 uppercase">@lang('public.'.$record->is_claimed)</span>
+                                <span class="bg-success-100 flex items-center justify-center text-success-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-success-900 dark:text-success-300 uppercase">@lang('public.'.$record->is_claimed)</span>
                             @elseif($record->is_claimed == 'rejected')
-                                <span class="bg-danger-100 text-danger-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-danger-900 dark:text-danger-300 uppercase">@lang('public.'.$record->is_claimed)</span>
+                                <span class="bg-danger-100 flex items-center justify-center text-danger-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-danger-900 dark:text-danger-300 uppercase">@lang('public.'.$record->is_claimed)</span>
                             @endif
                         </td>
                         <td>

@@ -8,7 +8,7 @@
     <nav class="flex " aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-3 text-lg font-semibold">
             <li class="inline-flex items-center">
-                <p href="#"
+                <a href="javascript:void(0)"
                    class="inline-flex items-center text-gray-700 hover:text-orange-600 dark:text-gray-400 dark:hover:text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                          class="w-7 h-7 mr-4">
@@ -17,7 +17,7 @@
                               clip-rule="evenodd"/>
                     </svg>
                     @lang('public.profile')
-                </p>
+                </a>
             </li>
             <li>
                 <div class="flex items-center">
@@ -27,10 +27,17 @@
                               d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                               clip-rule="evenodd"></path>
                     </svg>
-                    <p href="#"
-                       class="ml-1  text-gray-700 hover:text-orange-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">@lang('public.profile_verification')</p>
+                    <a href="javascript:void(0)"
+                       class="ml-1  text-gray-700 hover:text-orange-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">@lang('public.profile_verification')</a>
                 </div>
             </li>
+            @if(auth()->user()->kyc_approval_status == App\Models\User::KYC_STATUS_PENDING_VERIFICATION)
+                <span class="bg-success-100 text-success-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-success-900 dark:text-success-300">@lang('public.kyc_pending_message')</span>
+            @elseif(auth()->user()->kyc_approval_status == App\Models\User::KYC_STATUS_NOT_VERIFY)
+                <span class="bg-warning-100 text-warning-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-warning-900 dark:text-warning-300">@lang('public.kyc_not_verify_message')</span>
+            @elseif(auth()->user()->kyc_approval_status == App\Models\User::KYC_STATUS_REJECTED)
+                <span class="bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">@lang('public.kyc_reject_message')</span>
+            @endif
         </ol>
     </nav>
 

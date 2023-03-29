@@ -373,6 +373,11 @@ return array(
     'fail_uploaded_ic' => 'Your account had been verified!',
     'successfully_approve_kyc' => 'Successfully updated user KYC approval status!',
     'kyc_approval_confirmation' => 'Are you sure you want to approve the KYC status of this user?',
+    'user_verified' => 'User already been verified',
+    'invalid_status' => 'Only pending status can perform verification action.',
+    'kyc_pending_message' => 'Your profile verification has been submitted! Give the admin some time to verify.',
+    'kyc_not_verify_message' => 'Your profile is not verified! Upload your document to proceed verification',
+    'kyc_reject_message' => 'Your profile verification has been rejected! Resubmit to allow the admin verify.',
 
     'personal_daily_deposit' => 'Personal Daily Deposit',
     'personal_weekly_deposit' => 'Personal Weekly Deposit',

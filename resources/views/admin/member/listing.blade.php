@@ -161,8 +161,8 @@
                                     <span class="text-danger font-semibold uppercase">@lang('public.suspend')</span>
                                 @endif
                             </td>
-                            <td class="p-4 text-center">
-                                <a href="javascript:void(0)" class="impersonate bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                            <td class="py-4 px-6 text-center">
+                                <a href="javascript:void(0)" class="impersonate flex justify-center items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
                                    data-modal-target="impersonate_modal" data-modal-toggle="impersonate_modal"
                                    data-te-ripple-init
                                    data-te-ripple-color="light" id="{{ $record->id }}">

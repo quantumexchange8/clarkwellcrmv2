@@ -205,11 +205,11 @@
 
                         <td class="p-4">
                             @if($record->status == 1)
-                                <span class="text-success font-semibold uppercase">Active</span>
+                                <span class="text-success font-semibold uppercase">@lang('public.active')</span>
                             @elseif($record->status == 2)
-                                <span class="text-warning font-semibold uppercase">Inactive</span>
+                                <span class="text-warning font-semibold uppercase">@lang('public.inactive')</span>
                             @elseif($record->status == 3)
-                                <span class="text-danger font-semibold uppercase">Suspended</span>
+                                <span class="text-danger font-semibold uppercase">@lang('public.suspend')</span>
                             @endif
                         </td>
                         <td class="p-4">
@@ -221,12 +221,10 @@
                                 <span class="text-danger font-semibold uppercase">@lang('public.kyc_not_verify')</span>
                             @endif
                         </td>
-                        <td class="p-4 text-center">
+                        <td class="py-4 px-6 text-center">
                             <a href="javascript:void(0)"
-                               class="impersonate bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                               data-modal-target="impersonate_modal" data-modal-toggle="impersonate_modal"
-                               data-te-ripple-init
-                               data-te-ripple-color="light" id="{{ $record->id }}">
+                               class="kyc_approval flex justify-center items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                               data-modal-target="kyc_approval_modal" data-modal-toggle="kyc_approval_modal" id="{{ $record->id }}">
                                 @lang('public.approval')
                             </a>
                         </td>
@@ -260,13 +258,13 @@
 
 
     <!-- approval Modal -->
-    <div id="impersonate_modal" tabindex="-1"
+    <div id="kyc_approval_modal" tabindex="-1"
          class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
         <div class="relative w-full h-full max-w-md md:h-auto">
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <button type="button"
                         class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-                        data-modal-hide="impersonate_modal">
+                        data-modal-hide="kyc_approval_modal">
                     <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                          xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -289,7 +287,7 @@
                         </div>
                         <button type="submit" class="text-white bg-[#40DD7F] hover:bg-green-400 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" value="{{App\Models\User::KYC_STATUS_VERIFIED}}" name="approval">
                             <svg class="h-6 w-6 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <circle cx="12" cy="12" r="9" />  <path d="M9 12l2 2l4 -4" /></svg>
-                            <span class="ml-2">@lang('public.delete_confirmed')</span>
+                            <span class="ml-2">@lang('public.approve')</span>
                         </button>
                         <button type="submit" class="text-white bg-[#FF6262] hover:bg-red-400 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" value="{{App\Models\User::KYC_STATUS_REJECTED}}" name="approval">
                             <svg class="h-6 w-6 text-white"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <circle cx="12" cy="12" r="10" />  <line x1="15" y1="9" x2="9" y2="15" />  <line x1="9" y1="9" x2="15" y2="15" /></svg>
@@ -305,7 +303,7 @@
 @section('script')
     <script>
         $(document).ready(function (e) {
-            $('.impersonate').on('click', function () {
+            $('.kyc_approval').on('click', function () {
                 var id = $(this).attr('id');
                 $(".modal-body #user_id").val(id);
             });

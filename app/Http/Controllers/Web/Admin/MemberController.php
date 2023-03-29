@@ -472,9 +472,14 @@ class MemberController extends Controller
         $user = User::find($request->input('user_id'));
 
         if ($user->kyc_approval_status != User::KYC_STATUS_PENDING_VERIFICATION) {
-            return back()->withErrors(["error" => "Only pending status can perform approval action."]);
+            Alert::warning(trans('public.invalid_action'), trans('public.invalid_status'));
+
+            return back();
+
         } else if ($user->kyc_approval_status == User::KYC_STATUS_VERIFIED) {
-            return back()->withErrors(["error" => "User already verified."]);
+            Alert::warning(trans('public.invalid_action'), trans('public.user_verified'));
+
+            return back();
         }
 
         $user->kyc_approval_status = $request->input('approval');
