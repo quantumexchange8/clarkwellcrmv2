@@ -470,8 +470,9 @@ class MemberController extends Controller
     public function approval(Request $request)
     {
         $user = User::find($request->input('user_id'));
+        $direct_approve = $request->input('direct_approve');
 
-        if ($user->kyc_approval_status != User::KYC_STATUS_PENDING_VERIFICATION) {
+        if (!$direct_approve && $user->kyc_approval_status != User::KYC_STATUS_PENDING_VERIFICATION) {
             Alert::warning(trans('public.invalid_action'), trans('public.invalid_status'));
 
             return back();
@@ -486,6 +487,6 @@ class MemberController extends Controller
         $user->save();
 
         Alert::success(trans('public.done'), trans('public.successfully_approve_kyc'));
-        return redirect()->route('member_kyc_listing');
+        return redirect()->back();
     }
 }
