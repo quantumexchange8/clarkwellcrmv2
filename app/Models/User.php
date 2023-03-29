@@ -23,6 +23,7 @@ class User extends Authenticatable implements JWTSubject
     const KYC_STATUS_NOT_VERIFY = 1;
     const KYC_STATUS_PENDING_VERIFICATION = 2;
     const KYC_STATUS_VERIFIED = 3;
+    const KYC_STATUS_REJECTED = 4;
 
     //use status section
     const STATUS_ACTIVE = 1;

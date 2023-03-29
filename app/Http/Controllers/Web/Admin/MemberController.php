@@ -477,7 +477,7 @@ class MemberController extends Controller
             return back()->withErrors(["error" => "User already verified."]);
         }
 
-        $user->kyc_approval_status = User::KYC_STATUS_VERIFIED;
+        $user->kyc_approval_status = $request->input('approval');
         $user->save();
 
         Alert::success(trans('public.done'), trans('public.successfully_approve_kyc'));

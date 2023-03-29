@@ -287,12 +287,14 @@
                             <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">@lang('public.kyc_approval_confirmation')</h3>
                             <input type="hidden" name="user_id" id="user_id">
                         </div>
-                        <button type="submit" value="{{App\Models\User::KYC_STATUS_VERIFIED}}" name="approval"
-                                class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
-                            @lang('public.delete_confirmed')
+                        <button type="submit" class="text-white bg-[#40DD7F] hover:bg-green-400 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" value="{{App\Models\User::KYC_STATUS_VERIFIED}}" name="approval">
+                            <svg class="h-6 w-6 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <circle cx="12" cy="12" r="9" />  <path d="M9 12l2 2l4 -4" /></svg>
+                            <span class="ml-2">@lang('public.delete_confirmed')</span>
                         </button>
-                        <button data-modal-hide="impersonate_modal" type="button"
-                                class="text-gray-700 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">@lang('public.delete_cancel')</button>
+                        <button type="submit" class="text-white bg-[#FF6262] hover:bg-red-400 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" value="{{App\Models\User::KYC_STATUS_REJECTED}}" name="approval">
+                            <svg class="h-6 w-6 text-white"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <circle cx="12" cy="12" r="10" />  <line x1="15" y1="9" x2="9" y2="15" />  <line x1="9" y1="9" x2="15" y2="15" /></svg>
+                            <span class="ml-2">@lang('public.reject')</span>
+                        </button>
                     </form>
                 </div>
             </div>
