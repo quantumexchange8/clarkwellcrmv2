@@ -24,11 +24,11 @@
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th class="flex items-center justify-center bg-[#FDFCF3]">
-                        <div class="my-6 relative inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600">
+                        <div class="my-6 relative inline-flex items-center justify-center w-28 h-28 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600">
                             @if ($user->profile_image)
-                                <img src="{{ asset('uploads/users/' .$user->profile_image)}}" id="profile_pic_preview" class="relative inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl">
+                                <img src="{{ asset('uploads/users/' .$user->profile_image)}}" id="profile_pic_preview" class="relative inline-flex items-center justify-center w-28 h-28 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl">
                             @else
-                                <img src="{{url('/img/profile.png')}}" id="profile_pic_preview" class="relative inline-flex items-center justify-center w-32 h-32 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl">
+                                <img src="{{url('/img/profile.png')}}" id="profile_pic_preview" class="relative inline-flex items-center justify-center w-28 h-28 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600font-bold text-white dark:text-gray-300 text-4xl">
                             @endif
                         </div>
                     </th>
@@ -85,7 +85,7 @@
             </form>
             @if($deposits->isNotEmpty())
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-8 border-2">
-                    <table class="w-full text-left">
+                    <table class="w-full text-left text-sm">
                         <thead class="font-bold">
                         <tr>
                             <th scope="col" class="px-6 py-6">

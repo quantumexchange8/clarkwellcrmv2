@@ -24,14 +24,14 @@
         <div class="grid grid-flow-row grid-flow-cols grid-cols-3 gap-3 my-4 max-[1200px]:grid-rows-auto max-[1200px]:grid-cols-none ">
             <div class="flex justify-center max-[1200px]:justify-start ">
                 <div class="block rounded-lg bg-[#FDFCF3] border-2 text-center shadow-lg dark:bg-neutral-700 w-full">
-                    <div class="pt-6 pb-4 px-6 dark:text-neutral-50 flex text-orange-400 font-bold text-3xl">
+                    <div class="pt-6 pb-4 px-6 dark:text-neutral-50 flex text-orange-400 font-bold text-lg">
                         @lang('public.rank')
                     </div>
                     <div class="py-1">
                         <div class="relative inline-flex items-center justify-center w-28 h-28 overflow-hidden bg-orange-400 rounded-full dark:bg-gray-600">
-                            <span class="font-bold text-white dark:text-gray-300 text-3xl">{{$rank->rank_short_form}}</span>
+                            <span class="font-bold text-white dark:text-gray-300 text-lg">{{$rank->rank_short_form}}</span>
                         </div>
-                        <h5 class="my-6 text-xl font-bold leading-tight text-[#696057] dark:text-neutral-50">
+                        <h5 class="my-6 text-lg font-bold leading-tight text-[#696057] dark:text-neutral-50">
                             @lang('public.'. $rank->rank_short_form )
                         </h5>
                     </div>
@@ -39,22 +39,22 @@
             </div>
             <div class="flex justify-center col-span-2 max-[1200px]:col-span-1 max-[1200px]:justify-start ">
                 <div class="block rounded-lg bg-[#FDFCF3] border-2 shadow-lg dark:bg-neutral-700 w-full py-4">
-                    <div class="pt-4 px-6 flex text-orange-400 font-bold text-3xl">
+                    <div class="pt-4 px-6 flex text-orange-400 font-bold text-lg">
                         @lang('public.personal_details')
                     </div>
                     <div class="grid grid-cols-2 max-[1200px]:grid-cols-none">
                         <div class="px-12 py-4 col-span-2 max-[1200px]:col-span-1">
                             <p class="font-medium text-gray-500 dark:text-gray-400 "> @lang('public.name'):</p>
-                            <h5 class="mb-2 text-xl font-semibold tracking-tight text-[#696057] dark:text-white">{{$user->name}}</h5>
+                            <h5 class="mb-2 text-lg font-semibold tracking-tight text-[#696057] dark:text-white">{{$user->name}}</h5>
                         </div>
                         <div class="px-12 py-4 ">
                             <p class="font-medium text-gray-500 dark:text-gray-400 "> @lang('public.email'):</p>
-                            <h5 class="mb-2 text-xl font-semibold tracking-tight text-[#696057] dark:text-white">{{$user->email}}</h5>
+                            <h5 class="mb-2 text-lg font-semibold tracking-tight text-[#696057] dark:text-white">{{$user->email}}</h5>
                         </div>
                         <div class="px-12 py-4">
                             <p class="font-medium text-gray-500 dark:text-gray-400 "> @lang('public.contact'):</p>
                             <div class="flex items-center space-x-4">
-                                <h5 class=" text-xl font-semibold tracking-tight text-[#696057] dark:text-white">{{$user->contact_number}}</h5>
+                                <h5 class=" text-lg font-semibold tracking-tight text-[#696057] dark:text-white">{{$user->contact_number}}</h5>
                             </div>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
             </div>
             <div class="flex justify-center max-[1200px]:justify-start mt-3 ">
                 <div class="block  rounded-lg bg-[#FDFCF3] border-2 text-center shadow-lg dark:bg-neutral-700 w-full py-4">
-                    <div class="py-4 px-6 dark:text-neutral-50 flex text-orange-400 font-bold text-3xl">
+                    <div class="py-4 px-6 dark:text-neutral-50 flex text-orange-400 font-bold text-lg">
                         @lang('public.avatar')
                     </div>
                     <div class="">
@@ -79,13 +79,13 @@
             </div>
             <div class="flex justify-center col-span-2 max-[1200px]:col-span-1 max-[1200px]:justify-start mt-3 ">
                 <div class="block rounded-lg bg-[#FDFCF3] border-2 shadow-lg dark:bg-neutral-700 w-full py-4">
-                    <div class="pt-4 px-6 flex text-orange-400 font-bold text-3xl">
+                    <div class="pt-4 px-6 flex text-orange-400 font-bold text-lg">
                         @lang('public.location')
                     </div>
                     <div class="grid grid-cols-2 max-[1400px]:grid-cols-none">
                         <div class="px-12 py-4 ">
                             <p class="font-medium text-gray-500 dark:text-gray-400 "> @lang('public.address'):</p>
-                            <h5 class="mb-2 text-xl font-semibold tracking-tight text-[#696057] dark:text-white">
+                            <h5 class="mb-2 text-lg font-semibold tracking-tight text-[#696057] dark:text-white">
                                 {{$user->address}}
                             </h5>
                         </div>
@@ -97,19 +97,19 @@
                                 @endif
                                 @switch(app()->getLocale())
                                     @case('en')
-                                        <h5 class=" text-xl font-semibold tracking-tight text-[#696057] dark:text-white">{{ $country_trans }}</h5>
+                                        <h5 class=" text-lg font-semibold tracking-tight text-[#696057] dark:text-white">{{ $country_trans }}</h5>
                                         @break
 
                                     @case('cn')
-                                        <h5 class=" text-xl font-semibold tracking-tight text-[#696057] dark:text-white">{{ $country_trans }}</h5>
+                                        <h5 class=" text-lg font-semibold tracking-tight text-[#696057] dark:text-white">{{ $country_trans }}</h5>
                                         @break
 
                                     @case('tw')
-                                        <h5 class=" text-xl font-semibold tracking-tight text-[#696057] dark:text-white">{{ $country_trans }}</h5>
+                                        <h5 class=" text-lg font-semibold tracking-tight text-[#696057] dark:text-white">{{ $country_trans }}</h5>
                                         @break
 
                                     @default
-                                        <h5 class=" text-xl font-semibold tracking-tight text-[#696057] dark:text-white">{{ $country_trans }}</h5>
+                                        <h5 class=" text-lg font-semibold tracking-tight text-[#696057] dark:text-white">{{ $country_trans }}</h5>
                                 @endswitch
                             </div>
                         </div>
@@ -124,7 +124,7 @@
             <div class="relative bg-[#FDFCF3] rounded-lg shadow dark:bg-gray-700">
                 <!-- Modal header -->
                 <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-orange-500 dark:text-white">
+                    <h3 class="text-lg font-semibold text-orange-500 dark:text-white">
                         @lang('public.upload_avatar')
                     </h3>
                     <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="avatarModal">

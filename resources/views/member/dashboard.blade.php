@@ -10,7 +10,7 @@
                 <div
                     class="block rounded-lg bg-[#FDFCF3] text-center shadow-lg dark:bg-neutral-700 w-full border-2">
                     <div
-                        class="border-b-2 border-neutral-100 py-6 px-6 dark:border-neutral-600 dark:text-neutral-50 flex justify-center text-orange-400 font-bold text-2xl">
+                        class="border-b-2 border-neutral-100 py-6 px-6 dark:border-neutral-600 dark:text-neutral-50 flex justify-center text-orange-400 font-bold text-xl">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                              class="w-6 h-6 mr-3 mt-1">
                             <path fill-rule="evenodd"
@@ -38,7 +38,7 @@
                                                     {{$deposit->broker->name}}
                                                 </p>
                                             </div>
-                                            <div class="inline-flex items-center text-base font-semibold text-[#696057] dark:text-white">
+                                            <div class="inline-flex items-center text-sm font-semibold text-[#696057] dark:text-white">
                                                 ${{number_format($deposit->amount,2)}}
                                             </div>
                                         </div>
@@ -53,7 +53,7 @@
                 <div
                     class="block rounded-lg bg-[#FDFCF3] text-center shadow-lg dark:bg-neutral-700 w-full border-2">
                     <div
-                        class="border-b-2 border-neutral-100 py-6 px-6 dark:border-neutral-600 dark:text-neutral-50 flex justify-center text-orange-400 font-bold text-2xl">
+                        class="border-b-2 border-neutral-100 py-6 px-6 dark:border-neutral-600 dark:text-neutral-50 flex justify-center text-orange-400 font-bold text-xl">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                              class="w-6 h-6 mr-3 mt-1">
                             <path d="M12 7.5a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z"/>
@@ -70,7 +70,10 @@
                             <h5 class="my-2 text-xl text-[#696057] font-bold leading-none dark:text-white">
                                 @lang('public.total'): ${{number_format($group_deposits_total,2)}}
                             </h5>
-                            <a href="javascript:void(0)" class="font-medium text-blue-600 hover:underline dark:text-blue-500" data-modal-target="groupModal" data-modal-toggle="groupModal" data-te-ripple-init data-te-ripple-color="light">
+                            <a href="javascript:void(0)" class="font-medium text-blue-600 hover:underline dark:text-blue-500" data-te-toggle="modal"
+                               data-te-target="#groupDepositModal"
+                               data-te-ripple-init
+                               data-te-ripple-color="light">
                                 @lang('public.more')
                             </a>
                         </div>
@@ -84,7 +87,7 @@
                                                     {{$group_deposit->name}}
                                                 </p>
                                             </div>
-                                            <div class="inline-flex items-center text-base font-semibold text-[#696057] dark:text-white">
+                                            <div class="inline-flex items-center text-sm font-semibold text-[#696057] dark:text-white">
                                                 ${{number_format($group_deposit->total,2)}}
                                             </div>
                                         </div>
@@ -100,7 +103,7 @@
                     <h4 class="px-12 text-xl font-bold leading-tight text-[#696057] dark:text-neutral-50 max-lg:hidden">
                         {{$user->name}}
                     </h4>
-                    <div class="border-b-2 border-neutral-200 py-4 px-4 dark:border-neutral-600 dark:text-neutral-50 flex justify-center text-orange-400 font-bold text-2xl">
+                    <div class="border-b-2 border-neutral-200 py-4 px-4 dark:border-neutral-600 dark:text-neutral-50 flex justify-center text-orange-400 font-bold text-xl">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                              class="w-6 h-6 mr-3 mt-1">
                             <path fill-rule="evenodd"
@@ -113,7 +116,7 @@
                         <div class="flow-root">
                             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                                 <li class="py-3 sm:py-4">
-                                    <div class="flex items-center space-x-4">
+                                    <div class="flex items-center space-x-4 text-sm">
                                         <div class="flex-shrink-0">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                                  class="w-6 h-6 text-orange-400">
@@ -126,13 +129,13 @@
                                                 @lang('public.personal_daily_deposit')
                                             </p>
                                         </div>
-                                        <div class="inline-flex items-center text-base font-semibold text-[#696057] dark:text-white">
+                                        <div class="inline-flex items-center font-semibold text-[#696057] dark:text-white">
                                             ${{number_format($user->userDailyWeeklyDeposit(), 2)}}
                                         </div>
                                     </div>
                                 </li>
                                 <li class="py-3 sm:py-4">
-                                    <div class="flex items-center space-x-4">
+                                    <div class="flex items-center space-x-4 text-sm">
                                         <div class="flex-shrink-0">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                                  class="w-6 h-6 text-orange-400">
@@ -145,7 +148,7 @@
                                                 @lang('public.personal_weekly_deposit')
                                             </p>
                                         </div>
-                                        <div class="inline-flex items-center text-base font-semibold text-[#696057] dark:text-white">
+                                        <div class="inline-flex items-center font-semibold text-[#696057] dark:text-white">
                                             ${{number_format($user->userDailyWeeklyDeposit(true), 2)}}
                                         </div>
                                     </div>
@@ -157,7 +160,7 @@
             </div>
             <div class="flex justify-center col-span-2 mt-6 max-[1000px]:col-span-1 max-[1250px]:justify-start">
                 <div class="px-6 block rounded-lg bg-[#FDFCF3]  shadow-lg dark:bg-neutral-700 w-full border-2">
-                    <div class=" pt-6 px-6 flex text-orange-400 font-bold text-2xl">
+                    <div class=" pt-6 px-6 flex text-orange-400 font-bold text-xl">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                              stroke="currentColor" class="w-6 h-6 mr-3 mt-1">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -252,7 +255,7 @@
             </div>
             <div class="flex justify-center mt-6 max-[1320px]:justify-start max-[1000px]:col-span-1 max-[1320px]:col-span-2 ">
                 <div class="block  rounded-lg bg-[#FDFCF3] shadow-lg dark:bg-neutral-700 w-full border-2">
-                    <div class="border-b-2 border-neutral-100 py-6 px-6 dark:border-neutral-600 dark:text-neutral-50 flex justify-center text-orange-400 font-bold text-2xl">
+                    <div class="border-b-2 border-neutral-100 py-6 px-6 dark:border-neutral-600 dark:text-neutral-50 flex justify-center text-orange-400 font-bold text-xl">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                              class="w-6 h-6 mr-3 mt-1">
                             <path fill-rule="evenodd"
@@ -304,7 +307,7 @@
                                   d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM9.624 7.084a.75.75 0 00-1.248.832l2.223 3.334H9a.75.75 0 000 1.5h2.25v1.5H9a.75.75 0 000 1.5h2.25v1.5a.75.75 0 001.5 0v-1.5H15a.75.75 0 000-1.5h-2.25v-1.5H15a.75.75 0 000-1.5h-1.599l2.223-3.334a.75.75 0 10-1.248-.832L12 10.648 9.624 7.084z"
                                   clip-rule="evenodd"/>
                         </svg>
-                        <h3 class="text-2xl font-semibold dark:text-white ">
+                        <h3 class="text-xl font-semibold dark:text-white ">
                             @lang('public.personal_deposit')
                         </h3>
 
@@ -330,9 +333,9 @@
                                             <div class="flex items-center space-x-4">
                                                 <div class="flex-shrink-0">
                                                     @if ($deposit->broker->broker_image)
-                                                        <img src="{{ asset('uploads/brokers/' .$deposit->broker->broker_image)}}" class="w-10 h-10 rounded-full bg-rose-400" alt="">
+                                                        <img src="{{ asset('uploads/brokers/' .$deposit->broker->broker_image)}}" class="w-10 h-10 rounded-full bg-gray-100" alt="">
                                                     @else
-                                                        <img class="w-10 h-10 rounded-full bg-rose-400" alt="">
+                                                        <img class="w-10 h-10 rounded-full bg-gray-100" alt="">
                                                     @endif
                                                 </div>
                                                 <div class="flex-1 min-w-0 text-left">
@@ -369,13 +372,21 @@
             </div>
         </div>
 
-        <!-- Group Deposit Modal -->
-        <div id="groupModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
-            <div class="relative w-full h-full max-w-2xl md:h-auto">
-                <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 overflow-auto ">
-                    <!-- Modal header -->
-                    <div class="flex items-start justify-between p-6 border-b rounded-t dark:border-gray-600 text-orange-400 overflow-auto ">
+        <!--Group Deposit Modal -->
+        <div
+            data-te-modal-init
+            class="fixed top-0 left-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+            id="groupDepositModal"
+            tabindex="-1"
+            aria-labelledby="groupDepositModalLabel"
+            aria-hidden="true">
+            <div
+                data-te-modal-dialog-ref
+                class="pointer-events-none relative h-[calc(100%-1rem)] w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:h-[calc(100%-3.5rem)] min-[576px]:max-w-2xl">
+                <div
+                    class="pointer-events-auto relative flex max-h-[100%] w-full flex-col overflow-hidden rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
+                    <div
+                        class="flex flex-shrink-0 items-center justify-between text-orange-400 rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                              class="w-6 h-6 mr-3 mt-1">
                             <path d="M12 7.5a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z"/>
@@ -385,24 +396,29 @@
                             <path
                                 d="M2.25 18a.75.75 0 000 1.5c5.4 0 10.63.722 15.6 2.075 1.19.324 2.4-.558 2.4-1.82V18.75a.75.75 0 00-.75-.75H2.25z"/>
                         </svg>
-                        <h3 class="text-2xl font-semibold dark:text-white ">
+                        <h3 class="text-xl font-semibold dark:text-white ">
                             @lang('public.group_deposit')
                         </h3>
-
-                        <button type="button"
-                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                data-modal-hide="groupModal">
-                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                      clip-rule="evenodd"></path>
+                        <button
+                            type="button"
+                            class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
+                            data-te-modal-dismiss
+                            aria-label="Close">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="h-6 w-6">
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M6 18L18 6M6 6l12 12" />
                             </svg>
-                            <span class="sr-only">@lang('public.close_modal')</span>
                         </button>
                     </div>
-                    <!-- Modal body -->
-                    <div class="px-6 py-4 space-y-6 overflow-auto">
+                    <div class="relative overflow-y-auto p-4">
                         <div class="flow-root">
                             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                                 @if($group_deposits->count() > 0)
@@ -434,9 +450,9 @@
                                                     <div class="flex items-center space-x-4">
                                                         <div class="flex-shrink-0">
                                                             @if ($deposit['broker']['broker_image'])
-                                                                <img src="{{ asset('uploads/brokers/' .$deposit['broker']['broker_image'])}}" class="w-10 h-10 rounded-full bg-rose-400" alt="">
+                                                                <img src="{{ asset('uploads/brokers/' .$deposit['broker']['broker_image'])}}" class="w-10 h-10 rounded-full bg-gray-100" alt="">
                                                             @else
-                                                                <img class="w-10 h-10 rounded-full bg-rose-400" alt="">
+                                                                <img class="w-10 h-10 rounded-full bg-gray-100" alt="">
                                                             @endif
                                                         </div>
                                                         <div class="flex-1 min-w-0">
@@ -464,10 +480,13 @@
                                     </li>
                                 @endif
                             </ul>
-                            <div class="flex items-center float-right mt-4">
-                                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                    <p class="font-bold text-xl text-orange-400">@lang('public.total'): ${{number_format($group_deposits_total,2)}}</p>
-                                </div>
+                        </div>
+                    </div>
+                    <div
+                        class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
+                        <div class="flex items-center float-right mt-4">
+                            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                <p class="font-bold text-xl text-orange-400">@lang('public.total'): ${{number_format($group_deposits_total,2)}}</p>
                             </div>
                         </div>
                     </div>
@@ -485,7 +504,7 @@
                     @foreach($news_all as $news)
                         @if($news->popup_status)
                         <div class="p-8 odd:bg-gray-100 even:bg-white rounded-l border border-gray-300">
-                            <h3 class="text-2xl font-semibold text-[#FFA168] dark:text-white underline">
+                            <h3 class="text-xl font-semibold text-[#FFA168] dark:text-white underline">
                                 {{ $news->title }}
                             </h3>
                             <span class="text-xs font-semibold text-gray-500">{{ $news->created_at }}</span>

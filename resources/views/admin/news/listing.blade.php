@@ -34,7 +34,7 @@
     </div>
 
     @if($news_all->isNotEmpty())
-        <div class="relative overflow-x-auto mt-2">
+        <div class="relative overflow-x-auto mt-2 text-sm">
             <table class="w-full text-black text-left dark:text-gray-400 table-auto">
                 <thead class="uppercase bg-[#F6F6F6]">
                 <tr>

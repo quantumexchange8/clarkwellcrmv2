@@ -55,7 +55,7 @@
         <?php
         $no = $records->firstItem();
         ?>
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-2 text-sm">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-2 text-xs">
             <table class="w-full text-left">
                 <thead class="uppercase bg-[#FDFCF3]">
                 <tr>

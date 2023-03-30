@@ -6,7 +6,7 @@
 
     <div class="flex flex-row gap-4 max-[1150px]:block">
         <h1 class="flex-1 font-semibold text-2xl text-gray-600">@lang('public.members') / {{ $user->name }}</h1>
-        <a href="{{ route('member_deposit', $user->id) }}" class="mt-2 bg-[#1AB759] hover:bg-green-400 border border-green-200 focus:ring-4 focus:outline-none focus:ring-green-600 text-card-14 rounded-lg px-5 py-2.5 text-center inline-flex items-center ">
+        <a href="{{ route('member_deposit', $user->id) }}" class="mt-2 bg-gray-600 hover:bg-gray-400 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-600 rounded-lg px-5 py-2.5 text-center inline-flex items-center ">
             <svg class="h-4 w-4 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
@@ -34,8 +34,11 @@
                 <h5 class="font-bold text-lg text-gray-600 text-center mt-4 mb-2">{{ $user->name }}</h5>
                 <span class="font-semibold text-lg text-orange-400 text-center">{{ $user->rank->rank_short_form }}</span>
                 <div class="items-center mt-4 md:mt-6">
-                    <p class="font-semibold text-lg text-orange-400 mt-4">@lang('public.last_rank_up'):</p>
-                    <div class="font-semibold text-lg text-gray-600">{{\Carbon\Carbon::parse($user->rank_update_at)->format('Y-m-d')}} <br>
+                    <p class="font-semibold text-md text-orange-400 mt-4">@lang('public.last_rank_up'):</p>
+                    <div class="font-semibold text-sm text-gray-600">
+                        <p class="mb-2">
+                            {{\Carbon\Carbon::parse($user->rank_update_at)->format('Y-m-d')}}
+                        </p>
                         <span class="bg-gray-300 text-gray-800 text-sm font-medium shadow-lg px-2.5 py-1.5 rounded dark:bg-gray-700 dark:text-gray-300">
                             {{$user->auto_rank_up ? trans('public.auto') : trans('public.manual')}}
                         </span>
@@ -44,7 +47,7 @@
                 <div class="flex mt-4 space-x-3 md:mt-6">
                     <button
                         data-modal-target="ranking_details_modal" data-modal-toggle="ranking_details_modal"
-                        class="mx-auto inline-flex items-center px-8 py-2 text-center text-card-14 text-white bg-[#FFA168] rounded-lg hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-300"
+                        class="mx-auto inline-flex items-center px-8 py-2 text-center text-white bg-[#FFA168] rounded-lg hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-300"
                         data-te-ripple-init
                         data-te-ripple-color="light">
                         @lang('public.rank_details')
@@ -53,73 +56,73 @@
             </div>
 
             <div class="col-span-3 ml-4 p-4 md:mt-6">
-                <div class="grid grid-cols-2 gap-8 break-words max-[800px]:grid-cols-1">
+                <div class="grid grid-cols-2 gap-4 break-words max-[800px]:grid-cols-1">
                     <div class="px-4">
-                        <h2 class="font-semibold text-lg text-orange-400 mb-4">@lang('public.email')</h2>
-                        <span class="font-semibold text-lg text-gray-500">
+                        <h2 class="font-semibold text-md text-orange-400 mb-4">@lang('public.email')</h2>
+                        <span class="font-semibold text-md text-gray-500">
                             {{ $user->email }}
                         </span>
                     </div>
                     <div class="px-4">
-                        <h2 class="font-semibold text-lg text-orange-400 mb-4">@lang('public.contact')</h2>
-                        <span class="font-semibold text-lg text-gray-500">
+                        <h2 class="font-semibold text-md text-orange-400 mb-4">@lang('public.contact')</h2>
+                        <span class="font-semibold text-md text-gray-500">
                             {{ $user->contact_number }}
                         </span>
                     </div>
-                    <div class="mt-10 px-4">
-                        <h2 class="font-semibold text-lg text-orange-400 mb-4">@lang('public.address')</h2>
-                        <span class="font-semibold text-lg text-gray-500">
+                    <div class="mt-6 px-4">
+                        <h2 class="font-semibold text-md text-orange-400 mb-4">@lang('public.address')</h2>
+                        <span class="font-semibold text-md text-gray-500">
                             {{ $user->address }}
                         </span>
                     </div>
-                    <div class="mt-10 px-4">
-                        <h2 class="font-semibold text-lg text-orange-400 mb-4">@lang('public.country')</h2>
-                        <span class="font-semibold text-lg text-gray-500">
+                    <div class="mt-6 px-4">
+                        <h2 class="font-semibold text-md text-orange-400 mb-4">@lang('public.country')</h2>
+                        <span class="font-semibold text-md text-gray-500">
                             @switch(app()->getLocale())
                                 @case('en')
-                                    <h5 class=" text-lg font-semibold text-gray-500 dark:text-white">{{ $country_trans }}</h5>
+                                    <h5 class=" text-md font-semibold text-gray-500 dark:text-white">{{ $country_trans }}</h5>
                                     @break
 
                                 @case('cn')
-                                    <h5 class=" text-lg font-semibold text-gray-500 dark:text-white">{{ $country_trans }}</h5>
+                                    <h5 class=" text-md font-semibold text-gray-500 dark:text-white">{{ $country_trans }}</h5>
                                     @break
 
                                 @case('tw')
-                                    <h5 class=" text-lg font-semibold text-gray-500 dark:text-white">{{ $country_trans }}</h5>
+                                    <h5 class=" text-md font-semibold text-gray-500 dark:text-white">{{ $country_trans }}</h5>
                                     @break
 
                                 @default
-                                    <h5 class=" text-lg font-semibold text-gray-500 dark:text-white">{{ $country_trans }}</h5>
+                                    <h5 class=" text-md font-semibold text-gray-500 dark:text-white">{{ $country_trans }}</h5>
                             @endswitch
                         </span>
                     </div>
-                    <div class="mt-10 px-4">
-                        <h2 class="font-semibold text-lg text-orange-400 mb-4">@lang('public.date_join')</h2>
-                        <span class="font-semibold text-lg text-gray-500">
+                    <div class="mt-6 px-4">
+                        <h2 class="font-semibold text-md text-orange-400 mb-4">@lang('public.date_join')</h2>
+                        <span class="font-semibold text-md text-gray-500">
                             {{ $user->created_at }}
                         </span>
                     </div>
-                    <div class="mt-10 px-4">
-                        <h2 class="font-semibold text-lg text-orange-400 mb-4">@lang('public.status')</h2>
+                    <div class="mt-6 px-4">
+                        <h2 class="font-semibold text-md text-orange-400 mb-4">@lang('public.status')</h2>
                         @if($user->status == 1)
-                            <span class="text-success font-semibold text-lg text-gray-500">@lang('public.active')</span>
+                            <span class="text-success font-semibold text-md text-gray-500">@lang('public.active')</span>
                         @elseif($user->status == 2)
-                            <span class="text-warning font-semibold text-lg text-gray-500">@lang('public.inactive')</span>
+                            <span class="text-warning font-semibold text-md text-gray-500">@lang('public.inactive')</span>
                         @elseif($user->status == 3)
-                            <span class="text-danger font-semibold text-lg text-gray-500">@lang('public.suspend')</span>
+                            <span class="text-danger font-semibold text-md text-gray-500">@lang('public.suspend')</span>
                         @endif
                     </div>
-                    <div class="mt-10 px-4">
-                        <h2 class="font-semibold text-lg text-orange-400 mb-4">@lang('public.leader_status')</h2>
-                        <span class="font-semibold text-lg text-gray-500">
+                    <div class="mt-6 px-4">
+                        <h2 class="font-semibold text-md text-orange-400 mb-4">@lang('public.leader_status')</h2>
+                        <span class="font-semibold text-md text-gray-500">
                             {{ $user->leader_status ? 'Yes' : 'No'}}
                         </span>
                     </div>
-                    <div class="mt-10 px-4">
+                    <div class="mt-6 px-4">
                         <form action="{{ route('member_kyc_approval') }}" method="post">
                             @csrf
-                            <h2 class="font-semibold text-lg text-orange-400 mb-2">@lang('public.kyc_approval_status')</h2>
-                            <span class="font-semibold text-lg text-gray-500">
+                            <h2 class="font-semibold text-md text-orange-400 mb-2">@lang('public.kyc_approval_status')</h2>
+                            <span class="font-semibold text-md text-gray-500">
                                 @if($user->kyc_approval_status == 3)
                                     <span class="text-success font-semibold mr-2 mb-2 uppercase">@lang('public.kyc_verified')</span>
                                 @elseif($user->kyc_approval_status == 2)
