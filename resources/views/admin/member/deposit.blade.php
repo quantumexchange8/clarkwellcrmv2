@@ -144,8 +144,8 @@
                         </tbody>
                     </table>
                     <!-- pagination -->
-                    <div class="m-4 flex">
-                        {!! $deposits->links() !!}
+                    <div class="m-4">
+                        {!! $deposits->links('pagination::tailwind') !!}
                     </div>
                 </div>
             @else

@@ -177,8 +177,8 @@
                 </tbody>
             </table>
             <!-- pagination -->
-            <div class="m-4 flex">
-                {!! $records->links() !!}
+            <div class="m-4">
+                {!! $records->links('pagination::tailwind') !!}
             </div>
         </div>
     @else

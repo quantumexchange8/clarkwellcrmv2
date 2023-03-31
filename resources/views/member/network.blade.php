@@ -151,7 +151,9 @@
                     <!-- Help text -->
                     <span class="text-sm text-gray-700 dark:text-gray-400">
                         @if(count($commissions) > 0)
-                            @lang('public.showing') <span class="font-semibold text-gray-900 dark:text-white">{{$commissions->count()}}</span> @lang('public.to') <span class="font-semibold text-gray-900 dark:text-white">{{ $commissions->count() }}</span> @lang('public.of') <span class="font-semibold text-gray-900 dark:text-white">{{ $commissions->total() }}</span>  @lang('public.entries')
+                            <div class="my-4">
+                                {!! $commissions->links() !!}
+                            </div>
 
                         @else
                             <div class="w-full flex p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800" role="alert">
@@ -164,12 +166,6 @@
 
                         @endif
                 </span>
-                    <!-- Buttons -->
-                    <div class="inline-flex mt-2">
-                        <div class="d-flex justify-content-center">
-                            {!! $commissions->links() !!}
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

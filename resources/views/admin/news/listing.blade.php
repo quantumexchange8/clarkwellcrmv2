@@ -99,8 +99,8 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="my-4 flex">
-                {!! $news_all->links() !!}
+            <div class="my-4">
+                {!! $news_all->links('pagination::tailwind') !!}
             </div>
         </div>
     @else
