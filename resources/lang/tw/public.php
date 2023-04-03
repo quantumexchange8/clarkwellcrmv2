@@ -55,7 +55,7 @@ return array(
     'reports' => '報告',
     'deposits' => '託管',
     'listing' => '列表',
-    'downline_listing' => '下線列表',
+    'downline_listing' => '團隊全網列表',
     'referrals' => '推薦',
     'referrals_tree' => '推薦樹',
     'transfer' => '轉移',
