@@ -62,7 +62,7 @@ class AuthController extends Controller
                 Session::put('first_time_logged_in', 0);
                 if (Auth::user()->role === 1) {
                     Session::put('first_time_logged_in', 1);
-                    return redirect('member/dashboard');
+                    return redirect('member/welcome_page');
                 } else if (Auth::user()->role === 2) {
                     return redirect('admin/dashboard');
                 }

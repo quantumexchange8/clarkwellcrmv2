@@ -14,6 +14,7 @@ use App\Models\Deposits;
 use App\Models\Rankings;
 use App\Models\SettingCountry;
 use App\Models\User;
+use App\Models\Withdrawals;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +32,28 @@ use Illuminate\Support\Facades\Session as FacadesSession;
 
 class UserController extends Controller
 {
+    public function welcome_page()
+    {
+        $user = Auth::user();
+
+        $news = Announcements::query()
+            ->where('deleted_at', null)
+            ->where('visibility', 1)
+            ->latest('created_at')
+            ->first();
+
+        $withdrawal = Withdrawals::query()
+            ->where('requested_by_user', $user->id)
+            ->orderByDesc('created_at')
+            ->first();
+
+        return view('member.welcome_page', [
+            'user' => $user,
+            'news' => $news,
+            'withdrawal' => $withdrawal,
+        ]);
+    }
+
     public function dashboard()
     {
         $user = Auth::user();

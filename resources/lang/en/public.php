@@ -395,5 +395,10 @@ return array(
     'bonus_amount' => 'Bonus Amount',
     'approve_claim' => 'Successfully Approve Performance Bonus',
     'reject_claim' => 'Performance Bonus has been Rejected',
+
+    //welcome page
+    'pending_description' => 'Wait patiently for the admin to look through your request.',
+    'withdraw_request' => 'Withdrawal Request',
+    'read_more' => 'Read More',
 )
 ?>

@@ -45,12 +45,13 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
     Route::middleware('jwt.verify')->group(function () {
         Route::middleware('role.check:member')->prefix('member')->namespace('Member')->group(function () {
             Route::controller('UserController')->group(function () {
+                Route::get('/welcome_page', 'welcome_page')->name('welcome_page');
                 Route::get('/dashboard', 'dashboard')->name('member_dashboard');
                 Route::match(['get', 'post'], '/change-password', 'changePassword')->name('member_change_password');
 //                Route::post('/change-password', 'changePasswordSave');
                 Route::get('/tree', 'tree');
                 Route::match(['get', 'post'], '/tree', 'tree');
-                Route::get('/profile', 'profile');
+                Route::get('/profile', 'profile')->name('member_profile');
                 Route::match(['get', 'post'], '/verification', 'verification')->name('member_verification');
                 Route::match(['get', 'post'], '/downline_listing', 'downline_listing')->name('member_downline_listing');
                 Route::get('/account/{id}', 'account');

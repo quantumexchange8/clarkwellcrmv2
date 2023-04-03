@@ -430,7 +430,7 @@ class MemberController extends Controller
                 'type' => get_class($user),
                 'description' =>  'Admin with id: '. $admin->id .' has IMPERSONATE user with id: '. $user->id,
             ]);
-            return redirect()->route('member_dashboard');
+            return redirect()->route('welcome_page');
         }
 
 

@@ -395,6 +395,11 @@ return array(
     'bonus_amount' => '奖金金额',
     'approve_claim' => '绩效奖金审批成功',
     'reject_claim' => '绩效奖金已被拒绝',
+
+    //welcome page
+    'pending_description' => '耐心等待管理员查看您的请求。',
+    'withdraw_request' => '提款请求',
+    'read_more' => '更多',
 )
 ?>
 

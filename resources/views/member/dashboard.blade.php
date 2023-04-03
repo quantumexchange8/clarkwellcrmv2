@@ -198,7 +198,7 @@
                                 <input id="refLink" type="text" id="website-admin"
                                        value="{{ $user->url }}"
                                        class="select-all rounded-none rounded-r-lg bg-orange-50 border text-orange-500 focus:ring-orange-500 focus:border-orange-500 block flex-1 min-w-0 text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
-                                       placeholder="elonmusk" readonly>
+                                       placeholder="elonmusk" disabled>
                             </div>
 {{--                            <div class="mt-3">--}}
 {{--                                <button type="button"--}}

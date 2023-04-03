@@ -395,6 +395,11 @@ return array(
     'bonus_amount' => '獎金金額',
     'approve_claim' => '績效獎金審批成功',
     'reject_claim' => '績效獎金已被拒絕',
+
+    //welcome page
+    'pending_description' => '耐心等待管理員查看您的請求。',
+    'withdraw_request' => '提款請求',
+    'read_more' => '更多',
 )
 ?>
 
