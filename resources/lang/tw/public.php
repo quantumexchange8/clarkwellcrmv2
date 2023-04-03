@@ -181,8 +181,8 @@ return array(
     'delete_confirmed' => '是的，我確定！',
     'delete_cancel' => '取消',
     'select_user' => '選擇使用者',
-    'upline_email' => '上線電子郵件',
-    'no_upline' => '沒有上線',
+    'upline_email' => '領導電子郵件',
+    'no_upline' => '沒有領導',
 
 //admin member deposit
     'delete_deposit_confirmation' => '您確定要刪除此託管嗎？',
@@ -388,8 +388,8 @@ return array(
     'performance_bonus' => '績效獎金',
     'pending' => '待辦',
     'downline_rank' => '下線排名',
-    'upline_name' => '上線姓名',
-    'upline_rank' => '上線排名',
+    'upline_name' => '領導姓名',
+    'upline_rank' => '領導排名',
     'commission_amount' => '佣金金額',
     'bonus' => '獎金 (%)',
     'bonus_amount' => '獎金金額',

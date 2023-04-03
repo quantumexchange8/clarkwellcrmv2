@@ -181,8 +181,8 @@ return array(
     'delete_confirmed' => '是的，我确定！',
     'delete_cancel' => '取消',
     'select_user' => '选择用户',
-    'upline_email' => '上线电子邮件',
-    'no_upline' => '没有上线',
+    'upline_email' => '领导电子邮件',
+    'no_upline' => '没有领导',
 
 //admin member deposit
     'delete_deposit_confirmation' => '您确定要删除此托管吗?',
@@ -388,8 +388,8 @@ return array(
     'performance_bonus' => '绩效奖金',
     'pending' => '待办',
     'downline_rank' => '下线排名',
-    'upline_name' => '上线姓名',
-    'upline_rank' => '上线排名',
+    'upline_name' => '领导姓名',
+    'upline_rank' => '领导排名',
     'commission_amount' => '佣金金额',
     'bonus' => '奖金 (%)',
     'bonus_amount' => '奖金金额',
