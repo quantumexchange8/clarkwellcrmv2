@@ -147,6 +147,13 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
                 Route::post('/news_delete', 'delete')->name('news_delete');
             });
 
+            Route::controller('EventController')->prefix('event')->group(function () {
+                Route::match(['get', 'post'], '/event_listing', 'listing')->name('event_listing');
+                Route::match(['get', 'post'], '/create_event', 'create_event')->name('create_event');
+                Route::match(['get', 'post'], '/event_edit/{id}', 'event_edit')->name('event_edit');
+                Route::post('/event_delete', 'delete')->name('event_delete');
+            });
+
             Route::controller('CommissionsController')->group(function () {
                 Route::post('/commission_delete', 'delete')->name('commission_delete');
             });

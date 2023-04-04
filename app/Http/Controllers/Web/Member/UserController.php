@@ -11,6 +11,7 @@ use App\Models\Announcements;
 use App\Models\Brokers;
 use App\Models\Commissions;
 use App\Models\Deposits;
+use App\Models\Event;
 use App\Models\Rankings;
 use App\Models\SettingCountry;
 use App\Models\User;
@@ -47,9 +48,17 @@ class UserController extends Controller
             ->orderByDesc('created_at')
             ->first();
 
+        $events = Event::query()
+            ->where('deleted_at', null)
+            ->where('visibility', 1)
+            ->where('pop_up_status', 1)
+            ->orderByDesc('created_at')
+            ->get();
+
         return view('member.welcome_page', [
             'user' => $user,
             'news' => $news,
+            'events' => $events,
             'withdrawal' => $withdrawal,
         ]);
     }

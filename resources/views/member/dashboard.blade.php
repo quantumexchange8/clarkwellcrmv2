@@ -269,8 +269,8 @@
                         <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                             @foreach($news_all as $news)
                                 <li class="py-3 sm:py-4 hover:bg-orange-100">
-                                    <a href="#newsModal-{{ $news->id }}" class="w-full"
-                                       data-modal-target="newsModal-{{ $news->id }}" data-modal-toggle="newsModal-{{ $news->id }}"
+                                    <a href="javascript:void(0)" class="w-full" data-te-toggle="modal"
+                                       data-te-target="#newsModal-{{ $news->id }}"
                                        data-te-ripple-init
                                        data-te-ripple-color="light">
                                         <div class="flex items-center space-x-4">

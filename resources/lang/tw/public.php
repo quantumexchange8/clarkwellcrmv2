@@ -218,7 +218,9 @@ return array(
 //admin news
     'create_news' => '建立新聞',
     'update_news' => '更新新聞',
-    'visible' => '可見度',
+    'visibility' => '可見度',
+    'visible' => '可見',
+    'not_visible' => '不可見',
     'popup_status' => '彈窗',
     'news_title' => '新聞標題',
     'date_created' => '建立日期',
@@ -400,6 +402,19 @@ return array(
     'pending_description' => '耐心等待管理員查看您的請求。',
     'withdraw_request' => '提款請求',
     'read_more' => '更多',
+
+    //event
+    'event' => '廣告',
+    'invalid_event' => '無效的新聞',
+    'successfully_added_event' => '成功創建廣告',
+    'successfully_updated_event' => '成功更新廣告',
+    'successfully_deleted_event' => '成功刪除廣告',
+    'delete_event_confirmation' => '您確定要刪除此活動嗎？',
+    'create_event' => '創建廣告',
+    'update_event' => '更新廣告',
+    'event_title' => '廣告標題',
+    'event_image' => '廣告圖片',
+    'click_to_view' => '點擊查看',
 )
 ?>
 

@@ -158,6 +158,12 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('event_listing') }}" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-orange-100 dark:hover:bg-gray-700">
+                    <svg class="h-6 w-6 {{ request()->is('admin/event/*') ? 'text-orange-400' : 'text-gray-500'}}"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="4" y="5" width="16" height="16" rx="2" />  <line x1="16" y1="3" x2="16" y2="7" />  <line x1="8" y1="3" x2="8" y2="7" />  <line x1="4" y1="11" x2="20" y2="11" />  <rect x="8" y="15" width="2" height="2" /></svg>
+                    <span class="flex-1 ml-3 whitespace-nowrap {{ request()->is('admin/event/*') ? 'font-semibold text-lg text-orange-400' : 'font-semibold text-lg text-gray-500'}}">@lang('public.event')</span>
+                </a>
+            </li>
+            <li>
                 <form method="post" action="{{ url('logout') }}" class="inline-flex w-full whitespace-nowrap bg-transparent rounded-lg hover:bg-orange-100">
                     @csrf
                     <a href="javascript:void(0)" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white dark:hover:bg-gray-700">

@@ -1,9 +1,9 @@
 @extends('layouts.master-admin')
 
-@section('title') News @endsection
+@section('title') Event @endsection
 
 @section('contents')
-    <h1 class="font-semibold text-2xl text-gray-500">@lang('public.news')</h1>
+    <h1 class="font-semibold text-2xl text-gray-500">@lang('public.event')</h1>
 
     <!-- search -->
     <div class="flex flex-col">
@@ -20,7 +20,7 @@
                 <div class="max-[755px]:flex max-[755px]:flex-col gap-2">
                     <button type="submit" class="text-white bg-primary hover:bg-primary-600 border border-primary-200 focus:ring-4 focus:outline-none focus:ring-primary-600 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" name="submit" value="search">@lang('public.search')</button>
                     <button type="submit" class="text-white bg-rose-500 hover:bg-rose-600 border border-rose-200 focus:ring-4 focus:outline-none focus:ring-rose-600 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-rose-800" name="submit" value="reset">@lang('public.reset')</button>
-                    <a href="{{ route('create_news') }}" class="inline-flex text-white py-1.5 px-8 rounded bg-[#2AC769] hover:bg-success-500 text-lg font-bold float-right items-center justify-center">
+                    <a href="{{ route('create_event') }}" class="inline-flex text-white py-1.5 px-8 rounded bg-[#2AC769] hover:bg-success-500 text-lg font-bold float-right items-center justify-center">
                         <div class="flex items-center">
                             <svg class="h-6 w-6 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
@@ -33,19 +33,22 @@
         </form>
     </div>
 
-    @if($news_all->isNotEmpty())
+    @if($events->isNotEmpty())
         <div class="relative overflow-x-auto mt-2 text-sm">
             <table class="w-full text-black text-left dark:text-gray-400 table-auto">
                 <thead class="uppercase bg-[#F6F6F6]">
                 <tr>
-                    <th class="px-6 py-3 text-md font-bold" style="width: 20%">
-                        @lang('public.date_created')
+                    <th  class="px-6 py-3 text-md font-bold">
+                        @lang('public.event_title')
                     </th>
                     <th  class="px-6 py-3 text-md font-bold">
-                        @lang('public.news_title')
+                        @lang('public.event_image')
                     </th>
                     <th  class="px-6 py-3 text-md font-bold" style="width: 12%">
                         @lang('public.visibility')
+                    </th>
+                    <th class="px-6 py-3 text-md font-bold" style="width: 20%">
+                        @lang('public.date_created')
                     </th>
                     <th  class="px-6 py-3 text-md font-bold w-12">
                         @lang('public.action')
@@ -53,54 +56,56 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach($news_all as $news)
-                        <tr class="border-b odd:bg-[#FDFCF3] even:bg-[#F6F6F6]">
-                            <td class="px-6 py-4 ">
-                                {{ $news->created_at }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $news->title }}
-                            </td>
-                            <td class="px-6 py-4">
-                                @if($news->visibility == 1)
-                                    <span class="font-semibold text-success">@lang('public.visible')</span>
-                                @else
-                                    <span class="font-semibold text-danger">@lang('public.not_visible')</span>
-                                @endif
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex gap-2">
-                                    <a href="javascript:void(0)" class="text-gray-700" data-te-toggle="modal"
-                                       data-te-target="#newsModal-{{ $news->id }}"
-                                       data-te-ripple-init
-                                       data-te-ripple-color="light">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 hover:fill-gray-400">
-                                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
-                                            <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
-                                        </svg>
-                                    </a>
-                                    @include('admin.news.view_modal')
-                                    <a href="{{ route('news_edit', $news->id) }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-primary hover:fill-primary-400">
-                                            <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z" />
-                                        </svg>
-                                    </a>
-                                    <a href="javascript:void(0)" class="delete"
-                                       data-modal-target="delete_modal" data-modal-toggle="delete_modal"
-                                       data-te-ripple-init
-                                       data-te-ripple-color="light" id="{{ $news->id }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-danger hover:fill-danger-400">
-                                            <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clip-rule="evenodd" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
+                @foreach($events as $event)
+                    <tr class="border-b odd:bg-[#FDFCF3] even:bg-[#F6F6F6]">
+                        <td class="px-6 py-4">
+                            {{ $event->event_title }}
+                        </td>
+                        <td class="px-6 py-4">
+                            <a href="javascript:void(0)" class="text-primary" data-te-toggle="modal"
+                               data-te-target="#eventModal-{{ $event->id }}">
+                                @lang('public.click_to_view')
+                            </a>
+                            @include('admin.event.modal')
+                        </td>
+                        <td class="px-6 py-4">
+                            @if($event->visibility == 1)
+                                <span class="font-semibold text-success">@lang('public.visible')</span>
+                            @else
+                                <span class="font-semibold text-danger">@lang('public.not_visible')</span>
+                            @endif
+                        </td>
+                        <td class="px-6 py-4 ">
+                            <p>
+                                {{ date_format($event->created_at, 'Y-m-d') }}
+                            </p>
+                            <span>
+                                By {{ $event->user->name }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex gap-2">
+                                <a href="{{ route('event_edit', $event->id) }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-primary hover:fill-primary-400">
+                                        <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z" />
+                                    </svg>
+                                </a>
+                                <a href="javascript:void(0)" class="delete"
+                                   data-modal-target="delete_modal" data-modal-toggle="delete_modal"
+                                   data-te-ripple-init
+                                   data-te-ripple-color="light" id="{{ $event->id }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-danger hover:fill-danger-400">
+                                        <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
             <div class="my-4">
-                {!! $news_all->links('pagination::tailwind') !!}
+                {!! $events->links('pagination::tailwind') !!}
             </div>
         </div>
     @else
@@ -122,12 +127,12 @@
                     <span class="sr-only">@lang('public.close_modal')</span>
                 </button>
                 <div class="p-6 text-center">
-                    <form method="POST" action="{{ route('news_delete') }}">
+                    <form method="POST" action="{{ route('event_delete') }}">
                         @csrf
                         <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         <div class="modal-body">
-                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">@lang('public.delete_news_confirmation')</h3>
-                            <input type="hidden" name="news_id" id="news_id">
+                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">@lang('public.delete_event_confirmation')</h3>
+                            <input type="hidden" name="event_id" id="event_id">
                         </div>
                         <button type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                             @lang('public.delete_confirmed')
@@ -147,7 +152,7 @@
         $(document).ready(function(e) {
             $('.delete').on('click', function() {
                 var id = $(this).attr('id');
-                $(".modal-body #news_id").val( id );
+                $(".modal-body #event_id").val( id );
             });
         });
     </script>

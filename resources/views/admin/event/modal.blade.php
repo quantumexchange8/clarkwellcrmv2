@@ -1,9 +1,9 @@
 <div
     data-te-modal-init
     class="fixed top-0 left-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-    id="newsModal-{{ $news->id }}"
+    id="eventModal-{{ $event->id }}"
     tabindex="-1"
-    aria-labelledby="newsModal-{{ $news->id }}_label"
+    aria-labelledby="eventModal-{{ $event->id }}_label"
     aria-hidden="true">
     <div
         data-te-modal-dialog-ref
@@ -14,10 +14,8 @@
                 class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
                 <h5
                     class="text-xl font-medium leading-normal text-orange-400 dark:text-neutral-200"
-                    id="newsModal-{{ $news->id }}_label">
-                    {{ $news->title }}
-                    <br>
-                    <span class="text-xs text-gray-500">{{ $news->created_at }}</span>
+                    id="eventModal-{{ $event->id }}_label">
+                    {{ $event->event_title }}
                 </h5>
                 <button
                     type="button"
@@ -39,7 +37,7 @@
                 </button>
             </div>
             <div class="relative overflow-y-auto p-4">
-                {!! $news->content !!}
+                <img class="h-full my-auto" src="{{ asset('uploads/events/'.$event->event_image) }}" alt="">
             </div>
             <div
                 class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">

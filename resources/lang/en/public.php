@@ -219,7 +219,9 @@ return array(
     //admin news
     'create_news' => 'Create News',
     'update_news' => 'Update News',
-    'visible' => 'Visibility',
+    'visibility' => 'Visibility',
+    'visible' => 'Visible',
+    'not_visible' => 'Not Visible',
     'popup_status' => 'Pop Up',
     'news_title' => 'News Title',
     'date_created' => 'Date Created',
@@ -400,5 +402,18 @@ return array(
     'pending_description' => 'Wait patiently for the admin to look through your request.',
     'withdraw_request' => 'Withdrawal Request',
     'read_more' => 'Read More',
+
+    //event
+    'event' => 'Event',
+    'invalid_event' => 'Invalid Event',
+    'successfully_added_event' => 'Successfully Created Event',
+    'successfully_updated_event' => 'Successfully Updated Event',
+    'successfully_deleted_event' => 'Successfully Deleted Event',
+    'delete_event_confirmation' => 'Are you sure you want to delete this event?',
+    'create_event' => 'Create Event',
+    'update_event' => 'Update Event',
+    'event_title' => 'Event Title',
+    'event_image' => 'Event Image',
+    'click_to_view' => 'Click To View',
 )
 ?>

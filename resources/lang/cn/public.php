@@ -218,7 +218,9 @@ return array(
 //admin news
     'create_news' => '创建新闻',
     'update_news' => '更新新闻',
-    'visible' => '可见性',
+    'visibility' => '可见性',
+    'visible' => '可见',
+    'not_visible' => '不可见',
     'popup_status' => '弹窗',
     'news_title' => '新闻标题',
     'date_created' => '创建日期',
@@ -400,6 +402,19 @@ return array(
     'pending_description' => '耐心等待管理员查看您的请求。',
     'withdraw_request' => '提款请求',
     'read_more' => '更多',
+
+    //event
+    'event' => '活动',
+    'invalid_event' => '无效的活动',
+    'successfully_added_event' => '成功创建活动',
+    'successfully_updated_event' => '成功更新活动',
+    'successfully_deleted_event' => '成功删除活动',
+    'delete_event_confirmation' => '您确定要删除此活动吗？',
+    'create_event' => '创建活动',
+    'update_event' => '更新活动',
+    'event_title' => '活动标题',
+    'event_image' => '活动图片',
+    'click_to_view' => '点击查看',
 )
 ?>
 

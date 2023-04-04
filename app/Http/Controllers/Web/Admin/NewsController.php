@@ -138,4 +138,5 @@ class NewsController extends Controller
 
         Alert::success(trans('public.done'), trans('public.successfully_deleted_news'));
         return redirect()->route('news_listing');
-    }}
+    }
+}
