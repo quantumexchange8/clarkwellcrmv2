@@ -300,7 +300,9 @@ class UserController extends Controller
                     ->orWhere('name', 'like', '%' . $freetexts . '%');
 
             }
-            $members = $query->whereIn('id', $user->getChildrenIds())->take(1)->get();
+            $compare_users = array_intersect($query->pluck('id')->toArray(), $user->getChildrenIds());
+
+            $members = User::whereIn('id', $compare_users)->take(1)->get();
         } else {
             $members = Auth::user()->children;
         }
