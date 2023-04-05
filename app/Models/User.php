@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Kyslik\ColumnSortable\Sortable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
@@ -161,6 +162,51 @@ class User extends Authenticatable implements JWTSubject
         }
 
         return $query->orderbyDesc('created_at');
+    }
+
+    public static function get_member_tree_record($search)
+    {
+        $user = Auth::user();
+
+        $searchTerms = @$search['freetext'] ?? NULL;
+        $freetext = explode(' ', $searchTerms);
+        $members = [];
+        if ($searchTerms) {
+            $query =  User::query();
+            foreach ($freetext as $freetexts) {
+                $query->where('email', 'like', '%' . $freetexts . '%')
+                    ->orWhere('name', 'like', '%' . $freetexts . '%');
+
+            }
+            $compare_users = array_intersect($query->pluck('id')->toArray(), $user->getChildrenIds());
+
+            $members = User::whereIn('id', $compare_users)->take(1)->get();
+        } else {
+            $members = $user->children;
+        }
+
+        return $members;
+    }
+
+    public static function get_admin_tree_record($search)
+    {
+        $searchTerms = @$search['freetext'] ?? NULL;
+        $freetext = explode(' ', $searchTerms);
+        $members = [];
+        if ($searchTerms) {
+            foreach ($freetext as $freetexts) {
+                $members = User::where('role', User::ROLE_MEMBER)
+                    ->where('email', 'like', '%' . $freetexts . '%')
+                    ->orWhere('name', 'like', '%' . $freetexts . '%')
+                    ->take(1)
+                    ->get();
+            }
+
+        } else {
+            $members = User::where('role', User::ROLE_MEMBER)->whereNull('upline_referral_id')->get();
+        }
+
+        return $members;
     }
 
     public function getClientsCount()

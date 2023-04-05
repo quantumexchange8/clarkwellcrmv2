@@ -9,53 +9,17 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class NetworkExport implements FromCollection, WithHeadings
 {
-    private $filterUser;
-    private $searchText;
     private $result = array();
+    private $query;
 
-    public function __construct($userId=null, $searchText=null)
+    public function __construct($query)
     {
-        $this->filterUser = $userId;
-        $this->searchText = $searchText;
+        $this->query = $query;
     }
 
     public function collection()
     {
-        $query = User::query();
-
-        if ($this->filterUser) {
-
-            $searchTerms = $this->searchText ?? NULL;
-            $freetext = explode(' ', $searchTerms);
-            if ($searchTerms) {
-                $user = User::find($this->filterUser);
-                foreach ($freetext as $freetexts) {
-                    $query->where('email', 'like', '%' . $freetexts . '%')
-                        ->orWhere('name', 'like', '%' . $freetexts . '%');
-                }
-                $query->whereIn('id', $user->getChildrenIds())
-                    ->take(1);
-            } else {
-                $query->where('id', '=', $this->filterUser);
-            }
-
-        } else {
-            $query->where('role', User::ROLE_MEMBER);
-
-            $searchTerms = $this->searchText ?? NULL;
-            $freetext = explode(' ', $searchTerms);
-            if ($searchTerms) {
-                foreach ($freetext as $freetexts) {
-                    $query->where('email', 'like', '%' . $freetexts . '%')
-                        ->orWhere('name', 'like', '%' . $freetexts . '%');
-                }
-                $query->take(1);
-            } else {
-                $query->where('hierarchyList', NULL);
-            }
-        }
-
-        $records = $query->get();
+        $records = $this->query;
         foreach($records as $user) {
             $this->result[] = array(
                 'name' => $user->name,

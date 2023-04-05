@@ -31,7 +31,7 @@ class ReferralController extends Controller
                     break;
                 case 'export':
                     $now = Carbon::now()->format('YmdHis');
-                    return Excel::download(new NetworkExport( null, $request->input('freetext')), $now . '-network-records.xlsx');
+                    return Excel::download(new NetworkExport(User::get_admin_tree_record(session('tree_network_search'))), $now . '-network-records.xlsx');
                 case 'reset':
                     session()->forget('tree_network_search');
                     break;
@@ -40,24 +40,8 @@ class ReferralController extends Controller
 
         $search = session('tree_network_search') ? session('tree_network_search') : $search;
 
-        $searchTerms = @$search['freetext'] ?? NULL;
-        $freetext = explode(' ', $searchTerms);
-        $members = [];
-        if ($searchTerms) {
-            foreach ($freetext as $freetexts) {
-                $members = User::where('role', User::ROLE_MEMBER)
-                    ->where('email', 'like', '%' . $freetexts . '%')
-                    ->orWhere('name', 'like', '%' . $freetexts . '%')
-                    ->take(1)
-                    ->get();
-            }
-
-        } else {
-            $members = User::where('role', User::ROLE_MEMBER)->whereNull('upline_referral_id')->get();
-        }
-
         return view('admin.referral.referral_tree', [
-            'members' => $members,
+            'members' => User::get_admin_tree_record($search),
             'title' => 'Referral Tree',
             'search' =>  $search,
         ]);

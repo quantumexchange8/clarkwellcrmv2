@@ -280,7 +280,7 @@ class UserController extends Controller
                     break;
                 case 'export':
                     $now = Carbon::now()->format('YmdHis');
-                    return Excel::download(new NetworkExport($user->id, $request->input('freetext')), $now . '-network-records.xlsx');
+                    return Excel::download(new NetworkExport(User::get_member_tree_record(session('tree_network_search'))), $now . '-network-records.xlsx');
 
                     case 'reset':
                     session()->forget('tree_network_search');
@@ -290,24 +290,10 @@ class UserController extends Controller
 
         $search = session('tree_network_search') ? session('tree_network_search') : $search;
 
-        $searchTerms = @$search['freetext'] ?? NULL;
-        $freetext = explode(' ', $searchTerms);
-        $members = [];
-        if ($searchTerms) {
-            $query =  User::query();
-            foreach ($freetext as $freetexts) {
-                $query->where('email', 'like', '%' . $freetexts . '%')
-                    ->orWhere('name', 'like', '%' . $freetexts . '%');
-
-            }
-            $compare_users = array_intersect($query->pluck('id')->toArray(), $user->getChildrenIds());
-
-            $members = User::whereIn('id', $compare_users)->take(1)->get();
-        } else {
-            $members = Auth::user()->children;
-        }
-
-        return view('member/tree', compact('members', 'search'));
+        return view('member/tree', [
+            'members' => User::get_member_tree_record($search),
+            'search' => $search,
+        ]);
     }
 
     public function exportExcel(Request $request)
