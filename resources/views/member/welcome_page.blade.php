@@ -92,14 +92,12 @@
                     </button>
                     @foreach($events as $event)
                         @if($event->pop_up_status)
-                            <div class="p-8 odd:bg-gray-100 even:bg-white rounded-l border border-gray-300">
+                            <div class="p-4 odd:bg-gray-100 even:bg-white rounded-l border border-gray-300">
                                 <h3 class="text-xl font-semibold text-[#FFA168] dark:text-white underline">
                                     {{ $event->event_title }}
                                 </h3>
                                 <span class="text-xs font-semibold text-gray-500">{{ $event->created_at }}</span>
-                                <div class="mt-6 text-base leading-relaxed text-gray-500 dark:text-gray-400 block">
-                                    <img class="h-full my-auto" src="{{ asset('uploads/events/'.$event->event_image) }}" alt="">
-                                </div>
+                                <img class="mt-4 h-full my-auto" src="{{ asset('uploads/events/'.$event->event_image) }}" alt="">
                             </div>
                         @endif
                     @endforeach
