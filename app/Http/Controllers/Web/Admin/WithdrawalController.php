@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreWithdrawalRequest;
 use App\Imports\WithdrawalImport;
 use App\Models\Brokers;
+use App\Models\SettingCountry;
 use App\Models\User;
 use App\Models\Withdrawals;
 use Carbon\Carbon;
@@ -76,7 +77,8 @@ class WithdrawalController extends Controller
                         'freetext' =>  $request->input('freetext'),
                         'created_start' => $request->input('created_start'),
                         'created_end' => $request->input('created_end'),
-                        'status' => $request->input('status')
+                        'status' => $request->input('status'),
+                        'country' => $request->input('country')
                     ]]);
                     break;
                 case 'export':
@@ -97,6 +99,7 @@ class WithdrawalController extends Controller
             'search' =>  $search,
             'brokers' => Brokers::all(),
             'get_status_sel' => ['' => trans('public.select_status')] + [1 => trans('public.process'), 2 => trans('public.approved'), 3 => trans('public.rejected')],
+            'get_country_sel' => SettingCountry::get_country_sel(),
         ]);
     }
 

@@ -115,6 +115,12 @@ class Deposits extends Model
             $end_date = Carbon::parse(@$search['transaction_end'])->endOfDay()->format('Y-m-d H:i:s');
             $query->whereBetween('transaction_at', [$start_date, $end_date]);
         }
+        $search_country = @$search['country'] ?? NULL;
+        if ($search_country) {
+            $query->whereHas('user', function ($q) use($search_country) {
+                $q->where('country', $search_country);
+            });
+        }
 
         return $query->orderbyDesc('transaction_at');
     }

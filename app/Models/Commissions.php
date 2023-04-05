@@ -75,6 +75,7 @@ class Commissions extends Model
 
     public static function get_record($search)
     {
+
         $query = Commissions::sortable()->whereHas('user', function ($query) {
            return $query->where('role', 1);
         });
@@ -108,6 +109,13 @@ class Commissions extends Model
             }
 
 
+        }
+        $search_country = @$search['country'] ?? NULL;
+
+        if ($search_country) {
+            $query->whereHas('user', function ($q) use($search_country) {
+                $q->where('country', $search_country);
+            });
         }
 
         return $query->orderbyDesc('transaction_at');

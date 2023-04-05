@@ -104,6 +104,13 @@ class Withdrawals extends Model
 
         }
 
+        $search_country = @$search['country'] ?? NULL;
+        if ($search_country) {
+            $query->whereHas('user', function ($q) use($search_country) {
+                $q->where('country', $search_country);
+            });
+        }
+
         return $query->orderbyDesc('created_at');
     }
 

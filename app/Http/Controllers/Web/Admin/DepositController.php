@@ -8,6 +8,7 @@ use App\Imports\DepositsImport;
 use App\Models\ActionLogs;
 use App\Models\Brokers;
 use App\Models\Deposits;
+use App\Models\SettingCountry;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -62,6 +63,7 @@ class DepositController extends Controller
     public function listing(Request $request)
     {
         $search = array();
+        $countries = SettingCountry::where('id', '>', 1)->get();
 
         if ($request->isMethod('post')) {
             $submit_type = $request->input('submit');
@@ -72,6 +74,7 @@ class DepositController extends Controller
                         'freetext' =>  $request->input('freetext'),
                         'transaction_start' => $request->input('transaction_start'),
                         'transaction_end' => $request->input('transaction_end'),
+                        'country' => $request->input('country')
                     ]]);
                     break;
                 case 'export':
@@ -91,6 +94,7 @@ class DepositController extends Controller
             'records' => Deposits::get_report_record($search)->paginate(10),
             'search' =>  $search,
             'brokers' => Brokers::all(),
+            'get_country_sel' => SettingCountry::get_country_sel(),
         ]);
     }
 

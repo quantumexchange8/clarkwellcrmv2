@@ -10,6 +10,7 @@ use App\Models\ActionLogs;
 use App\Models\Announcements;
 use App\Models\Brokers;
 use App\Models\Commissions;
+use App\Models\SettingCountry;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -75,6 +76,7 @@ class CommissionsController extends Controller
                         'freetext' =>  $request->input('freetext'),
                         'transaction_start' => $request->input('transaction_start'),
                         'transaction_end' => $request->input('transaction_end'),
+                        'country' => $request->input('country')
                     ]]);
                     break;
                 case 'export':
@@ -94,6 +96,7 @@ class CommissionsController extends Controller
             'records' => Commissions::get_record($search)->paginate(10),
             'search' =>  $search,
             'brokers' => Brokers::all(),
+            'get_country_sel' => SettingCountry::get_country_sel(),
         ]);
     }
 
