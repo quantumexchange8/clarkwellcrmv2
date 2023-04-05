@@ -163,8 +163,3 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
 
     });
 });
-
-Route::get('/testlog', function () {
-  Log::critical('This is a critical message Sent from Laravel App');
-     return view('login');
- });
