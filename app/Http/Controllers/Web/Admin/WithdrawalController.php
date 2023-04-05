@@ -27,12 +27,15 @@ class WithdrawalController extends Controller
         $approval = $request->input('status');
         $withdrawal = Withdrawals::find($id);
         $user = $withdrawal->user;
+
+        $total_withdraw_amount = $withdrawal->amount + $withdrawal->transaction_fee;
+
         if ($withdrawal->status != Withdrawals::STATUS_PENDING) {
             Alert::error(trans('public.invalid_action'), trans('public.try_again'));
-            return back()->withErrors(["error" => "Only pending status can perform approval action."]);
-        } else if ($approval == 'approve' && ($withdrawal->amount + $withdrawal->transaction_fee) > $user->wallet_balance) {
+            return back();
+        } else if ($approval == 'approve' && number_format($user->wallet_balance - $total_withdraw_amount, 2) < 0) {
             Alert::error(trans('public.invalid_action'), trans('public.insufficient_amount'));
-            return back()->withErrors(["error" => "User's wallet balance insufficient to approve."]);
+            return back();
         }
         switch ($request->input('status')) {
             case 'approve':
@@ -50,8 +53,11 @@ class WithdrawalController extends Controller
 
         if ($withdrawal->status == Withdrawals::STATUS_APPROVED) {
 
-            $user->wallet_balance  = $user->wallet_balance - $withdrawal->amount - $withdrawal->transaction_fee;
-            $user->save();
+            $wallet_balance = $user->wallet_balance - $withdrawal->amount - $withdrawal->transaction_fee;
+
+            $user->update([
+                'wallet_balance' => number_format($wallet_balance, 2),
+            ]);
         }
         Alert::success(trans('public.done'), trans('public.successfully_updated_withdrawal_status'));
         return back();
