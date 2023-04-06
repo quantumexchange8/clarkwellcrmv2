@@ -50,10 +50,11 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
                 Route::match(['get', 'post'], '/change-password', 'changePassword')->name('member_change_password');
 //                Route::post('/change-password', 'changePasswordSave');
                 Route::get('/tree', 'tree');
-                Route::match(['get', 'post'], '/tree', 'tree');
+                Route::match(['get', 'post'], '/tree', 'tree')->name('member_tree')->middleware('tree.verification');
+                Route::match(['get', 'post'], '/tree_verification/{type}', 'treeVerification')->name('tree_verification');
                 Route::get('/profile', 'profile')->name('member_profile');
                 Route::match(['get', 'post'], '/verification', 'verification')->name('member_verification');
-                Route::match(['get', 'post'], '/downline_listing', 'downline_listing')->name('member_downline_listing');
+                Route::match(['get', 'post'], '/downline_listing', 'downline_listing')->name('member_downline_listing')->middleware('tree.verification');
                 Route::get('/account/{id}', 'account');
                 Route::post('/export-network', 'exportExcel');
                 Route::post('/update-profile-pic', 'updateProfilePicture');
@@ -64,8 +65,8 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
             });
             Route::controller('CommissionController')->group(function () {
                 Route::get('/commissions', 'index');
-                Route::match(['get', 'post'], '/commissions', 'index')->name('commissions_listing');
-                Route::match(['get', 'post'], '/network', 'network')->name('network_commissions_listing');
+                Route::match(['get', 'post'], '/commissions', 'index')->name('commissions_listing')->middleware('tree.verification');
+                Route::match(['get', 'post'], '/network', 'network')->name('network_commissions_listing')->middleware('tree.verification');
             });
             Route::controller('DepositController')->group(function () {
                 Route::match(['get', 'post'], '/deposit/{id}', 'deposit')->name('deposits_listing');

@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'jwt.verify' => \App\Http\Middleware\JwtMiddleware::class,
         'jwt.set' => \App\Http\Middleware\JwtSetMiddleware::class,
         'role.check' => \App\Http\Middleware\RoleCheck::class,
+        'tree.verification' => \App\Http\Middleware\TreeVerification::class,
     ];
 }

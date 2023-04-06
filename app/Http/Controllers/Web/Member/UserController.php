@@ -269,12 +269,6 @@ class UserController extends Controller
     {
         $search = array();
         $user = Auth::user();
-        $token = FacadesSession::get('tree_verification') ?? null;
-        $tokenNotExpire = null;
-        if ($token) {
-            $tokenNotExpire = Carbon::now()->lt($token);
-        }
-        if ($tokenNotExpire) {
             if ($request->isMethod('post')) {
                 $submit_type = $request->input('submit');
                 switch ($submit_type) {
@@ -300,28 +294,34 @@ class UserController extends Controller
                 'members' => User::get_member_tree_record($search),
                 'search' => $search,
             ]);
-        } else {
-            if ($request->isMethod('post')) {
+    }
 
-                $credentials = [
-                    'email' => $user->email,
-                    'password' => $request['current_password'],
-                ];
+    public function treeVerification(Request $request, $type)
+    {
+        $user = Auth::user();
 
-                if (Auth::guard('web')->setTTL(1)->attempt($credentials)) {
-                    FacadesSession::put('tree_verification', Carbon::now()->addMinutes(30));
-                    return redirect()->back();
-                } else {
-                    Alert::error(trans('public.access_denied'), trans('public.invalid_auth'));
-                    return back()->withErrors(['error_message' => 'Invalid email or password']);
-                }
+        if ($request->isMethod('post')) {
+
+            $credentials = [
+                'email' => $user->email,
+                'password' => $request['current_password'],
+            ];
+
+            if (Auth::guard('web')->setTTL(1)->attempt($credentials)) {
+
+                FacadesSession::put('tree_verification', Carbon::now()->addMinutes(30));
+
+                return redirect()->route($type);
+            } else {
+                Alert::error(trans('public.access_denied'), trans('public.invalid_auth'));
+                return back()->withErrors(['error_message' => 'Invalid email or password']);
             }
-
-
-            return view('member/tree-verification');
         }
 
 
+        return view('member/tree-verification', [
+            'type' => $type
+        ]);
     }
 
     public function exportExcel(Request $request)

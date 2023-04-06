@@ -8,7 +8,7 @@
             <img class ="h-20 mx-auto my-6" src="{{url('/img/CW.png')}}">
         </a>
         <p class="font-semibold m-6 text-center text-lg text-gray-700">@lang('public.tree_verification')</p>
-        <form method="post" action="{{ url('member/tree') }}">@csrf
+        <form method="post" action="{{ route('tree_verification', $type) }}">@csrf
             <div class="form-group mb-6">
                 <label for="current_password" class="form-label inline-block mb-2 text-orange-400 font-semibold">@lang('public.enter_password')</label>
                 <div class="relative mb-2">
