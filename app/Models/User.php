@@ -360,11 +360,11 @@ class User extends Authenticatable implements JWTSubject
     {
         $start_date = $end_date = Carbon::now();
         if ($month) {
-            $start_date = $start_date->startOfMonth()->subMonth();
+            $start_date = $start_date->startOfMonth();
             $end_date = $start_date->copy()->endOfMonth();
 
         } else {
-            $start_date = $end_date = $start_date->subDay();
+            $start_date = $end_date = $start_date;
         }
 
         $start_date = Carbon::parse($start_date)->startOfDay()->format('Y-m-d H:i:s');
@@ -388,10 +388,10 @@ class User extends Authenticatable implements JWTSubject
 
         $start_date = $end_date = Carbon::now();
         if ($month) {
-            $start_date = $start_date->startOfMonth()->subMonth();
+            $start_date = $start_date->startOfMonth();
             $end_date = $start_date->copy()->endOfMonth();
         } else {
-            $start_date = $end_date = $start_date->subDay();
+            $start_date = $end_date = $start_date;
         }
 
         $start_date = Carbon::parse($start_date)->startOfDay()->format('Y-m-d H:i:s');
