@@ -415,6 +415,14 @@ return array(
     'event_title' => '活动标题',
     'event_image' => '活动图片',
     'click_to_view' => '点击查看',
+
+    //tree verification
+    'tree_verification' => '密码验证以查看市场体系',
+    'enter_password' => '输入密码',
+    'verify' => '验证',
+    'group_daily_deposit' => '团队每月托管总计',
+    'group_monthly_deposit' => '团队每月托管总计',
+    'personal_monthly_deposit' => '个人每月托管总计',
 )
 ?>
 

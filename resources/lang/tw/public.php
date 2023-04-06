@@ -415,6 +415,14 @@ return array(
     'event_title' => '廣告標題',
     'event_image' => '廣告圖片',
     'click_to_view' => '點擊查看',
+
+    //tree verification
+    'tree_verification' => '密碼驗證以查看市場體系',
+    'enter_password' => '輸入密碼',
+    'verify' => '驗證',
+    'group_daily_deposit' => '團隊每月託管總計',
+    'group_monthly_deposit' => '團隊每月託管總計',
+    'personal_monthly_deposit' => '個人每月託管總計',
 )
 ?>
 

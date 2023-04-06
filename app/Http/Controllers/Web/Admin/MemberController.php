@@ -97,7 +97,7 @@ class MemberController extends Controller
             ]);
 
             if (!$validator->fails()) {
-                 User::create([
+                 $user = User::create([
                     'name' => $request->input('name'),
                     'contact_number' => $request->input('contact_number'),
                     'email' => $request->input('email'),
@@ -109,7 +109,7 @@ class MemberController extends Controller
                     'status' => $request->input('status'),
                     'leader_status' => $request->input('leader_status'),
                 ]);
-
+                $user->setReferralId();
                 Alert::success(trans('public.done'), trans('public.successfully_added_member'));
                 return redirect()->route('member_listing');
             }
