@@ -51,7 +51,7 @@ class EventController extends Controller
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(), [
                 'event_title' => 'required|max:255',
-                'event_image' => 'required|image|max:5120',
+                'event_image' => 'required',
             ])->setAttributeNames([
                 'event_title' => trans('public.event_title'),
                 'event_image' => trans('public.event_image'),
@@ -59,16 +59,9 @@ class EventController extends Controller
 
             if (!$validator->fails()) {
 
-                $event_image_name = null;
-                $event_image = $request->file('event_image');
-                if ($event_image) {
-                    $event_image_name = pathinfo($event_image->getClientOriginalName(), PATHINFO_FILENAME) . time() . '.' . $event_image->getClientOriginalExtension();
-                    $event_image->move($this->path_url, $event_image_name);
-                }
-
                 Event::create([
                     'event_title' => $request->input('event_title'),
-                    'event_image' => $event_image_name,
+                    'event_image' => $request->input('event_image'),
                     'visibility' => $request->input('visibility') == 'on' ? 1 : 0,
                     'pop_up_status' => $request->input('pop_up_status') == 'on' ? 1 : 0,
                     'user_id' => Auth::user()->id,
@@ -102,22 +95,17 @@ class EventController extends Controller
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(), [
                 'event_title' => 'required|max:255',
+                'event_image' => 'required',
             ])->setAttributeNames([
                 'event_title' => trans('public.event_title'),
+                'event_image' => trans('public.event_image'),
             ]);
 
             if (!$validator->fails()) {
 
-                $event_image = $request->file('event_image');
-                if ($event_image) {
-                    File::delete($this->path_url . '/' . $event->event_image);
-                    $event_image_name = pathinfo($event_image->getClientOriginalName(), PATHINFO_FILENAME) . time() . '.' . $event_image->getClientOriginalExtension();
-                    $event_image->move($this->path_url, $event_image_name);
-                    $event->event_image = $event_image_name;
-                }
-
                 $event->update([
                     'event_title' => $request->input('event_title'),
+                    'event_image' => $request->input('event_image'),
                     'visibility' => $request->input('visibility') == 'on' ? 1 : 0,
                     'pop_up_status' => $request->input('pop_up_status') == 'on' ? 1 : 0,
                     'userId' => Auth::user()->id,

@@ -81,30 +81,63 @@
                 <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </a>
         </div>
-        <div id="modal" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4 modal">
-            <div class="relative top-5 mx-auto shadow-xl rounded-md bg-white max-w-xl">
-                @foreach($events as $event)
 
-                <!-- Modal header -->
-                <div class="flex justify-between items-center text-white text-xl rounded-t-md px-4 py-2">
-                    <h3 class="text-xl font-semibold text-[#FFA168] dark:text-white underline">
-                        {{ $event->event_title }}
-                    </h3>
-                    <button class="text-gray-500" onclick="closeModal('modal')">x</button>
-                </div>
 
-                <!-- Modal body -->
-                    @if($event->pop_up_status)
-                        <div class="p-4 odd:bg-gray-100 even:bg-white rounded-l border border-gray-300">
-                            <span class="text-xs font-semibold text-gray-500">{{ $event->created_at }}</span>
-                            <img class="mt-4 h-full my-auto object-contain" src="{{ asset('uploads/events/'.$event->event_image) }}" alt="">
+        <button class="hidden" data-te-toggle="modal" data-te-target="#eventModalPopUp" id="popUpTrigger">qw eqqweqe</button>
+        <div
+            data-te-modal-init
+            class="fixed top-0 left-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+            id="eventModalPopUp"
+            tabindex="-1"
+            aria-labelledby="eventModalPopUp_label"
+            aria-hidden="true">
+            <div
+                data-te-modal-dialog-ref
+                class="pointer-events-none relative h-[calc(100%-1rem)] w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]">
+                <div
+                    class="pointer-events-auto relative flex max-h-[100%] w-full flex-col overflow-hidden rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
+                    @foreach($events as $event)
+                        <div
+                            class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
+                            <h5
+                                class="text-xl font-medium leading-normal text-orange-400 dark:text-neutral-200"
+                                id="eventModalPopUp_label">
+                                {{ $event->event_title }}
+                            </h5>
+                            <button
+                                type="button"
+                                class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
+                                data-te-modal-dismiss
+                                aria-label="Close">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="h-6 w-6 text-gray-300">
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
                         </div>
-                    @endif
-                @endforeach
-
-                <!-- Modal footer -->
-                <div class="px-4 py-2 border-t border-t-gray-200 flex justify-end items-center space-x-4">
-                    <button class="inline-block rounded bg-orange-100 px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-orange-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200" onclick="closeModal('modal')">@lang('public.close')</button>
+                        <div class="relative overflow-y-auto p-4">
+                            {!! $event->event_image !!}
+                        </div>
+                    @endforeach
+                    <div
+                        class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
+                        <button
+                            type="button"
+                            class="inline-block rounded bg-orange-100 px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-orange-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
+                            data-te-modal-dismiss
+                            data-te-ripple-init
+                            data-te-ripple-color="light">
+                            @lang('public.close')
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -114,30 +147,8 @@
 @section('script')
     <script>
         $(document).ready(function(){
-            $('#modal').fadeIn('15');
+            $('#popUpTrigger').trigger('click');
         });
-
-        window.openModal = function(modalId) {
-            document.getElementById(modalId).style.display = 'block'
-            document.getElementsByTagName('body')[0].classList.add('overflow-y-hidden')
-        }
-
-        window.closeModal = function(modalId) {
-            document.getElementById(modalId).style.display = 'none'
-            document.getElementsByTagName('body')[0].classList.remove('overflow-y-hidden')
-        }
-
-        // Close all modals when press ESC
-        document.onkeydown = function(event) {
-            event = event || window.event;
-            if (event.keyCode === 27) {
-                document.getElementsByTagName('body')[0].classList.remove('overflow-y-hidden')
-                let modals = document.getElementsByClassName('modal');
-                Array.prototype.slice.call(modals).forEach(i => {
-                    i.style.display = 'none'
-                })
-            }
-        };
 
     </script>
 @endsection
