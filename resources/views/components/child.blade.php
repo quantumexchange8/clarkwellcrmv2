@@ -15,7 +15,7 @@
                 <svg class="h-6 w-6 text-white" style="display: none" id="svgMinus-child{{ $child->id }}"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="5" y1="12" x2="19" y2="12" /></svg>
             </button>
             <a class="w-auto p-4 shadow-lg hover:shadow-2xl rounded-lg dark:bg-neutral-700 dark:text-neutral-50 inline-flex"
-               href="{{ route('referral_detail', $child->id) }}" id="childBg-{{ $count }}">
+               href="{{ url("member/account/$child->id") }}" id="childBg-{{ $count }}">
                 <div class="flex items-center space-x-4 sp">
                     <div class="inline-flex items-center justify-center w-8 h-8 bg-rose-400 rounded-full shrink-0 grow-0 dark:bg-gray-600" id="childColor-{{ $count }}">
                         <span class="font-bold text-md text-white">{{$count}}</span>
@@ -71,7 +71,7 @@
         <!-- Without Child -->
         <div class="inline-flex mb-4 w-auto justify-center items-center" id="childContainer">
             <a class="w-full p-4 shadow-lg hover:shadow-2xl rounded-lg dark:bg-neutral-700 dark:text-neutral-50 inline-flex"
-               href="{{ route('referral_detail', $child->id) }}" id="childBg-{{ $count }}">
+               href="{{ url("member/account/$child->id") }}" id="childBg-{{ $count }}">
                 <div class="flex items-center space-x-4 sp">
                     <div class="inline-flex items-center justify-center w-8 h-8 bg-rose-400 rounded-full shrink-0 grow-0 dark:bg-gray-600" id="childColor-{{ $count }}">
                         <span class="font-bold text-md text-white">{{$count}}</span>
