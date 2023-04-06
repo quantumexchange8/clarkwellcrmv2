@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 use Intervention\Image\Facades\Image;
@@ -268,32 +269,59 @@ class UserController extends Controller
     {
         $search = array();
         $user = Auth::user();
+        $token = FacadesSession::get('tree_verification') ?? null;
+        $tokenNotExpire = null;
+        if ($token) {
+            $tokenNotExpire = Carbon::now()->lt($token);
+        }
+        if ($tokenNotExpire) {
+            if ($request->isMethod('post')) {
+                $submit_type = $request->input('submit');
+                switch ($submit_type) {
+                    case 'search':
 
-        if ($request->isMethod('post')) {
-            $submit_type = $request->input('submit');
-            switch ($submit_type) {
-                case 'search':
-
-                    session(['tree_network_search' => [
-                        'freetext' => $request->input('freetext'),
-                    ]]);
-                    break;
-                case 'export':
-                    $now = Carbon::now()->format('YmdHis');
-                    return Excel::download(new NetworkExport(User::get_member_tree_record(session('tree_network_search'))), $now . '-network-records.xlsx');
+                        session(['tree_network_search' => [
+                            'freetext' => $request->input('freetext'),
+                        ]]);
+                        break;
+                    case 'export':
+                        $now = Carbon::now()->format('YmdHis');
+                        return Excel::download(new NetworkExport(User::get_member_tree_record(session('tree_network_search'))), $now . '-network-records.xlsx');
 
                     case 'reset':
-                    session()->forget('tree_network_search');
-                    break;
+                        session()->forget('tree_network_search');
+                        break;
+                }
             }
+
+            $search = session('tree_network_search') ? session('tree_network_search') : $search;
+
+            return view('member/tree', [
+                'members' => User::get_member_tree_record($search),
+                'search' => $search,
+            ]);
+        } else {
+            if ($request->isMethod('post')) {
+
+                $credentials = [
+                    'email' => $user->email,
+                    'password' => $request['current_password'],
+                ];
+
+                if (Auth::guard('web')->setTTL(1)->attempt($credentials)) {
+                    FacadesSession::put('tree_verification', Carbon::now()->addMinutes(30));
+                    return redirect()->back();
+                } else {
+                    Alert::error(trans('public.access_denied'), trans('public.invalid_auth'));
+                    return back()->withErrors(['error_message' => 'Invalid email or password']);
+                }
+            }
+
+
+            return view('member/tree-verification');
         }
 
-        $search = session('tree_network_search') ? session('tree_network_search') : $search;
 
-        return view('member/tree', [
-            'members' => User::get_member_tree_record($search),
-            'search' => $search,
-        ]);
     }
 
     public function exportExcel(Request $request)

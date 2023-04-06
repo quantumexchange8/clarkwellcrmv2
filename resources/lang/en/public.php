@@ -415,5 +415,13 @@ return array(
     'event_title' => 'Event Title',
     'event_image' => 'Event Image',
     'click_to_view' => 'Click To View',
+
+    //tree verification
+    'tree_verification' => 'Password verification to view tree',
+    'enter_password' => 'Enter Password',
+    'verify' => 'Verify',
+    'group_daily_deposit' => 'Group Daily Deposit',
+    'group_monthly_deposit' => 'Group Monthly Deposit',
+    'personal_monthly_deposit' => 'Personal Monthly Deposit',
 )
 ?>

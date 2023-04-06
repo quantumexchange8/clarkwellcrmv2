@@ -182,7 +182,7 @@ class User extends Authenticatable implements JWTSubject
 
             $members = User::whereIn('id', $compare_users)->take(1)->get();
         } else {
-            $members = $user->children;
+            $members = collect([(object) $user]);
         }
 
         return $members;
@@ -356,12 +356,13 @@ class User extends Authenticatable implements JWTSubject
         return $result;
     }
 
-    public function userDailyWeeklyDeposit($week = false)
+    public function userDailyMonthlyDeposit($month = false)
     {
         $start_date = $end_date = Carbon::now();
-        if ($week) {
-            $start_date = $start_date->startOfWeek()->subWeek();
-            $end_date = $start_date->copy()->endOfWeek();
+        if ($month) {
+            $start_date = $start_date->startOfMonth()->subMonth();
+            $end_date = $start_date->copy()->endOfMonth();
+
         } else {
             $start_date = $end_date = $start_date->subDay();
         }
@@ -380,6 +381,38 @@ class User extends Authenticatable implements JWTSubject
             ->sum('amount');
 
         return $personal_deposit - $personal_withdrawed_deposit;
+    }
+
+    public function groupDailyMonthlyDeposit($month = false)
+    {
+
+        $start_date = $end_date = Carbon::now();
+        if ($month) {
+            $start_date = $start_date->startOfMonth()->subMonth();
+            $end_date = $start_date->copy()->endOfMonth();
+        } else {
+            $start_date = $end_date = $start_date->subDay();
+        }
+
+        $start_date = Carbon::parse($start_date)->startOfDay()->format('Y-m-d H:i:s');
+        $end_date = Carbon::parse($end_date)->endOfDay()->format('Y-m-d H:i:s');
+
+        $users =$this->getChildrenIds();
+
+        $personal_deposit = Deposits::whereIn('userId', $users)
+            ->whereBetween('transaction_at', [$start_date, $end_date])
+            ->where('type', Deposits::TYPE_DEPOSIT)
+            ->sum('amount');
+        $personal_withdrawed_deposit = Deposits::whereIn('userId', $users)
+            ->whereBetween('transaction_at', [$start_date, $end_date])
+            ->where('type', Deposits::TYPE_WITHDRAW)
+            ->where('status', Deposits::STATUS_APPROVED)
+            ->sum('amount');
+
+        $underlineTotal = $personal_deposit - $personal_withdrawed_deposit;
+
+        $result = $underlineTotal + $this->userDailyMonthlyDeposit($month);
+        return $result;
     }
 
 
@@ -403,6 +436,7 @@ class User extends Authenticatable implements JWTSubject
                 return 'Invalid Status';
         }
     }
+
 
 
     public function rank()
