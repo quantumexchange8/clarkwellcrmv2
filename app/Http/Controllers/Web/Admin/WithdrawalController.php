@@ -124,7 +124,8 @@ class WithdrawalController extends Controller
                         'created_start' => $request->input('created_start'),
                         'created_end' => $request->input('created_end'),
                         'status' => $request->input('status'),
-                        'type' => 'children'
+                        'type' => 'children',
+                        'country' => $request->input('country')
                     ]]);
                     break;
                 case 'export':
@@ -146,6 +147,7 @@ class WithdrawalController extends Controller
             'users' => $users,
             'brokers' => Brokers::all(),
             'get_status_sel' => ['' => trans('public.select_status')] + [1 => trans('public.process'), 2 => trans('public.approved'), 3 => trans('public.rejected')],
+            'get_country_sel' => SettingCountry::get_country_sel(),
         ]);
     }
 

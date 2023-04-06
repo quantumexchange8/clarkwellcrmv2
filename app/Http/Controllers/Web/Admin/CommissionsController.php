@@ -120,7 +120,8 @@ class CommissionsController extends Controller
                         'user_id' =>  $request->input('user_id'),
                         'transaction_start' => $request->input('transaction_start'),
                         'transaction_end' => $request->input('transaction_end'),
-                        'type' => 'children'
+                        'type' => 'children',
+                        'country' => $request->input('country')
                     ]]);
                     break;
                 case 'export':
@@ -141,6 +142,7 @@ class CommissionsController extends Controller
             'search' =>  $search,
             'users' => $users,
             'brokers' => Brokers::all(),
+            'get_country_sel' => SettingCountry::get_country_sel(),
         ]);
     }
 

@@ -63,7 +63,7 @@ class DepositController extends Controller
     public function listing(Request $request)
     {
         $search = array();
-        $countries = SettingCountry::where('id', '>', 1)->get();
+
 
         if ($request->isMethod('post')) {
             $submit_type = $request->input('submit');
@@ -117,7 +117,8 @@ class DepositController extends Controller
                         'user_id' =>  $request->input('user_id'),
                         'transaction_start' => $request->input('transaction_start'),
                         'transaction_end' => $request->input('transaction_end'),
-                        'type' => 'children'
+                        'type' => 'children',
+                        'country' => $request->input('country')
                     ]]);
                     break;
                 case 'export':
@@ -138,6 +139,7 @@ class DepositController extends Controller
             'search' =>  $search,
             'users' => $users,
             'brokers' => Brokers::all(),
+            'get_country_sel' => SettingCountry::get_country_sel(),
         ]);
     }
 
