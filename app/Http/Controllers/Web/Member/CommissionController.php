@@ -37,7 +37,7 @@ class CommissionController extends Controller
                     break;
                 case 'export':
                     $now = Carbon::now()->format('YmdHis');
-                    return Excel::download(new ExportCommissions(Commissions::get_commissions_table(session('commissions_self_search') , $user->id)), $now . '-commissions-records.xlsx');
+                    return Excel::download(new ExportCommissions(Commissions::get_commissions_table(session('commissions_self_search') , $user->id), true), $now . '-commissions-records.xlsx');
                 case 'reset':
                     session()->forget('commissions_self_search');
                     break;

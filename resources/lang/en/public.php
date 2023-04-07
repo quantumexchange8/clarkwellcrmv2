@@ -423,5 +423,10 @@ return array(
     'group_daily_deposit' => 'Group Daily Deposit',
     'group_monthly_deposit' => 'Group Monthly Deposit',
     'personal_monthly_deposit' => 'Personal Monthly Deposit',
+
+    'group_daily_withdrawal' => 'Group Daily Withdrawal',
+    'group_monthly_withdrawal' => 'Group Monthly Withdrawal',
+    'personal_daily_withdrawal' => 'Personal Daily Withdrawal',
+    'personal_monthly_withdrawal' => 'Personal Monthly Withdrawal',
 )
 ?>

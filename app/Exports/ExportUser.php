@@ -10,29 +10,45 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 class ExportUser implements FromCollection, WithHeadings
 {
     private $query;
+    private $not_admin;
 
-    public function __construct($query)
+    public function __construct($query, $status=false)
     {
         $this->query = $query;
+        $this->not_admin = $status;
     }
 
     public function collection()
     {
         $records = $this->query->get();
         $result = array();
-        foreach($records as $user){
-            $result[] = array(
-                'name' => $user->name,
-                'upline'=> $user->parent ? $user->parent->email : null,
-                'first_leader'=> $user->getLeaders()['first_leader'],
-                'top_leader'=> $user->getLeaders()['top_leader'],
-                'rank' => $user->rank->name,
-                'email' => $user->email,
-                'contact' => $user->contact_number,
-                'country' => $user->country,
-                'status' => User::getUserStatus($user->status),
-            );
+        if ($this->not_admin) {
+            foreach($records as $user){
+                $result[] = array(
+                    'name' => $user->name,
+                    'rank' => $user->rank->name,
+                    'email' => $user->email,
+                    'contact' => $user->contact_number,
+                    'country' => $user->country,
+                    'status' => User::getUserStatus($user->status),
+                );
+            }
+        } else {
+            foreach($records as $user){
+                $result[] = array(
+                    'name' => $user->name,
+                    'upline'=> $user->parent ? $user->parent->email : null,
+                    'first_leader'=> $user->getLeaders()['first_leader'],
+                    'top_leader'=> $user->getLeaders()['top_leader'],
+                    'rank' => $user->rank->name,
+                    'email' => $user->email,
+                    'contact' => $user->contact_number,
+                    'country' => $user->country,
+                    'status' => User::getUserStatus($user->status),
+                );
+            }
         }
+
 
         return collect($result);
 
@@ -40,16 +56,28 @@ class ExportUser implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return [
-            'Name',
-            'Upline Email',
-            'First Leader Email',
-            'Top Leader Email',
-            'Rank',
-            'Email',
-            'Contact',
-            'Country',
-            'Status',
-        ];
+        if ($this->not_admin) {
+            return [
+                'Name',
+                'Rank',
+                'Email',
+                'Contact',
+                'Country',
+                'Status',
+            ];
+        } else {
+            return [
+                'Name',
+                'Upline Email',
+                'First Leader Email',
+                'Top Leader Email',
+                'Rank',
+                'Email',
+                'Contact',
+                'Country',
+                'Status',
+            ];
+        }
+
     }
 }

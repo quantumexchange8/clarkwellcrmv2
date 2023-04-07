@@ -423,6 +423,11 @@ return array(
     'group_daily_deposit' => '团队每月托管总计',
     'group_monthly_deposit' => '团队每月托管总计',
     'personal_monthly_deposit' => '个人每月托管总计',
+
+    'group_daily_withdrawal' => '团队每日提款总计',
+    'group_monthly_withdrawal' => '团队每月提款总计',
+    'personal_daily_withdrawal' => '个人每日提款总计',
+    'personal_monthly_withdrawal' => '个人每月提款总计',
 )
 ?>
 

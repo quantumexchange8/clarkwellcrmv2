@@ -415,6 +415,56 @@ class User extends Authenticatable implements JWTSubject
         return $result;
     }
 
+    public function userDailyMonthlyWithdrawal($month = false)
+    {
+        $start_date = $end_date = Carbon::now();
+        if ($month) {
+            $start_date = $start_date->startOfMonth();
+            $end_date = $start_date->copy()->endOfMonth();
+
+        } else {
+            $start_date = $end_date = $start_date;
+        }
+
+        $start_date = Carbon::parse($start_date)->startOfDay()->format('Y-m-d H:i:s');
+        $end_date = Carbon::parse($end_date)->endOfDay()->format('Y-m-d H:i:s');
+
+        $personal_withdrawal_query = $this->withdrawals()
+            ->whereBetween('created_at', [$start_date, $end_date])
+            ->where('status', Withdrawals::STATUS_APPROVED);
+
+        $amount = $fee = clone $personal_withdrawal_query;
+
+        return $amount->sum('amount') + $fee->sum('transaction_fee');
+    }
+
+    public function groupDailyMonthlyWithdrawal($month = false)
+    {
+
+        $start_date = $end_date = Carbon::now();
+        if ($month) {
+            $start_date = $start_date->startOfMonth();
+            $end_date = $start_date->copy()->endOfMonth();
+        } else {
+            $start_date = $end_date = $start_date;
+        }
+
+        $start_date = Carbon::parse($start_date)->startOfDay()->format('Y-m-d H:i:s');
+        $end_date = Carbon::parse($end_date)->endOfDay()->format('Y-m-d H:i:s');
+
+        $users =$this->getChildrenIds();
+
+        $personal_withdrawal_query = Withdrawals::whereIn('requested_by_user', $users)
+            ->whereBetween('created_at', [$start_date, $end_date])
+            ->where('status', Withdrawals::STATUS_APPROVED);
+
+        $amount = $fee = clone $personal_withdrawal_query;
+
+        $underlineTotal = $amount->sum('amount') + $fee->sum('transaction_fee');
+
+        return $underlineTotal + $this->userDailyMonthlyWithdrawal($month);
+    }
+
 
     public function getRole()
     {
@@ -452,6 +502,11 @@ class User extends Authenticatable implements JWTSubject
     public function commissions(): HasMany
     {
         return $this->hasMany(Commissions::class, 'userId', 'id');
+    }
+
+    public function withdrawals(): HasMany
+    {
+        return $this->hasMany(Withdrawals::class, 'requested_by_user', 'id');
     }
 
     public function children()

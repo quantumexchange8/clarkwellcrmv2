@@ -280,7 +280,7 @@ class UserController extends Controller
                         break;
                     case 'export':
                         $now = Carbon::now()->format('YmdHis');
-                        return Excel::download(new NetworkExport(User::get_member_tree_record(session('tree_network_search'))), $now . '-network-records.xlsx');
+                        return Excel::download(new NetworkExport(User::get_member_tree_record(session('tree_network_search')), true), $now . '-network-records.xlsx');
 
                     case 'reset':
                         session()->forget('tree_network_search');
@@ -403,7 +403,7 @@ class UserController extends Controller
                     break;
                 case 'export':
                     $now = Carbon::now()->format('YmdHis');
-                    return Excel::download(new ExportUser(User::get_record(session('member_downline_search'), false, $user->id)), $now . '-users-records.xlsx');
+                    return Excel::download(new ExportUser(User::get_record(session('member_downline_search'), false, $user->id), true), $now . '-users-records.xlsx');
                 case 'reset':
                     session(['member_downline_search' => [
                         'created_start' => $start_date,
