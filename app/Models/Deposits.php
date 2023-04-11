@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use Kyslik\ColumnSortable\Sortable;
 
 class Deposits extends Model
@@ -124,6 +125,53 @@ class Deposits extends Model
 
         return $query->orderbyDesc('transaction_at');
     }
+    public static function get_member_daily_monthly_table($search, $user)
+    {
+        $members = array_merge($user->getChildrenIds(), [$user->id]);
+        $query = Deposits::sortable()->with('broker')->with('user');
+        $dep_type = Deposits::TYPE_DEPOSIT;
+        $with_type = Deposits::TYPE_WITHDRAW;
+        $status = Deposits::STATUS_APPROVED;
+
+            if (@$search['user_id']) {
+                $search_user = User::find(@$search['user_id']);
+                if ($search_user) {
+                    $members = array_merge($search_user->getChildrenIds(),  [$search_user->id]);
+                }
+            }
+            $query->whereIn('userId', $members);
+
+            $start_date = $end_date = null;
+            if (@$search['filter_type'] == 'monthly') {
+                if (@$search['filter_month'] && @$search['filter_year']) {
+                    $start_date = Carbon::createFromDate(@$search['filter_year'], @$search['filter_month'])->startOfMonth()->format('Y-m-d H:i:s');
+                    $end_date = Carbon::createFromDate(@$search['filter_year'], @$search['filter_month'])->endOfMonth()->format('Y-m-d H:i:s');
+                }
+            } else {
+                if (@$search['transaction_start'] && @$search['transaction_end']) {
+                    $start_date = Carbon::parse(@$search['transaction_start'])->startOfDay()->format('Y-m-d H:i:s');
+                    $end_date = Carbon::parse(@$search['transaction_end'])->endOfDay()->format('Y-m-d H:i:s');
+                }
+            }
+            if ($start_date && $end_date) {
+                $query->whereBetween('transaction_at', [$start_date, $end_date]);
+            }
+
+            if (@$search['filter_type'] == 'monthly') {
+                return $query->select('brokersId', 'userId',
+                    DB::raw("sum(CASE WHEN type = $dep_type THEN amount END) as dep_amount"),
+                    DB::raw("sum(CASE WHEN type = $with_type AND status = $status THEN amount END) as with_total"),
+                    DB::raw("(DATE_FORMAT(transaction_at, '%m-%Y')) as month_year"),
+                )->groupBy('brokersId', 'userId', 'month_year')->orderbyDesc('month_year');
+            } else {
+                return $query->select('brokersId', 'userId',
+                    DB::raw("sum(CASE WHEN type = $dep_type THEN amount END) as dep_amount"),
+                    DB::raw("sum(CASE WHEN type = $with_type AND status = $status THEN amount END) as with_total"),
+                    DB::raw('DATE(transaction_at) as date'),
+                )->groupBy('brokersId', 'userId', 'date')->orderbyDesc('date');
+            }
+    }
+
 
     public function user()
     {

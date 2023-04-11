@@ -356,9 +356,14 @@ class User extends Authenticatable implements JWTSubject
         return $result;
     }
 
-    public function userDailyMonthlyDeposit($month = false)
+    public function userDailyMonthlyDeposit($month = false, $select_month = null, $select_year = null)
     {
-        $start_date = $end_date = Carbon::now();
+        if ($select_month && $select_year) {
+            $start_date = Carbon::createFromDate($select_year, $select_month, 1);
+        } else {
+            $start_date = Carbon::now();
+        }
+
         if ($month) {
             $start_date = $start_date->startOfMonth();
             $end_date = $start_date->copy()->endOfMonth();

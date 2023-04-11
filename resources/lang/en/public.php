@@ -428,5 +428,9 @@ return array(
     'group_monthly_withdrawal' => 'Group Monthly Withdrawal',
     'personal_daily_withdrawal' => 'Personal Daily Withdrawal',
     'personal_monthly_withdrawal' => 'Personal Monthly Withdrawal',
+
+    'deposit_amount' => 'Deposit Amount',
+    'deposit_withdrawal_amount' => 'Withdrawal(Capital) Amount',
+    'deposit_downline_listing' => 'Deposit downline listing',
 )
 ?>

@@ -55,7 +55,7 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
                 Route::get('/profile', 'profile')->name('member_profile');
                 Route::match(['get', 'post'], '/verification', 'verification')->name('member_verification');
                 Route::match(['get', 'post'], '/downline_listing', 'downline_listing')->name('member_downline_listing')->middleware('tree.verification');
-                Route::get('/account/{id}', 'account');
+                Route::get('/account/{id}', 'account')->name('view_member_profile');
                 Route::post('/export-network', 'exportExcel');
                 Route::post('/update-profile-pic', 'updateProfilePicture');
                 Route::post('/leave-impersonate', 'leaveImpersonate')->name('leave_impersonate_user');
@@ -74,6 +74,8 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
                 //temporarily for testing
                 Route::post('/import-deposit', 'store');
                 Route::post('/export-deposit', 'export');
+
+                Route::match(['get', 'post'], '/daily_monthly_deposits', 'dailyMonthlyDownlineListing')->name('daily_monthly_deposits_listing')->middleware('tree.verification');
             });
             Route::controller('WithdrawalController')->group(function () {
                 Route::match(['get', 'post'], '/withdrawals', 'index')->name('withdrawals_listing');

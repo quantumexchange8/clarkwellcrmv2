@@ -95,22 +95,7 @@
                                 @if($user->countryFlag)
                                 <span class="fi fi-{{$user->countryFlag}} "></span>
                                 @endif
-                                @switch(app()->getLocale())
-                                    @case('en')
-                                        <h5 class=" text-lg font-semibold tracking-tight text-[#696057] dark:text-white">{{ $country_trans }}</h5>
-                                        @break
-
-                                    @case('cn')
-                                        <h5 class=" text-lg font-semibold tracking-tight text-[#696057] dark:text-white">{{ $country_trans }}</h5>
-                                        @break
-
-                                    @case('tw')
-                                        <h5 class=" text-lg font-semibold tracking-tight text-[#696057] dark:text-white">{{ $country_trans }}</h5>
-                                        @break
-
-                                    @default
-                                        <h5 class=" text-lg font-semibold tracking-tight text-[#696057] dark:text-white">{{ $country_trans }}</h5>
-                                @endswitch
+                                <h5 class=" text-lg font-semibold tracking-tight text-[#696057] dark:text-white">{{ $user->getTranslatedCountry() }}</h5>
                             </div>
                         </div>
                     </div>
