@@ -432,5 +432,17 @@ return array(
     'deposit_amount' => 'Deposit Amount',
     'deposit_withdrawal_amount' => 'Withdrawal(Capital) Amount',
     'deposit_downline_listing' => 'Deposit downline listing',
+
+    'wallet_adjustment' => 'Wallet Adjustment',
+    'adjustment_amount' => 'Adjustment Amount',
+    'adjustment_remark' => 'Adjustment Remark',
+    'submit' => 'Submit',
+    'fail_to_adjust_wallet' => 'Fail to adjust the wallet amount of user!',
+    'success_to_adjust_wallet' => 'Successfully adjusted the wallet amount of user!',
+    'wallets_log' => 'Wallets Log',
+    'old_amount' => 'Old Balance',
+    'new_amount' => 'New Balance',
+    'daily' => 'Daily',
+    'monthly' => 'Monthly',
 )
 ?>

@@ -55,7 +55,7 @@ return array(
     'reports' => '报告',
     'deposits' => '托管',
     'listing' => '列表',
-    'downline_listing' => '团队全网列表',
+    'downline_listing' => ' 团队列表',
     'referrals' => '推荐',
     'referrals_tree' => '推荐树',
     'transfer' => '转移',
@@ -432,6 +432,18 @@ return array(
     'deposit_amount' => '托管总计',
     'deposit_withdrawal_amount' => '托管提款总计',
     'deposit_downline_listing' => '托管下线',
+
+    'wallet_adjustment' => '钱包金额调整',
+    'adjustment_amount' => '调整金额',
+    'adjustment_remark' => '调整备注',
+    'submit' => '提交',
+    'fail_to_adjust_wallet' => '用户钱包金额调整失败!',
+    'success_to_adjust_wallet' => '用户钱包金额调整成功!',
+    'wallets_log' => '钱包金额调整记录',
+    'old_amount' => '调整前金额',
+    'new_amount' => '调整后金额',
+    'daily' => '每日',
+    'monthly' => '每月',
 )
 ?>
 

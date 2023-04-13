@@ -3,6 +3,7 @@
 use App\Http\Controllers\Web\Admin\CommissionsController;
 use App\Http\Controllers\Web\Admin\DepositController;
 use App\Http\Controllers\Web\Admin\PerformanceBonusController;
+use App\Http\Controllers\Web\Admin\WalletLogsController;
 use App\Http\Controllers\Web\Admin\WithdrawalController;
 use App\Http\Controllers\Web\LocalizationController;
 use Illuminate\Support\Facades\Route;
@@ -104,6 +105,7 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
                 Route::match(['get', 'post'], '/deposit/{id}', 'member_deposit')->name('member_deposit');
                 Route::match(['get', 'post'], '/withdraw_amount/{id}', 'withdraw_amount')->name('withdraw_amount');
                 Route::post('/impersonate', 'impersonate')->name('impersonate_user');
+                Route::post('/wallet_adjustment', 'adjustWallet')->name('wallet_adjustment');
             });
 
             Route::prefix('report')->group(function () {
@@ -118,6 +120,7 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
                 Route::match(['get', 'post'], '/withdrawal/withdrawal_request/{id}', [WithdrawalController::class, 'approval'])->name('withdrawal_request');
                 Route::match(['get', 'post'], '/performance_bonus/listing', [PerformanceBonusController::class, 'performance_bonus_listing'])->name('performance_bonus_listing');
                 Route::match(['get', 'post'], '/performance_bonus/approval/{id}', [PerformanceBonusController::class, 'performance_bonus_approval'])->name('performance_bonus_approval');
+                Route::match(['get', 'post'], '/wallets/listing', [WalletLogsController::class, 'listing'])->name('wallet_logs_listing');
             });
 
             Route::controller('ReferralController')->prefix('referral')->group(function () {

@@ -56,8 +56,8 @@
 
                 <div class="max-[655px]:flex max-[655px]:flex-col gap-2">
                     <select id="filter_type" name="filter_type" class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500">
-                            <option selected {{ @$search['filter_type'] == 'daily' ? 'selected' : '' }} value="daily">Daily</option>
-                        <option {{ @$search['filter_type'] == 'monthly' ? 'selected' : '' }} value="monthly">Monthly</option>
+                            <option selected {{ @$search['filter_type'] == 'daily' ? 'selected' : '' }} value="daily">@lang('public.daily')</option>
+                        <option {{ @$search['filter_type'] == 'monthly' ? 'selected' : '' }} value="monthly">@lang('public.monthly')</option>
                     </select>
                 </div>
                 <div class="max-[755px]:flex max-[755px]:flex-col gap-2">

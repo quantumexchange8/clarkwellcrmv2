@@ -78,7 +78,7 @@
                         <a href="{{ url('member/tree') }}" class="{{ request()->is('member/tree') || request()->is('member/account/*') || request()->is('member/deposit/*') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.network_tree')</a>
                     </li>
                     <li>
-                        <a href="{{ url('member/downline_listing') }}" class="{{ request()->is('member/downline_listing') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.downline_listing')</a>
+                        <a href="{{ url('member/daily_monthly_deposits') }}" class="{{ request()->is('member/daily_monthly_deposits') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.deposit_downline_listing')</a>
                     </li>
                     <li>
                         <a href="{{ url('member/commissions') }}" class="{{ request()->is('member/commissions') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.commissions')</a>
@@ -87,7 +87,7 @@
                         <a href="{{ url('member/network') }}" class="{{ request()->is('member/network') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.network')</a>
                     </li>
                     <li>
-                        <a href="{{ url('member/daily_monthly_deposits') }}" class="{{ request()->is('member/daily_monthly_deposits') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.deposit_downline_listing')</a>
+                        <a href="{{ url('member/downline_listing') }}" class="{{ request()->is('member/downline_listing') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.downline_listing')</a>
                     </li>
                 </ul>
             </li>

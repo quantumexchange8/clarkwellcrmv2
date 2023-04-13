@@ -10,6 +10,7 @@ use App\Models\Deposits;
 use App\Models\Rankings;
 use App\Models\SettingCountry;
 use App\Models\User;
+use App\Models\WalletLogs;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -488,5 +489,34 @@ class MemberController extends Controller
 
         Alert::success(trans('public.done'), trans('public.successfully_approve_kyc'));
         return redirect()->back();
+    }
+
+    public function adjustWallet(Request $request)
+    {
+        $request->validate([
+            'adjust_amount' => 'required|numeric',
+            'adjust_remark' => 'nullable|string|max:255',
+        ]);
+        $user = User::find($request->user_id);
+
+        if ($user) {
+            $old_amount = $user->wallet_balance;
+
+            $user->wallet_balance = $request->input('adjust_amount');
+            $user->save();
+
+            WalletLogs::create([
+                'old_balance' => $old_amount,
+                'new_balance' => $user->wallet_balance,
+                'remark' => $request->input('adjust_remark'),
+                'user_id' => $user->id,
+            ]);
+
+            Alert::success(trans('public.done'), trans('public.success_to_adjust_wallet'));
+        } else {
+            Alert::warning(trans('public.invalid_action'), trans('public.fail_to_adjust_wallet'));
+        }
+
+        return back();
     }
 }

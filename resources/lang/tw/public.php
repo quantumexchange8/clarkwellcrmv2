@@ -55,7 +55,7 @@ return array(
     'reports' => '報告',
     'deposits' => '託管',
     'listing' => '列表',
-    'downline_listing' => '團隊全網列表',
+    'downline_listing' => '團隊列表',
     'referrals' => '推薦',
     'referrals_tree' => '推薦樹',
     'transfer' => '轉移',
@@ -432,6 +432,18 @@ return array(
     'deposit_amount' => '託管總計',
     'deposit_withdrawal_amount' => '託管提款總計',
     'deposit_downline_listing' => '託管下线',
+
+    'wallet_adjustment' => '錢包金額調整',
+    'adjustment_amount' => '調整金額',
+    'adjustment_remark' => '調整備註',
+    'submit' => '提交',
+    'fail_to_adjust_wallet' => '使用者錢包金額調整失敗！',
+    'success_to_adjust_wallet' => '使用者錢包金額調整成功！',
+    'wallets_log' => '錢包金額調整記錄',
+    'old_amount' => '調整前金額',
+    'new_amount' => '調整後金額',
+    'daily' => '每日',
+    'monthly' => '每月',
 )
 ?>
 
