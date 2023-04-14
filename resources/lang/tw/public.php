@@ -55,7 +55,7 @@ return array(
     'reports' => '報告',
     'deposits' => '託管',
     'listing' => '列表',
-    'downline_listing' => '團隊列表',
+    'downline_listing' => '搜索',
     'referrals' => '推薦',
     'referrals_tree' => '推薦樹',
     'transfer' => '轉移',
@@ -431,7 +431,7 @@ return array(
 
     'deposit_amount' => '託管總計',
     'deposit_withdrawal_amount' => '託管提款總計',
-    'deposit_downline_listing' => '託管下线',
+    'deposit_downline_listing' => '團隊列表',
 
     'wallet_adjustment' => '錢包金額調整',
     'adjustment_amount' => '調整金額',

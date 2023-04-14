@@ -55,7 +55,7 @@ return array(
     'reports' => '报告',
     'deposits' => '托管',
     'listing' => '列表',
-    'downline_listing' => ' 团队列表',
+    'downline_listing' => ' 搜索',
     'referrals' => '推荐',
     'referrals_tree' => '推荐树',
     'transfer' => '转移',
@@ -431,7 +431,7 @@ return array(
 
     'deposit_amount' => '托管总计',
     'deposit_withdrawal_amount' => '托管提款总计',
-    'deposit_downline_listing' => '托管下线',
+    'deposit_downline_listing' => '团队列表',
 
     'wallet_adjustment' => '钱包金额调整',
     'adjustment_amount' => '调整金额',
