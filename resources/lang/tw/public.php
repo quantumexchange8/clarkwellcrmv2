@@ -277,7 +277,7 @@ return array(
 'invalid_action' => '無效的操作',
 
 //admin title
-'deposit_downline' => '託管 - 下线',
+'deposit_downline' => '團隊列表',
 'commission_downline' => '個人返佣 - 下线',
 'withdrawal_downline' => '提款 - 下线',
 'add_member' => '新增會員',
