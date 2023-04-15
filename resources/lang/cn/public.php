@@ -277,7 +277,7 @@ return array(
     'invalid_action' => '无效的操作',
 
     //admin title
-    'deposit_downline' => '托管 - 下线',
+    'deposit_downline' => '团队列表',
     'commission_downline' => '个人返佣 - 下线',
     'withdrawal_downline' => '提现 - 下线',
     'add_member' => '添加会员',
