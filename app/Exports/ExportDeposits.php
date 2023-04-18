@@ -34,6 +34,7 @@ class ExportDeposits implements FromCollection, WithHeadings {
                 'amount' =>  number_format((float)$deposits->amount, 2, '.', ''),
                 'type' => $deposits->type == Deposits::TYPE_DEPOSIT ? 'Deposit' : 'Withdrawal',
                 'upload_date' => Carbon::parse($deposits->created_at)->format('Y-m-d'),
+                'group_sales' => $deposits->user->leader_status ? $deposits->user->groupTotalDeposit() : 'Not Available'
             );
         }
 
@@ -52,6 +53,7 @@ class ExportDeposits implements FromCollection, WithHeadings {
             'Amount',
             'Type',
             'Uploaded Date',
+            'Leader Group Sales'
         ];
     }
 }

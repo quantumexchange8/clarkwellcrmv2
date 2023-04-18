@@ -26,8 +26,6 @@ class ExportPerformanceBonus implements FromCollection, WithHeadings {
         $result = array();
         foreach($records as $record){
             $result[] = array(
-                'user_name' => $record->upline->name,
-                'user_rank' => $record->upline->rank->name,
                 'downline_name' => $record->downline->name,
                 'downline_rank' => $record->downline->rank->name,
                 'commission_amount' => $record->commission_amount,
@@ -45,8 +43,6 @@ class ExportPerformanceBonus implements FromCollection, WithHeadings {
     public function headings(): array
     {
         return [
-            'Upline Name',
-            'Upline Rank',
             'Downline Name',
             'Downline Rank',
             'Commission Amount',
