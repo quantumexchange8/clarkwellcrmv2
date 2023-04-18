@@ -444,5 +444,7 @@ return array(
     'new_amount' => 'New Balance',
     'daily' => 'Daily',
     'monthly' => 'Monthly',
+
+    'monthly_lot' => 'Monthly Lot Size',
 )
 ?>

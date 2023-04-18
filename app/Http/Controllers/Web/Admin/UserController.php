@@ -60,7 +60,8 @@ class UserController extends Controller
             'total_withdrawals' => $total_withdrawals,
             'total_commissions' => $total_commissions,
             'total_members' => $total_members,
-            'brokers' => $brokers
+            'brokers' => $brokers,
+            'monthly_lot' => Commissions::getMonthlyLotSize(),
         ]);
     }
 

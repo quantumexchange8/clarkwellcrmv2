@@ -39,6 +39,18 @@ class Commissions extends Model
         return $amount;
     }
 
+    public static function getMonthlyLotSize()
+    {
+        $start_date = Carbon::parse(Carbon::now()->startOfMonth())->startOfDay()->format('Y-m-d H:i:s');
+        $end_date = Carbon::parse(Carbon::now()->endOfMonth())->endOfDay()->format('Y-m-d H:i:s');
+        $amount = self::with('user')->whereHas('user', function($q) {
+            $q->where('status', User::STATUS_ACTIVE);
+        }) ->whereBetween('transaction_at', [$start_date, $end_date])
+            ->sum('lot_size');
+
+        return $amount;
+    }
+
     public static function get_commissions_table($search, $userId, $children = [])
     {
         $query = Commissions::sortable();

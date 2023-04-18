@@ -100,6 +100,67 @@ class CommissionsController extends Controller
         ]);
     }
 
+    public function listingLotSize(Request $request)
+    {
+        $search = array();
+        $month = [];
+        $year = [];
+
+        for ($m=1; $m<=12; $m++) {
+            $month[$m] = date('F', mktime(0,0,0,$m, 1, date('Y')));
+        }
+        foreach (range(Carbon::now()->year, 2022) as $yr) {
+            $year[$yr] = $yr;
+        }
+        $current = Carbon::now();
+
+        $search =   session('admin_lot_search') ? session('admin_lot_search') :session(['admin_lot_search' => [
+            'transaction_start' => $current->copy()->startOfMonth()->format('Y-m-d H:i:s'),
+            'transaction_end' =>  $current->copy()->endOfMonth()->format('Y-m-d H:i:s'),
+        ]]);
+
+        if ($request->isMethod('post')) {
+            $submit_type = $request->input('submit');
+
+            switch ($submit_type) {
+                case 'search':
+                    $start_date = Carbon::createFromDate($request->input('filter_year'), $request->input('filter_month'))->startOfMonth()->format('Y-m-d H:i:s');
+                    $end_date = Carbon::createFromDate($request->input('filter_year'), $request->input('filter_month'))->endOfMonth()->format('Y-m-d H:i:s');
+                    session(['admin_lot_search' => [
+                        'freetext' =>  $request->input('freetext'),
+                        'transaction_start' => $start_date,
+                        'transaction_end' => $end_date,
+                        'country' => $request->input('country'),
+                        'filter_year' => $request->input('filter_year'),
+                        'filter_month' => $request->input('filter_month'),
+                    ]]);
+                    break;
+                case 'export':
+                    $now = Carbon::now()->format('YmdHis');
+                    return Excel::download(new ExportCommissions(Commissions::get_record( session('admin_lot_search'))), $now . '-commissions-records.xlsx');
+                case 'reset':
+                    session()->forget('admin_lot_search');
+                    session(['admin_lot_search' => [
+                        'filter_year' => $current->copy()->year,
+                        'filter_month' =>  $current->copy()->month,
+                    ]]);
+                    break;
+            }
+        }
+
+        $search = session('admin_lot_search') ? session('admin_lot_search') : $search;
+
+        return view('admin.report.commission_lot', [
+            'title' => 'Lot Size',
+            'records' => Commissions::get_record($search)->paginate(10),
+            'search' =>  $search,
+            'brokers' => Brokers::all(),
+            'get_country_sel' => SettingCountry::get_country_sel(),
+            'get_filter_month' => $month,
+            'get_filter_year' => $year,
+        ]);
+    }
+
     public function listingChildren(Request $request)
     {
 

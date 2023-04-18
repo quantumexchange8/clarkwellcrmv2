@@ -53,6 +53,17 @@
                 </div>
             </div>
         </div>
+        <div class="max-w-sm rounded overflow-hidden shadow-lg text-white" style="background: #AEAEAE;">
+            <div class="px-6 py-4">
+                <div class="flex items-center p-3">
+                    <svg class="h-12 w-12 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M9 5H7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2V7a2 2 0 0 0 -2 -2h-2" />  <rect x="9" y="3" width="6" height="4" rx="2" />  <line x1="9" y1="12" x2="9.01" y2="12" />  <line x1="13" y1="12" x2="15" y2="12" />  <line x1="9" y1="16" x2="9.01" y2="16" />  <line x1="13" y1="16" x2="15" y2="16" /></svg>
+                    <div class="flex-col" style="margin-left: 20px">
+                        <h3 class="font-bold text-lg ">$ {{ number_format($monthly_lot), 2}}</h3>
+                        <h6 class="font-semibold text-sm text-[#696057]">@lang('public.monthly_lot')</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 
