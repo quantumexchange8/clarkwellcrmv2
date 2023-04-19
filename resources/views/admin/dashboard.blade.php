@@ -8,7 +8,7 @@
         <h1 class="flex-1 font-semibold text-2xl text-gray-500">@lang('public.dashboard')</h1>
     </div>
 
-    <div class="grid grid-cols-4 gap-8 mt-4 max-[1350px]:grid-rows-auto max-[1350px]:grid-cols-2 max-[950px]:grid-cols-1">
+    <div class="grid grid-cols-3 gap-8 mt-4 max-[1350px]:grid-rows-auto max-[1350px]:grid-cols-2 max-[950px]:grid-cols-1">
         <div class="max-w-sm rounded overflow-hidden shadow-lg text-white" style="background: #40DD7F;">
             <div class="px-6 py-4">
                 <div class="flex items-center p-3">
