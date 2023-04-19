@@ -143,6 +143,8 @@ class CommissionsController extends Controller
                     session(['admin_lot_search' => [
                         'filter_year' => $current->copy()->year,
                         'filter_month' =>  $current->copy()->month,
+                        'transaction_start' => $current->copy()->startOfMonth()->format('Y-m-d H:i:s'),
+                        'transaction_end' =>  $current->copy()->endOfMonth()->format('Y-m-d H:i:s'),
                     ]]);
                     break;
             }

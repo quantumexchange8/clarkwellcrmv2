@@ -8,7 +8,7 @@
 
     <!-- component -->
     <div class="flex flex-col">
-        <form method="post" action="{{ route('report_commission_lot') }}">
+        <form method="post" action="{{ route('ranking_logs_listing') }}">
             @csrf
             <div class="grid gap-6 mb-6 mt-4 grid-cols-2 max-[1600px]:grid-cols-2 max-[1100px]:grid-cols-1">
                 <div class="relative">
@@ -23,11 +23,7 @@
                 <div class="max-[655px]:flex max-[655px]:flex-col gap-2" id="filter_year">
                     {!! Form::select('filter_year', $get_filter_year, @$search['filter_year'], ['class' => 'bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500']) !!}
                 </div>
-                <div class="flex w-full">
-                    {!! Form::select('country', $get_country_sel, @$search['country'], ['placeholder' => 'Please select a country', 'class' => 'font-medium text-sm placeholder:text-gray-400 text-gray-500 bg-gray-50 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500']) !!}
 
-
-                </div>
                 <div class="max-[755px]:flex max-[755px]:flex-col gap-2">
                     <button type="submit" class="text-white bg-primary hover:bg-primary-600 border border-primary-200 focus:ring-4 focus:outline-none focus:ring-primary-600 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" name="submit" value="search">@lang('public.search')</button>
                     <button type="submit" class="text-white bg-rose-500 hover:bg-rose-600 border border-rose-200 focus:ring-4 focus:outline-none focus:ring-rose-600 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" name="submit" value="reset">@lang('public.reset')</button>
@@ -62,23 +58,22 @@
                     </th>
                     <th scope="col" class="p-4">
                         <div class="flex items-center">
-                            @sortablelink('broker.name', trans('public.broker'))
+                            @sortablelink('created_at', trans('public.date'))
                             <a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
                         </div>
                     </th>
                     <th scope="col" class="p-4">
                         <div class="flex items-center">
-                            @sortablelink('transaction_at', trans('public.date'))
+                            @sortablelink('old_rank', trans('public.old_rank'))
                             <a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
                         </div>
                     </th>
                     <th scope="col" class="p-4">
                         <div class="flex items-center">
-                            @sortablelink('lot_size', trans('public.lot_size'))
+                            @sortablelink('new_rank', trans('public.new_rank'))
                             <a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
                         </div>
                     </th>
-
                 </tr>
                 </thead>
                 <tbody>
@@ -94,13 +89,13 @@
                             {{ $record->user->email }}
                         </td>
                         <td class="p-4">
-                            {{ $record->broker->name }}
+                            {{ date_format($record->created_at, 'Y-m-d') }}
                         </td>
                         <td class="p-4">
-                            {{ date_format($record->transaction_at, 'Y-m-d') }}
+                            {{ $record->old_rank()->first()->name }}
                         </td>
                         <td class="p-4">
-                            {{ $record->lot_size }}
+                            {{ $record->new_rank()->first()->name }}
                         </td>
                     </tr>
                         <?php

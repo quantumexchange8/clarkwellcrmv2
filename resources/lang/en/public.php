@@ -454,5 +454,8 @@ return array(
     'successfully_updated_setting' => 'Successfully Updated Setting!',
 
     'monthly_lot' => 'Monthly Lot Size',
+    'ranking_log' => 'Ranking Logs',
+    'new_rank' => 'New Rank',
+    'old_rank' => 'Old Rank'
 )
 ?>

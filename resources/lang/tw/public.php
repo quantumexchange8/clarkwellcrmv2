@@ -452,6 +452,11 @@ return array(
     'value' => '定值',
     'invalid_setting' => '無效設置',
     'successfully_updated_setting' => '成功更新設置！',
+
+    'monthly_lot' => '每月手數',
+    'ranking_log' => '排名更新記錄',
+    'new_rank' => '新排名',
+    'old_rank' => '舊排名'
 )
 ?>
 

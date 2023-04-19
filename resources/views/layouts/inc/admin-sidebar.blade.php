@@ -73,6 +73,9 @@
                             <li>
                                 <a href="{{ route('report_commission_children') }}" class="{{ request()->is('admin/report/commissions/children') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} font-normal flex items-center w-full p-2 text-base font-semibold transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 text-gray-500">@lang('public.downline_listing')</a>
                             </li>
+                            <li>
+                                <a href="{{ route('report_commission_lot') }}" class="{{ request()->is('admin/report/commissions/listing_lot_size') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} font-normal flex items-center w-full p-2 text-base font-semibold transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 text-gray-500">@lang('public.monthly_lot')</a>
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -122,6 +125,9 @@
                     </li>
                     <li>
                         <a href="{{ route('wallet_logs_listing') }}" class="{{ request()->is('admin/report/wallets/listing') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.wallets_log')</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('ranking_logs_listing') }}" class="{{ request()->is('admin/report/ranking/listing') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.ranking_log')</a>
                     </li>
                 </ul>
             </li>
