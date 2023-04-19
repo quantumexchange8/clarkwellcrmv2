@@ -161,6 +161,12 @@ class User extends Authenticatable implements JWTSubject
             $query->whereBetween('created_at', [$start_date, $end_date]);
         }
 
+        $auto_rank_up = @$search['auto_rank_up'];
+
+        if(isset($auto_rank_up)){
+            $query->where('auto_rank_up', $auto_rank_up);
+        }
+
         return $query->orderbyDesc('created_at');
     }
 

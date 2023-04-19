@@ -169,6 +169,7 @@ return array(
 
     'access' => '权限',
     'access_confirmation' => '您确定要访问此用户吗？',
+    'choose_auto_rank_up_status' => '选择自动晋升状态',
 
 //admin member comissions
     'choose_broker' => '选择外汇券商',
@@ -444,6 +445,13 @@ return array(
     'new_amount' => '调整后金额',
     'daily' => '每日',
     'monthly' => '每月',
+
+    'setting' => '设置',
+    'setting_listing' => '设置列表',
+    'update_setting' => '更新设置',
+    'value' => '定值',
+    'invalid_setting' => '无效设置',
+    'successfully_updated_setting' => '成功更新设置！',
 )
 ?>
 

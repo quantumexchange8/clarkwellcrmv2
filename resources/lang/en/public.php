@@ -169,6 +169,7 @@ return array(
 
     'access' => 'Access',
     'access_confirmation' => 'Are you sure you want to access this user?',
+    'choose_auto_rank_up_status' => 'Choose Auto Rank Up Status',
 
     //admin member commissions
     'choose_broker' => 'Choose Broker',
@@ -444,6 +445,13 @@ return array(
     'new_amount' => 'New Balance',
     'daily' => 'Daily',
     'monthly' => 'Monthly',
+
+    'setting' => 'Setting',
+    'setting_listing' => 'Setting Listing',
+    'update_setting' => 'Update Setting',
+    'value' => 'Value',
+    'invalid_setting' => 'Invalid Setting',
+    'successfully_updated_setting' => 'Successfully Updated Setting!',
 
     'monthly_lot' => 'Monthly Lot Size',
 )

@@ -41,6 +41,7 @@ class MemberController extends Controller
                         'created_start' => $request->input('created_start'),
                         'created_end' => $request->input('created_end'),
                         'status' => $request->input('status'),
+                        'auto_rank_up' => $request->input('auto_rank_up'),
                     ]]);
                     break;
                 case 'export':
@@ -60,6 +61,7 @@ class MemberController extends Controller
             'records' => User::get_record($search)->paginate(10),
             'search' =>  $search,
             'get_status_sel' => [ 'members' => trans('public.members'), 'leaders' => trans('public.leader') ],
+            'get_auto_rank_up_sel' => [ '' => trans('public.choose_auto_rank_up_status'), 0 => trans('public.manual'), 1 => trans('public.auto') ],
         ]);
     }
 
