@@ -460,6 +460,17 @@ return array(
     'new_amount' => 'Saldo Baru',
     'daily' => 'Harian',
     'monthly' => 'Bulanan',
+
+    'setting' => 'Pengaturan',
+    'setting_listing' => 'Daftar Pengaturan',
+    'update_setting' => 'Perbarui Pengaturan',
+    'value' => 'Nilai',
+    'invalid_setting' => 'Pengaturan Tidak Valid',
+    'successfully_updated_setting' => 'Berhasil Memperbarui Pengaturan!',
+    'monthly_lot' => 'Ukuran Lot Bulanan',
+    'ranking_log' => 'Log Peringkat',
+    'new_rank' => 'Peringkat Baru',
+    'old_rank' => 'Peringkat Lama'
 )
 
 ?>

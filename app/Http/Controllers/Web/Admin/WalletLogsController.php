@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\Admin;
 
 use App\Exports\ExportDeposits;
+use App\Exports\ExportWalletLogs;
 use App\Http\Controllers\Controller;
 use App\Models\Brokers;
 use App\Models\Deposits;
@@ -30,6 +31,11 @@ class WalletLogsController extends Controller
                         'transaction_end' => $request->input('created_end'),
                     ]]);
                     break;
+
+                case 'export':
+                    $now = Carbon::now()->format('YmdHis');
+                    return Excel::download(new ExportWalletLogs( WalletLogs::get_report_record(session('admin_wallet_logs_search'))), $now . '-wallet-logs-records.xlsx');
+
                 case 'reset':
                     session()->forget('admin_wallet_logs_search');
                     break;

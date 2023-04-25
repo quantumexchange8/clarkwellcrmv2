@@ -45,6 +45,9 @@ class ExportUser implements FromCollection, WithHeadings
                     'contact' => $user->contact_number,
                     'country' => $user->country,
                     'status' => User::getUserStatus($user->status),
+                    'joined_date' => $user->created_at,
+                    'kyc' => User::getUserKYCStatus($user->kyc_approval_status),
+                    'personal_invest' => $user->personalDeposits(),
                 );
             }
         }
@@ -76,6 +79,9 @@ class ExportUser implements FromCollection, WithHeadings
                 'Contact',
                 'Country',
                 'Status',
+                'Joined Date',
+                'KYC Status',
+                'Total Personal Invest'
             ];
         }
 

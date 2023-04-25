@@ -498,6 +498,23 @@ class User extends Authenticatable implements JWTSubject
         }
     }
 
+    public static function getUserKYCStatus($status)
+    {
+        switch( $status) {
+            case self::KYC_STATUS_PENDING_VERIFICATION:
+                return 'Pending Verification';
+            case self::KYC_STATUS_NOT_VERIFY:
+                return 'Not Verify';
+            case self::KYC_STATUS_REJECTED:
+                return 'Rejected';
+            case self::KYC_STATUS_VERIFIED:
+                return 'Verified';
+
+            default:
+                return 'Invalid Status';
+        }
+    }
+
 
 
     public function rank()

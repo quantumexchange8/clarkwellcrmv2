@@ -426,12 +426,38 @@ return array(
     'group_monthly_deposit' => 'เงินฝากประจำเดือนของกลุ่ม',
     'personal_monthly_deposit' => 'เงินฝากประจำเดือนส่วนตัว',
 
-    'tree_verification' => 'การตรวจสอบรหัสผ่านเพื่อดูต้นไม้',
-    'enter_password' => 'ใส่รหัสผ่าน',
-    'verify' => 'ตรวจสอบ',
-    'group_daily_deposit' => 'เงินฝากประจำวันของกลุ่ม',
-    'group_monthly_deposit' => 'เงินฝากประจำเดือนของกลุ่ม',
-    'personal_monthly_deposit' => 'เงินฝากประจำเดือนส่วนตัว',
+
+    'group_daily_withdrawal' => 'ถอนเงินรายวันของกลุ่ม',
+    'group_monthly_withdrawal' => 'ถอนเงินรายเดือนของกลุ่ม',
+    'personal_daily_withdrawal' => 'ถอนเงินรายวันส่วนตัว',
+    'personal_monthly_withdrawal' => 'ถอนเงินรายเดือนส่วนตัว',
+
+    'deposit_amount' => 'จำนวนเงินฝาก',
+    'deposit_withdrawal_amount' => 'จำนวนเงินถอน (เงินทุน)',
+    'deposit_downline_listing' => 'รายชื่อลูกของผู้ให้เงิน',
+
+    'wallet_adjustment' => 'การปรับปรุงกระเป๋าเงิน',
+    'adjustment_amount' => 'จำนวนการปรับปรุง',
+    'adjustment_remark' => 'หมายเหตุการปรับปรุง',
+    'submit' => 'ส่ง',
+    'fail_to_adjust_wallet' => 'ไม่สามารถปรับปรุงจำนวนกระเป๋าเงินของผู้ใช้ได้!',
+    'success_to_adjust_wallet' => 'ปรับปรุงจำนวนกระเป๋าเงินของผู้ใช้สำเร็จแล้ว!',
+    'wallets_log' => 'บันทึกกระเป๋าเงิน',
+    'old_amount' => 'ยอดเงินเก่า',
+    'new_amount' => 'ยอดเงินใหม่',
+    'daily' => 'รายวัน',
+    'monthly' => 'รายเดือน',
+
+    'setting' => 'ตั้งค่า',
+    'setting_listing' => 'รายการตั้งค่า',
+    'update_setting' => 'อัพเดทตั้งค่า',
+    'value' => 'ค่า',
+    'invalid_setting' => 'ตั้งค่าไม่ถูกต้อง',
+    'successfully_updated_setting' => 'อัพเดทตั้งค่าสำเร็จ!',
+    'monthly_lot' => 'ขนาดล็อตรายเดือน',
+    'ranking_log' => 'บันทึกการจัดอันดับ',
+    'new_rank' => 'อันดับใหม่',
+    'old_rank' => 'อันดับเก่า'
 )
 
 ?>
