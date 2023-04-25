@@ -207,6 +207,8 @@ return array(
     'en' => '英文',
     'cn' => '簡體',
     'tw' => '繁體',
+    'th' => 'THAI',
+    'id' => 'INDO',
     'remove' => '移除',
     'delete_broker_confirmation' => '您確定要刪除此外匯券商檔案嗎？',
     'url' => 'URL',

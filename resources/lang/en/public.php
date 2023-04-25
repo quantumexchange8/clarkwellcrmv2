@@ -207,6 +207,8 @@ return array(
     'en' => 'EN',
     'cn' => 'CN',
     'tw' => 'TW',
+    'th' => 'THAI',
+    'id' => 'INDO',
     'remove' => 'Remove',
     'delete_broker_confirmation' => 'Are you sure you want to delete this broker profile?',
     'url' => 'URL',
@@ -456,6 +458,6 @@ return array(
     'monthly_lot' => 'Monthly Lot Size',
     'ranking_log' => 'Ranking Logs',
     'new_rank' => 'New Rank',
-    'old_rank' => 'Old Rank'
+    'old_rank' => 'Old Rank',
 )
 ?>

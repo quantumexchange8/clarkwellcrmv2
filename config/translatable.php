@@ -13,7 +13,9 @@ return [
     'locales' => [
         'en',
         'cn',
-        'tw'
+        'tw',
+        'th',
+        'id'
     ],
 
     /*

@@ -26,6 +26,16 @@
                     繁体字
                     @break
 
+                @case('th')
+                    <span class="fi fi-th mr-3 "></span>
+                    Thailand
+                    @break
+
+                @case('id')
+                    <span class="fi fi-id mr-3 "></span>
+                    Indonesian
+                    @break
+
                 @default
                     <span class="fi fi-us mr-3 "></span>
                     EN
@@ -41,6 +51,12 @@
                 </li>
                 <li>
                     <a href="{{ url('localization/tw') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><span class="fi fi-tw mr-3"></span>繁体字</a>
+                </li>
+                <li>
+                    <a href="{{ url('localization/th') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><span class="fi fi-th mr-3"></span>ประเทศไทย</a>
+                </li>
+                <li>
+                    <a href="{{ url('localization/id') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><span class="fi fi-id mr-3"></span>Indonesia</a>
                 </li>
             </ul>
         </div>

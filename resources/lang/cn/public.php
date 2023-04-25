@@ -207,6 +207,8 @@ return array(
     'en' => '英文',
     'cn' => '简体',
     'tw' => '繁体',
+    'th' => 'THAI',
+    'id' => 'INDO',
     'remove' => '删除',
     'delete_broker_confirmation' => '您确定要删除此外汇券商档案吗？',
     'url' => 'URL',
