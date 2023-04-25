@@ -50,6 +50,7 @@ class AuthController extends Controller
             $credentials = [
                 'email' => $request['email'],
                 'password' => $request['password'],
+                'status' => User::STATUS_ACTIVE
             ];
             $remember = $request->filled('remember');
             $token_duration = 1440;

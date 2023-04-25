@@ -3,7 +3,7 @@
 @section('title') {{ $title }} @endsection
 
 @section('contents')
-    <h1 class="font-semibold text-2xl text-gray-500">@lang('public.reports') / @lang('public.performance_bonus')</h1>
+    <h1 class="font-semibold text-2xl text-gray-500">@lang('public.reports') / @lang('public.wallets_log')</h1>
 
     <!-- component -->
     <div class="flex flex-col">
