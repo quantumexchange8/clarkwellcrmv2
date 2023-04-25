@@ -17,6 +17,7 @@ return array(
     'referral_code' => 'Kode Referral (Opsional)',
     'invalid_referral_code' => 'Kode Referral Tidak Valid',
     'tnc' => 'Saya telah membaca, memahami, dan menerima syarat dan ketentuan.',
+    'tnc_check' => 'T&C',
     'have_acc' => 'Sudah punya akun?',
     'forgot_yr_pass' => 'Lupa Password Anda?',
     'insert_email' => 'Masukkan alamat email di sini.',

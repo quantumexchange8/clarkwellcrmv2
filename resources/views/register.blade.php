@@ -22,6 +22,16 @@
                     繁体字
                     @break
 
+                @case('th')
+                    <span class="fi fi-th mr-3 "></span>
+                    Thailand
+                    @break
+
+                @case('id')
+                    <span class="fi fi-id mr-3 "></span>
+                    Indonesian
+                    @break
+
                 @default
                     <span class="fi fi-us mr-3 "></span>
                     EN
@@ -37,6 +47,12 @@
                 </li>
                 <li>
                     <a href="{{ url('localization/tw') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><span class="fi fi-tw mr-3"></span>繁体字</a>
+                </li>
+                <li>
+                    <a href="{{ url('localization/th') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><span class="fi fi-th mr-3"></span>ประเทศไทย</a>
+                </li>
+                <li>
+                    <a href="{{ url('localization/id') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><span class="fi fi-id mr-3"></span>Indonesia</a>
                 </li>
             </ul>
         </div>
@@ -168,9 +184,12 @@
             </div>
             <div class="flex items-start mb-3">
                 <div class="flex items-center h-5">
-                    <input id="terms" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-orange-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-orange-600 dark:ring-offset-gray-800 checked:bg-orange-600 checked:border-orange-600" required oninvalid="this.setCustomValidity('@lang('public.required_tnc')')">
+                    <input id="terms" type="checkbox" value="checked" name="tnc_check" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-orange-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-orange-600 dark:ring-offset-gray-800 checked:bg-orange-600 checked:border-orange-600 @error('tnc_check') w-4 h-4 border border-red-500 rounded bg-gray-50 focus:ring-3 focus:ring-orange-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-orange-600 dark:ring-offset-gray-800 checked:bg-orange-600 checked:border-orange-600 @enderror">
                 </div>
                 <label for="terms" class="ml-2 text-sm font-medium text-gray-600 dark:text-gray-300 mb-4">@lang('public.tnc')</label>
+                @error('tnc_check')
+                <div class="text-sm text-red-600">{{ $message }}</div>
+                @enderror
             </div>
             <button type="submit" class="w-full px-6 py-2.5 bg-orange-400 text-white font-medium text-sm leading-tight rounded shadow-md hover:bg-orange-700 hover:shadow-lg focus:bg-orange-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-orange-800 active:shadow-lg transition duration-150 ease-in-out">@lang('public.register_here')</button>
         </form>

@@ -15,6 +15,7 @@ return array(
     'referral_code' => '推荐码（选修的）',
     'invalid_referral_code' => '无效的推荐代码',
     'tnc' => '我已阅读、理解并接受条款和条件。',
+    'tnc_check' => '条款和条件',
     'success_register' => '成功创建帐户！登录查看账户',
     'have_acc' => '已有帐户？',
     'forgot_yr_pass' => '忘记密码了吗？',

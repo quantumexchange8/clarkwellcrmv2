@@ -16,6 +16,7 @@ return array(
     'referral_code' => 'Referral Code(Optional)',
     'invalid_referral_code' => 'Invalid Referral Code',
     'tnc' => 'I have read, understood and accept the terms and conditions.',
+    'tnc_check' => 'T&C',
     'have_acc' => 'Already have an account?',
     'forgot_yr_pass' => 'Forgot Your Password?',
     'insert_email' => 'Insert email address here.',

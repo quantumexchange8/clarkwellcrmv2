@@ -37,7 +37,8 @@ class UserRegisterRequest extends FormRequest
             'phone' => 'required|string|unique:users,contact_number',
             'address' => 'string|required|max:255',
             'country' => 'required|string',
-            'referral' => 'nullable|exists:users,referral_id'
+            'referral' => 'nullable|exists:users,referral_id',
+            'tnc_check' => 'required'
         ];
     }
 
@@ -51,6 +52,7 @@ class UserRegisterRequest extends FormRequest
             'address' => trans('public.address'),
             'country' => trans('public.country'),
             'referral' => trans('public.referral_code'),
+            'tnc_check' => trans('public.tnc_check'),
         ];
     }
 }

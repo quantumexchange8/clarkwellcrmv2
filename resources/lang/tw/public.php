@@ -15,6 +15,7 @@ return array(
     'referral_code' => '推薦碼（選修的）',
     'invalid_referral_code' => '無效的推薦代碼',
     'tnc' => '我已閱讀、理解並接受條款和條件。',
+    'tnc_check' => '條款和條件',
     'success_register' => '成功創建帳戶！登錄查看賬戶',
     'have_acc' => '已有帳戶？',
     'forgot_yr_pass' => '忘記密碼了嗎？',
