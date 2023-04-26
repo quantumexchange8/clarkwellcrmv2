@@ -177,6 +177,7 @@
             </table>
             <!-- pagination -->
             <div class="m-4">
+                <span class="float-right font-bold"> @lang('public.total'):  ${{ number_format($total, 2) }}</span> <br><br>
                 {!! $records->links('pagination::tailwind') !!}
             </div>
         </div>

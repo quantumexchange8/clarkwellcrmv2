@@ -176,16 +176,18 @@ class DepositController extends Controller
         }
 
         $search = session('daily_monthly_deposits_children_search') ? session('daily_monthly_deposits_children_search') : $search;
+        $query = Deposits::get_member_daily_monthly_table($search, $user);
 
         return view('member/deposits_daily_monthly', [
             'title' => 'Deposits - Downline',
             'submit' => route('daily_monthly_deposits_listing'),
-            'records' => Deposits::get_member_daily_monthly_table($search, $user)->paginate(10),
+            'records' => $query->paginate(5),
             'search' =>  $search,
             'user' => $user,
             'users' => $users,
             'get_filter_month' => $month,
             'get_filter_year' => $year,
+            'total' => $query->get()->sum('dep_amount') - $query->get()->sum('with_total')
         ]);
     }
 }
