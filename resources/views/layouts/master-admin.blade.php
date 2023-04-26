@@ -8,6 +8,8 @@
     <title>@yield('title') | Clark Well</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css"/>
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/CW-icon.png') }}"/>
+    <link rel="apple-touch-icon" href="{{ asset('img/CW-icon.png') }}">
     @vite(['resources/css/app.css','resources/js/app.js'])
     @yield('css')
 </head>
