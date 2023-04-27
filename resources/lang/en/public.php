@@ -453,10 +453,13 @@ return array(
     'setting_listing' => 'Setting Listing',
     'update_setting' => 'Update Setting',
     'value' => 'Value',
+    'choose_value_type' => 'Choose Value Type',
+    'date_value' => 'Date',
     'invalid_setting' => 'Invalid Setting',
     'successfully_updated_setting' => 'Successfully Updated Setting!',
 
     'monthly_lot' => 'Monthly Lot Size',
+    'lot_size_pool' => 'Lot Size Pool',
     'ranking_log' => 'Ranking Logs',
     'new_rank' => 'New Rank',
     'old_rank' => 'Old Rank',

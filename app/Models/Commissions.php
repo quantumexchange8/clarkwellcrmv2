@@ -45,7 +45,20 @@ class Commissions extends Model
         $end_date = Carbon::parse(Carbon::now()->endOfMonth())->endOfDay()->format('Y-m-d H:i:s');
         $amount = self::with('user')->whereHas('user', function($q) {
             $q->where('status', User::STATUS_ACTIVE);
-        }) ->whereBetween('transaction_at', [$start_date, $end_date])
+        })->whereBetween('transaction_at', [$start_date, $end_date])
+            ->sum('lot_size');
+
+        return $amount;
+    }
+
+    public static function getLotSizePool()
+    {
+        $pool_reset_date = ActionLogs::where('type', '=', 'LOT_SIZE_POOL')->orderByDesc('created_at')->first();
+        $start_date = $pool_reset_date->created_at->format('Y-m-d H:i:s');
+        $end_date = Carbon::parse(Carbon::now())->format('Y-m-d H:i:s');
+        $amount = self::with('user')->whereHas('user', function($q) {
+            $q->where('status', User::STATUS_ACTIVE);
+        })->whereBetween('transaction_at', [$start_date, $end_date])
             ->sum('lot_size');
 
         return $amount;

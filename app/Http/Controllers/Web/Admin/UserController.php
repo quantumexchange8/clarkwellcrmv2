@@ -62,6 +62,7 @@ class UserController extends Controller
             'total_members' => $total_members,
             'brokers' => $brokers,
             'monthly_lot' => Commissions::getMonthlyLotSize(),
+            'lot_size_pool' => Commissions::getLotSizePool(),
         ]);
     }
 

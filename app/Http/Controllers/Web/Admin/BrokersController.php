@@ -92,58 +92,48 @@ class BrokersController extends Controller
     {
         $validator = null;
         $post = null;
+        $languages = config('translatable.locales');
+        $rules = [];
 
         if ($request->isMethod('post')) {
 
-            $validator = Validator::make($request->all(), [
-                'en.name' => 'required',
-                'cn.name' => 'required',
-                'tw.name' => 'required',
-                'en.description' => 'required',
-                'cn.description' => 'required',
-                'tw.description' => 'required',
-                'en.note' => 'required',
-                'cn.note' => 'required',
-                'tw.note' => 'required',
-                'url' => 'required|url',
-                'broker_image' => 'required|image',
-                'qr_image' => 'required|image',
-            ])->setAttributeNames([
-                'en.name' => trans('public.name'). ' ('.trans('public.en').')',
-                'cn.name' => trans('public.name'). ' ('.trans('public.cn').')',
-                'tw.name' => trans('public.name'). ' ('.trans('public.tw').')',
-                'en.description' => trans('public.description'). ' ('.trans('public.en').')',
-                'cn.description' => trans('public.description'). ' ('.trans('public.cn').')',
-                'tw.description' => trans('public.description'). ' ('.trans('public.tw').')',
-                'en.note' => trans('public.instructor_note'). ' ('.trans('public.en').')',
-                'cn.note' => trans('public.instructor_note'). ' ('.trans('public.cn').')',
-                'tw.note' => trans('public.instructor_note'). ' ('.trans('public.tw').')',
+            $attributeNames = [
                 'url' => trans('public.url'),
-                'description' => trans('public.description'),
-                'note' => trans('public.instructor_note'),
                 'broker_image' => trans('public.broker_image'),
                 'qr_image' => trans('public.qr_code'),
-            ]);
+            ];
+
+            foreach ($languages as $lang) {
+                $rules["{$lang}.name"] = 'required';
+                $rules["{$lang}.description"] = 'required';
+                $rules["{$lang}.note"] = 'required';
+
+                $attributeNames["{$lang}.name"] = trans('public.name').' ('.trans("public.{$lang}").')';
+                $attributeNames["{$lang}.description"] = trans('public.description').' ('.trans("public.{$lang}").')';
+                $attributeNames["{$lang}.note"] = trans('public.note').' ('.trans("public.{$lang}").')';
+            }
+
+            $validator = Validator::make($request->all(), $rules+[
+                    'url' => 'required|url',
+                    'broker_image' => 'required|image',
+                    'qr_image' => 'required|image',
+                ])->setAttributeNames($attributeNames);
 
             if (!$validator->fails())
             {
-                $brokers_data = [
-                    'en' => [
-                        'name'       => $request->input('en.name'),
-                        'description' => $request->input('en.description'),
-                        'note' => $request->input('en.note'),
-                    ],
-                    'cn' => [
-                        'name'       => $request->input('cn.name'),
-                        'description' => $request->input('cn.description'),
-                        'note' => $request->input('cn.note'),
-                    ],
-                    'tw' => [
-                        'name'       => $request->input('tw.name'),
-                        'description' => $request->input('tw.description'),
-                        'note' => $request->input('tw.note'),
-                    ],
-                ];
+                $brokers_data = [];
+
+                foreach ($languages as $lang) {
+                    $name_key = $lang . '.name';
+                    $note_key = $lang . '.note';
+                    $description_key = $lang . '.description';
+
+                    $brokers_data[$lang] = [
+                        'name' => $request->input($name_key),
+                        'note' => $request->input($note_key),
+                        'description' => $request->input($description_key),
+                    ];
+                }
 
                 $user = Auth::user();
                 $brokerImageName = $qrImageName = null;
@@ -198,6 +188,8 @@ class BrokersController extends Controller
     {
         $validator = null;
         $post = $broker = Brokers::find($id);
+        $languages = config('translatable.locales');
+        $rules = [];
 
         if (!$broker) {
             Alert::error(trans('public.invalid_broker'), trans('public.try_again'));
@@ -205,35 +197,28 @@ class BrokersController extends Controller
         }
 
         if ($request->isMethod('post')) {
-            $validator = Validator::make($request->all(), [
-                'en.name' => 'required',
-                'cn.name' => 'required',
-                'tw.name' => 'required',
-                'en.description' => 'required',
-                'cn.description' => 'required',
-                'tw.description' => 'required',
-                'en.note' => 'required',
-                'cn.note' => 'required',
-                'tw.note' => 'required',
-                'url' => 'required|url',
-                'broker_image' => 'image',
-                'qr_image' => 'image',
-            ])->setAttributeNames([
-                'en.name' => trans('public.name'). ' ('.trans('public.en').')',
-                'cn.name' => trans('public.name'). ' ('.trans('public.cn').')',
-                'tw.name' => trans('public.name'). ' ('.trans('public.tw').')',
-                'en.description' => trans('public.description'). ' ('.trans('public.en').')',
-                'cn.description' => trans('public.description'). ' ('.trans('public.cn').')',
-                'tw.description' => trans('public.description'). ' ('.trans('public.tw').')',
-                'en.note' => trans('public.instructor_note'). ' ('.trans('public.en').')',
-                'cn.note' => trans('public.instructor_note'). ' ('.trans('public.cn').')',
-                'tw.note' => trans('public.instructor_note'). ' ('.trans('public.tw').')',
+
+            $attributeNames = [
                 'url' => trans('public.url'),
-                'description' => trans('public.description'),
-                'note' => trans('public.instructor_note'),
                 'broker_image' => trans('public.broker_image'),
                 'qr_image' => trans('public.qr_code'),
-            ]);
+            ];
+
+            foreach ($languages as $lang) {
+                $rules["{$lang}.name"] = 'required';
+                $rules["{$lang}.description"] = 'required';
+                $rules["{$lang}.note"] = 'required';
+
+                $attributeNames["{$lang}.name"] = trans('public.name').' ('.trans("public.{$lang}").')';
+                $attributeNames["{$lang}.description"] = trans('public.description').' ('.trans("public.{$lang}").')';
+                $attributeNames["{$lang}.note"] = trans('public.note').' ('.trans("public.{$lang}").')';
+            }
+
+            $validator = Validator::make($request->all(), $rules+[
+                    'url' => 'required|url',
+                    'broker_image' => 'image',
+                    'qr_image' => 'image',
+                ])->setAttributeNames($attributeNames);
 
             if (!$validator->fails()) {
                 $brokerImage = $request->file('broker_image');
@@ -252,27 +237,22 @@ class BrokersController extends Controller
                     $broker->qr_image = $qrImageName;
                 }
 
-                $brokers_data = [
-                    'en' => [
-                        'name'       => $request->input('en.name'),
-                        'description' => $request->input('en.description'),
-                        'note' => $request->input('en.note'),
-                    ],
-                    'cn' => [
-                        'name'       => $request->input('cn.name'),
-                        'description' => $request->input('cn.description'),
-                        'note' => $request->input('cn.note'),
-                    ],
-                    'tw' => [
-                        'name'       => $request->input('tw.name'),
-                        'description' => $request->input('tw.description'),
-                        'note' => $request->input('tw.note'),
-                    ],
-                ];
+                $brokers_data = [];
+
+                foreach ($languages as $lang) {
+                    $name_key = $lang . '.name';
+                    $note_key = $lang . '.note';
+                    $description_key = $lang . '.description';
+
+                    $brokers_data[$lang] = [
+                        'name' => $request->input($name_key),
+                        'note' => $request->input($note_key),
+                        'description' => $request->input($description_key),
+                    ];
+                }
 
                 $broker->update($brokers_data+[
                     'url' => $request->input('url'),
-                    'updated_at' => now(),
                 ]);
 
                 Alert::success(trans('public.done'), trans('public.successfully_updated_broker'));
