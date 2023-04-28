@@ -155,6 +155,7 @@ class MemberController extends Controller
                     Password::min(6)->letters()->numbers()],
                 'rankId' => 'required',
                 'country' => 'required',
+                'address' => 'required',
                 'status' => 'required',
                 'profile_image' => 'nullable|image',
                 'leader_status' => 'required',
@@ -165,6 +166,7 @@ class MemberController extends Controller
                 'password' => trans('public.password'),
                 'rankId' => trans('public.rank'),
                 'country' => trans('public.country'),
+                'address' => trans('public.address'),
                 'status' => trans('public.status'),
                 'profile_image' => trans('public.profile_image'),
                 'leader_status' => trans('public.leader_status'),
@@ -178,6 +180,7 @@ class MemberController extends Controller
                     'rankId' => $request->input('rankId'),
                     'country' => $request->input('country'),
                     'status' => $request->input('status'),
+                    'address' => $request->input('address'),
                     'leader_status' => $request->input('leader_status'),
                 ];
 
