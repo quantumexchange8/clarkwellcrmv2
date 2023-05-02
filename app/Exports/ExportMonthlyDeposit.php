@@ -44,7 +44,6 @@ class ExportMonthlyDeposit implements FromCollection, WithHeadings {
             'Transaction Date',
             'Client Name',
             'Client Email',
-            'Upline Email',
             'Broker',
             'Deposit Amount',
             'Withdrawal Amount (capital)',
