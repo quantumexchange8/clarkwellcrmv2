@@ -28,7 +28,6 @@ class ExportMonthlyDeposit implements FromCollection, WithHeadings {
                 'transaction_date' => $record->month_year ?? $record->date,
                 'name' => $record->user->name,
                 'email' => $record->user->email,
-                'upline_email' => $record->user->parent ? $record->user->parent->email : null,
                 'broker' => $record->broker->name,
                 'deposit_amount' => number_format($record->dep_amount, 2),
                 'withdrawal_amount' => number_format($record->with_total, 2),
