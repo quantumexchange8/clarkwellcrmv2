@@ -449,7 +449,8 @@ return array(
     'monthly' => 'รายเดือน',
 
     'setting' => 'ตั้งค่า',
-    'setting_listing' => 'รายการตั้งค่า',
+    'master_setting' => '主設置',
+    'setting_listing' => 'การตั้งค่าหลัก',
     'update_setting' => 'อัพเดทตั้งค่า',
     'value' => 'ค่า',
     'invalid_setting' => 'ตั้งค่าไม่ถูกต้อง',
@@ -460,7 +461,17 @@ return array(
     'monthly_lot' => 'ขนาดล็อตรายเดือน',
     'ranking_log' => 'บันทึกการจัดอันดับ',
     'new_rank' => 'อันดับใหม่',
-    'old_rank' => 'อันดับเก่า'
+    'old_rank' => 'อันดับเก่า',
+
+    'withdrawal_action' => 'การถอนเงิน',
+    'choose_type' => 'เลือกประเภท',
+    'personal' => 'ส่วนบุคคล',
+    'group' => 'กลุ่ม',
+    'select_action' => 'เลือกการกระทำ',
+    'enable' => 'เปิดใช้งาน',
+    'disable' => 'ปิดการใช้งาน',
+    'user' => 'ผู้ใช้',
+    'successfully_updated_withdrawal_setting' => 'อัปเดตการตั้งค่าการถอนเงินเรียบร้อยแล้ว',
 )
 
 ?>

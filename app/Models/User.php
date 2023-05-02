@@ -33,6 +33,10 @@ class User extends Authenticatable implements JWTSubject
     //user role section
     const ROLE_MEMBER = 1;
     const ROLE_ADMIN = 2;
+
+    //withdrawal action
+    const ENABLE_WITHDRAWAL = 1;
+    const DISABLE_WITHDRAWAL = 0;
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public $sortable = [
@@ -413,6 +417,7 @@ class User extends Authenticatable implements JWTSubject
         $personal_deposit = Deposits::whereIn('userId', $users)
             ->whereBetween('transaction_at', [$start_date, $end_date])
             ->where('type', Deposits::TYPE_DEPOSIT)
+            ->where('status', Deposits::STATUS_APPROVED)
             ->sum('amount');
         $personal_withdrawed_deposit = Deposits::whereIn('userId', $users)
             ->whereBetween('transaction_at', [$start_date, $end_date])
@@ -422,8 +427,7 @@ class User extends Authenticatable implements JWTSubject
 
         $underlineTotal = $personal_deposit - $personal_withdrawed_deposit;
 
-        $result = $underlineTotal + $this->userDailyMonthlyDeposit($month);
-        return $result;
+        return $underlineTotal + $this->userDailyMonthlyDeposit($month);
     }
 
     public function userDailyMonthlyWithdrawal($month = false)
@@ -463,17 +467,21 @@ class User extends Authenticatable implements JWTSubject
         $start_date = Carbon::parse($start_date)->startOfDay()->format('Y-m-d H:i:s');
         $end_date = Carbon::parse($end_date)->endOfDay()->format('Y-m-d H:i:s');
 
-        $users =$this->getChildrenIds();
+        $user_id = Auth::user()->id;
+        $users = $this->getChildrenIds();
+        $users[] = $user_id;
 
-        $personal_withdrawal_query = Withdrawals::whereIn('requested_by_user', $users)
-            ->whereBetween('created_at', [$start_date, $end_date])
-            ->where('status', Withdrawals::STATUS_APPROVED);
+        $personal_withdrawed_deposit = Deposits::whereIn('userId', $users)
+            ->whereBetween('transaction_at', [$start_date, $end_date])
+            ->where('type', Deposits::TYPE_WITHDRAW)
+            ->where('status', Deposits::STATUS_APPROVED)
+            ->sum('amount');
 
-        $amount = $fee = clone $personal_withdrawal_query;
+//        $amount = $fee = clone $personal_withdrawal_query;
+//
+//        $underlineTotal = $amount->sum('amount') + $fee->sum('transaction_fee');
 
-        $underlineTotal = $amount->sum('amount') + $fee->sum('transaction_fee');
-
-        return $underlineTotal + $this->userDailyMonthlyWithdrawal($month);
+        return $personal_withdrawed_deposit;
     }
 
 

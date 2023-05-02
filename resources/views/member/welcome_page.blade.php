@@ -83,7 +83,7 @@
         </div>
 
 
-        <button class="hidden" data-te-toggle="modal" data-te-target="#eventModalPopUp" id="popUpTrigger">qw eqqweqe</button>
+        <button class="hidden" data-te-toggle="modal" data-te-target="#eventModalPopUp" id="popUpTrigger">Pop Up</button>
         <div
             data-te-modal-init
             class="fixed top-0 left-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
@@ -96,13 +96,12 @@
                 class="pointer-events-none relative h-[calc(100%-1rem)] w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]">
                 <div
                     class="pointer-events-auto relative flex max-h-[100%] w-full flex-col overflow-hidden rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
-                    @foreach($events as $event)
                         <div
                             class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
                             <h5
                                 class="text-xl font-medium leading-normal text-orange-400 dark:text-neutral-200"
                                 id="eventModalPopUp_label">
-                                {{ $event->event_title }}
+                                @lang('public.event')
                             </h5>
                             <button
                                 type="button"
@@ -124,9 +123,34 @@
                             </button>
                         </div>
                         <div class="relative overflow-y-auto p-4">
-                            {!! $event->event_image !!}
+                            <div id="default-carousel" class="relative w-full h-full" data-carousel="slide">
+                                <!-- Carousel wrapper -->
+                                <div class="relative h-screen overflow-y-auto overflow-x-hidden rounded-lg">
+                                    @foreach($events as $event)
+                                        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                            <h5
+                                                class="text-xl font-medium leading-normal text-orange-400 dark:text-neutral-200">
+                                                {{ $event->event_title }}
+                                            </h5>
+                                            {!! $event->event_image !!}
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <!-- Slider controls -->
+                                <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+            <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            <span class="sr-only">Previous</span>
+        </span>
+                                </button>
+                                <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+            <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            <span class="sr-only">Next</span>
+        </span>
+                                </button>
+                            </div>
                         </div>
-                    @endforeach
                     <div
                         class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
                         <button

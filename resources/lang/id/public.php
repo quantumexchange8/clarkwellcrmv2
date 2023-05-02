@@ -462,6 +462,7 @@ return array(
     'monthly' => 'Bulanan',
 
     'setting' => 'Pengaturan',
+    'setting_listing' => 'Pengaturan Master',
     'setting_listing' => 'Daftar Pengaturan',
     'update_setting' => 'Perbarui Pengaturan',
     'value' => 'Nilai',
@@ -473,7 +474,17 @@ return array(
     'monthly_lot' => 'Ukuran Lot Bulanan',
     'ranking_log' => 'Log Peringkat',
     'new_rank' => 'Peringkat Baru',
-    'old_rank' => 'Peringkat Lama'
+    'old_rank' => 'Peringkat Lama',
+
+    'withdrawal_action' => 'Tindakan Penarikan',
+    'choose_type' => 'Pilih Jenis',
+    'personal' => 'Personal',
+    'group' => 'Grup',
+    'select_action' => 'Pilih Tindakan',
+    'enable' => 'Aktifkan',
+    'disable' => 'Nonaktifkan',
+    'user' => 'Pengguna',
+    'successfully_updated_withdrawal_setting' => 'Berhasil Memperbarui Pengaturan Penarikan',
 )
 
 ?>

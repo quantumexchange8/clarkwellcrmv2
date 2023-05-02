@@ -6,6 +6,7 @@ use App\Exports\ExportWithdrawal;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreWithdrawalRequest;
 use App\Models\Settings;
+use App\Models\User;
 use App\Models\Withdrawals;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -54,6 +55,13 @@ class WithdrawalController extends Controller
     public function store(StoreWithdrawalRequest $request)
     {
         $user = Auth::user();
+
+        if ($user->withdrawal_action == User::DISABLE_WITHDRAWAL)
+        {
+            Alert::warning(trans('public.invalid_action'), trans('public.try_again'));
+            return redirect()->back();
+        }
+
         if (Withdrawals::where('requested_by_user', $user->id)->where('status', Withdrawals::STATUS_PENDING)->exists()) {
             Alert::warning(trans('public.invalid_action'), trans('public.withdrawal_pending_request'));
             return back()->withInput();

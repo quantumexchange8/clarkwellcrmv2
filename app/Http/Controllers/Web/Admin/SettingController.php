@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ActionLogs;
 use App\Models\Settings;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -84,5 +85,95 @@ class SettingController extends Controller
             'submit' => route('setting_edit', $id),
             'title' => 'Edit',
         ])->withErrors($validator);
+    }
+
+    public function setting_withdrawal(Request $request)
+    {
+        $validator = null;
+        $post = null;
+        $user_id = $request->input('user');
+        $user = User::find($user_id);
+
+        $users = User::query()
+            ->where('status', User::STATUS_ACTIVE)
+            ->where('role', User::ROLE_MEMBER)
+            ->where('deleted_at', null)
+            ->get();
+
+        if ($request->isMethod('post')) {
+            $validator = Validator::make($request->all(), [
+                'user' => 'required',
+            ])->setAttributeNames([
+                'user' => trans('public.user'),
+            ]);
+
+            if (!$validator->fails()) {
+
+                $withdrawal_setting_type = $request->input('withdrawal_setting_type');
+                $withdrawal_action = $request->input('withdrawal_action');
+
+                if ($withdrawal_setting_type == 'personal') {
+
+                    if ($withdrawal_action == User::ENABLE_WITHDRAWAL) {
+                        $user->update([
+                            'withdrawal_action' => 1
+                        ]);
+                    } elseif ($withdrawal_action == User::DISABLE_WITHDRAWAL) {
+                        $user->update([
+                            'withdrawal_action' => 0
+                        ]);
+                    }
+
+                } elseif ($withdrawal_setting_type == 'group') {
+                    $user_children_ids = $user->getChildrenIds();
+
+                    if ($withdrawal_action == User::ENABLE_WITHDRAWAL) {
+                        foreach ($user_children_ids as $user_children_id)
+                        {
+                            $children = User::find($user_children_id);
+
+                            $user->update([
+                                'withdrawal_action' => 1
+                            ]);
+
+                            $children->update([
+                                'withdrawal_action' => 1
+                            ]);
+                        }
+                    } elseif ($withdrawal_action == User::DISABLE_WITHDRAWAL) {
+                        foreach ($user_children_ids as $user_children_id)
+                        {
+                            $children = User::find($user_children_id);
+
+                            $user->update([
+                                'withdrawal_action' => 0
+                            ]);
+
+                            $children->update([
+                                'withdrawal_action' => 0
+                            ]);
+                        }
+                    }
+
+                } else {
+                    Alert::success(trans('public.invalid_action'), trans('public.try_again'));
+                    return redirect()->back();
+                }
+
+                Alert::success(trans('public.done'), trans('public.successfully_updated_withdrawal_setting'));
+                return redirect()->back();
+            }
+
+            $post = (object) $request->all();
+
+        }
+
+        return view('admin.setting.setting_withdrawal', [
+            'post' => $post,
+            'users' => $users,
+            'submit' => route('setting_withdrawal'),
+            'title' => 'Withdrawal',
+            'get_withdrawal_sel' => [User::ENABLE_WITHDRAWAL => trans('public.enable'), User::DISABLE_WITHDRAWAL => trans('public.disable')],
+        ]);
     }
 }

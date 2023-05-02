@@ -165,6 +165,7 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
             Route::controller('SettingController')->prefix('setting')->group(function () {
                 Route::match(['get', 'post'], '/setting_listing', 'listing')->name('setting_listing');
                 Route::match(['get', 'post'], '/setting_edit/{id}', 'setting_edit')->name('setting_edit');
+                Route::match(['get', 'post'], '/setting_withdrawal', 'setting_withdrawal')->name('setting_withdrawal');
             });
 
             Route::controller('CommissionsController')->group(function () {

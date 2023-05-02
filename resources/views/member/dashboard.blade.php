@@ -180,11 +180,11 @@
                                         </div>
                                         <div class="flex-1 min-w-0 text-left">
                                             <p class="text-orange-400 font-semibold truncate dark:text-white">
-                                                @lang('public.group_monthly_deposit')
+                                                @lang('public.group_daily_withdrawal')
                                             </p>
                                         </div>
                                         <div class="inline-flex items-center font-semibold text-[#696057] dark:text-white">
-                                            ${{number_format($user->groupDailyMonthlyDeposit(true), 2)}}
+                                            ${{number_format($user->groupDailyMonthlyWithdrawal(), 2)}}
                                         </div>
                                     </div>
                                     <div class="flex items-center space-x-4 text-sm">
@@ -197,11 +197,11 @@
                                         </div>
                                         <div class="flex-1 min-w-0 text-left">
                                             <p class="text-orange-400 font-semibold truncate dark:text-white">
-                                                @lang('public.group_daily_withdrawal')
+                                                @lang('public.group_monthly_deposit')
                                             </p>
                                         </div>
                                         <div class="inline-flex items-center font-semibold text-[#696057] dark:text-white">
-                                            ${{number_format($user->groupDailyMonthlyWithdrawal(), 2)}}
+                                            ${{number_format($user->groupDailyMonthlyDeposit(true), 2)}}
                                         </div>
                                     </div>
                                     <div class="flex items-center space-x-4 text-sm">

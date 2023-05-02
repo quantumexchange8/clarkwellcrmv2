@@ -450,6 +450,7 @@ return array(
     'monthly' => 'Monthly',
 
     'setting' => 'Setting',
+    'master_setting' => 'Master Setting',
     'setting_listing' => 'Setting Listing',
     'update_setting' => 'Update Setting',
     'value' => 'Value',
@@ -463,5 +464,15 @@ return array(
     'ranking_log' => 'Ranking Logs',
     'new_rank' => 'New Rank',
     'old_rank' => 'Old Rank',
+
+    'withdrawal_action' => 'Withdrawal Action',
+    'choose_type' => 'Choose Type',
+    'personal' => 'Personal',
+    'group' => 'Group',
+    'select_action' => 'Select Action',
+    'enable' => 'Enable',
+    'disable' => 'Disable',
+    'user' => 'User',
+    'successfully_updated_withdrawal_setting' => 'Successfully Update Withdrawal Action',
 )
 ?>

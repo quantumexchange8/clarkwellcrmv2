@@ -450,6 +450,7 @@ return array(
     'monthly' => '每月',
 
     'setting' => '設置',
+    'master_setting' => '主設置',
     'setting_listing' => '設置列表',
     'update_setting' => '更新設置',
     'value' => '定值',
@@ -462,7 +463,17 @@ return array(
     'monthly_lot' => '每月手數',
     'ranking_log' => '排名更新記錄',
     'new_rank' => '新排名',
-    'old_rank' => '舊排名'
+    'old_rank' => '舊排名',
+
+    'withdrawal_action' => '取款行動',
+    'choose_type' => '選擇類型',
+    'personal' => '個人',
+    'group' => '團隊',
+    'select_action' => '選擇操作',
+    'enable' => '啟用',
+    'disable' => '禁用',
+    'user' => '用戶',
+    'successfully_updated_withdrawal_setting' => '成功更新取款行動設置',
 )
 ?>
 
