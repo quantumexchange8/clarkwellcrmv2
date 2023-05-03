@@ -288,13 +288,12 @@ class User extends Authenticatable implements JWTSubject
     public function groupTotalDeposit()
     {
         $users =$this->getChildrenIds();
+
         $group_deposit = Deposits::whereIn('userId', $users)->where('type', Deposits::TYPE_DEPOSIT)->sum('amount');
         $group_deposit_with= Deposits::whereIn('userId', $users)->where('type', Deposits::TYPE_WITHDRAW)
             ->where('status', Deposits::STATUS_APPROVED)
             ->sum('amount');
-        $underlineTotal = $group_deposit - $group_deposit_with;
-        $result = $underlineTotal + $this->personalDeposits();
-        return $result;
+        return $group_deposit - $group_deposit_with;
     }
     public function groupDepositsByBrokers()
     {
@@ -467,9 +466,7 @@ class User extends Authenticatable implements JWTSubject
         $start_date = Carbon::parse($start_date)->startOfDay()->format('Y-m-d H:i:s');
         $end_date = Carbon::parse($end_date)->endOfDay()->format('Y-m-d H:i:s');
 
-        $user_id = Auth::user()->id;
         $users = $this->getChildrenIds();
-        $users[] = $user_id;
 
         $personal_withdrawed_deposit = Deposits::whereIn('userId', $users)
             ->whereBetween('transaction_at', [$start_date, $end_date])
