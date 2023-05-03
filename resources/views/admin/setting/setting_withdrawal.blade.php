@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="text-value">
-            <label for="user" class="block mb-6 font-bold text-[#FFA168] dark:text-white">User</label>
+            <label for="user" class="block mb-6 font-bold text-[#FFA168] dark:text-white">@lang('public.user')</label>
             <select class="js-example-basic-single w-full max-w-sm" id="user" name="user">
                 @foreach($users as $user)
                     <option value="{{ $user->id }}">{{ $user->name }}</option>

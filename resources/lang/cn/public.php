@@ -465,7 +465,7 @@ return array(
     'new_rank' => '新排名',
     'old_rank' => '旧排名',
 
-    'withdrawal_action' => '取款行动',
+    'withdrawal_action' => '取款设置',
     'choose_type' => '选择类型',
     'personal' => '个人',
     'group' => '团队',

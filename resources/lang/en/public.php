@@ -465,7 +465,7 @@ return array(
     'new_rank' => 'New Rank',
     'old_rank' => 'Old Rank',
 
-    'withdrawal_action' => 'Withdrawal Action',
+    'withdrawal_action' => 'Withdrawal Setting',
     'choose_type' => 'Choose Type',
     'personal' => 'Personal',
     'group' => 'Group',
