@@ -170,7 +170,18 @@
                     <span class="sr-only">Close modal</span>
                 </button>
                 <div class="px-6 py-6 lg:px-8">
-                    <h3 class="mb-4 text-xl font-semibold text-[#FFA168] dark:text-white">@lang('public.withdrawal_amount')</h3>
+                    <h3 class="text-xl mb-4 font-semibold text-[#FFA168] leading-tight">
+                        @lang('public.withdrawal_amount')
+                        @if($user->withdrawal_action == \App\Models\User::DISABLE_WITHDRAWAL)
+                            <span class="inline-block whitespace-nowrap rounded-[0.27rem] bg-yellow-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-yellow-700">
+                                @lang('public.disable')
+                            </span>
+                        @elseif($user->withdrawal_action == \App\Models\User::ENABLE_WITHDRAWAL)
+                            <span class="inline-block whitespace-nowrap rounded-[0.27rem] bg-success-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-success-700">
+                                @lang('public.enable')
+                            </span>
+                        @endif
+                    </h3>
                     <form class="space-y-6" method="post" action="{{ route('withdraw_amount', $user->id) }}">
                         @csrf
                         <div>
