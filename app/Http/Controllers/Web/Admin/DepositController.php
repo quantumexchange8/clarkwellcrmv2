@@ -94,7 +94,7 @@ class DepositController extends Controller
             'records' => Deposits::get_report_record($search)->paginate(10),
             'search' =>  $search,
             'brokers' => Brokers::all(),
-            'get_country_sel' => SettingCountry::get_country_sel(),
+            'get_country_sel' => SettingCountry::get_country_sel(app()->getLocale()),
         ]);
     }
 
@@ -139,7 +139,7 @@ class DepositController extends Controller
             'search' =>  $search,
             'users' => $users,
             'brokers' => Brokers::all(),
-            'get_country_sel' => SettingCountry::get_country_sel(),
+            'get_country_sel' => SettingCountry::get_country_sel(app()->getLocale()),
         ]);
     }
 

@@ -96,7 +96,7 @@ class CommissionsController extends Controller
             'records' => Commissions::get_record($search)->paginate(10),
             'search' =>  $search,
             'brokers' => Brokers::all(),
-            'get_country_sel' => SettingCountry::get_country_sel(),
+            'get_country_sel' => SettingCountry::get_country_sel(app()->getLocale()),
         ]);
     }
 
@@ -157,7 +157,7 @@ class CommissionsController extends Controller
             'records' => Commissions::get_record($search)->paginate(10),
             'search' =>  $search,
             'brokers' => Brokers::all(),
-            'get_country_sel' => SettingCountry::get_country_sel(),
+            'get_country_sel' => SettingCountry::get_country_sel(app()->getLocale()),
             'get_filter_month' => $month,
             'get_filter_year' => $year,
         ]);
@@ -205,7 +205,7 @@ class CommissionsController extends Controller
             'search' =>  $search,
             'users' => $users,
             'brokers' => Brokers::all(),
-            'get_country_sel' => SettingCountry::get_country_sel(),
+            'get_country_sel' => SettingCountry::get_country_sel(app()->getLocale()),
         ]);
     }
 

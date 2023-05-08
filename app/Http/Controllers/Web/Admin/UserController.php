@@ -124,7 +124,7 @@ class UserController extends Controller
             'title' => 'Edit',
             'user' => $user,
             'post' => $post,
-            'get_country_sel' => SettingCountry::get_country_sel(),
+            'get_country_sel' => SettingCountry::get_country_sel(app()->getLocale()),
             'submit' => route('admin_profile'),
         ])->withErrors($validator);
     }

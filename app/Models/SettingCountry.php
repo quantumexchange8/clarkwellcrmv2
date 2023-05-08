@@ -11,9 +11,21 @@ class SettingCountry extends Model
 
     protected $table = 'countries';
 
-    public static function get_country_sel(): array
+    public static function get_country_sel(string $language): array
     {
         $query = SettingCountry::where('id', '>', 1);
 
-        return $query->orderby('id')->get()->pluck('name', 'name')->toArray();
-    }}
+        switch ($language) {
+            case 'cn':
+                $column = 'name_cn';
+                break;
+            case 'tw':
+                $column = 'name_tw';
+                break;
+            default:
+                $column = 'name';
+        }
+
+        return $query->orderBy('id')->get()->pluck($column, 'name')->toArray();
+    }
+}

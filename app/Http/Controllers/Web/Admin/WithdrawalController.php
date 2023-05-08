@@ -99,7 +99,7 @@ class WithdrawalController extends Controller
             'search' =>  $search,
             'brokers' => Brokers::all(),
             'get_status_sel' => ['' => trans('public.select_status')] + [1 => trans('public.process'), 2 => trans('public.approved'), 3 => trans('public.rejected')],
-            'get_country_sel' => SettingCountry::get_country_sel(),
+            'get_country_sel' => SettingCountry::get_country_sel(app()->getLocale()),
         ]);
     }
 
@@ -147,7 +147,7 @@ class WithdrawalController extends Controller
             'users' => $users,
             'brokers' => Brokers::all(),
             'get_status_sel' => ['' => trans('public.select_status')] + [1 => trans('public.process'), 2 => trans('public.approved'), 3 => trans('public.rejected')],
-            'get_country_sel' => SettingCountry::get_country_sel(),
+            'get_country_sel' => SettingCountry::get_country_sel(app()->getLocale()),
         ]);
     }
 

@@ -128,7 +128,7 @@ class MemberController extends Controller
             'get_rank_sel' => Rankings::get_rank_sel(),
             'get_status_sel' => [ 1 => 'Active', 2 => 'Inactive', 3 => 'Suspended' ],
             'get_leader_status_sel' => [ 0 => 'No', 1 => 'Yes' ],
-            'get_country_sel' => SettingCountry::get_country_sel(),
+            'get_country_sel' => SettingCountry::get_country_sel(app()->getLocale()),
         ])->withErrors($validator);
     }
 
@@ -218,7 +218,7 @@ class MemberController extends Controller
             'get_rank_sel' => Rankings::get_rank_sel(),
             'get_status_sel' => [ 1 => 'Active', 2 => 'Inactive', 3 => 'Suspended' ],
             'get_leader_status_sel' => [ 0 => 'No', 1 => 'Yes' ],
-            'get_country_sel' => SettingCountry::get_country_sel(),
+            'get_country_sel' => SettingCountry::get_country_sel(app()->getLocale()),
         ])->withErrors($validator);
     }
 
