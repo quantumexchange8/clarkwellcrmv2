@@ -39,8 +39,8 @@ class CommissionsImport implements ToCollection, WithHeadingRow, withValidation,
      */
     public function collection(Collection $rows)
     {
-        foreach ($rows as $key=>$row) {
-            $user = User::where('email', $row['email'])->first();
+        foreach ($rows as $key => $row) {
+            $user = User::where('email', $row['email'])->withTrashed()->first();
             $transactionDate = Carbon::instance(Date::excelToDateTimeObject($row['transaction_date']))->format('Y-m-d H:i:s');
             Commissions::create([
                 'lot_size' => round($row['lot_size'], 2),

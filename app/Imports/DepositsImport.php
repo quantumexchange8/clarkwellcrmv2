@@ -42,7 +42,7 @@ class DepositsImport implements ToCollection, WithHeadingRow, withValidation, Sk
     {
         foreach ($rows as $key=>$row) {
 
-            $user = User::where('email', $row['email'])->first();
+            $user = User::where('email', $row['email'])->withTrashed()->first();
             $transactionDate = Carbon::instance(Date::excelToDateTimeObject($row['transaction_date']))->format('Y-m-d H:i:s');
             $perform_action = true;
             $type = Deposits::TYPE_DEPOSIT;

@@ -35,7 +35,7 @@ class WithdrawalImport implements ToCollection, WithHeadingRow, withValidation, 
     {
         foreach ($rows as $key=>$row) {
 
-            $user = User::where('email', $row['email'])->first();
+            $user = User::where('email', $row['email'])->withTrashed()->first();
             $perform_action = true;
             $msg = null;
 
