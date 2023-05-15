@@ -136,7 +136,6 @@
                                 {{ $record->month_year ?? $record->date }}
                             </td>
                             <td class="p-4">
-
                                 <a href="{{ route('view_member_profile', $record->user->id) }}" class="underline text-[#1A8BFF]">{{ $record->user->name  }} {{$record->user->id}}</a>
                             </td>
                             <td class="p-4">

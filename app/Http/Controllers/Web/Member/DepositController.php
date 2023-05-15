@@ -181,7 +181,7 @@ class DepositController extends Controller
         return view('member/deposits_daily_monthly', [
             'title' => 'Deposits - Downline',
             'submit' => route('daily_monthly_deposits_listing'),
-            'records' => $query->paginate(5),
+            'records' => $query->paginate(10),
             'search' =>  $search,
             'user' => $user,
             'users' => $users,
