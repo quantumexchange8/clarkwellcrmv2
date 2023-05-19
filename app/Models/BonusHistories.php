@@ -23,8 +23,47 @@ class BonusHistories extends Model
         'downline_id',
         'brokersId',
         'status',
-        'from_commissions_id'
+        'from_commissions_id',
+        'created_at'
     ];
+
+    public static function get_record($search)
+    {
+
+        $query = BonusHistories::sortable()->with('user')->whereHas('user', function ($query) {
+            return $query->where('role', 1);
+        });
+
+        $search_text = @$search['freetext'] ?? NULL;
+        $freetext = explode(' ', $search_text);
+
+        if($search_text){
+            foreach($freetext as $freetexts) {
+                $query->whereHas('user', function ($q) use ($freetexts) {
+                    $q->where('email', 'like', '%' . $freetexts . '%')
+                        ->orWhere('name', 'like', '%' . $freetexts . '%');
+                });
+            }
+        }
+
+        if (@$search['type']) {
+            $users = User::find(@$search['user_id']);
+            $users_id = [];
+            if ($users) {
+                $users_id[] = $users->id;
+                $users_id = array_merge($users->getChildrenIds(), $users_id);
+                $query->whereIn('downline_id', $users_id);
+            }
+        }
+
+        if (@$search['transaction_start'] && @$search['transaction_end']) {
+            $start_date = Carbon::parse(@$search['transaction_start'])->startOfDay()->format('Y-m-d H:i:s');
+            $end_date = Carbon::parse(@$search['transaction_end'])->endOfDay()->format('Y-m-d H:i:s');
+            $query->whereBetween('created_at', [$start_date, $end_date]);
+        }
+
+        return $query->orderbyDesc('created_at');
+    }
 
     public static function get_commissions_table($search, $userId)
     {

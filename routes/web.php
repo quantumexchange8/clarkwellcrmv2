@@ -106,6 +106,7 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
                 Route::match(['get', 'post'], '/withdraw_amount/{id}', 'withdraw_amount')->name('withdraw_amount');
                 Route::post('/impersonate', 'impersonate')->name('impersonate_user');
                 Route::post('/wallet_adjustment', 'adjustWallet')->name('wallet_adjustment');
+                Route::match(['get', 'post'],'/acknowledgement_letter', 'acknowledgement_letter')->name('acknowledgement_letter');
             });
 
             Route::prefix('report')->group(function () {
@@ -123,6 +124,7 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
                 Route::match(['get', 'post'], '/performance_bonus/approval/{id}', [PerformanceBonusController::class, 'performance_bonus_approval'])->name('performance_bonus_approval');
                 Route::match(['get', 'post'], '/wallets/listing', [WalletLogsController::class, 'listing'])->name('wallet_logs_listing');
                 Route::match(['get', 'post'], '/ranking/listing', [\App\Http\Controllers\Web\Admin\RankingUpdateLogController::class, 'listing'])->name('ranking_logs_listing');
+                Route::match(['get', 'post'], '/bonus_history/listing', [\App\Http\Controllers\Web\Admin\BonusHistoryController::class, 'listing'])->name('bonus_history_listing');
             });
 
             Route::controller('ReferralController')->prefix('referral')->group(function () {
@@ -166,6 +168,7 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
                 Route::match(['get', 'post'], '/setting_listing', 'listing')->name('setting_listing');
                 Route::match(['get', 'post'], '/setting_edit/{id}', 'setting_edit')->name('setting_edit');
                 Route::match(['get', 'post'], '/setting_withdrawal', 'setting_withdrawal')->name('setting_withdrawal');
+                Route::match(['get', 'post'], '/setting_email_status', 'setting_email_status')->name('setting_email_status');
             });
 
             Route::controller('CommissionsController')->group(function () {
