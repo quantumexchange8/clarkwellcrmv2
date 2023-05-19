@@ -57,7 +57,14 @@
                 <div class="max-[755px]:flex max-[755px]:flex-col gap-2">
                     <button type="submit" class="text-white bg-primary hover:bg-primary-600 border border-primary-200 focus:ring-4 focus:outline-none focus:ring-primary-600 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" name="submit" value="search">@lang('public.search')</button>
                     <button type="submit" class="text-white bg-rose-500 hover:bg-rose-600 border border-rose-200 focus:ring-4 focus:outline-none focus:ring-rose-600 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" name="submit" value="reset">@lang('public.reset')</button>
+                    <a href="#" class=" text-white py-2 px-5 rounded bg-[#FFA168] hover:bg-orange-400 text-md font-bold float-right">
+                        <div class="flex items-center justify-center">
+                            <svg class="h-6 w-6 text-white mr-2"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />  <polyline points="17 8 12 3 7 8" />  <line x1="12" y1="3" x2="12" y2="15" /></svg>
+                            <button type="submit" name="submit" value="export"  class=" text-md font-bold">@lang('public.export_report')</button>
+                        </div>
+                    </a>
                 </div>
+
             </div>
         </form>
     </div>
@@ -127,6 +134,7 @@
             </table>
             <!-- pagination -->
             <div class="m-4">
+                <span class="float-right font-bold"> @lang('public.total'):  ${{ number_format($total_amount, 2) }}</span> <br><br>
                 {!! $records->links('pagination::tailwind') !!}
             </div>
         </div>

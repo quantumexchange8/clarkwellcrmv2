@@ -48,12 +48,8 @@ class BonusHistories extends Model
 
         if (@$search['type']) {
             $users = User::find(@$search['user_id']);
-            $users_id = [];
-            if ($users) {
-                $users_id[] = $users->id;
-                $users_id = array_merge($users->getChildrenIds(), $users_id);
-                $query->whereIn('downline_id', $users_id);
-            }
+            $users_id = $users->getChildrenIds();
+            $query->whereIn('downline_id', $users_id);
         }
 
         if (@$search['transaction_start'] && @$search['transaction_end']) {

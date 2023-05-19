@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
+use App\Exports\ExportBonusHistories;
 use App\Http\Controllers\Controller;
 use App\Models\BonusHistories;
 use App\Models\Brokers;
@@ -9,6 +10,7 @@ use App\Models\SettingCountry;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BonusHistoryController extends Controller
 {
@@ -36,6 +38,9 @@ class BonusHistoryController extends Controller
                         'transaction_end' => $request->input('transaction_end')
                     ]]);
                     break;
+                case 'export':
+                    $now = Carbon::now()->format('YmdHis');
+                    return Excel::download(new ExportBonusHistories(BonusHistories::get_record( session('admin_bonus_history_search'))), $now . '-bonus-histories-records.xlsx');
                 case 'reset':
                     session()->forget('admin_bonus_history_search');
                     break;
@@ -43,6 +48,7 @@ class BonusHistoryController extends Controller
         }
 
         $search = session('admin_bonus_history_search') ? session('admin_bonus_history_search') : $search;
+        $query = BonusHistories::get_record($search);
 
         return view('admin.report.bonus_history_list', [
             'title' => trans('public.network'),
@@ -51,6 +57,7 @@ class BonusHistoryController extends Controller
             'search' =>  $search,
             'users' => $users,
             'brokers' => Brokers::all(),
+            'total_amount' => $query->get()->sum('bonus_amount')
         ]);
     }
 }
