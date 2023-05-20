@@ -598,8 +598,10 @@
             var copyText = document.getElementById("refLink");
             var  first_time= "<?php echo $first_time_logged_in; ?>";
             if (first_time == 1) {
-                $('#popModal').show();
-                {{Session::put('first_time_logged_in', 0)}};
+                @if(!empty($news_all->count() > 0))
+                    $('#popModal').show();
+                    {{Session::put('first_time_logged_in', 0)}};
+                @endif
             }
 
             $("#copyLink").click(function(){

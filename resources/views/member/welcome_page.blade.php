@@ -132,13 +132,21 @@
                                 <!-- Carousel wrapper -->
                                 <div class="relative h-screen overflow-y-auto overflow-x-hidden rounded-lg">
                                     @foreach($events as $event)
-                                        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                        @if($events->count() == 1)
                                             <h5
                                                 class="text-xl font-medium leading-normal text-orange-400 dark:text-neutral-200">
                                                 {{ $event->event_title }}
                                             </h5>
                                             {!! $event->event_image !!}
-                                        </div>
+                                        @else
+                                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                                <h5
+                                                    class="text-xl font-medium leading-normal text-orange-400 dark:text-neutral-200">
+                                                    {{ $event->event_title }}
+                                                </h5>
+                                                {!! $event->event_image !!}
+                                            </div>
+                                        @endif
                                     @endforeach
                                 </div>
                                 <!-- Slider controls -->
