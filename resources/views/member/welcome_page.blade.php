@@ -72,14 +72,19 @@
 
         <!-- news -->
         <div class="max-w p-6 bg-[#FDFCF3] border border-gray-200 rounded-lg shadow hover:shadow-xl dark:bg-gray-800 dark:border-gray-700">
-            <h2 class="mb-6 underline text-2xl font-bold tracking-tight text-orange-400 dark:text-white">{{ $news->title }}</h2>
-            <div class="mb-6 font-normal text-gray-700 dark:text-gray-400">
-                <p class="text-2xl text-gray-400 dark:text-gray-500">{!! $news->content !!}</p>
-            </div>
-            <a href="{{ route('member_dashboard') }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-orange-400 rounded-lg hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
-                @lang('public.read_more')
-                <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-            </a>
+            @if(!empty($news))
+                <h2 class="mb-6 underline text-2xl font-bold tracking-tight text-orange-400 dark:text-white">{{ $news->title }}</h2>
+                <div class="mb-6 font-normal text-gray-700 dark:text-gray-400">
+                    <p class="text-2xl text-gray-400 dark:text-gray-500">{!! $news->content !!}</p>
+                </div>
+                <a href="{{ route('member_dashboard') }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-orange-400 rounded-lg hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
+                    @lang('public.read_more')
+                    <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </a>
+            @else
+                <p class="text-xl text-orange-400">@lang('public.welcome_back'), {{ auth()->user()->name }}!</p>
+            @endif
+
         </div>
 
 
