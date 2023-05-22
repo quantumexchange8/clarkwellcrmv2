@@ -167,6 +167,8 @@ return array(
     'password_validation_2' => '必须包含数字',
     'password_validation_3' => '必须包含特殊字符',
     'password_validation_4' => '至少 6 个字符',
+    'yes' => '是',
+    'no' => '否',
 
     'access' => '权限',
     'access_confirmation' => '您确定要访问此用户吗？',
@@ -474,6 +476,15 @@ return array(
     'disable' => '禁用',
     'user' => '用户',
     'successfully_updated_withdrawal_setting' => '成功更新取款行动设置',
+
+    'acknowledgement_letter' => '客户权益书',
+    'send' => '发送',
+    'specific_user' => '仅限指定用户',
+    'with_children' => '与下线一起',
+    'status_not_allow' => '用户当前状态不允许接收此函件',
+    'successfully_send_acknowledgement' => '成功发送客户权益书',
+    'email_status' => '电子邮件状态',
+    'successfully_updated_email_status_setting' => '成功更新电子邮件状态设置'
 )
 ?>
 

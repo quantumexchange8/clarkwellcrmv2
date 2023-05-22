@@ -176,6 +176,8 @@ return array(
     'password_validation_2' => 'Harus terdiri dari angka',
     'password_validation_3' => 'Harus terdiri dari karakter khusus',
     'password_validation_4' => 'Minimal 6 karakter',
+    'yes' => 'Ya',
+    'no' => 'Tidak',
 
     'access' => 'Akses',
     'access_confirmation' => 'Apakah Anda yakin ingin mengakses pengguna ini?',
@@ -485,6 +487,15 @@ return array(
     'disable' => 'Nonaktifkan',
     'user' => 'Pengguna',
     'successfully_updated_withdrawal_setting' => 'Berhasil Memperbarui Pengaturan Penarikan',
+
+    'acknowledgement_letter' => 'Pernyataan hak pelanggan',
+    'send' => 'Kirim',
+    'specific_user' => 'Hanya untuk Pengguna Tertentu',
+    'with_children' => 'Bersamaan dengan luring',
+    'status_not_allow' => 'Status pengguna saat ini tidak memungkinkan menerima surat ini',
+    'successfully_send_acknowledgement' => 'Berhasil mengirim surat manfaat pelanggan',
+    'email_status' => 'Status Email',
+    'successfully_updated_email_status_setting' => 'Berhasil memperbarui pengaturan status email',
 )
 
 ?>

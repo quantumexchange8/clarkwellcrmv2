@@ -8,7 +8,7 @@
         <a href="{{ route('setting_listing') }}" class="text-xl font-semibold text-[#FFA168]">@lang('public.back')</a>
     </div>
 
-    <form class="space-y-6" action="{{ $submit }}" method="post">
+    <form class="space-y-6 md:w-1/2 sm:w-full" action="{{ $submit }}" method="post">
         @csrf
         <div>
             <label for="title" class="block mb-6 font-bold text-[#FFA168] dark:text-white">@lang('public.title')</label>

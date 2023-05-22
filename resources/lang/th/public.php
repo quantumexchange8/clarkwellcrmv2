@@ -166,6 +166,8 @@ return array(
     'password_validation_2' => 'ต้องมีตัวเลข',
     'password_validation_3' => 'ต้องมีอักขระพิเศษ',
     'password_validation_4' => 'ต้องมีอย่างน้อย 6 ตัวอักษร',
+    'yes' => 'ใช่',
+    'no' => 'ไม่',
 
     'access' => 'เข้าถึง',
     'access_confirmation' => 'คุณแน่ใจหรือไม่ว่าต้องการเข้าถึงผู้ใช้นี้?',
@@ -472,6 +474,15 @@ return array(
     'disable' => 'ปิดการใช้งาน',
     'user' => 'ผู้ใช้',
     'successfully_updated_withdrawal_setting' => 'อัปเดตการตั้งค่าการถอนเงินเรียบร้อยแล้ว',
+
+    'acknowledgement_letter' => 'คำชี้แจงสิทธิ์ของลูกค้า',
+    'send' => 'ส่ง',
+    'specific_user' => 'เฉพาะผู้ใช้ที่กำหนด',
+    'with_children' => 'กันด้วยนะครับ',
+    'status_not_allow' => 'สถานะปัจจุบันของผู้ใช้ไม่อนุญาตให้รับจดหมายนี้',
+    'successfully_send_acknowledgement' => 'ส่งจดหมายแจ้งผลประโยชน์ของลูกค้าเรียบร้อยแล้ว',
+    'email_status' => 'สถานะอีเมล',
+    'successfully_updated_email_status_setting' => 'อัปเดตการตั้งค่าสถานะอีเมลเรียบร้อยแล้ว',
 )
 
 ?>

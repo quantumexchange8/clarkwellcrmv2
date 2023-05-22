@@ -12,19 +12,31 @@
         <a href="{{ route('setting_listing') }}" class="text-xl font-semibold text-[#FFA168]">@lang('public.back')</a>
     </div>
 
-    <form class="space-y-6" action="{{ $submit }}" method="post">
+    <form class="space-y-6 md:w-1/2 sm:w-full" action="{{ $submit }}" method="post">
         @csrf
         <p class="block font-bold text-[#FFA168] dark:text-white">@lang('public.choose_type')</p>
-        <div class="grid grid-cols-2 gap-4">
-            <div class="flex items-center pl-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg">
-                <input id="value_type" type="radio" checked value="personal" name="withdrawal_setting_type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="value_type" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">@lang('public.personal')</label>
-            </div>
-            <div class="flex items-center pl-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg">
-                <input id="value_type" type="radio" value="group" name="withdrawal_setting_type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="value_type" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">@lang('public.group')</label>
-            </div>
-        </div>
+        <ul class="grid w-full gap-6 md:grid-cols-2">
+            <li>
+                <input type="radio" id="hosting-small" name="withdrawal_setting_type" value="personal" class="hidden peer" checked>
+                <label for="hosting-small" class="inline-flex items-center justify-between w-full px-3 py-1 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-orange-400 peer-checked:text-orange-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                    <div class="block">
+                        <div class="w-full text-lg font-semibold">@lang('public.personal')</div>
+                        <div class="w-full">@lang('public.specific_user')</div>
+                    </div>
+                    <svg aria-hidden="true" class="w-6 h-6 ml-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </label>
+            </li>
+            <li>
+                <input type="radio" id="hosting-big" name="withdrawal_setting_type" value="group" class="hidden peer">
+                <label for="hosting-big" class="inline-flex items-center justify-between w-full px-3 py-1 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-orange-400 peer-checked:text-orange-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                    <div class="block">
+                        <div class="w-full text-lg font-semibold">@lang('public.group')</div>
+                        <div class="w-full">@lang('public.with_children')</div>
+                    </div>
+                    <svg aria-hidden="true" class="w-6 h-6 ml-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </label>
+            </li>
+        </ul>
         <div class="text-value">
             <label for="user" class="block mb-6 font-bold text-[#FFA168] dark:text-white">@lang('public.user')</label>
             <select class="js-example-basic-single w-full max-w-sm" id="user" name="user">

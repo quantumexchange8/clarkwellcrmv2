@@ -46,9 +46,9 @@
                             @endif
                         </a>
                     </li>
-{{--                    <li>--}}
-{{--                        <a href="{{ route('acknowledgement_letter') }}" class="{{ request()->is('admin/member/acknowledgement_letter') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 text-base font-semibold transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.acknowledgement_letter')</a>--}}
-{{--                    </li>--}}
+                    <li>
+                        <a href="{{ route('acknowledgement_letter') }}" class="{{ request()->is('admin/member/acknowledgement_letter') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 text-base font-semibold transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.acknowledgement_letter')</a>
+                    </li>
                 </ul>
             </li>
             <li>
@@ -191,9 +191,9 @@
                     <li>
                         <a href="{{ route('setting_withdrawal') }}" class="{{ request()->is('admin/setting/setting_withdrawal') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 text-base font-semibold transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.withdrawal_action')</a>
                     </li>
-{{--                    <li>--}}
-{{--                        <a href="{{ route('setting_email_status') }}" class="{{ request()->is('admin/setting/setting_email_status') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 text-base font-semibold transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.email_status')</a>--}}
-{{--                    </li>--}}
+                    <li>
+                        <a href="{{ route('setting_email_status') }}" class="{{ request()->is('admin/setting/setting_email_status') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 text-base font-semibold transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.email_status')</a>
+                    </li>
                 </ul>
             </li>
             <li>

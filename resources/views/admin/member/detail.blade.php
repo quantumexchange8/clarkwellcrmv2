@@ -123,7 +123,7 @@
                     <div class="mt-6 px-4">
                         <h2 class="font-semibold text-md text-orange-400 mb-4">@lang('public.leader_status')</h2>
                         <span class="font-semibold text-md text-gray-500">
-                            {{ $user->leader_status ? 'Yes' : 'No'}}
+                            {{ $user->leader_status ? trans('public.yes') : trans('public.no') }}
                         </span>
                     </div>
                     <div class="mt-6 px-4">
@@ -152,6 +152,12 @@
                                 </button>
                             @endif
                         </form>
+                    </div>
+                    <div class="mt-6 px-4">
+                        <h2 class="font-semibold text-md text-orange-400 mb-4">@lang('public.email_status')</h2>
+                        <span class="font-semibold text-md text-gray-500">
+                            {{ $user->email_status == 1 ? trans('public.yes') : trans('public.no') }}
+                        </span>
                     </div>
                 </div>
             </div>

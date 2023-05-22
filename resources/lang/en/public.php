@@ -167,6 +167,8 @@ return array(
     'password_validation_2' => 'Must include a number',
     'password_validation_3' => 'Must include a special character',
     'password_validation_4' => 'Minimum 6 character',
+    'yes' => 'Yes',
+    'no' => 'No',
 
     'access' => 'Access',
     'access_confirmation' => 'Are you sure you want to access this user?',
@@ -474,5 +476,15 @@ return array(
     'disable' => 'Disable',
     'user' => 'User',
     'successfully_updated_withdrawal_setting' => 'Successfully Update Withdrawal Action',
+
+    //email status & acknowledgement letter
+    'acknowledgement_letter' => 'Acknowledgement Letter',
+    'send' => 'Send',
+    'specific_user' => 'Specific User Only',
+    'with_children' => 'Together With Their Children',
+    'status_not_allow' => 'The user current status does not allow them to receive this letter',
+    'successfully_send_acknowledgement' => 'Successfully sent acknowledgement letter',
+    'email_status' => 'Email Status',
+    'successfully_updated_email_status_setting' => 'Successfully updated email status',
 )
 ?>

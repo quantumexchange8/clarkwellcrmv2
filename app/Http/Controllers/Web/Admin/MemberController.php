@@ -11,11 +11,16 @@ use App\Models\Rankings;
 use App\Models\SettingCountry;
 use App\Models\User;
 use App\Models\WalletLogs;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -523,5 +528,125 @@ class MemberController extends Controller
         }
 
         return back();
+    }
+
+    public function acknowledgement_letter(Request $request)
+    {
+        $validator = null;
+        $post = null;
+        $user_id = $request->input('user');
+        $user = User::find($user_id);
+
+        $users = User::query()
+            ->where('status', User::STATUS_ACTIVE)
+            ->where('role', User::ROLE_MEMBER)
+            ->where('deleted_at', null)
+            ->get();
+
+        if ($request->isMethod('post')) {
+            $validator = Validator::make($request->all(), [
+                'user' => 'required',
+            ])->setAttributeNames([
+                'user' => trans('public.user'),
+            ]);
+
+            if (!$validator->fails()) {
+                $send_email_type = $request->input('send_email_type');
+//                $withdrawal_action = $request->input('withdrawal_action');
+
+                if ($send_email_type == 'personal') {
+
+                    if ($user->email_status == 0) {
+                        Alert::error(trans('public.invalid_action'), trans('public.status_not_allow'));
+                        return redirect()->back();
+                    }
+
+                    $fontPath = public_path('fonts/simsun.ttf');
+
+                    $options = new Options();
+                    $options->set('defaultFont', $fontPath);
+
+                    $dompdf = new Dompdf($options);
+
+                    $data['email'] = $user->email;
+                    $data['title'] = 'Clark Well - Acknowledgement Letter';
+
+                    $html = view('admin.member.acknowledgement_pdf', ['user' => $user])->render();
+
+                    $dompdf->loadHtml($html);
+                    $dompdf->render();
+
+                    $pdfContent = $dompdf->output();
+
+                    Mail::send('email', ['user' => $user], function ($message) use ($data, $pdfContent) {
+                        $message->to($data['email'])
+                            ->subject($data['title'])
+                            ->attachData($pdfContent, 'test.pdf');
+                    });
+
+                } elseif ($send_email_type == 'group') {
+
+                    if ($user->email_status == 0) {
+                        Alert::error(trans('public.invalid_action'), trans('public.status_not_allow'));
+                        return redirect()->back();
+                    }
+
+                    $fontPath = public_path('fonts/simsun.ttf');
+
+                    $options = new Options();
+                    $options->set('defaultFont', $fontPath);
+
+                    $data['title'] = 'Clark Well - Acknowledgement Letter';
+
+                    $user_children_ids = $user->getChildrenIds();
+                    $user_children_ids[] = $user->id;
+
+                    foreach ($user_children_ids as $child_id) {
+                        $child = User::find($child_id);
+
+                        $data['email'] = $child->email;
+
+                        if ($child->email_status == 0) {
+                            // Skip sending email to users with email_status equal to 0
+                            continue;
+                        }
+
+                        $dompdf = new Dompdf($options); // Create a new instance of Dompdf for each iteration
+
+                        $html = view('admin.member.acknowledgement_pdf', ['user' => $child])->render();
+
+                        $dompdf->loadHtml($html);
+                        $dompdf->render();
+
+                        $pdfContent = $dompdf->output();
+
+                        Mail::send('email', ['user' => $child], function ($message) use ($data, $pdfContent) {
+                            $message->to($data['email'])
+                                ->subject($data['title'])
+                                ->attachData($pdfContent, 'test.pdf');
+                        });
+                    }
+
+
+                } else {
+                    Alert::success(trans('public.invalid_action'), trans('public.try_again'));
+                    return redirect()->back();
+                }
+
+                Alert::success(trans('public.done'), trans('public.successfully_send_acknowledgement'));
+                return redirect()->back();
+            }
+
+            $post = (object) $request->all();
+
+        }
+
+        return view('admin.member.send_letter', [
+            'post' => $post,
+            'users' => $users,
+            'submit' => route('acknowledgement_letter'),
+            'title' => trans('public.acknowledgement_letter'),
+            'get_withdrawal_sel' => [User::ENABLE_WITHDRAWAL => trans('public.enable'), User::DISABLE_WITHDRAWAL => trans('public.disable')],
+        ])->withErrors($validator);
     }
 }

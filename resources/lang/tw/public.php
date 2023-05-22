@@ -167,6 +167,8 @@ return array(
     'password_validation_2' => '必須包含數字',
     'password_validation_3' => '必須包含特殊字符',
     'password_validation_4' => '至少 6 個字符',
+    'yes' => '是',
+    'no' => '否',
 
     'access' => '權限',
     'access_confirmation' => '您確定要訪問此用戶嗎？',
@@ -474,6 +476,15 @@ return array(
     'disable' => '禁用',
     'user' => '用戶',
     'successfully_updated_withdrawal_setting' => '成功更新取款行動設置',
+
+    'acknowledgement_letter' => '客戶權益書',
+    'send' => '發送',
+    'specific_user' => '僅限指定用戶',
+    'with_children' => '與下綫一起',
+    'status_not_allow' => '用戶當前狀態不允許接收此函件',
+    'successfully_send_acknowledgement' => '成功發送客戶權益書',
+    'email_status' => '電子郵件狀態',
+    'successfully_updated_email_status_setting' => '成功更新電子郵件狀態設定',
 )
 ?>
 

@@ -7,10 +7,13 @@ use App\Http\Requests\UserRegisterRequest;
 use App\Models\Rankings;
 use App\Models\SettingCountry;
 use App\Models\User;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
@@ -115,6 +118,35 @@ class AuthController extends Controller
         ]);
         if ($user) {
             $user->setReferralId();
+
+            if ($upline_user_id) {
+                $upline_user = User::find($upline_user_id);
+
+                if ($upline_user && $upline_user->email_status == 1) {
+                    $fontPath = public_path('fonts/simsun.ttf');
+
+                    $options = new Options();
+                    $options->set('defaultFont', $fontPath);
+
+                    $dompdf = new Dompdf($options);
+
+                    $data['email'] = $user->email;
+                    $data['title'] = 'Clark Well - Acknowledgement Letter';
+
+                    $html = view('admin.member.acknowledgement_pdf', ['user' => $user])->render();
+
+                    $dompdf->loadHtml($html);
+                    $dompdf->render();
+
+                    $pdfContent = $dompdf->output();
+
+                    Mail::send('email', ['user' => $user], function ($message) use ($data, $pdfContent) {
+                        $message->to($data['email'])
+                            ->subject($data['title'])
+                            ->attachData($pdfContent, 'test.pdf');
+                    });
+                }
+            }
 
             Alert::success(trans('public.done'), trans('public.success_register'));
             return redirect('welcome');

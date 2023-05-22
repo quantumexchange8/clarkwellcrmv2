@@ -174,6 +174,96 @@ class SettingController extends Controller
             'submit' => route('setting_withdrawal'),
             'title' => 'Withdrawal',
             'get_withdrawal_sel' => [User::ENABLE_WITHDRAWAL => trans('public.enable'), User::DISABLE_WITHDRAWAL => trans('public.disable')],
-        ]);
+        ])->withErrors($validator);
+    }
+
+    public function setting_email_status(Request $request)
+    {
+        $validator = null;
+        $post = null;
+        $user_id = $request->input('user');
+        $user = User::find($user_id);
+
+        $users = User::query()
+            ->where('status', User::STATUS_ACTIVE)
+            ->where('role', User::ROLE_MEMBER)
+            ->where('deleted_at', null)
+            ->get();
+
+        if ($request->isMethod('post')) {
+            $validator = Validator::make($request->all(), [
+                'user' => 'required',
+            ])->setAttributeNames([
+                'user' => trans('public.user'),
+            ]);
+
+            if (!$validator->fails()) {
+
+                $email_status_setting_type = $request->input('email_status_setting_type');
+                $email_status = $request->input('email_status');
+
+                if ($email_status_setting_type == 'personal') {
+
+                    if ($email_status == User::ENABLE_WITHDRAWAL) {
+                        $user->update([
+                            'email_status' => 1
+                        ]);
+                    } elseif ($email_status == User::DISABLE_WITHDRAWAL) {
+                        $user->update([
+                            'email_status' => 0
+                        ]);
+                    }
+
+                } elseif ($email_status_setting_type == 'group') {
+                    $user_children_ids = $user->getChildrenIds();
+
+                    if ($email_status == User::ENABLE_WITHDRAWAL) {
+                        foreach ($user_children_ids as $user_children_id)
+                        {
+                            $children = User::find($user_children_id);
+
+                            $user->update([
+                                'email_status' => 1
+                            ]);
+
+                            $children->update([
+                                'email_status' => 1
+                            ]);
+                        }
+                    } elseif ($email_status == User::DISABLE_WITHDRAWAL) {
+                        foreach ($user_children_ids as $user_children_id)
+                        {
+                            $children = User::find($user_children_id);
+
+                            $user->update([
+                                'email_status' => 0
+                            ]);
+
+                            $children->update([
+                                'email_status' => 0
+                            ]);
+                        }
+                    }
+
+                } else {
+                    Alert::success(trans('public.invalid_action'), trans('public.try_again'));
+                    return redirect()->back();
+                }
+
+                Alert::success(trans('public.done'), trans('public.successfully_updated_email_status_setting'));
+                return redirect()->back();
+            }
+
+            $post = (object) $request->all();
+
+        }
+
+        return view('admin.setting.email_status', [
+            'post' => $post,
+            'users' => $users,
+            'submit' => route('setting_email_status'),
+            'title' => 'Email Status',
+            'get_withdrawal_sel' => [User::ENABLE_WITHDRAWAL => trans('public.enable'), User::DISABLE_WITHDRAWAL => trans('public.disable')],
+        ])->withErrors($validator);
     }
 }
