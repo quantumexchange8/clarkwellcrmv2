@@ -496,6 +496,9 @@ return array(
     'successfully_send_acknowledgement' => 'Berhasil mengirim surat manfaat pelanggan',
     'email_status' => 'Status Email',
     'successfully_updated_email_status_setting' => 'Berhasil memperbarui pengaturan status email',
+
+    'deleted_member' => 'Anggota Terhapus',
+    'deleted_date' => 'Tanggal Terhapus',
 )
 
 ?>

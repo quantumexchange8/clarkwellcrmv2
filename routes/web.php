@@ -125,6 +125,7 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
                 Route::match(['get', 'post'], '/wallets/listing', [WalletLogsController::class, 'listing'])->name('wallet_logs_listing');
                 Route::match(['get', 'post'], '/ranking/listing', [\App\Http\Controllers\Web\Admin\RankingUpdateLogController::class, 'listing'])->name('ranking_logs_listing');
                 Route::match(['get', 'post'], '/bonus_history/listing', [\App\Http\Controllers\Web\Admin\BonusHistoryController::class, 'listing'])->name('bonus_history_listing');
+                Route::match(['get', 'post'], '/deleted_member', [\App\Http\Controllers\Web\Admin\MemberController::class, 'deleted_member'])->name('deleted_member');
             });
 
             Route::controller('ReferralController')->prefix('referral')->group(function () {

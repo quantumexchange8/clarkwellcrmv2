@@ -46,6 +46,7 @@ class User extends Authenticatable implements JWTSubject
         'country',
         'status',
         'created_at',
+        'deleted_at'
     ];
 
     /**
@@ -163,6 +164,56 @@ class User extends Authenticatable implements JWTSubject
             $start_date = Carbon::parse(@$search['created_start'])->startOfDay()->format('Y-m-d H:i:s');
             $end_date = Carbon::parse(@$search['created_end'])->endOfDay()->format('Y-m-d H:i:s');
             $query->whereBetween('created_at', [$start_date, $end_date]);
+        }
+
+        $auto_rank_up = @$search['auto_rank_up'];
+
+        if(isset($auto_rank_up)){
+            $query->where('auto_rank_up', $auto_rank_up);
+        }
+
+        return $query->orderbyDesc('created_at');
+    }
+
+    public static function get_deleted_record($search, $kyc = false, $member_id = null)
+    {
+        $query = User::sortable()->withTrashed()->where('role', 1)->where('deleted_at', '!=', null);
+        if ($member_id) {
+            $query->where('hierarchyList', 'like', '%-' . $member_id . '-%');
+        }
+        $search_text = @$search['freetext'] ?? NULL;
+        $freetext = explode(' ', $search_text);
+
+        if($search_text){
+            $query2 = clone $query;
+            foreach($freetext as $freetexts) {
+                $query2->where(function ($q) use ($freetexts) {
+                    $q->where('email', 'like', '%' . $freetexts . '%')
+                        ->orWhere('name', 'like', '%' . $freetexts . '%');
+                });
+            }
+            if (@$search['status'] && @$search['status'] =='leaders') {
+                $query2->where('leader_status', true);
+
+                $leaders = $query2->pluck('id')->toArray();
+
+                $query->where(function ($q) use ($leaders) {
+                    foreach($leaders as $leader) {
+                        $q->where('hierarchyList', 'like', '%-' . $leader . '-%');
+                    }
+                });
+            } else {
+                $query = $query2;
+            }
+        }
+        if ($kyc) {
+            $query->where('kyc_approval_status', User::KYC_STATUS_PENDING_VERIFICATION);
+        }
+
+        if (@$search['created_start'] && @$search['created_end']) {
+            $start_date = Carbon::parse(@$search['created_start'])->startOfDay()->format('Y-m-d H:i:s');
+            $end_date = Carbon::parse(@$search['created_end'])->endOfDay()->format('Y-m-d H:i:s');
+            $query->whereBetween('deleted_at', [$start_date, $end_date]);
         }
 
         $auto_rank_up = @$search['auto_rank_up'];

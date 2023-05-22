@@ -483,6 +483,9 @@ return array(
     'successfully_send_acknowledgement' => 'ส่งจดหมายแจ้งผลประโยชน์ของลูกค้าเรียบร้อยแล้ว',
     'email_status' => 'สถานะอีเมล',
     'successfully_updated_email_status_setting' => 'อัปเดตการตั้งค่าสถานะอีเมลเรียบร้อยแล้ว',
+
+    'deleted_member' => 'สมาชิกที่ถูกลบ',
+    'deleted_date' => 'วันที่ถูกลบ',
 )
 
 ?>

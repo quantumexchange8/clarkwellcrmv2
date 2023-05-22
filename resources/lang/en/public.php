@@ -486,5 +486,9 @@ return array(
     'successfully_send_acknowledgement' => 'Successfully sent acknowledgement letter',
     'email_status' => 'Email Status',
     'successfully_updated_email_status_setting' => 'Successfully updated email status',
+
+    //deleted member report
+    'deleted_member' => 'Deleted Member',
+    'deleted_date' => 'Deleted Date',
 )
 ?>

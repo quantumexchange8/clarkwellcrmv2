@@ -485,6 +485,9 @@ return array(
     'successfully_send_acknowledgement' => '成功發送客戶權益書',
     'email_status' => '電子郵件狀態',
     'successfully_updated_email_status_setting' => '成功更新電子郵件狀態設定',
+
+    'deleted_member' => '已刪除成員',
+    'deleted_date' => '刪除日期',
 )
 ?>
 

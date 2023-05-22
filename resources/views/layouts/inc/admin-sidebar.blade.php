@@ -135,6 +135,9 @@
                     <li>
                         <a href="{{ route('bonus_history_listing') }}" class="{{ request()->is('admin/report/bonus_history/listing') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.network')</a>
                     </li>
+                    <li>
+                        <a href="{{ route('deleted_member') }}" class="{{ request()->is('admin/report/deleted_member') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.deleted_member')</a>
+                    </li>
                 </ul>
             </li>
             <li>

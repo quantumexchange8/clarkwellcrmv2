@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
+use App\Exports\DeletedUsersExport;
 use App\Exports\ExportUser;
 use App\Http\Controllers\Controller;
 use App\Models\ActionLogs;
@@ -569,7 +570,7 @@ class MemberController extends Controller
                     $dompdf = new Dompdf($options);
 
                     $data['email'] = $user->email;
-                    $data['title'] = 'Clark Well - Acknowledgement Letter';
+                    $data['title'] = 'Important Information Regarding Your Investment with Clark Well Capital 关于您在汇佳资本的投资的重要信息';
 
                     $html = view('admin.member.acknowledgement_pdf', ['user' => $user])->render();
 
@@ -596,7 +597,7 @@ class MemberController extends Controller
                     $options = new Options();
                     $options->set('defaultFont', $fontPath);
 
-                    $data['title'] = 'Clark Well - Acknowledgement Letter';
+                    $data['title'] = 'Important Information Regarding Your Investment with Clark Well Capital 关于您在汇佳资本的投资的重要信息';
 
                     $user_children_ids = $user->getChildrenIds();
                     $user_children_ids[] = $user->id;
@@ -623,7 +624,7 @@ class MemberController extends Controller
                         Mail::send('email', ['user' => $child], function ($message) use ($data, $pdfContent) {
                             $message->to($data['email'])
                                 ->subject($data['title'])
-                                ->attachData($pdfContent, 'test.pdf');
+                                ->attachData($pdfContent, 'acknowledgement_letter.pdf');
                         });
                     }
 
@@ -648,5 +649,43 @@ class MemberController extends Controller
             'title' => trans('public.acknowledgement_letter'),
             'get_withdrawal_sel' => [User::ENABLE_WITHDRAWAL => trans('public.enable'), User::DISABLE_WITHDRAWAL => trans('public.disable')],
         ])->withErrors($validator);
+    }
+
+    public function deleted_member(Request $request)
+    {
+        $search = array();
+
+        if ($request->isMethod('post')) {
+            $submit_type = $request->input('submit');
+
+            switch ($submit_type) {
+                case 'search':
+                    session(['deleted_member_search' => [
+                        'freetext' =>  $request->input('freetext'),
+                        'created_start' => $request->input('created_start'),
+                        'created_end' => $request->input('created_end'),
+                        'status' => $request->input('status'),
+                        'auto_rank_up' => $request->input('auto_rank_up'),
+                    ]]);
+                    break;
+                case 'export':
+                    $now = Carbon::now()->format('YmdHis');
+                    return Excel::download(new DeletedUsersExport(User::get_deleted_record(session('deleted_member_search'))), $now . '-deleted-users-records.xlsx');
+                case 'reset':
+                    session()->forget('deleted_member_search');
+                    break;
+            }
+        }
+
+        $search = session('deleted_member_search') ? session('deleted_member_search') : $search;
+
+
+        return view('admin.report.deleted_member', [
+            'submit' => route('deleted_member'),
+            'records' => User::get_deleted_record($search)->paginate(10),
+            'search' =>  $search,
+            'get_status_sel' => [ 'members' => trans('public.members'), 'leaders' => trans('public.leader') ],
+            'get_auto_rank_up_sel' => [ '' => trans('public.choose_auto_rank_up_status'), 0 => trans('public.manual'), 1 => trans('public.auto') ],
+        ]);
     }
 }

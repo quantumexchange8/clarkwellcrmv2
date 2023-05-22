@@ -484,7 +484,10 @@ return array(
     'status_not_allow' => '用户当前状态不允许接收此函件',
     'successfully_send_acknowledgement' => '成功发送客户权益书',
     'email_status' => '电子邮件状态',
-    'successfully_updated_email_status_setting' => '成功更新电子邮件状态设置'
+    'successfully_updated_email_status_setting' => '成功更新电子邮件状态设置',
+
+    'deleted_member' => '已删除成员',
+    'deleted_date' => '删除日期'
 )
 ?>
 
