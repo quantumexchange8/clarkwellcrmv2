@@ -37,6 +37,7 @@ class BonusHistoryController extends Controller
                         'transaction_start' => $request->input('transaction_start'),
                         'transaction_end' => $request->input('transaction_end')
                     ]]);
+
                     break;
                 case 'export':
                     $now = Carbon::now()->format('YmdHis');

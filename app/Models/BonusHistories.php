@@ -46,9 +46,11 @@ class BonusHistories extends Model
             }
         }
 
-        if (@$search['type']) {
+        if (@$search['user_id']) {
             $users = User::find(@$search['user_id']);
+
             $users_id = $users->getChildrenIds();
+
             $query->whereIn('downline_id', $users_id);
         }
 

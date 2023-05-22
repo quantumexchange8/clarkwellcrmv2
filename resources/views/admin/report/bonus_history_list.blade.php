@@ -113,7 +113,7 @@
                 @foreach($records as $record)
                     <tr class="border-b odd:bg-[#F6F6F6] even:bg-[#FDFCF3] text-sm">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{$record->commission->transaction_at}}
+                            {{ date_format($record->created_at, 'Y-m-d, H:i A') }}
                         </th>
                         <td class="px-6 py-4">
                             {{$record->user->name}}
