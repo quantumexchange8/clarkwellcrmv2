@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html>
 
 <head>
     <title>Clark Well - Acknowledgement Letter</title>

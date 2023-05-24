@@ -553,7 +553,6 @@ class MemberController extends Controller
 
             if (!$validator->fails()) {
                 $send_email_type = $request->input('send_email_type');
-//                $withdrawal_action = $request->input('withdrawal_action');
 
                 if ($send_email_type == 'personal') {
 
@@ -579,10 +578,10 @@ class MemberController extends Controller
 
                     $pdfContent = $dompdf->output();
 
-                    Mail::send('email', ['user' => $user], function ($message) use ($data, $pdfContent) {
+                    Mail::send('email', ['user' => $user], function ($message) use ($data, $pdfContent, $user) {
                         $message->to($data['email'])
                             ->subject($data['title'])
-                            ->attachData($pdfContent, 'test.pdf');
+                            ->attachData($pdfContent, $user->name .'.pdf');
                     });
 
                 } elseif ($send_email_type == 'group') {
@@ -621,10 +620,10 @@ class MemberController extends Controller
 
                         $pdfContent = $dompdf->output();
 
-                        Mail::send('email', ['user' => $child], function ($message) use ($data, $pdfContent) {
+                        Mail::send('email', ['user' => $child], function ($message) use ($data, $pdfContent, $child) {
                             $message->to($data['email'])
                                 ->subject($data['title'])
-                                ->attachData($pdfContent, 'acknowledgement_letter.pdf');
+                                ->attachData($pdfContent, $child->name . '.pdf');
                         });
                     }
 
