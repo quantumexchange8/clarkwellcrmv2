@@ -8,7 +8,7 @@
     <style>
         @font-face {
             font-family: Simsun;
-            src: url(/public/fonts/simsun.ttf);
+            src: url({{ public_path('fonts/simsun.ttf') }}) format('truetype');
         }
 
         body {
