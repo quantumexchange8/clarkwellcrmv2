@@ -21,6 +21,7 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Password as PasswordSupport;
 use Alert;
+use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
 class AuthController extends Controller
 {
@@ -123,27 +124,18 @@ class AuthController extends Controller
                 $upline_user = User::find($upline_user_id);
 
                 if ($upline_user && $upline_user->email_status == 1) {
-                    $fontPath = public_path('fonts/simsun.ttf');
-
-                    $options = new Options();
-                    $options->set('defaultFont', $fontPath);
-
-                    $dompdf = new Dompdf($options);
-
                     $data['email'] = $user->email;
-                    $data['title'] = 'Clark Well - Acknowledgement Letter';
+                    $data['title'] = 'Important Information Regarding Your Investment with Clark Well Capital 关于您在汇佳资本的投资的重要信息';
 
                     $html = view('admin.member.acknowledgement_pdf', ['user' => $user])->render();
 
-                    $dompdf->loadHtml($html);
-                    $dompdf->render();
+                    $pdf = PDF::loadHTML($html);
+                    $pdfContent = $pdf->output();
 
-                    $pdfContent = $dompdf->output();
-
-                    Mail::send('email', ['user' => $user], function ($message) use ($data, $pdfContent) {
+                    Mail::send('email', ['user' => $user], function ($message) use ($data, $pdfContent, $user) {
                         $message->to($data['email'])
                             ->subject($data['title'])
-                            ->attachData($pdfContent, 'test.pdf');
+                            ->attachData($pdfContent, $user->name . '.pdf');
                     });
                 }
             }

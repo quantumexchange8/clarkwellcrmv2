@@ -12,7 +12,6 @@ use App\Models\Rankings;
 use App\Models\SettingCountry;
 use App\Models\User;
 use App\Models\WalletLogs;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -24,11 +23,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use Intervention\Image\Facades\Image;
 use Maatwebsite\Excel\Facades\Excel;
 use Alert;
+use niklasravnsborg\LaravelPdf\Facades\Pdf;
 use Session;
 
 class MemberController extends Controller
@@ -561,27 +560,18 @@ class MemberController extends Controller
                         return redirect()->back();
                     }
 
-                    $fontPath = public_path('fonts/simsun.ttf');
-
-                    $options = new Options();
-                    $options->set('defaultFont', $fontPath);
-
-                    $dompdf = new Dompdf($options);
-
                     $data['email'] = $user->email;
                     $data['title'] = 'Important Information Regarding Your Investment with Clark Well Capital 关于您在汇佳资本的投资的重要信息';
 
                     $html = view('admin.member.acknowledgement_pdf', ['user' => $user])->render();
 
-                    $dompdf->loadHtml($html);
-                    $dompdf->render();
-
-                    $pdfContent = $dompdf->output();
+                    $pdf = PDF::loadHTML($html);
+                    $pdfContent = $pdf->output();
 
                     Mail::send('email', ['user' => $user], function ($message) use ($data, $pdfContent, $user) {
                         $message->to($data['email'])
                             ->subject($data['title'])
-                            ->attachData($pdfContent, $user->name .'.pdf');
+                            ->attachData($pdfContent, $user->name . '.pdf');
                     });
 
                 } elseif ($send_email_type == 'group') {
@@ -591,11 +581,6 @@ class MemberController extends Controller
                         return redirect()->back();
                     }
 
-                    $fontPath = public_path('fonts/simsun.ttf');
-
-                    $options = new Options();
-                    $options->set('defaultFont', $fontPath);
-
                     $data['title'] = 'Important Information Regarding Your Investment with Clark Well Capital 关于您在汇佳资本的投资的重要信息';
 
                     $user_children_ids = $user->getChildrenIds();
@@ -604,27 +589,24 @@ class MemberController extends Controller
                     foreach ($user_children_ids as $child_id) {
                         $child = User::find($child_id);
 
-                        $data['email'] = $child->email;
-
                         if ($child->email_status == 0) {
                             // Skip sending email to users with email_status equal to 0
                             continue;
                         }
 
-                        $dompdf = new Dompdf($options); // Create a new instance of Dompdf for each iteration
+                        $data['email'] = $child->email;
 
                         $html = view('admin.member.acknowledgement_pdf', ['user' => $child])->render();
 
-                        $dompdf->loadHtml($html);
-                        $dompdf->render();
-
-                        $pdfContent = $dompdf->output();
+                        $pdf = PDF::loadHTML($html);
+                        $pdfContent = $pdf->output();
 
                         Mail::send('email', ['user' => $child], function ($message) use ($data, $pdfContent, $child) {
                             $message->to($data['email'])
                                 ->subject($data['title'])
                                 ->attachData($pdfContent, $child->name . '.pdf');
                         });
+
                     }
 
 

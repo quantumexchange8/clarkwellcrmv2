@@ -21,6 +21,7 @@
         "laravelcollective/html": "^6.4",
         "maatwebsite/excel": "^3.1",
         "nesbot/carbon": "^2.66",
+        "niklasravnsborg/laravel-pdf": "^4.1",
         "php-open-source-saver/jwt-auth": "^2.1",
         "realrashid/sweet-alert": "^6.0",
         "simplesoftwareio/simple-qrcode": "~4"
