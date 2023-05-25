@@ -37,8 +37,8 @@ class Withdrawals extends Model
 
     public static $walletTypes = [
         self::TRC20,
-        self::ERC20,
-        self::BEP20
+//        self::ERC20,
+//        self::BEP20
     ];
 
     public static function getApprovedWithdrawalAmount()
