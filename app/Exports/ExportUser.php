@@ -48,6 +48,7 @@ class ExportUser implements FromCollection, WithHeadings
                     'joined_date' => $user->created_at,
                     'kyc' => User::getUserKYCStatus($user->kyc_approval_status),
                     'personal_invest' => $user->personalDeposits(),
+                    'total_group_sales' => $user->groupTotalDeposit(),
                 );
             }
         }
@@ -81,7 +82,8 @@ class ExportUser implements FromCollection, WithHeadings
                 'Status',
                 'Joined Date',
                 'KYC Status',
-                'Total Personal Invest'
+                'Total Personal Invest',
+                'Total Group Sales'
             ];
         }
 

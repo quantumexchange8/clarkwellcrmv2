@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ActionLogs;
 use App\Models\Brokers;
 use App\Models\Deposits;
+use App\Models\ExtraBonus;
 use App\Models\Rankings;
 use App\Models\SettingCountry;
 use App\Models\User;
@@ -528,6 +529,33 @@ class MemberController extends Controller
         }
 
         return back();
+    }
+
+    public function member_extra_bonus(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'bonus_amount' => 'required|numeric',
+        ])->setAttributeNames([
+            'bonus_amount' => trans('public.amount'),
+        ]);
+
+        if (!$validator->passes()){
+            return response()->json([
+                'status' => 0,
+                'error' => $validator->errors()->toArray()
+            ]);
+        } else {
+            ExtraBonus::updateOrCreate([
+                'user_id' => $request->input('user_id')
+            ], [
+                'bonus_amount' => $request->input('bonus_amount'),
+            ]);
+
+            return response()->json([
+                'status' => 1,
+                'msg' => trans('public.successfully_added_extra_bonus'),
+            ]);
+        }
     }
 
     public function acknowledgement_letter(Request $request)

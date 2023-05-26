@@ -129,6 +129,9 @@ return array(
     'max' => 'Max',
     'transaction_fee' => 'Transaction Fee',
     'withdrawal_total' => 'Withdraw Total',
+    'successfully_deleted_withdrawal' => 'Successfully Cancel Withdrawal Request',
+    'cancel_withdrawal_confirmation' => 'Are you sure you want to cancel this withdrawal request?',
+    'discard' => 'Discard',
 
     //admin dashboard
     'total_group_sales' => 'Total Group Sales',
@@ -169,6 +172,7 @@ return array(
     'password_validation_4' => 'Minimum 6 character',
     'yes' => 'Yes',
     'no' => 'No',
+    'successfully_added_extra_bonus' => 'Successfully Added Extra Bonus',
 
     'access' => 'Access',
     'access_confirmation' => 'Are you sure you want to access this user?',
@@ -490,5 +494,10 @@ return array(
     //deleted member report
     'deleted_member' => 'Deleted Member',
     'deleted_date' => 'Deleted Date',
+
+    //Extra bonus
+    'extra_bonus' => 'Extra Bonus',
+    'delete_bonus_confirmation' => 'Are you sure you want to delete this extra bonus?',
+    'successfully_deleted_extra_bonus' => 'Successfully deleted extra bonus',
 )
 ?>

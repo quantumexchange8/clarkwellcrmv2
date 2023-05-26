@@ -136,6 +136,9 @@ return array(
     'max' => 'Maksimal',
     'transaction_fee' => 'Biaya Transaksi',
     'withdrawal_total' => 'Total Penarikan',
+    'successfully_deleted_withdrawal' => 'Berhasil Membatalkan Permintaan Penarikan',
+    'cancel_withdrawal_confirmation' => 'Apakah Anda yakin ingin membatalkan permintaan penarikan ini?',
+    'discard' => 'Buang',
 
     //admin dashboard
     'total_group_sales' => 'Total Penjualan Grup',
@@ -178,6 +181,7 @@ return array(
     'password_validation_4' => 'Minimal 6 karakter',
     'yes' => 'Ya',
     'no' => 'Tidak',
+    'successfully_added_extra_bonus' => 'Berhasil Menambahkan Bonus Tambahan',
 
     'access' => 'Akses',
     'access_confirmation' => 'Apakah Anda yakin ingin mengakses pengguna ini?',
@@ -499,6 +503,10 @@ return array(
 
     'deleted_member' => 'Anggota Terhapus',
     'deleted_date' => 'Tanggal Terhapus',
+
+    'extra_bonus' => 'Bonus Tambahan',
+    'delete_bonus_confirmation' => 'Apakah Anda yakin ingin menghapus bonus tambahan ini?',
+    'successfully_deleted_extra_bonus' => 'Berhasil menghapus bonus tambahan',
 )
 
 ?>

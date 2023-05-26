@@ -129,6 +129,9 @@ return array(
     'max' => '最大值',
     'transaction_fee' => '交易手续费',
     'withdrawal_total' => '提现总额',
+    'successfully_deleted_withdrawal' => '成功取消提现请求',
+    'cancel_withdrawal_confirmation' => '您确定要取消此提现请求吗？',
+    'discard' => '放弃',
 
 //admin dashboard
     'total_group_sales' => '团队销售总额',
@@ -169,6 +172,7 @@ return array(
     'password_validation_4' => '至少 6 个字符',
     'yes' => '是',
     'no' => '否',
+    'successfully_added_extra_bonus' => '成功添加额外奖金',
 
     'access' => '权限',
     'access_confirmation' => '您确定要访问此用户吗？',
@@ -487,7 +491,11 @@ return array(
     'successfully_updated_email_status_setting' => '成功更新电子邮件状态设置',
 
     'deleted_member' => '已删除成员',
-    'deleted_date' => '删除日期'
+    'deleted_date' => '删除日期',
+
+    'extra_bonus' => '额外奖金',
+    'delete_bonus_confirmation' => '您确定要删除此额外奖金吗？',
+    'successfully_deleted_extra_bonus' => '成功删除额外奖金',
 )
 ?>
 

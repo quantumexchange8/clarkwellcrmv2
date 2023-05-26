@@ -602,4 +602,9 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo(User::class, 'upline_referral_id');
     }
 
+    public function extra_bonus()
+    {
+        return $this->hasOne(ExtraBonus::class, 'user_id', 'id');
+    }
+
 }

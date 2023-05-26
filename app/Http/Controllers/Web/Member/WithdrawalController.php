@@ -11,6 +11,8 @@ use App\Models\Withdrawals;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
 use Alert;
 
@@ -93,6 +95,70 @@ class WithdrawalController extends Controller
         return back();
     }
 
+    public function withdrawal_edit(Request $request)
+    {
+        $user = Auth::user();
+        $withdrawal = Withdrawals::find($request->withdrawal_id);
 
+        if ($user->withdrawal_action == User::DISABLE_WITHDRAWAL)
+        {
+            Alert::warning(trans('public.invalid_action'), trans('public.try_again'));
+            return redirect()->back();
+        }
+
+        $validator = Validator::make($request->all(), [
+            'network' => ['required', Rule::in(Withdrawals::$walletTypes)],
+            'address' => 'required',
+            'amount' => 'required|numeric',
+        ])->setAttributeNames([
+            'network' => trans('public.network'),
+            'address' => trans('public.address'),
+            'amount' => trans('public.amount'),
+        ]);
+
+        if (!$validator->passes()){
+            return response()->json([
+                'status' => 0,
+                'error' => $validator->errors()->toArray()
+            ]);
+        } else {
+
+            if ($request->amount > $user->wallet_balance)
+            {
+                return response()->json([
+                    'status' => 2,
+                    'msg' => trans('public.insufficient_amount')
+                ]);
+            }
+
+            $withdrawal->update([
+                'address' => $request->input('address'),
+                'amount' => $request->input('amount'),
+            ]);
+
+            return response()->json([
+                'status' => 1,
+                'msg' => trans('public.successfully_update_withdrawal'),
+            ]);
+        }
+    }
+
+    public function withdrawal_cancel(Request $request)
+    {
+        $withdrawal_id = $request->input('withdrawal_id');
+        $withdrawal = Withdrawals::find($withdrawal_id);
+
+        if (!$withdrawal) {
+            Alert::error(trans('public.invalid_action'), trans('public.try_again'));
+            return redirect()->back();
+        }
+
+        $withdrawal->update([
+            'status' => Withdrawals::STATUS_REJECTED
+        ]);
+
+        Alert::success(trans('public.done'), trans('public.successfully_cancel_withdrawal'));
+        return redirect()->back();
+    }
 
 }

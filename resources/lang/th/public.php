@@ -128,6 +128,9 @@ return array(
     'max' => 'สูงสุด',
     'transaction_fee' => 'ค่าธรรมเนียมการทำธุรกรรม',
     'withdrawal_total' => 'ยอดถอนเงินรวม',
+    'successfully_deleted_withdrawal' => 'ยกเลิกคำขอถอนเงินเรียบร้อยแล้ว',
+    'cancel_withdrawal_confirmation' => 'คุณแน่ใจหรือไม่ว่าต้องการยกเลิกคำขอถอนเงินนี้?',
+    'discard' => 'ทิ้ง',
 
     //admin dashboard
     'total_group_sales' => 'ยอดขายกลุ่มทั้งหมด',
@@ -168,6 +171,7 @@ return array(
     'password_validation_4' => 'ต้องมีอย่างน้อย 6 ตัวอักษร',
     'yes' => 'ใช่',
     'no' => 'ไม่',
+    'successfully_added_extra_bonus' => 'เพิ่มโบนัสพิเศษเรียบร้อยแล้ว',
 
     'access' => 'เข้าถึง',
     'access_confirmation' => 'คุณแน่ใจหรือไม่ว่าต้องการเข้าถึงผู้ใช้นี้?',
@@ -486,6 +490,10 @@ return array(
 
     'deleted_member' => 'สมาชิกที่ถูกลบ',
     'deleted_date' => 'วันที่ถูกลบ',
+
+    'extra_bonus' => 'โบนัสพิเศษ',
+    'delete_bonus_confirmation' => 'คุณแน่ใจหรือว่าต้องการลบโบนัสพิเศษนี้?',
+    'successfully_deleted_extra_bonus' => 'ลบโบนัสพิเศษสำเร็จแล้ว',
 )
 
 ?>

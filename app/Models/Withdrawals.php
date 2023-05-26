@@ -62,7 +62,7 @@ class Withdrawals extends Model
             $query->where('status', $search['filter_status']);
         }
 
-        return $query->orderby('created_at');
+        return $query->orderByDesc('created_at');
     }
 
     public static function get_record($search)

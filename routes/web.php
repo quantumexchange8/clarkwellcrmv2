@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExtraBonusController;
 use App\Http\Controllers\Web\Admin\CommissionsController;
 use App\Http\Controllers\Web\Admin\DepositController;
 use App\Http\Controllers\Web\Admin\PerformanceBonusController;
@@ -81,6 +82,8 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
             Route::controller('WithdrawalController')->group(function () {
                 Route::match(['get', 'post'], '/withdrawals', 'index')->name('withdrawals_listing');
                 Route::post('/store-withdrawal', 'store');
+                Route::post('/withdrawal-edit', 'withdrawal_edit')->name('withdrawal-edit');
+                Route::post('/withdrawal-cancel', 'withdrawal_cancel')->name('withdrawal_cancel');
             });
             Route::controller('PerformanceBonusController')->group(function () {
                 Route::match(['get', 'post'], '/performance_bonus', 'listing')->name('member_performance_bonus');
@@ -107,6 +110,7 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
                 Route::post('/impersonate', 'impersonate')->name('impersonate_user');
                 Route::post('/wallet_adjustment', 'adjustWallet')->name('wallet_adjustment');
                 Route::match(['get', 'post'],'/acknowledgement_letter', 'acknowledgement_letter')->name('acknowledgement_letter');
+                Route::post('/member_extra_bonus', 'member_extra_bonus')->name('member_extra_bonus');
             });
 
             Route::prefix('report')->group(function () {
@@ -122,6 +126,8 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
                 Route::match(['get', 'post'], '/withdrawal/withdrawal_request/{id}', [WithdrawalController::class, 'approval'])->name('withdrawal_request');
                 Route::match(['get', 'post'], '/performance_bonus/listing', [PerformanceBonusController::class, 'performance_bonus_listing'])->name('performance_bonus_listing');
                 Route::match(['get', 'post'], '/performance_bonus/approval/{id}', [PerformanceBonusController::class, 'performance_bonus_approval'])->name('performance_bonus_approval');
+                Route::match(['get', 'post'], '/extra_bonus/listing', [ExtraBonusController::class, 'extra_bonus_listing'])->name('extra_bonus_listing');
+                Route::post('/extra_bonus_delete', [ExtraBonusController::class, 'extra_bonus_delete'])->name('extra_bonus_delete');
                 Route::match(['get', 'post'], '/wallets/listing', [WalletLogsController::class, 'listing'])->name('wallet_logs_listing');
                 Route::match(['get', 'post'], '/ranking/listing', [\App\Http\Controllers\Web\Admin\RankingUpdateLogController::class, 'listing'])->name('ranking_logs_listing');
                 Route::match(['get', 'post'], '/bonus_history/listing', [\App\Http\Controllers\Web\Admin\BonusHistoryController::class, 'listing'])->name('bonus_history_listing');

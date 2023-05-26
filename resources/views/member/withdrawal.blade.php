@@ -137,6 +137,9 @@
                                 <a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
                             </div>
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            @lang('public.action')
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -163,19 +166,52 @@
                                     @break
 
                                 @default
-                                    <td class="px-6 py-4 text-primary font-semibold">
-                                        @lang('public.process')
-                                        @endswitch
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{$data->address}}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{$data->getNetwork()}}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        ${{ number_format($data->amount,2) }}
-                                    </td>
+                                <td class="px-6 py-4 text-primary font-semibold">
+                                    @lang('public.process')
+                            @endswitch
+                            </td>
+                            <td class="px-6 py-4">
+                                {{$data->address}}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{$data->getNetwork()}}
+                            </td>
+                            <td class="px-6 py-4">
+                                ${{ number_format($data->amount,2) }}
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex gap-2">
+                                    @if(auth()->user()->withdrawal_action == \App\Models\User::ENABLE_WITHDRAWAL && $data->status == \App\Models\Withdrawals::STATUS_PENDING)
+                                        <a href="#withdrawal-edit-{{ $data->id }}"
+                                           data-modal-target="withdrawal-edit-{{ $data->id }}" data-modal-toggle="withdrawal-edit-{{ $data->id }}"
+                                           data-te-ripple-init
+                                           data-te-ripple-color="light" data-tooltip-target="tooltip-edit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-primary hover:fill-primary-400">
+                                                <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z" />
+                                            </svg>
+                                        </a>
+                                        <div id="tooltip-edit" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                            @lang('public.edit')
+                                            <div class="tooltip-arrow" data-popper-arrow></div>
+                                        </div>
+                                        @include('member.withdrawal-modal')
+                                        <a href="javascript:void(0)" data-tooltip-target="tooltip-cancel" class="cancel"
+                                           data-modal-target="cancel_modal" data-modal-toggle="cancel_modal"
+                                           data-te-ripple-init
+                                           data-te-ripple-color="light" id="{{ $data->id }}">
+                                            <svg class="h-7 w-7 text-red-500"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                        </a>
+                                        <div id="tooltip-cancel" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                            @lang('public.cancel')
+                                            <div class="tooltip-arrow" data-popper-arrow></div>
+                                        </div>
+                                    @else
+                                        <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">@lang('public.done')</span>
+                                    @endif
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
 
@@ -267,12 +303,11 @@
                                        class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">@lang('public.withdrawal_amount')
                                 </label>
                                 <div class="relative">
-                                    <input type="number" name="amount" id="amount-wallet" value= "{{ old('amount') }}"
+                                    <input type="number" name="amount" id="amount-wallet-add" value="{{ old('amount') }}"
                                            step="0.01" min="0"
-                                           onchange oninput="test()"
                                            class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
                                            required>
-                                    <button onclick="maxAmount()" type="button"
+                                    <button type="button" id="max-button-add"
                                             class="text-white absolute right-2.5 bottom-2.5 bg-orange-500 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
                                         @lang('public.max')
                                     </button>
@@ -282,10 +317,10 @@
                                 </div>
                             </div>
                             <div class="mb-4">
-                                <label for="fee" class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">
+                                <label for="fee-add" class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">
                                     @lang('public.transaction_fee')
                                 </label>
-                                <input type="text" name="fee" id="fee" readonly aria-label="disabled input 2"
+                                <input type="text" name="fee" id="fee-add" readonly aria-label="disabled input 2"
                                        value="{{number_format($transaction_fee,2)}} USDT"
                                        class="bg-gray-50 border border-gray-300 text-orange-500 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                        required>
@@ -297,7 +332,7 @@
                             <div class="text-center font-medium text-md mt-2 text-orange-500  dark:text-orange-700">
                                 @lang('public.withdrawal_total')
                             </div>
-                            <button type="submit" id="total"
+                            <button type="submit" id="total-add"
                                     class="w-full text-white bg-success hover:ring-success  focus:ring-4 focus:outline-none focus:ring-success font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                                 0.00 USDT
                             </button>
@@ -319,26 +354,149 @@
         </div>
     </div>
 
+    <!-- Cancel Modal -->
+    <div id="cancel_modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
+        <div class="relative w-full h-full max-w-md md:h-auto">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="cancel_modal">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">@lang('public.close_modal')</span>
+                </button>
+                <div class="p-6 text-center">
+                    <form method="POST" action="{{ route('withdrawal_cancel') }}">
+                        @csrf
+                        <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <div class="modal-body">
+                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">@lang('public.cancel_withdrawal_confirmation')</h3>
+                            <input type="hidden" name="withdrawal_id" id="withdrawal_id">
+                        </div>
+                        <button type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                            @lang('public.cancel')
+                        </button>
+                        <button data-modal-hide="cancel_modal" type="button" class="text-gray-700 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">@lang('public.discard')</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 
 @section('script')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
-        function maxAmount() {
-            document.getElementById("amount-wallet").value =  Number({{$user->wallet_balance}});
-            test();
-        }
+        $(document).ready(function() {
+            $('.cancel').on('click', function() {
+                var id = $(this).attr('id');
+                $(".modal-body #withdrawal_id").val( id );
+            });
 
-            function test(e) {
-                var amount = document.getElementById("amount-wallet").value;
-                var fee = {{\App\Models\Settings::where('name', 'withdrawal_transaction_fee')->first()->value}};
-                document.getElementById("fee").setAttribute('value', fee);
+            function maxAmountAdd() {
+                $("#amount-wallet-add").val({{$user->wallet_balance}});
+                walletmaxAmountAdd();
+            }
 
-                if (amount > fee) {
-                    document.getElementById("total").innerHTML = amount - fee + ' USDT';
+            function maxAmountEdit() {
+                $("#amount-wallet-edit").val({{$user->wallet_balance}});
+                walletmaxAmountEdit();
+            }
+
+            function walletmaxAmountAdd() {
+                var amountAdd = $("#amount-wallet-add").val();
+                var feeAdd = {{\App\Models\Settings::where('name', 'withdrawal_transaction_fee')->first()->value}};
+                $("#fee-add").attr('value', feeAdd);
+
+                if (amountAdd > feeAdd) {
+                    $("#total-add").html(amountAdd - feeAdd + ' USDT');
                 } else {
-                    document.getElementById("total").innerHTML = '0.00 USDT';
+                    $("#total-add").html('0.00 USDT');
                 }
             }
+
+            function walletmaxAmountEdit() {
+                var amountEdit = parseFloat($("#amount-wallet-edit").val());
+                var feeEdit = parseFloat("{{\App\Models\Settings::where('name', 'withdrawal_transaction_fee')->first()->value}}");
+                $("#fee-edit").attr('value', feeEdit);
+
+                if (amountEdit > feeEdit) {
+                    $("#total-edit").html((amountEdit - feeEdit).toFixed(2) + ' USDT');
+                } else {
+                    $("#total-edit").html('0.00 USDT');
+                }
+            }
+
+            $("#max-button-add").click(function() {
+                maxAmountAdd();
+            });
+
+            $("#amount-wallet-add").on("input", function() {
+                walletmaxAmountAdd();
+            });
+
+            $("#max-button-edit").click(function() {
+                maxAmountEdit();
+            });
+
+            $("#amount-wallet-edit").on("input", function() {
+                walletmaxAmountEdit();
+            });
+
+            $('#edit-withdrawal').on('submit', function(e) {
+                e.preventDefault();
+                var form = $(this)
+                $.ajax({
+                    method:$(this).attr('method'),
+                    url:$(this).attr('action'),
+                    data:new FormData(this),
+                    processData:false,
+                    dataType:'json',
+                    contentType:false,
+                    beforeSend:function (){
+                        form.find('span.error-text').text('');
+                    },
+                    success: function(data) {
+                        if(data.status == 0) {
+                            $.each(data.error, function (prefix, val){
+                                $('span.'+prefix+'_error').text(val[0]);
+                                $('.'+prefix).addClass('border-danger');
+                            });
+                        } else if (data.status == 2) {
+                            Swal.fire({
+                                title: '{{ trans('public.invalid_action') }}',
+                                text: data.msg,
+                                icon: 'error',
+                                confirmButtonText: 'OK',
+                                timer: 3000,
+                                timerProgressBar: false,
+                            });
+                        } else {
+                            Swal.fire({
+                                title: '{{ trans('public.done') }}',
+                                text: data.msg,
+                                icon: 'success',
+                                confirmButtonText: 'OK',
+                                timer: 3000,
+                                timerProgressBar: false,
+                            }).then(function() {
+                                location.reload();
+                            });
+                        }
+                    },
+                    error: function() {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'An error occurred while processing your request.',
+                            icon: 'error',
+                            confirmButtonText: 'OK',
+                            timer: 3000,
+                            timerProgressBar: false,
+                        });
+                    }
+                });
+            });
+        });
+
     </script>
 @endsection

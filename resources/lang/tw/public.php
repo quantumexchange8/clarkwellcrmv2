@@ -129,6 +129,9 @@ return array(
     'max' => '最大值',
     'transaction_fee' => '交易手續費',
     'withdrawal_total' => '提現總額',
+    'successfully_deleted_withdrawal' => '成功取消提現請求',
+    'cancel_withdrawal_confirmation' => '您確定要取消此提現請求嗎？',
+    'discard' => '放棄',
 
 //admin dashboard
     'total_group_sales' => '團隊銷售總額',
@@ -169,6 +172,7 @@ return array(
     'password_validation_4' => '至少 6 個字符',
     'yes' => '是',
     'no' => '否',
+    'successfully_added_extra_bonus' => '成功添加額外獎金',
 
     'access' => '權限',
     'access_confirmation' => '您確定要訪問此用戶嗎？',
@@ -488,6 +492,10 @@ return array(
 
     'deleted_member' => '已刪除成員',
     'deleted_date' => '刪除日期',
+
+    'extra_bonus' => '額外獎金',
+    'delete_bonus_confirmation' => '您確定要刪除此額外獎金嗎？',
+    'successfully_deleted_extra_bonus' => '成功刪除額外獎金',
 )
 ?>
 
