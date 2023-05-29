@@ -131,9 +131,14 @@ class WithdrawalController extends Controller
                 ]);
             }
 
+            $settings = Settings::getKeyValue();
+            $amount = round($request->amount, 2);
+            $fee = $settings['withdrawal_transaction_fee'];
+            $amount = $amount - $fee;
+
             $withdrawal->update([
                 'address' => $request->input('address'),
-                'amount' => $request->input('amount'),
+                'amount' => $amount,
             ]);
 
             return response()->json([

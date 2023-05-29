@@ -132,6 +132,7 @@ return array(
     'successfully_deleted_withdrawal' => '成功取消提现请求',
     'cancel_withdrawal_confirmation' => '您确定要取消此提现请求吗？',
     'discard' => '放弃',
+    'successfully_update_withdrawal' => '成功更新提款请求',
 
 //admin dashboard
     'total_group_sales' => '团队销售总额',

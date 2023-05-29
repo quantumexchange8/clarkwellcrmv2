@@ -139,6 +139,7 @@ return array(
     'successfully_deleted_withdrawal' => 'Berhasil Membatalkan Permintaan Penarikan',
     'cancel_withdrawal_confirmation' => 'Apakah Anda yakin ingin membatalkan permintaan penarikan ini?',
     'discard' => 'Buang',
+    'successfully_update_withdrawal' => 'Berhasil Memperbarui Permintaan Penarikan',
 
     //admin dashboard
     'total_group_sales' => 'Total Penjualan Grup',

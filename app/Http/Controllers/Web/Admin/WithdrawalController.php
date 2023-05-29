@@ -151,35 +151,6 @@ class WithdrawalController extends Controller
         ]);
     }
 
-    public function withdrawal_request(Request $request, $id)
-    {
-        $user = Withdrawals::find($id);
-
-        if (!$user)
-        {
-            Alert::error(trans('public.invalid_action'), trans('public.try_again'));
-            return redirect()->back();
-        }
-
-        switch ($request->input('status')) {
-            case 'approve':
-                $user->update([
-                    'status' => 2,
-                ]);
-                break;
-
-            case 'reject':
-                $user->update([
-                    'status' => 3,
-                ]);
-                break;
-        }
-
-        Alert::success(trans('public.done'), trans('public.successfully_updated_withdrawal_status'));
-        return redirect()->back();
-
-    }
-
     public function store(Request $request)
     {
         if ($request->isMethod('post')) {

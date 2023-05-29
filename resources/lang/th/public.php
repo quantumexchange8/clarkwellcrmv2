@@ -131,6 +131,7 @@ return array(
     'successfully_deleted_withdrawal' => 'ยกเลิกคำขอถอนเงินเรียบร้อยแล้ว',
     'cancel_withdrawal_confirmation' => 'คุณแน่ใจหรือไม่ว่าต้องการยกเลิกคำขอถอนเงินนี้?',
     'discard' => 'ทิ้ง',
+    'successfully_update_withdrawal' => 'อัปเดตคำขอถอนเงินสำเร็จ',
 
     //admin dashboard
     'total_group_sales' => 'ยอดขายกลุ่มทั้งหมด',

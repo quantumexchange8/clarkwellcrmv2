@@ -132,6 +132,7 @@ return array(
     'successfully_deleted_withdrawal' => 'Successfully Cancel Withdrawal Request',
     'cancel_withdrawal_confirmation' => 'Are you sure you want to cancel this withdrawal request?',
     'discard' => 'Discard',
+    'successfully_update_withdrawal' => 'Successfully Updated Withdrawal Request',
 
     //admin dashboard
     'total_group_sales' => 'Total Group Sales',
