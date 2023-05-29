@@ -19,6 +19,7 @@ use Dompdf\Options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -583,7 +584,7 @@ class MemberController extends Controller
 
                 if ($send_email_type == 'personal') {
 
-                    if ($user->email_status == 0) {
+                    if ($user->email_status == 0 || $user->email_sent == 1) {
                         Alert::error(trans('public.invalid_action'), trans('public.status_not_allow'));
                         return redirect()->back();
                     }
@@ -602,9 +603,13 @@ class MemberController extends Controller
                             ->attachData($pdfContent, $user->name . '.pdf');
                     });
 
+                    $user->update([
+                        'email_sent' => 1
+                    ]);
+
                 } elseif ($send_email_type == 'group') {
 
-                    if ($user->email_status == 0) {
+                    if ($user->email_status == 0 || $user->email_sent == 1) {
                         Alert::error(trans('public.invalid_action'), trans('public.status_not_allow'));
                         return redirect()->back();
                     }
@@ -617,23 +622,25 @@ class MemberController extends Controller
                     foreach ($user_children_ids as $child_id) {
                         $child = User::find($child_id);
 
-                        if ($child->email_status == 0) {
-                            // Skip sending email to users with email_status equal to 0
-                            continue;
+                        if ($child->email_status == 1 && $child->email_sent == 0) {
+                            // Proceed to send email for children with email_status equal to 1 and email_sent equal to 0
+                            $data['email'] = $child->email;
+
+                            $html = view('admin.member.acknowledgement_pdf', ['user' => $child])->render();
+
+                            $pdf = PDF::loadHTML($html);
+                            $pdfContent = $pdf->output();
+
+                            Mail::send('email', ['user' => $child], function ($message) use ($data, $pdfContent, $child) {
+                                $message->to($data['email'])
+                                    ->subject($data['title'])
+                                    ->attachData($pdfContent, $child->name . '.pdf');
+                            });
+
+                            $child->update([
+                                'email_sent' => 1
+                            ]);
                         }
-
-                        $data['email'] = $child->email;
-
-                        $html = view('admin.member.acknowledgement_pdf', ['user' => $child])->render();
-
-                        $pdf = PDF::loadHTML($html);
-                        $pdfContent = $pdf->output();
-
-                        Mail::send('email', ['user' => $child], function ($message) use ($data, $pdfContent, $child) {
-                            $message->to($data['email'])
-                                ->subject($data['title'])
-                                ->attachData($pdfContent, $child->name . '.pdf');
-                        });
 
                     }
 
@@ -696,5 +703,51 @@ class MemberController extends Controller
             'get_status_sel' => [ 'members' => trans('public.members'), 'leaders' => trans('public.leader') ],
             'get_auto_rank_up_sel' => [ '' => trans('public.choose_auto_rank_up_status'), 0 => trans('public.manual'), 1 => trans('public.auto') ],
         ]);
+    }
+
+    public function mail_jordan_network()
+    {
+        $user = User::find(29);
+
+        $data['title'] = 'Important Information Regarding Your Investment with Clark Well Capital 关于您在汇佳资本的投资的重要信息';
+
+        $user_children_ids = $user->getChildrenIds();
+        $user_children_ids[] = $user->id;
+
+        $userIdQuery = DB::table('deposits')
+            ->whereIn('userId', $user_children_ids)
+            ->where('transaction_at', '>', '2023-05-15')
+            ->distinct('userId')
+            ->pluck('userId');
+
+        // $userIdQuery contains the unique userId values that meet the conditions
+
+
+        foreach ($userIdQuery as $child_id)
+        {
+            $child = User::find($child_id);
+
+            if ($child->email_status == 1 && $child->email_sent == 0) {
+                // Proceed to send email for children with email_status equal to 1 and email_sent equal to 0
+                $data['email'] = $child->email;
+
+                $html = view('admin.member.acknowledgement_pdf', ['user' => $child])->render();
+
+                $pdf = PDF::loadHTML($html);
+                $pdfContent = $pdf->output();
+
+                Mail::send('email', ['user' => $child], function ($message) use ($data, $pdfContent, $child) {
+                    $message->to($data['email'])
+                        ->subject($data['title'])
+                        ->attachData($pdfContent, $child->name . '.pdf');
+                });
+
+                $child->update([
+                    'email_sent' => 1
+                ]);
+            }
+        }
+        Alert::success('Done', 'Successfully sent to Jordan Network');
+        return redirect()->route('member_listing');
     }
 }

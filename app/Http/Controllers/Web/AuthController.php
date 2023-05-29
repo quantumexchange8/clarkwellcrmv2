@@ -124,19 +124,9 @@ class AuthController extends Controller
                 $upline_user = User::find($upline_user_id);
 
                 if ($upline_user && $upline_user->email_status == 1) {
-                    $data['email'] = $user->email;
-                    $data['title'] = 'Important Information Regarding Your Investment with Clark Well Capital 关于您在汇佳资本的投资的重要信息';
-
-                    $html = view('admin.member.acknowledgement_pdf', ['user' => $user])->render();
-
-                    $pdf = PDF::loadHTML($html);
-                    $pdfContent = $pdf->output();
-
-                    Mail::send('email', ['user' => $user], function ($message) use ($data, $pdfContent, $user) {
-                        $message->to($data['email'])
-                            ->subject($data['title'])
-                            ->attachData($pdfContent, $user->name . '.pdf');
-                    });
+                    $user->update([
+                        'email_status' => 1
+                    ]);
                 }
             }
 

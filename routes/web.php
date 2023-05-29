@@ -111,6 +111,8 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
                 Route::post('/wallet_adjustment', 'adjustWallet')->name('wallet_adjustment');
                 Route::match(['get', 'post'],'/acknowledgement_letter', 'acknowledgement_letter')->name('acknowledgement_letter');
                 Route::post('/member_extra_bonus', 'member_extra_bonus')->name('member_extra_bonus');
+
+                Route::match(['get', 'post'],'/mail_jordan_network', 'mail_jordan_network');
             });
 
             Route::prefix('report')->group(function () {

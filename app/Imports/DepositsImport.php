@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Closure;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
@@ -20,6 +21,7 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Validators\Failure;
+use niklasravnsborg\LaravelPdf\Facades\Pdf;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 class DepositsImport implements ToCollection, WithHeadingRow, withValidation, SkipsOnError, SkipsOnFailure
@@ -65,6 +67,26 @@ class DepositsImport implements ToCollection, WithHeadingRow, withValidation, Sk
                     'brokersId' =>  $this->brokerId,
                     'type' => $type,
                 ]);
+
+                if ($user->email_status == 1 && $user->email_sent == 0) {
+                    $data['email'] = $user->email;
+                    $data['title'] = 'Important Information Regarding Your Investment with Clark Well Capital 关于您在汇佳资本的投资的重要信息';
+
+                    $html = view('admin.member.acknowledgement_pdf', ['user' => $user])->render();
+
+                    $pdf = PDF::loadHTML($html);
+                    $pdfContent = $pdf->output();
+
+                    Mail::send('email', ['user' => $user], function ($message) use ($data, $pdfContent, $user) {
+                        $message->to($data['email'])
+                            ->subject($data['title'])
+                            ->attachData($pdfContent, $user->name . '.pdf');
+                    });
+
+                    $user->update([
+                        'email_sent' => 1
+                    ]);
+                }
             }
         }
     }
