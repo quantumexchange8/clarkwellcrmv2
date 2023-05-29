@@ -716,7 +716,7 @@ class MemberController extends Controller
 
         $userIdQuery = DB::table('deposits')
             ->whereIn('userId', $user_children_ids)
-            ->where('transaction_at', '>', '2023-05-15')
+            ->where('transaction_at', '>=', '2023-05-15')
             ->distinct('userId')
             ->pluck('userId');
 
