@@ -86,7 +86,7 @@ class BonusHistories extends Model
             });
         }
 
-        return $query;
+        return $query->orderbyDesc('created_at');
     }
 
     public function user()
