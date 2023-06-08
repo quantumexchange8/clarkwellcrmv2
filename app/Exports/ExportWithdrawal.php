@@ -30,7 +30,9 @@ class ExportWithdrawal implements FromCollection, WithHeadings
                     'user_country' =>  $withdrawal->user->country,
                     'requested_date' => Carbon::parse($withdrawal->created_at)->format('Y-m-d H:i:s'),
                     'wallet_address' => $withdrawal->address,
-                    'amount' => number_format((float)$withdrawal->amount, 2, '.', ''),
+                    'amount' => number_format((float)$withdrawal->amount + $withdrawal->transaction_fee, 2, '.', ''),
+                    'transaction_fee' => number_format((float)$withdrawal->transaction_fee, 2, '.', ''),
+                    'net_amount' => number_format((float)$withdrawal->amount, 2, '.', ''),
                     'wallet_type' =>  $withdrawal->getNetwork(),
                     'status'=> Withdrawals::getApprovalStatus($withdrawal->status),
                 );
@@ -75,6 +77,8 @@ class ExportWithdrawal implements FromCollection, WithHeadings
                 'Requested Date',
                 'Wallet Address',
                 'Amount',
+                'Transaction Fee',
+                'Net Amount',
                 'Wallet Type',
                 'Status',
             ];
