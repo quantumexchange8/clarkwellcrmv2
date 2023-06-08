@@ -521,6 +521,7 @@ return array(
     'successfully_save_withdrawal_pin' => 'บันทึกรหัสถอนเงินเรียบร้อยแล้ว',
     'withdrawal_pin_invalid' => 'รหัสถอนเงินไม่ถูกต้อง',
     'successfully_submit_withdrawal_request' => 'ส่งคำขอถอนเงินเรียบร้อยแล้ว',
+    'fee_remark' => 'มีค่าธรรมเนียมการถอน $5 (ไม่รวมค่าธรรมเนียมแพลตฟอร์มแลกเปลี่ยน cryptocurrency)',
 
 )
 

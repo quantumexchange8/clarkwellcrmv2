@@ -523,6 +523,7 @@ return array(
     'successfully_save_withdrawal_pin' => '成功保存提現密碼',
     'withdrawal_pin_invalid' => '提現密碼無效',
     'successfully_submit_withdrawal_request' => '成功提交提現請求',
+    'fee_remark' => '提現手續費為5美元（不包含加密貨幣交易所費用)',
 
 )
 ?>

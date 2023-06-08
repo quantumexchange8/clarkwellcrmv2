@@ -523,6 +523,8 @@ return array(
     'successfully_save_withdrawal_pin' => '成功保存提现密码',
     'withdrawal_pin_invalid' => '提现密码无效',
     'successfully_submit_withdrawal_request' => '成功提交提现请求',
+    'fee_remark' => '提现手续费为5美元（不包含加密货币交易所费用)',
+
 )
 ?>
 

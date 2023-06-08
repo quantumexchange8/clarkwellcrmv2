@@ -534,6 +534,7 @@ return array(
     'successfully_save_withdrawal_pin' => 'Berhasil Menyimpan PIN Penarikan',
     'withdrawal_pin_invalid' => 'PIN Penarikan tidak valid',
     'successfully_submit_withdrawal_request' => 'Berhasil mengirimkan permintaan penarikan',
+    'fee_remark' => 'Ada biaya penarikan sebesar $5 (tidak termasuk biaya platform pertukaran mata uang kripto)',
 
 )
 

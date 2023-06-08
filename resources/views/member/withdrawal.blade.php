@@ -297,6 +297,7 @@
                                        value="{{number_format($transaction_fee,2)}} USDT"
                                        class="bg-gray-50 border border-gray-300 text-orange-500 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                        required>
+                                <div class="text-sm text-center text-gray-500">@lang('public.fee_remark')</div>
                             </div>
 
                             <div class="mb-4">

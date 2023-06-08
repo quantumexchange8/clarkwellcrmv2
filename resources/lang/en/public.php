@@ -526,5 +526,6 @@ return array(
     'successfully_save_withdrawal_pin' => 'Successfully Save Withdrawal Pin',
     'withdrawal_pin_invalid' => 'The Withdrawal Pin is invalid',
     'successfully_submit_withdrawal_request' => 'Successfully submitted withdrawal request',
+    'fee_remark' => 'There is a withdrawal fee of $5 (not including cryptocurrency exchange platform fees)',
 )
 ?>
