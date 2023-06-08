@@ -508,6 +508,33 @@ return array(
     'extra_bonus' => 'Bonus Tambahan',
     'delete_bonus_confirmation' => 'Apakah Anda yakin ingin menghapus bonus tambahan ini?',
     'successfully_deleted_extra_bonus' => 'Berhasil menghapus bonus tambahan',
+
+    //new feature for withdrawal
+    'wallet_setting' => 'Pengaturan Dompet',
+    'wallet_address' => 'Alamat Dompet',
+    'current_wallet_address' => 'Alamat Dompet Sekarang',
+    'new_wallet_address' => 'Alamat Dompet Baru',
+    'create_wallet' => 'Buat Dompet',
+    'withdrawal_pin' => 'PIN Penarikan',
+    'setup_pin' => 'Atur PIN',
+    'member_wallet' => 'Dompet Anggota',
+    'wallet_type' => 'Jenis Dompet',
+    'request_status' => 'Status Permintaan',
+    'wallet_status' => 'Status Dompet',
+    'requested_at' => 'Tanggal Permintaan',
+    'successfully_update_request' => 'Berhasil Memperbarui Permintaan',
+    'wait_admin_approve_request' => 'Tunggu Admin menyetujui permintaan Anda',
+    'wallet_address_enter_same' => 'Alamat Dompet yang dimasukkan sama',
+    'successfully_save_wallet_address' => 'Berhasil Menyimpan Alamat Dompet',
+    'current_pin_required' => 'Kolom PIN Penarikan Saat Ini diperlukan.',
+    'new_withdrawal_pin' => 'PIN Penarikan Baru',
+    'withdrawal_pin_confirmation' => 'Konfirmasi PIN Penarikan',
+    'current_withdrawal_pin' => 'PIN Penarikan Saat Ini',
+    'current_pin_invalid' => 'PIN Saat Ini tidak valid',
+    'successfully_save_withdrawal_pin' => 'Berhasil Menyimpan PIN Penarikan',
+    'withdrawal_pin_invalid' => 'PIN Penarikan tidak valid',
+    'successfully_submit_withdrawal_request' => 'Berhasil mengirimkan permintaan penarikan',
+
 )
 
 ?>

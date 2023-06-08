@@ -7,10 +7,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreWithdrawalRequest;
 use App\Models\Settings;
 use App\Models\User;
+use App\Models\UserWallet;
 use App\Models\Withdrawals;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
@@ -54,11 +56,23 @@ class WithdrawalController extends Controller
             'search' =>  $search,
         ]);
     }
-    public function store(StoreWithdrawalRequest $request)
+    public function store(Request $request)
     {
         $user = Auth::user();
 
         if ($user->withdrawal_action == User::DISABLE_WITHDRAWAL)
+        {
+            Alert::warning(trans('public.invalid_action'), trans('public.try_again'));
+            return redirect()->back();
+        }
+
+        if ($user->kyc_approval_status != User::KYC_STATUS_VERIFIED)
+        {
+            Alert::warning(trans('public.invalid_action'), trans('public.try_again'));
+            return redirect()->back();
+        }
+
+        if ($user->user_wallet->wallet_status == UserWallet::STATUS_INACTIVE)
         {
             Alert::warning(trans('public.invalid_action'), trans('public.try_again'));
             return redirect()->back();
@@ -67,32 +81,56 @@ class WithdrawalController extends Controller
         if (Withdrawals::where('requested_by_user', $user->id)->where('status', Withdrawals::STATUS_PENDING)->exists()) {
             Alert::warning(trans('public.invalid_action'), trans('public.withdrawal_pending_request'));
             return back()->withInput();
-        } elseif ($request->amount > $user->wallet_balance)
-        {
-            Alert::warning(trans('public.invalid_action'), trans('public.insufficient_amount'));
-            return back()->withInput();
         }
 
-        $settings = Settings::getKeyValue();
-        $amount = round($request->amount, 2);
-        $fee = $settings['withdrawal_transaction_fee'];
-        $amount = $amount - $fee;
-
-        if ($amount <= 0)
-        {
-            Alert::warning(trans('public.invalid_action'), trans('public.unnecessary_withdraw'));
-            return back()->withInput();
-        }
-
-        $withdrawal = Withdrawals::create([
-            'network' => $request->network,
-            'amount' => $amount,
-            'address' => $request->address,
-            'transaction_fee' => $fee,
-            'status' => Withdrawals::STATUS_PENDING,
-            'requested_by_user' => $user->id,
+        $validator = Validator::make($request->all(), [
+            'amount' => 'required|numeric',
+            'withdrawal_pin' => [
+                function ($attribute, $value, $fail) use ($user) {
+                    if (!Hash::check($value, $user->withdrawal_pin)) {
+                        $fail(trans('public.withdrawal_pin_invalid'));
+                    }
+                },
+            ],
+        ])->setAttributeNames([
+            'amount' => trans('public.amount'),
+            'withdrawal_pin' => trans('public.withdrawal_pin'),
         ]);
-        return back();
+
+        if (!$validator->passes()){
+            return response()->json([
+                'status' => 0,
+                'error' => $validator->errors()->toArray()
+            ]);
+        } else {
+
+            if ($request->amount > $user->wallet_balance)
+            {
+                return response()->json([
+                    'status' => 2,
+                    'msg' => trans('public.insufficient_amount')
+                ]);
+            }
+
+            $settings = Settings::getKeyValue();
+            $amount = round($request->amount, 2);
+            $fee = $settings['withdrawal_transaction_fee'];
+            $amount = $amount - $fee;
+
+            Withdrawals::create([
+                'network' => $user->user_wallet->wallet_type,
+                'amount' => $amount,
+                'address' => $user->user_wallet->wallet_address,
+                'transaction_fee' => $fee,
+                'status' => Withdrawals::STATUS_PENDING,
+                'requested_by_user' => $user->id,
+            ]);
+
+            return response()->json([
+                'status' => 1,
+                'msg' => trans('public.successfully_submit_withdrawal_request'),
+            ]);
+        }
     }
 
     public function withdrawal_edit(Request $request)
@@ -100,20 +138,42 @@ class WithdrawalController extends Controller
         $user = Auth::user();
         $withdrawal = Withdrawals::find($request->withdrawal_id);
 
+        if (!$withdrawal)
+        {
+            Alert::warning(trans('public.invalid_action'), trans('public.try_again'));
+            return redirect()->back();
+        }
+
         if ($user->withdrawal_action == User::DISABLE_WITHDRAWAL)
         {
             Alert::warning(trans('public.invalid_action'), trans('public.try_again'));
             return redirect()->back();
         }
 
+        if ($user->kyc_approval_status != User::KYC_STATUS_VERIFIED)
+        {
+            Alert::warning(trans('public.invalid_action'), trans('public.try_again'));
+            return redirect()->back();
+        }
+
+        if ($user->user_wallet->wallet_status == UserWallet::STATUS_INACTIVE)
+        {
+            Alert::warning(trans('public.invalid_action'), trans('public.try_again'));
+            return redirect()->back();
+        }
+
         $validator = Validator::make($request->all(), [
-            'network' => ['required', Rule::in(Withdrawals::$walletTypes)],
-            'address' => 'required',
             'amount' => 'required|numeric',
+            'withdrawal_pin' => [
+                function ($attribute, $value, $fail) use ($user) {
+                    if (!Hash::check($value, $user->withdrawal_pin)) {
+                        $fail(trans('public.withdrawal_pin_invalid'));
+                    }
+                },
+            ],
         ])->setAttributeNames([
-            'network' => trans('public.network'),
-            'address' => trans('public.address'),
             'amount' => trans('public.amount'),
+            'withdrawal_pin' => trans('public.withdrawal_pin'),
         ]);
 
         if (!$validator->passes()){
@@ -137,7 +197,6 @@ class WithdrawalController extends Controller
             $amount = $amount - $fee;
 
             $withdrawal->update([
-                'address' => $request->input('address'),
                 'amount' => $amount,
             ]);
 

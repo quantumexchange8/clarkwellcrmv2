@@ -15,6 +15,7 @@ use App\Models\Event;
 use App\Models\Rankings;
 use App\Models\SettingCountry;
 use App\Models\User;
+use App\Models\UserWallet;
 use App\Models\Withdrawals;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -93,6 +94,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $rank = $user->rank;
+        $user_withdrawal_status = Withdrawals::where('requested_by_user', $user->id)->where('status', Withdrawals::STATUS_PENDING)->first();
 
         switch (app()->getLocale()) {
             case 'en':
@@ -125,7 +127,120 @@ class UserController extends Controller
             'user' => $user,
             'rank' => $rank,
             'country_trans' => $country_trans,
+            'user_withdrawal_status' => $user_withdrawal_status,
         ]);
+    }
+
+    public function wallet_address(Request $request)
+    {
+        $user = Auth::user();
+        $user_wallet = $user->user_wallet;
+        $user_withdrawal_status = Withdrawals::where('requested_by_user', $user->id)->where('status', Withdrawals::STATUS_PENDING)->first();
+
+        if (!empty($user_wallet))
+        {
+            if ($user_wallet->wallet_address_request_status == UserWallet::STATUS_PENDING || $user_withdrawal_status)
+            {
+                return response()->json([
+                    'status' => 2,
+                    'msg' => trans('public.wait_admin_approve_request')
+                ]);
+            }
+
+            if ($user_wallet->wallet_address == $request->input('wallet_address'))
+            {
+                return response()->json([
+                    'status' => 3,
+                    'msg' => trans('public.wallet_address_enter_same')
+                ]);
+            }
+        }
+
+        $validator = Validator::make($request->all(), [
+            'wallet_type' => 'required',
+            'wallet_address' => 'required|regex:/T[A-Za-z1-9]{33}/',
+        ])->setAttributeNames([
+            'wallet_type' => trans('public.wallet_type'),
+            'wallet_address' => trans('public.wallet_address'),
+        ]);
+
+        if (!$validator->passes()){
+            return response()->json([
+                'status' => 0,
+                'error' => $validator->errors()->toArray()
+            ]);
+        } else {
+
+            if (empty($user_wallet))
+            {
+                UserWallet::create([
+                    'user_id' => $user->id,
+                    'wallet_type' => $request->input('wallet_type'),
+                    'wallet_address' => $request->input('wallet_address'),
+                    'requested_at' => now(),
+                ]);
+            } else {
+                $user_wallet->update([
+                    'wallet_address_request' => $request->input('wallet_address'),
+                    'wallet_address_request_status' => UserWallet::STATUS_PENDING,
+                    'wallet_status' => UserWallet::STATUS_INACTIVE,
+                    'requested_at' => now(),
+                ]);
+            }
+
+            return response()->json([
+                'status' => 1,
+                'msg' => trans('public.successfully_save_wallet_address')
+            ]);
+        }
+    }
+
+    public function withdrawal_pin(Request $request)
+    {
+        $user = Auth::user();
+
+        $validator = Validator::make($request->all(), [
+            'withdrawal_pin' => 'required|digits:6|confirmed|numeric',
+            'withdrawal_pin_confirmation' => 'required|same:withdrawal_pin',
+            'current_withdrawal_pin' => [
+                function ($attribute, $value, $fail) use ($request) {
+                    $user = auth()->user();
+                    if (!is_null($user->withdrawal_pin) && empty($value)) {
+                        $fail(trans('public.current_pin_required'));
+                    }
+                },
+                'digits:6',
+            ],
+        ])->setAttributeNames([
+            'withdrawal_pin' => trans('public.new_withdrawal_pin'),
+            'withdrawal_pin_confirmation' => trans('public.withdrawal_pin_confirmation'),
+            'current_withdrawal_pin' => trans('public.current_withdrawal_pin'),
+        ]);
+
+        if (!$validator->passes()){
+            return response()->json([
+                'status' => 0,
+                'error' => $validator->errors()->toArray()
+            ]);
+        } else {
+
+            if (!is_null($user->withdrawal_pin) && !Hash::check($request->get('current_withdrawal_pin'), $user->withdrawal_pin)) {
+
+                return response()->json([
+                    'status' => 2,
+                    'msg' => trans('public.current_pin_invalid')
+                ]);
+            }
+
+            $user->update([
+                'withdrawal_pin' => Hash::make($request->input('withdrawal_pin')),
+            ]);
+
+            return response()->json([
+                'status' => 1,
+                'msg' => trans('public.successfully_save_withdrawal_pin')
+            ]);
+        }
     }
 
     public function verification(Request $request)

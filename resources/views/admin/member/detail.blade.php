@@ -165,6 +165,14 @@
                             {{ $user->email_status == 1 ? trans('public.yes') : trans('public.no') }}
                         </span>
                     </div>
+                    <div class="mt-6 px-4">
+                        <h2 class="font-semibold text-md text-orange-400 mb-4">@lang('public.wallet_status')</h2>
+                        @if($user->user_wallet && $user->user_wallet->wallet_status == \App\Models\UserWallet::STATUS_ACTIVE)
+                            <span class="text-success font-semibold text-md text-gray-500">@lang('public.active')</span>
+                        @else
+                            <span class="text-warning font-semibold text-md text-gray-500">@lang('public.inactive')</span>
+                        @endif
+                    </div>
                     @if($user->extra_bonus)
                         <div class="mt-6 px-4">
                             <h2 class="font-semibold text-md text-orange-400 mb-4">@lang('public.extra_bonus')</h2>

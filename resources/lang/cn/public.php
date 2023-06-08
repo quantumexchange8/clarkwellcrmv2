@@ -497,6 +497,32 @@ return array(
     'extra_bonus' => '额外奖金',
     'delete_bonus_confirmation' => '您确定要删除此额外奖金吗？',
     'successfully_deleted_extra_bonus' => '成功删除额外奖金',
+
+    //new feature for withdrawal
+    'wallet_setting' => '钱包设置',
+    'wallet_address' => '钱包地址',
+    'current_wallet_address' => '当前钱包地址',
+    'new_wallet_address' => '新钱包地址',
+    'create_wallet' => '创建钱包',
+    'withdrawal_pin' => '提现密码',
+    'setup_pin' => '设置密码',
+    'member_wallet' => '会员钱包',
+    'wallet_type' => '钱包类型',
+    'request_status' => '请求状态',
+    'wallet_status' => '钱包状态',
+    'requested_at' => '请求时间',
+    'successfully_update_request' => '成功更新请求',
+    'wait_admin_approve_request' => '请等待管理员批准您的请求',
+    'wallet_address_enter_same' => '输入的钱包地址相同',
+    'successfully_save_wallet_address' => '成功保存钱包地址',
+    'current_pin_required' => '当前提现密码字段是必填的。',
+    'new_withdrawal_pin' => '新提现密码',
+    'withdrawal_pin_confirmation' => '确认提现密码',
+    'current_withdrawal_pin' => '当前提现密码',
+    'current_pin_invalid' => '当前密码无效',
+    'successfully_save_withdrawal_pin' => '成功保存提现密码',
+    'withdrawal_pin_invalid' => '提现密码无效',
+    'successfully_submit_withdrawal_request' => '成功提交提现请求',
 )
 ?>
 

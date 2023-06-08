@@ -49,6 +49,9 @@
                     <li>
                         <a href="{{ route('acknowledgement_letter') }}" class="{{ request()->is('admin/member/acknowledgement_letter') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 text-base font-semibold transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.acknowledgement_letter')</a>
                     </li>
+                    <li>
+                        <a href="{{ route('member_wallet') }}" class="{{ request()->is('admin/member/member_wallet') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 text-base font-semibold transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.member_wallet')</a>
+                    </li>
                 </ul>
             </li>
             <li>

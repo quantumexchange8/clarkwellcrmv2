@@ -495,6 +495,33 @@ return array(
     'extra_bonus' => 'โบนัสพิเศษ',
     'delete_bonus_confirmation' => 'คุณแน่ใจหรือว่าต้องการลบโบนัสพิเศษนี้?',
     'successfully_deleted_extra_bonus' => 'ลบโบนัสพิเศษสำเร็จแล้ว',
+
+    //new feature for withdrawal
+    'wallet_setting' => 'การตั้งค่ากระเป๋าเงิน',
+    'wallet_address' => 'ที่อยู่กระเป๋าเงิน',
+    'current_wallet_address' => 'ที่อยู่กระเป๋าเงินปัจจุบัน',
+    'new_wallet_address' => 'ที่อยู่กระเป๋าเงินใหม่',
+    'create_wallet' => 'สร้างกระเป๋าเงิน',
+    'withdrawal_pin' => 'รหัสถอนเงิน',
+    'setup_pin' => 'ตั้งค่ารหัสถอน',
+    'member_wallet' => 'กระเป๋าเงินสมาชิก',
+    'wallet_type' => 'ประเภทกระเป๋าเงิน',
+    'request_status' => 'สถานะคำขอ',
+    'wallet_status' => 'สถานะกระเป๋าเงิน',
+    'requested_at' => 'วันที่ทำคำขอ',
+    'successfully_update_request' => 'อัปเดตคำขอเรียบร้อยแล้ว',
+    'wait_admin_approve_request' => 'รอผู้ดูแลระบบอนุมัติคำขอของคุณ',
+    'wallet_address_enter_same' => 'ที่อยู่กระเป๋าเงินที่ป้อนเหมือนกัน',
+    'successfully_save_wallet_address' => 'บันทึกที่อยู่กระเป๋าเงินเรียบร้อยแล้ว',
+    'current_pin_required' => 'จำเป็นต้องระบุรหัสถอนเงินปัจจุบัน',
+    'new_withdrawal_pin' => 'รหัสถอนเงินใหม่',
+    'withdrawal_pin_confirmation' => 'ยืนยันรหัสถอนเงิน',
+    'current_withdrawal_pin' => 'รหัสถอนเงินปัจจุบัน',
+    'current_pin_invalid' => 'รหัสถอนเงินปัจจุบันไม่ถูกต้อง',
+    'successfully_save_withdrawal_pin' => 'บันทึกรหัสถอนเงินเรียบร้อยแล้ว',
+    'withdrawal_pin_invalid' => 'รหัสถอนเงินไม่ถูกต้อง',
+    'successfully_submit_withdrawal_request' => 'ส่งคำขอถอนเงินเรียบร้อยแล้ว',
+
 )
 
 ?>

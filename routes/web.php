@@ -55,6 +55,8 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
                 Route::match(['get', 'post'], '/tree', 'tree')->name('member_tree')->middleware('tree.verification');
                 Route::match(['get', 'post'], '/tree_verification/{type}', 'treeVerification')->name('tree_verification');
                 Route::get('/profile', 'profile')->name('member_profile');
+                Route::post('/wallet_address', 'wallet_address')->name('wallet_address');
+                Route::post('/withdrawal_pin', 'withdrawal_pin')->name('withdrawal_pin');
                 Route::match(['get', 'post'], '/verification', 'verification')->name('member_verification');
                 Route::match(['get', 'post'], '/downline_listing', 'downline_listing')->name('member_downline_listing')->middleware('tree.verification');
                 Route::get('/account/{id}', 'account')->name('view_member_profile');
@@ -111,8 +113,8 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
                 Route::post('/wallet_adjustment', 'adjustWallet')->name('wallet_adjustment');
                 Route::match(['get', 'post'],'/acknowledgement_letter', 'acknowledgement_letter')->name('acknowledgement_letter');
                 Route::post('/member_extra_bonus', 'member_extra_bonus')->name('member_extra_bonus');
-
-                Route::match(['get', 'post'],'/mail_jordan_network', 'mail_jordan_network');
+                Route::match(['get', 'post'],'/member_wallet', 'member_wallet')->name('member_wallet');
+                Route::match(['get', 'post'],'/member_wallet_approval/{id}', 'member_wallet_approval')->name('member_wallet_approval');
             });
 
             Route::prefix('report')->group(function () {

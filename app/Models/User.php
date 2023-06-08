@@ -607,4 +607,9 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(ExtraBonus::class, 'user_id', 'id');
     }
 
+    public function user_wallet()
+    {
+        return $this->hasOne(UserWallet::class, 'user_id', 'id');
+    }
+
 }

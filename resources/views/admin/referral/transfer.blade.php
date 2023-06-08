@@ -35,7 +35,7 @@
                 <div class="mt-6">
                     <select class="js-example-basic-single w-full" name="user">
                         @foreach($users as $user)
-                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            <option value="{{ $user->id }}">{{ $user->email }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -48,7 +48,7 @@
                 <div class="mt-6">
                     <select class="js-example-basic-single w-full" name="parent">
                         @foreach($users as $user)
-                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            <option value="{{ $user->id }}">{{ $user->email }}</option>
                         @endforeach
                     </select>
                 </div>

@@ -43,19 +43,34 @@
                         @lang('public.personal_details')
                     </div>
                     <div class="grid grid-cols-2 max-[1200px]:grid-cols-none">
-                        <div class="px-12 py-4 col-span-2 max-[1200px]:col-span-1">
+                        <div class="px-12 py-4">
                             <p class="font-medium text-gray-500 dark:text-gray-400 "> @lang('public.name'):</p>
                             <h5 class="mb-2 text-lg font-semibold tracking-tight text-[#696057] dark:text-white">{{$user->name}}</h5>
                         </div>
-                        <div class="px-12 py-4 ">
+                        <div class="px-12 py-4">
                             <p class="font-medium text-gray-500 dark:text-gray-400 "> @lang('public.email'):</p>
                             <h5 class="mb-2 text-lg font-semibold tracking-tight text-[#696057] dark:text-white">{{$user->email}}</h5>
+                        </div>
+                        <div class="px-12 py-4">
+                            <p class="font-medium text-gray-500 dark:text-gray-400 "> @lang('public.country'):</p>
+                            <div class="flex items-center space-x-4">
+                                @if($user->countryFlag)
+                                    <span class="fi fi-{{$user->countryFlag}} "></span>
+                                @endif
+                                <h5 class=" text-lg font-semibold tracking-tight text-[#696057] dark:text-white">{{ $user->getTranslatedCountry() }}</h5>
+                            </div>
                         </div>
                         <div class="px-12 py-4">
                             <p class="font-medium text-gray-500 dark:text-gray-400 "> @lang('public.contact'):</p>
                             <div class="flex items-center space-x-4">
                                 <h5 class=" text-lg font-semibold tracking-tight text-[#696057] dark:text-white">{{$user->contact_number}}</h5>
                             </div>
+                        </div>
+                        <div class="px-12 py-4">
+                            <p class="font-medium text-gray-500 dark:text-gray-400 "> @lang('public.address'):</p>
+                            <h5 class="mb-2 text-lg font-semibold tracking-tight text-[#696057] dark:text-white">
+                                {{$user->address}}
+                            </h5>
                         </div>
                     </div>
                 </div>
@@ -80,22 +95,50 @@
             <div class="flex justify-center col-span-2 max-[1200px]:col-span-1 max-[1200px]:justify-start mt-3 ">
                 <div class="block rounded-lg bg-[#FDFCF3] border-2 shadow-lg dark:bg-neutral-700 w-full py-4">
                     <div class="pt-4 px-6 flex text-orange-400 font-bold text-lg">
-                        @lang('public.location')
+                        @lang('public.wallet_setting')
                     </div>
-                    <div class="grid grid-cols-2 max-[1400px]:grid-cols-none">
-                        <div class="px-12 py-4 ">
-                            <p class="font-medium text-gray-500 dark:text-gray-400 "> @lang('public.address'):</p>
-                            <h5 class="mb-2 text-lg font-semibold tracking-tight text-[#696057] dark:text-white">
-                                {{$user->address}}
-                            </h5>
+                    <div class="grid grid-cols-2 max-[1200px]:grid-cols-none">
+                        <div class="px-12 py-4">
+                            <p class="font-medium text-gray-500 dark:text-gray-400 mb-4">@lang('public.wallet_address'):</p>
+                            @if($user->user_wallet)
+                                <div class="flex flex-col my-2">
+                                    <span class="font-semibold text-lg text-[#696057] dark:text-white">
+                                      @lang('public.type') - <span class="uppercase">{{ $user->user_wallet->wallet_type }}</span>
+                                        @if($user->user_wallet->wallet_address_request_status == \App\Models\UserWallet::STATUS_PENDING)
+                                            <span class="inline-block ml-2 px-2 py-1 text-sm font-semibold text-white bg-blue-500 rounded">@lang('public.pending')</span>
+                                        @endif
+                                    </span>
+                                    <span class="font-semibold text-lg text-[#696057] dark:text-white">@lang('public.address') - {{ substr_replace($user->user_wallet->wallet_address, '******', 3, -3) }}</span>
+                                </div>
+                                @if(!$user_withdrawal_status)
+                                    <button data-modal-target="wallet-address-modal" data-modal-toggle="wallet-address-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                        <svg class="h-5 w-5 text-white mr-2 -ml-1"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                        </svg>
+                                        @lang('public.edit')
+                                    </button>
+                                @endif
+                            @else
+                                <button data-modal-target="wallet-address-modal" data-modal-toggle="wallet-address-modal" type="button" class="text-white bg-success hover:bg-success-800 focus:ring-4 focus:outline-none focus:ring-success-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-success-600 dark:hover:bg-success-700 dark:focus:ring-success-800">
+                                    <svg class="h-5 w-5 text-white mr-2 -ml-1"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12" />  <path d="M20 12v4h-4a2 2 0 0 1 0 -4h4" /></svg>
+                                    @lang('public.create_wallet')
+                                </button>
+                            @endif
                         </div>
                         <div class="px-12 py-4">
-                            <p class="font-medium text-gray-500 dark:text-gray-400 "> @lang('public.country'):</p>
+                            <p class="font-medium text-gray-500 dark:text-gray-400 mb-4"> @lang('public.withdrawal_pin'):</p>
                             <div class="flex items-center space-x-4">
-                                @if($user->countryFlag)
-                                <span class="fi fi-{{$user->countryFlag}} "></span>
+                                @if($user->withdrawal_pin)
+                                    <button data-modal-target="withdrawal-pin-modal" data-modal-toggle="withdrawal-pin-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                        <svg class="h-5 w-5 text-white mr-2 -ml-1"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />  <path d="M7 11V7a5 5 0 0 1 9.9-1" /></svg>
+                                        @lang('public.edit')
+                                    </button>
+                                @else
+                                    <button data-modal-target="withdrawal-pin-modal" data-modal-toggle="withdrawal-pin-modal" type="button" class="text-white bg-success hover:bg-success-800 focus:ring-4 focus:outline-none focus:ring-success-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-success-600 dark:hover:bg-success-700 dark:focus:ring-success-800">
+                                        <svg class="h-5 w-5 text-white mr-2 -ml-1"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />  <path d="M7 11V7a5 5 0 0 1 9.9-1" /></svg>
+                                        @lang('public.setup_pin')
+                                    </button>
                                 @endif
-                                <h5 class=" text-lg font-semibold tracking-tight text-[#696057] dark:text-white">{{ $user->getTranslatedCountry() }}</h5>
                             </div>
                         </div>
                     </div>
@@ -145,11 +188,87 @@
 
             </div>
             </form>
-
         </div>
     </div>
+
+
+    <!-- Wallet Address Modal -->
+    <div id="wallet-address-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative w-full max-w-md max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="wallet-address-modal">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+                <div class="px-6 py-6 lg:px-8">
+                    <h3 class="mb-4 text-xl font-bold text-orange-400 dark:text-white">Wallet Address</h3>
+                    <form class="space-y-6" action="{{ route('wallet_address') }}" method="POST" id="wallet_address">
+                        @csrf
+                        <div>
+                            <label for="wallet_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Wallet Type</label>
+                            <input type="text" name="wallet_type" id="wallet_type" class="bg-gray-50 uppercase border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Wallet Type" readonly value="trc20">
+                            <span class="text-danger text-xs error-text wallet_type_error"></span>
+                        </div>
+                        <div>
+                            <label for="wallet_address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Wallet Address</label>
+                            <input type="text" name="wallet_address" id="wallet_address" placeholder="Wallet Address" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value="{{ @$user->user_wallet->wallet_address }}">
+                            <span class="text-danger text-xs error-text wallet_address_error"></span>
+                        </div>
+                        @if(!empty($user->wallet_address_request))
+                            <button type="submit" class="w-full text-white bg-[#2AC769] hover:bg-success-800 focus:ring-4 focus:outline-none focus:ring-success-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Save</button>
+                        @else
+                            <button type="submit" class="w-full text-white bg-[#2AC769] hover:bg-success-800 focus:ring-4 focus:outline-none focus:ring-success-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit Request</button>
+                        @endif
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Withdrawal Pin Modal -->
+    <div id="withdrawal-pin-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative w-full max-w-md max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="withdrawal-pin-modal">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+                <div class="px-6 py-6 lg:px-8">
+                    <h3 class="mb-4 text-xl font-bold text-orange-400 dark:text-white">Withdrawal Pin</h3>
+                    <form class="space-y-6" action="{{ route('withdrawal_pin') }}" method="POST" id="withdrawal_pin">
+                        @csrf
+
+                        @if(!empty($user->withdrawal_pin))
+                            <div>
+                                <label for="current_withdrawal_pin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current Withdrawal Pin</label>
+                                <input type="password" name="current_withdrawal_pin" id="current_withdrawal_pin" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="New Withdrawal Pin">
+                                <span class="text-danger text-xs error-text current_withdrawal_pin_error"></span>
+                            </div>
+                        @endif
+                        <div>
+                            <label for="withdrawal_pin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">New Withdrawal Pin</label>
+                            <input type="password" name="withdrawal_pin" id="withdrawal_pin" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="New Withdrawal Pin">
+                            <span class="text-danger text-xs error-text withdrawal_pin_error"></span>
+                        </div>
+                        <div>
+                            <label for="withdrawal_pin_confirmation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm Withdrawal Pin</label>
+                            <input type="password" name="withdrawal_pin_confirmation" id="withdrawal_pin_confirmation" placeholder="Confirm Withdrawal Pin" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                        </div>
+                        <button type="submit" class="w-full text-white bg-[#2AC769] hover:bg-success-800 focus:ring-4 focus:outline-none focus:ring-success-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Save Pin</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 @endsection
 @section('script')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
     let imageUpload = document.getElementById("file_input");
     // display file name if file has been selected
@@ -162,5 +281,128 @@
             image.src = '/img/profile.png';
         }
     };
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            $('#wallet_address').on('submit', function(e) {
+                e.preventDefault();
+                var form = $(this)
+                $.ajax({
+                    method:$(this).attr('method'),
+                    url:$(this).attr('action'),
+                    data:new FormData(this),
+                    processData:false,
+                    dataType:'json',
+                    contentType:false,
+                    beforeSend:function (){
+                        form.find('span.error-text').text('');
+                    },
+                    success: function(data) {
+                        if(data.status == 0) {
+                            $.each(data.error, function (prefix, val){
+                                $('span.'+prefix+'_error').text(val[0]);
+                                $('.'+prefix).addClass('border-danger');
+                            });
+                        } else if (data.status == 2) {
+                            Swal.fire({
+                                title: '{{ trans('public.invalid_action') }}',
+                                text: data.msg,
+                                icon: 'warning',
+                                confirmButtonText: 'OK',
+                                timer: 3000,
+                                timerProgressBar: false,
+                            });
+                        } else {
+                            Swal.fire({
+                                title: '{{ trans('public.done') }}',
+                                text: data.msg,
+                                icon: 'success',
+                                confirmButtonText: 'OK',
+                                timer: 3000,
+                                timerProgressBar: false,
+                            }).then(function() {
+                                location.reload();
+                            });
+                        }
+                    },
+                    error: function() {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'An error occurred while processing your request. Contact Admin.',
+                            icon: 'error',
+                            confirmButtonText: 'OK',
+                            timer: 4000,
+                            timerProgressBar: false,
+                        });
+                    }
+                });
+            });
+
+            $('#withdrawal_pin').on('submit', function(e) {
+                e.preventDefault();
+                var form = $(this)
+                $.ajax({
+                    method:$(this).attr('method'),
+                    url:$(this).attr('action'),
+                    data:new FormData(this),
+                    processData:false,
+                    dataType:'json',
+                    contentType:false,
+                    beforeSend:function (){
+                        form.find('span.error-text').text('');
+                    },
+                    success: function(data) {
+                        if(data.status == 0) {
+                            $.each(data.error, function (prefix, val){
+                                $('span.'+prefix+'_error').text(val[0]);
+                                $('.'+prefix).addClass('border-danger');
+                            });
+                        } else if (data.status == 2) {
+                            Swal.fire({
+                                title: '{{ trans('public.invalid_action') }}',
+                                text: data.msg,
+                                icon: 'warning',
+                                confirmButtonText: 'OK',
+                                timer: 3000,
+                                timerProgressBar: false,
+                            }).then(function() {
+                                location.reload();
+                            });
+                        } else if (data.status == 3) {
+                            Swal.fire({
+                                title: '{{ trans('public.invalid_action') }}',
+                                text: data.msg,
+                                icon: 'warning',
+                                confirmButtonText: 'OK',
+                                timer: 3000,
+                                timerProgressBar: false,
+                            });
+                        } else {
+                            Swal.fire({
+                                title: '{{ trans('public.done') }}',
+                                text: data.msg,
+                                icon: 'success',
+                                confirmButtonText: 'OK',
+                                timer: 3000,
+                                timerProgressBar: false,
+                            }).then(function() {
+                                location.reload();
+                            });
+                        }
+                    },
+                    error: function() {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'An error occurred while processing your request. Contact Admin.',
+                            icon: 'error',
+                            confirmButtonText: 'OK',
+                            timer: 4000,
+                            timerProgressBar: false,
+                        });
+                    }
+                });
+            });
+        });
     </script>
 @endsection

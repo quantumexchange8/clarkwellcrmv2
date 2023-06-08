@@ -12,6 +12,7 @@ use App\Models\ExtraBonus;
 use App\Models\Rankings;
 use App\Models\SettingCountry;
 use App\Models\User;
+use App\Models\UserWallet;
 use App\Models\WalletLogs;
 use Carbon\Carbon;
 use Dompdf\Dompdf;
@@ -25,6 +26,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use Intervention\Image\Facades\Image;
 use Maatwebsite\Excel\Facades\Excel;
@@ -335,6 +337,18 @@ class MemberController extends Controller
     {
         $user = User::find($id);
         $validator = null;
+
+        if ($user->kyc_approval_status != User::KYC_STATUS_VERIFIED)
+        {
+            Alert::warning(trans('public.invalid_action'), trans('public.try_again'));
+            return redirect()->back();
+        }
+
+        if ($user->user_wallet->wallet_status == UserWallet::STATUS_INACTIVE)
+        {
+            Alert::warning(trans('public.invalid_action'), trans('public.try_again'));
+            return redirect()->back();
+        }
 
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(), [
@@ -705,49 +719,72 @@ class MemberController extends Controller
         ]);
     }
 
-    public function mail_jordan_network()
+    public function member_wallet(Request $request)
     {
-        $user = User::find(29);
+        $search = array();
 
-        $data['title'] = 'Important Information Regarding Your Investment with Clark Well Capital 关于您在汇佳资本的投资的重要信息';
+        if ($request->isMethod('post')) {
+            $submit_type = $request->input('submit');
 
-        $user_children_ids = $user->getChildrenIds();
-        $user_children_ids[] = $user->id;
-
-        $userIdQuery = DB::table('deposits')
-            ->whereIn('userId', $user_children_ids)
-            ->where('transaction_at', '>=', '2023-05-15')
-            ->distinct('userId')
-            ->pluck('userId');
-
-        // $userIdQuery contains the unique userId values that meet the conditions
-
-
-        foreach ($userIdQuery as $child_id)
-        {
-            $child = User::find($child_id);
-
-            if ($child->email_status == 1 && $child->email_sent == 0) {
-                // Proceed to send email for children with email_status equal to 1 and email_sent equal to 0
-                $data['email'] = $child->email;
-
-                $html = view('admin.member.acknowledgement_pdf', ['user' => $child])->render();
-
-                $pdf = PDF::loadHTML($html);
-                $pdfContent = $pdf->output();
-
-                Mail::send('email', ['user' => $child], function ($message) use ($data, $pdfContent, $child) {
-                    $message->to($data['email'])
-                        ->subject($data['title'])
-                        ->attachData($pdfContent, $child->name . '.pdf');
-                });
-
-                $child->update([
-                    'email_sent' => 1
-                ]);
+            switch ($submit_type) {
+                case 'search':
+                    session(['member_wallet_search' => [
+                        'freetext' =>  $request->input('freetext'),
+                        'created_start' => $request->input('created_start'),
+                        'created_end' => $request->input('created_end'),
+                        'wallet_address_request_status' => $request->input('wallet_address_request_status'),
+                    ]]);
+                    break;
+                case 'reset':
+                    session()->forget('member_wallet_search');
+                    break;
             }
         }
-        Alert::success('Done', 'Successfully sent to Jordan Network');
-        return redirect()->route('member_listing');
+
+        $search = session('member_wallet_search') ? session('member_wallet_search') : $search;
+
+        return view('admin.member.member_wallet', [
+            'title' => trans('public.member_wallet'),
+            'submit' => route('member_wallet'),
+            'records' => UserWallet::get_record($search, 10),
+            'search' =>  $search,
+            'brokers' => Brokers::all(),
+            'get_status_sel' => ['' => trans('public.select_status')] + [1 => trans('public.process'), 2 => trans('public.approved'), 3 => trans('public.rejected')],
+        ]);
+    }
+
+    public function member_wallet_approval(Request $request, $id)
+    {
+        $request->validate([
+            'wallet_address_request_status' => ['required', Rule::in(['approve', 'reject'])],
+        ]);
+        $user_wallet = UserWallet::find($id);
+
+        if ($user_wallet->wallet_address_request_status != UserWallet::STATUS_PENDING) {
+            Alert::error(trans('public.invalid_action'), trans('public.try_again'));
+            return back();
+        }
+
+        switch ($request->input('wallet_address_request_status')) {
+            case 'approve':
+                $user_wallet->update([
+                    'wallet_address_request_status' => UserWallet::STATUS_APPROVED,
+                    'wallet_status' => UserWallet::STATUS_ACTIVE,
+                    'wallet_address' => $user_wallet->wallet_address_request,
+                    'wallet_address_request' => null,
+                ]);
+                break;
+
+            case 'reject':
+                $user_wallet->update([
+                    'wallet_address_request_status' => UserWallet::STATUS_REJECTED,
+                    'wallet_status' => UserWallet::STATUS_ACTIVE,
+                    'wallet_address_request' => null,
+                ]);
+                break;
+        }
+
+        Alert::success(trans('public.done'), trans('public.successfully_update_request'));
+        return back();
     }
 }

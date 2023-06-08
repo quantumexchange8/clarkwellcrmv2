@@ -91,7 +91,7 @@
                         </svg>
                         @lang('public.export_excel')
                     </button>
-                    @if(auth()->user()->withdrawal_action == \App\Models\User::ENABLE_WITHDRAWAL)
+                    @if(auth()->user()->withdrawal_action == \App\Models\User::ENABLE_WITHDRAWAL && auth()->user()->kyc_approval_status == \App\Models\User::KYC_STATUS_VERIFIED && auth()->user()->user_wallet->wallet_status == \App\Models\UserWallet::STATUS_ACTIVE )
                         <button type="button" data-modal-target="withdrawModal" data-modal-toggle="withdrawModal" class="mb-2 max-[1000px]:w-full justify-center text-white bg-success-500 hover:bg-success-600 focus:ring-4 text-sm focus:outline-none focus:ring-success-300 font-semibold rounded-lg px-5 py-2 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -263,32 +263,8 @@
                 <div class="px-6 py-6 lg:px-8">
                     <h3 class="mb-4 text-xl font-semibold text-orange-500 dark:text-white">@lang('public.withdrawal_as_USDT')</h3>
                     <form method="post" action="{{ url('member/store-withdrawal') }}"
-                          enctype="multipart/form-data">@csrf
+                          enctype="multipart/form-data" id="withdrawal-modal">@csrf
                         <div class="mb-4">
-                            <div class="inline-flex rounded-md shadow-sm" role="group">
-                                @foreach (\App\Models\Withdrawals::$walletTypes as $type)
-                                    <div class="flex items-center pl-3">
-                                        <input id="horizontal-list-radio-license" type="radio" checked value="{{$type}}"
-                                               name="network" value= "{{ old('network') }}"
-                                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="horizontal-list-radio-license"
-                                               class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{strtoupper($type)}}</label>
-                                    </div>
-                                @endforeach
-                            </div>
-                            @error('network')
-                            <div class="text-sm text-red-600">{{ $message }}</div>
-                            @enderror
-                            <div class="mb-4">
-                                <label for="Address"
-                                       class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">@lang('public.address')</label>
-                                <input type="text" name="address" id="address" value= "{{ old('address') }}"
-                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                       placeholder="" required>
-                                @error('address')
-                                <div class="text-sm text-red-600">{{ $message }}</div>
-                                @enderror
-                            </div>
                             <div class="mb-4">
                                 <label for="balance"
                                        class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">@lang('public.available_balance')
@@ -305,16 +281,13 @@
                                 <div class="relative">
                                     <input type="number" name="amount" id="amount-wallet-add" value="{{ old('amount') }}"
                                            step="0.01" min="0"
-                                           class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
-                                           required>
+                                           class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500">
                                     <button type="button" id="max-button-add"
                                             class="text-white absolute right-2.5 bottom-2.5 bg-orange-500 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
                                         @lang('public.max')
                                     </button>
-                                    @error('amount')
-                                    <div class="text-sm text-red-600">{{ $message }}</div>
-                                    @enderror
                                 </div>
+                                <span class="text-danger text-xs error-text amount_error"></span>
                             </div>
                             <div class="mb-4">
                                 <label for="fee-add" class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">
@@ -324,9 +297,14 @@
                                        value="{{number_format($transaction_fee,2)}} USDT"
                                        class="bg-gray-50 border border-gray-300 text-orange-500 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                        required>
-                                @error('fee')
-                                <div class="text-sm text-red-600">{{ $message }}</div>
-                                @enderror
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="withdrawal_pin" class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">
+                                    @lang('public.withdrawal_pin')
+                                </label>
+                                <input type="password" name="withdrawal_pin" id="withdrawal_pin" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Enter Pin">
+                                <span class="text-danger text-xs error-text withdrawal_pin_error"></span>
                             </div>
 
                             <div class="text-center font-medium text-md mt-2 text-orange-500  dark:text-orange-700">
@@ -336,17 +314,6 @@
                                     class="w-full text-white bg-success hover:ring-success  focus:ring-4 focus:outline-none focus:ring-success font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                                 0.00 USDT
                             </button>
-                            @if($errors->any())
-                                @foreach ($errors->get('error_messages') as $error)
-                                    <div class="flex p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
-                                        <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                                        <span class="sr-only">@lang('public.info')</span>
-                                        <div>
-                                            <span class="font-medium"> {{ $error }}</span>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            @endif
                         </div>
                     </form>
                 </div>
@@ -441,6 +408,60 @@
 
             $("#amount-wallet-edit").on("input", function() {
                 walletmaxAmountEdit();
+            });
+
+            $('#withdrawal-modal').on('submit', function(e) {
+                e.preventDefault();
+                var form = $(this)
+                $.ajax({
+                    method:$(this).attr('method'),
+                    url:$(this).attr('action'),
+                    data:new FormData(this),
+                    processData:false,
+                    dataType:'json',
+                    contentType:false,
+                    beforeSend:function (){
+                        form.find('span.error-text').text('');
+                    },
+                    success: function(data) {
+                        if(data.status == 0) {
+                            $.each(data.error, function (prefix, val){
+                                $('span.'+prefix+'_error').text(val[0]);
+                                $('.'+prefix).addClass('border-danger');
+                            });
+                        } else if (data.status == 2) {
+                            Swal.fire({
+                                title: '{{ trans('public.invalid_action') }}',
+                                text: data.msg,
+                                icon: 'error',
+                                confirmButtonText: 'OK',
+                                timer: 3000,
+                                timerProgressBar: false,
+                            });
+                        } else {
+                            Swal.fire({
+                                title: '{{ trans('public.done') }}',
+                                text: data.msg,
+                                icon: 'success',
+                                confirmButtonText: 'OK',
+                                timer: 3000,
+                                timerProgressBar: false,
+                            }).then(function() {
+                                location.reload();
+                            });
+                        }
+                    },
+                    error: function() {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'An error occurred while processing your request.',
+                            icon: 'error',
+                            confirmButtonText: 'OK',
+                            timer: 3000,
+                            timerProgressBar: false,
+                        });
+                    }
+                });
             });
 
             $('#edit-withdrawal').on('submit', function(e) {

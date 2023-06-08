@@ -14,28 +14,6 @@
 
                     <input type="hidden" name="withdrawal_id" value="{{ $data->id }}">
                     <div class="mb-4">
-                        <div class="inline-flex rounded-md" role="group">
-                            @foreach (\App\Models\Withdrawals::$walletTypes as $type)
-                                <div class="flex items-center pl-3">
-                                    <input id="horizontal-list-radio-license" type="radio" checked value="{{$type}}"
-                                           name="network"
-                                           class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500 network">
-                                    <label for="horizontal-list-radio-license"
-                                           class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{strtoupper($type)}}</label>
-                                </div>
-                            @endforeach
-                        </div>
-                        @error('network')
-                        <div class="text-sm text-red-600">{{ $message }}</div>
-                        @enderror
-                        <div class="mb-4">
-                            <label for="Address"
-                                   class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">@lang('public.address')</label>
-                            <input type="text" name="address" id="address" value="{{ $data->address }}"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white address"
-                                   placeholder="" required>
-                            <span class="text-danger text-xs error-text address_error"></span>
-                        </div>
                         <div class="mb-4">
                             <label for="balance"
                                    class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">@lang('public.available_balance')
@@ -71,6 +49,13 @@
                                    value="{{number_format($transaction_fee,2)}} USDT"
                                    class="bg-gray-50 border border-gray-300 text-orange-500 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                    required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="withdrawal_pin" class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">
+                                @lang('public.withdrawal_pin')
+                            </label>
+                            <input type="password" name="withdrawal_pin" id="withdrawal_pin" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Enter Pin">
+                            <span class="text-danger text-xs error-text withdrawal_pin_error"></span>
                         </div>
 
                         <div class="text-center font-medium text-md mt-2 text-orange-500  dark:text-orange-700">

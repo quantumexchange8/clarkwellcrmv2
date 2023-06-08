@@ -497,6 +497,33 @@ return array(
     'extra_bonus' => '額外獎金',
     'delete_bonus_confirmation' => '您確定要刪除此額外獎金嗎？',
     'successfully_deleted_extra_bonus' => '成功刪除額外獎金',
+
+    //new feature for withdrawal
+    'wallet_setting' => '錢包設置',
+    'wallet_address' => '錢包地址',
+    'current_wallet_address' => '當前錢包地址',
+    'new_wallet_address' => '新錢包地址',
+    'create_wallet' => '創建錢包',
+    'withdrawal_pin' => '提現密碼',
+    'setup_pin' => '設置密碼',
+    'member_wallet' => '會員錢包',
+    'wallet_type' => '錢包類型',
+    'request_status' => '請求狀態',
+    'wallet_status' => '錢包狀態',
+    'requested_at' => '請求時間',
+    'successfully_update_request' => '成功更新請求',
+    'wait_admin_approve_request' => '請等待管理員批准您的請求',
+    'wallet_address_enter_same' => '輸入的錢包地址相同',
+    'successfully_save_wallet_address' => '成功保存錢包地址',
+    'current_pin_required' => '當前提現密碼字段是必填的。',
+    'new_withdrawal_pin' => '新提現密碼',
+    'withdrawal_pin_confirmation' => '確認提現密碼',
+    'current_withdrawal_pin' => '當前提現密碼',
+    'current_pin_invalid' => '當前密碼無效',
+    'successfully_save_withdrawal_pin' => '成功保存提現密碼',
+    'withdrawal_pin_invalid' => '提現密碼無效',
+    'successfully_submit_withdrawal_request' => '成功提交提現請求',
+
 )
 ?>
 
