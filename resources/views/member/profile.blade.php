@@ -206,7 +206,7 @@
                     <form class="space-y-6" action="{{ route('wallet_address') }}" method="POST" id="wallet_address">
                         @csrf
                         <div>
-                            <label for="wallet_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Wallet Type</label>
+                            <label for="wallet_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Wallet Type (USDT)</label>
                             <input type="text" name="wallet_type" id="wallet_type" class="bg-gray-50 uppercase border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Wallet Type" readonly value="trc20">
                             <span class="text-danger text-xs error-text wallet_type_error"></span>
                         </div>
