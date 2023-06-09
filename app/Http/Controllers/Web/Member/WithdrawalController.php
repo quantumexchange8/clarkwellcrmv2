@@ -25,6 +25,7 @@ class WithdrawalController extends Controller
         $user = Auth::user();
         $search = array();
         $settings = Settings::getKeyValue();
+        $wallet_address = UserWallet::where('user_id', $user->id)->where('wallet_status', UserWallet::STATUS_ACTIVE)->first();
 
         if ($request->isMethod('post')) {
             $submit_type = $request->input('submit');
@@ -54,6 +55,7 @@ class WithdrawalController extends Controller
             'user' => $user,
             'transaction_fee' => $settings['withdrawal_transaction_fee'] ?? 0,
             'search' =>  $search,
+            'wallet_address' =>  $wallet_address,
         ]);
     }
     public function store(Request $request)
