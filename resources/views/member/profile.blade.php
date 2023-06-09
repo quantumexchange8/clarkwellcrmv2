@@ -242,19 +242,19 @@
 
                         @if(!empty($user->withdrawal_pin))
                             <div>
-                                <label for="current_withdrawal_pin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current Withdrawal Pin</label>
-                                <input type="password" name="current_withdrawal_pin" id="current_withdrawal_pin" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="New Withdrawal Pin">
+                                <label for="current_withdrawal_pin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">@lang('public.current_withdrawal_pin')</label>
+                                <input type="password" name="current_withdrawal_pin" id="current_withdrawal_pin" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="{{ trans('public.current_withdrawal_pin') }}">
                                 <span class="text-danger text-xs error-text current_withdrawal_pin_error"></span>
                             </div>
                         @endif
                         <div>
-                            <label for="withdrawal_pin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">New Withdrawal Pin</label>
-                            <input type="password" name="withdrawal_pin" id="withdrawal_pin" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="New Withdrawal Pin">
+                            <label for="withdrawal_pin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">@lang('public.new_withdrawal_pin')</label>
+                            <input type="password" name="withdrawal_pin" id="withdrawal_pin" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="{{ trans('public.new_withdrawal_pin') }}">
                             <span class="text-danger text-xs error-text withdrawal_pin_error"></span>
                         </div>
                         <div>
-                            <label for="withdrawal_pin_confirmation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm Withdrawal Pin</label>
-                            <input type="password" name="withdrawal_pin_confirmation" id="withdrawal_pin_confirmation" placeholder="Confirm Withdrawal Pin" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                            <label for="withdrawal_pin_confirmation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">@lang('public.withdrawal_pin_confirmation')</label>
+                            <input type="password" name="withdrawal_pin_confirmation" id="withdrawal_pin_confirmation" placeholder="{{ trans('public.withdrawal_pin_confirmation') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
                         </div>
                         <button type="submit" class="w-full text-white bg-[#2AC769] hover:bg-success-800 focus:ring-4 focus:outline-none focus:ring-success-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Save Pin</button>
 

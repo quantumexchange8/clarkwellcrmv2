@@ -749,7 +749,7 @@ class MemberController extends Controller
             'records' => UserWallet::get_record($search, 10),
             'search' =>  $search,
             'brokers' => Brokers::all(),
-            'get_status_sel' => ['' => trans('public.select_status')] + [1 => trans('public.process'), 2 => trans('public.approved'), 3 => trans('public.rejected')],
+            'get_status_sel' => ['' => trans('public.select_status')] + [1 => trans('public.pending'), 2 => trans('public.approved'), 3 => trans('public.rejected')],
         ]);
     }
 
