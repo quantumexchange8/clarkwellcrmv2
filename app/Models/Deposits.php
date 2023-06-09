@@ -76,7 +76,7 @@ class Deposits extends Model
             $query->whereBetween('transaction_at', [$start_date, $end_date]);
         }
 
-        return $query->orderbyDesc('transaction_at')->paginate($perpage);
+        return $query->orderbyDesc('created_at')->paginate($perpage);
     }
 
     public static function get_report_record($search)
@@ -123,7 +123,7 @@ class Deposits extends Model
             });
         }
 
-        return $query->orderbyDesc('transaction_at');
+        return $query->orderbyDesc('created_at');
     }
     public static function get_member_daily_monthly_table($search, $user)
     {
