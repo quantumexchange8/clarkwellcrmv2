@@ -506,6 +506,7 @@ return array(
     'setup_pin' => 'ตั้งค่ารหัสถอน',
     'member_wallet' => 'กระเป๋าเงินสมาชิก',
     'wallet_type' => 'ประเภทกระเป๋าเงิน',
+    'submit_request' => 'ส่งคำขอ',
     'request_status' => 'สถานะคำขอ',
     'wallet_status' => 'สถานะกระเป๋าเงิน',
     'requested_at' => 'วันที่ทำคำขอ',

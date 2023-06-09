@@ -508,6 +508,7 @@ return array(
     'setup_pin' => '設置密碼',
     'member_wallet' => '會員錢包',
     'wallet_type' => '錢包類型',
+    'submit_request' => '提交請求',
     'request_status' => '請求狀態',
     'wallet_status' => '錢包狀態',
     'requested_at' => '請求時間',

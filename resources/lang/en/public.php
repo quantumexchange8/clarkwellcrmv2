@@ -511,6 +511,7 @@ return array(
     'setup_pin' => 'Setup Pin',
     'member_wallet' => 'Member Wallet',
     'wallet_type' => 'Wallet Type',
+    'submit_request' => 'Submit Request',
     'request_status' => 'Request Status',
     'wallet_status' => 'Wallet Status',
     'requested_at' => 'Requested At',

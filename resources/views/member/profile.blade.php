@@ -202,23 +202,23 @@
                     <span class="sr-only">Close modal</span>
                 </button>
                 <div class="px-6 py-6 lg:px-8">
-                    <h3 class="mb-4 text-xl font-bold text-orange-400 dark:text-white">Wallet Address</h3>
+                    <h3 class="mb-4 text-xl font-bold text-orange-400 dark:text-white">@lang('public.wallet_address')</h3>
                     <form class="space-y-6" action="{{ route('wallet_address') }}" method="POST" id="wallet_address">
                         @csrf
                         <div>
-                            <label for="wallet_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Wallet Type (USDT)</label>
+                            <label for="wallet_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">@lang('public.wallet_type') (USDT)</label>
                             <input type="text" name="wallet_type" id="wallet_type" class="bg-gray-50 uppercase border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Wallet Type" readonly value="trc20">
                             <span class="text-danger text-xs error-text wallet_type_error"></span>
                         </div>
                         <div>
-                            <label for="wallet_address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Wallet Address</label>
-                            <input type="text" name="wallet_address" id="wallet_address" placeholder="Wallet Address" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value="{{ @$user->user_wallet->wallet_address }}">
+                            <label for="wallet_address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">@lang('public.wallet_address')</label>
+                            <input type="text" name="wallet_address" id="wallet_address" placeholder="{{ trans('public.wallet_address') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value="{{ @$user->user_wallet->wallet_address }}">
                             <span class="text-danger text-xs error-text wallet_address_error"></span>
                         </div>
                         @if(!empty($user->wallet_address_request))
-                            <button type="submit" class="w-full text-white bg-[#2AC769] hover:bg-success-800 focus:ring-4 focus:outline-none focus:ring-success-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Save</button>
+                            <button type="submit" class="w-full text-white bg-[#2AC769] hover:bg-success-800 focus:ring-4 focus:outline-none focus:ring-success-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">@lang('public.save')</button>
                         @else
-                            <button type="submit" class="w-full text-white bg-[#2AC769] hover:bg-success-800 focus:ring-4 focus:outline-none focus:ring-success-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit Request</button>
+                            <button type="submit" class="w-full text-white bg-[#2AC769] hover:bg-success-800 focus:ring-4 focus:outline-none focus:ring-success-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">@lang('public.submit_request')</button>
                         @endif
                     </form>
                 </div>
@@ -236,7 +236,7 @@
                     <span class="sr-only">Close modal</span>
                 </button>
                 <div class="px-6 py-6 lg:px-8">
-                    <h3 class="mb-4 text-xl font-bold text-orange-400 dark:text-white">Withdrawal Pin</h3>
+                    <h3 class="mb-4 text-xl font-bold text-orange-400 dark:text-white">@lang('public.withdrawal_pin')</h3>
                     <form class="space-y-6" action="{{ route('withdrawal_pin') }}" method="POST" id="withdrawal_pin">
                         @csrf
 
@@ -256,7 +256,7 @@
                             <label for="withdrawal_pin_confirmation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">@lang('public.withdrawal_pin_confirmation')</label>
                             <input type="password" name="withdrawal_pin_confirmation" id="withdrawal_pin_confirmation" placeholder="{{ trans('public.withdrawal_pin_confirmation') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
                         </div>
-                        <button type="submit" class="w-full text-white bg-[#2AC769] hover:bg-success-800 focus:ring-4 focus:outline-none focus:ring-success-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Save Pin</button>
+                        <button type="submit" class="w-full text-white bg-[#2AC769] hover:bg-success-800 focus:ring-4 focus:outline-none focus:ring-success-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">@lang('public.save')</button>
 
                     </form>
                 </div>

@@ -519,6 +519,7 @@ return array(
     'setup_pin' => 'Atur PIN',
     'member_wallet' => 'Dompet Anggota',
     'wallet_type' => 'Jenis Dompet',
+    'submit_request' => 'Kirim Permintaan',
     'request_status' => 'Status Permintaan',
     'wallet_status' => 'Status Dompet',
     'requested_at' => 'Tanggal Permintaan',
