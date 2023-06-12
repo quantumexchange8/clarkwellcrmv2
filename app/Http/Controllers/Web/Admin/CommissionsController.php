@@ -163,6 +163,55 @@ class CommissionsController extends Controller
         ]);
     }
 
+    public function lot_size_downline_listing(Request $request)
+    {
+        $search = [];
+
+        $users = User::query()
+            ->where('status', 1)
+            ->where('role', 1)
+            ->where('deleted_at', null)
+            ->where('name','LIKE','%'.$request->keyword.'%')
+            ->get();
+
+        if ($request->isMethod('post')) {
+            $submit_type = $request->input('submit');
+
+            switch ($submit_type) {
+                case 'search':
+                    session(['admin_lot_children_search' => [
+                        'user_id' =>  $request->input('user_id'),
+                        'freetext' =>  $request->input('freetext'),
+                        'type' => 'children',
+                        'transaction_start' => $request->input('transaction_start'),
+                        'transaction_end' => $request->input('transaction_end'),
+                        'country' => $request->input('country'),
+                    ]]);
+
+                    break;
+                case 'export':
+                    $now = Carbon::now()->format('YmdHis');
+                    return Excel::download(new ExportCommissions(Commissions::get_record( session('admin_lot_children_search'))), $now . '-lot-size-group-records.xlsx');
+                case 'reset':
+                    session()->forget('admin_lot_children_search');
+                    break;
+            }
+        }
+
+        $search = session('admin_lot_children_search') ? session('admin_lot_children_search') : $search;
+        $query = Commissions::get_record($search);
+
+        return view('admin.report.commission_lot-children', [
+            'title' => 'Lot Size',
+            'records' => Commissions::get_record($search)->paginate(10),
+            'search' =>  $search,
+            'brokers' => Brokers::all(),
+            'get_country_sel' => SettingCountry::get_country_sel(app()->getLocale()),
+            'users' => $users,
+            'total_amount' => $query->get()->sum('lot_size')
+        ]);
+    }
+
     public function listingChildren(Request $request)
     {
 

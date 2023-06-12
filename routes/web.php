@@ -120,7 +120,8 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
             Route::prefix('report')->group(function () {
                 Route::match(['get', 'post'], '/commissions/listing', [CommissionsController::class, 'listing'])->name('report_commission');
                 Route::match(['get', 'post'], '/commissions/children', [CommissionsController::class, 'listingChildren'])->name('report_commission_children');
-                Route::match(['get', 'post'], '/commissions/listing_lot_size', [CommissionsController::class, 'listingLotSize'])->name('report_commission_lot');
+                Route::match(['get', 'post'], '/commissions/monthly_lot_size/listing', [CommissionsController::class, 'listingLotSize'])->name('report_commission_lot');
+                Route::match(['get', 'post'], '/commissions/monthly_lot_size/downline_listing', [CommissionsController::class, 'lot_size_downline_listing'])->name('lot_size_downline_listing');
                 Route::match(['get', 'post'], '/deposits/listing', [DepositController::class, 'listing'])->name('report_deposits');
                 Route::match(['get', 'post'], '/deposits/children', [DepositController::class, 'listingChildren'])->name('report_deposits_children');
                 Route::post('/import-commissions', [CommissionsController::class, 'store'])->name('import_commission');

@@ -80,7 +80,18 @@
                                 <a href="{{ route('report_commission_children') }}" class="{{ request()->is('admin/report/commissions/children') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} font-normal flex items-center w-full p-2 text-base font-semibold transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 text-gray-500">@lang('public.downline_listing')</a>
                             </li>
                             <li>
-                                <a href="{{ route('report_commission_lot') }}" class="{{ request()->is('admin/report/commissions/listing_lot_size') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} font-normal flex items-center w-full p-2 text-base font-semibold transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 text-gray-500">@lang('public.monthly_lot')</a>
+                                <button type="button" class="flex items-center w-full p-2 transition duration-75 rounded-lg pl-8 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500" aria-controls="monthly_lot_size" data-collapse-toggle="monthly_lot_size">
+                                    <span class="flex-1 ml-3 text-left whitespace-nowrap text-sm {{ request()->is('admin/report/commissions/monthly_lot_size/*') ? 'font-semibold text-lg text-orange-400' : 'font-semibold text-lg text-gray-500'}}" sidebar-toggle-item>@lang('public.monthly_lot')</span>
+                                    <svg sidebar-toggle-item class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                </button>
+                                <ul id="monthly_lot_size" class="{{ request()->is('admin/report/commissions/monthly_lot_size/*') ? '' : 'hidden' }} py-2 space-y-2 ml-4">
+                                    <li>
+                                        <a href="{{ route('report_commission_lot') }}" class="{{ request()->is('admin/report/commissions/monthly_lot_size/listing') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.listing')</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('lot_size_downline_listing') }}" class="{{ request()->is('admin/report/commissions/monthly_lot_size/downline_listing') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 text-base font-semibold transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.downline_listing')</a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </li>
