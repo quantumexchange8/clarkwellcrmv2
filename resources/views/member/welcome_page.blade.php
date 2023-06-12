@@ -184,7 +184,10 @@
 @section('script')
     <script>
         $(document).ready(function(){
-            $('#popUpTrigger').trigger('click');
+            var events = @json($events);
+            if (events.length > 0) {
+                $('#popUpTrigger').trigger('click');
+            }
         });
 
     </script>
