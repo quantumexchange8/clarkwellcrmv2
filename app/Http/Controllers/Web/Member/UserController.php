@@ -263,7 +263,6 @@ class UserController extends Controller
                 'back_id_image' => trans('public.back_id'),
             ]);
 
-
             if (!$validator->fails()) {
                 $front_id_image = $request->file('front_id_image');
                 if ($front_id_image) {
@@ -273,7 +272,9 @@ class UserController extends Controller
                     $imageName = time() . '.' . $front_id_image->getClientOriginalExtension();
                     $resize_upload = Image::make( $front_id_image->path() );
                     $resize_upload->save(public_path('/uploads/users/'.$imageName));
-                    $user->front_id_image = $imageName;
+                    $user->update([
+                        'front_id_image' => $imageName
+                    ]);
                 }
 
 
@@ -285,13 +286,16 @@ class UserController extends Controller
                     $imageName = time() . '.' . $back_id_image->getClientOriginalExtension();
                     $resize_upload = Image::make( $back_id_image->path() );
                     $resize_upload->save(public_path('/uploads/users/'.$imageName));
-                    $user->back_id_image = $imageName;
+                    $user->update([
+                        'back_id_image' => $imageName
+                    ]);
                 }
 
                 if ($user->back_id_image && $user->front_id_image) {
-                    $user->kyc_approval_status = User::KYC_STATUS_PENDING_VERIFICATION;
+                    $user->update([
+                        'kyc_approval_status' => User::KYC_STATUS_PENDING_VERIFICATION
+                    ]);
                 }
-                $user->save();
                 Alert::success(trans('public.done'), trans('public.successfully_uploaded_ic'));
                 return redirect()->route('member_verification');
             }
