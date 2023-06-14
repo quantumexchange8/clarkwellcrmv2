@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\Admin;
 
 use App\Exports\NetworkExport;
 use App\Http\Controllers\Controller;
+use App\Models\ActionLogs;
 use App\Models\Brokers;
 use App\Models\Commissions;
 use App\Models\Deposits;
@@ -144,6 +145,12 @@ class ReferralController extends Controller
                 $user->hierarchyList = $user_hierarchy;
                 $user->upline_referral_id = $new_parent->id;
                 $user->save();
+
+                ActionLogs::create([
+                    'user_id' => Auth::user()->id,
+                    'type' => get_class($user),
+                    'description' => 'Admin with id: '. Auth::user()->id .' has TRANSFER user ' . $user->name . ', ' . $user->email . ' with id: '. $user->id . ' to ' . $new_parent->email . ' with id: ' . $new_parent->id,
+                ]);
 
                 Alert::success(trans('public.done'), trans('public.successfully_transfer_customer'));
                 return redirect()->route('referral_tree');
