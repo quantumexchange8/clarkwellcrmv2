@@ -30,7 +30,7 @@ class BonusHistories extends Model
     public static function get_record($search)
     {
 
-        $query = BonusHistories::sortable()->with('user')->whereHas('user', function ($query) {
+        $query = BonusHistories::sortable()->with('user')->where('deleted_at', '=', null)->whereHas('user', function ($query) {
             return $query->where('role', 1);
         });
 
@@ -65,7 +65,7 @@ class BonusHistories extends Model
 
     public static function get_commissions_table($search, $userId)
     {
-        $query = BonusHistories::sortable()->with('commission')->with('user')->where('upline_id', $userId)->where('downline_id', '!=', $userId);
+        $query = BonusHistories::sortable()->with('commission')->with('user')->where('deleted_at', '=', null)->where('upline_id', $userId)->where('downline_id', '!=', $userId);
         $searchTerms = @$search['freetext'] ?? NULL;
         $freetext = explode(' ', $searchTerms);
 

@@ -83,7 +83,7 @@ class CommissionController extends Controller
                     break;
             }
         }
-        $group_total = BonusHistories::where('upline_id', $user->id)->sum('bonus_amount');
+        $group_total = BonusHistories::where('upline_id', $user->id)->where('deleted_at', '=', null)->sum('bonus_amount');
 
         $search = session('commissions_network_search') ? session('commissions_network_search') : $search;
         return view('member/network', [
