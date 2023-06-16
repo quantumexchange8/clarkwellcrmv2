@@ -537,6 +537,16 @@ return array(
     'successfully_submit_withdrawal_request' => 'Berhasil mengirimkan permintaan penarikan',
     'fee_remark' => 'Ada biaya penarikan sebesar $5 (tidak termasuk biaya platform pertukaran mata uang kripto)',
 
+    'success' => 'Sukses!',
+    'link_copied' => 'Tautan Tersalin',
+    'to_withdraw' => 'Untuk Penarikan:',
+    'setup_usdt_wallet' => 'Setup Wallet USDT',
+    'click_here_to_set_up_usdt_wallet' => 'Klik di sini untuk setup Wallet USDT',
+    'setup_withdrawal_pin' => 'Setup PIN Penarikan',
+    'click_here_to_set_up_withdrawal_pin' => 'Klik di sini untuk setup PIN Penarikan',
+    'profile_verified' => 'Profil Terverifikasi',
+    'pending_kyc' => 'KYC Menunggu Verifikasi',
+
 )
 
 ?>

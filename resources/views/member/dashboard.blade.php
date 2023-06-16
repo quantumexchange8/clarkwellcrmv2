@@ -613,8 +613,8 @@
 
                 // Alert the copied text
                 Swal.fire({
-                    title: 'Success!',
-                    text: 'Link Copied',
+                    title: "{{ trans('public.success') }}",
+                    text: "{{ trans('public.link_copied') }}",
                     icon: 'success',
                     confirmButtonText: 'OK'
                 })

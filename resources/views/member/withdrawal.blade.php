@@ -91,13 +91,52 @@
                         </svg>
                         @lang('public.export_excel')
                     </button>
-                    @if(auth()->user()->withdrawal_action == \App\Models\User::ENABLE_WITHDRAWAL && auth()->user()->kyc_approval_status == \App\Models\User::KYC_STATUS_VERIFIED && $wallet_address )
+                    @if(auth()->user()->withdrawal_action == \App\Models\User::ENABLE_WITHDRAWAL && auth()->user()->kyc_approval_status == \App\Models\User::KYC_STATUS_VERIFIED && $wallet_address && auth()->user()->withdrawal_pin )
                         <button type="button" data-modal-target="withdrawModal" data-modal-toggle="withdrawModal" class="mb-2 max-[1000px]:w-full justify-center text-white bg-success-500 hover:bg-success-600 focus:ring-4 text-sm focus:outline-none focus:ring-success-300 font-semibold rounded-lg px-5 py-2 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                             @lang('public.withdraw')
                         </button>
+                    @else
+                        <h2 class="mb-2 font-semibold text-gray-900 dark:text-white">@lang('public.to_withdraw')</h2>
+                        <ul class="max-w-md text-sm space-y-1 text-gray-500 list-inside dark:text-gray-400">
+                            @if(auth()->user()->withdrawal_action == \App\Models\User::ENABLE_WITHDRAWAL && $wallet_address)
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 mr-1.5 text-green-500 dark:text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                    <span>@lang('public.setup_usdt_wallet')</span>
+                                </li>
+                            @else
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 mr-1.5 text-gray-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
+                                    <span>@lang('public.setup_usdt_wallet') <a href="{{ route('member_profile') }}" class="text-primary"> (@lang('public.click_here_to_set_up_usdt_wallet'))</a></span>
+                                </li>
+                            @endif
+
+                            @if(auth()->user()->withdrawal_action == \App\Models\User::ENABLE_WITHDRAWAL && auth()->user()->withdrawal_pin)
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 mr-1.5 text-green-500 dark:text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                    <span>@lang('public.setup_withdrawal_pin')</span>
+                                </li>
+                            @else
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 mr-1.5 text-gray-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
+                                    <span>@lang('public.setup_withdrawal_pin') <a href="{{ route('member_profile') }}" class="text-primary"> (@lang('public.click_here_to_set_up_withdrawal_pin'))</a></span>
+                                </li>
+                            @endif
+
+                            @if(auth()->user()->kyc_approval_status == \App\Models\User::KYC_STATUS_VERIFIED)
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 mr-1.5 text-green-500 dark:text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                    <span>@lang('public.profile_verified')</span>
+                                </li>
+                            @else
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 mr-1.5 text-gray-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
+                                    <span>@lang('public.pending_kyc')</span>
+                                </li>
+                            @endif
+                        </ul>
                     @endif
                 </div>
 

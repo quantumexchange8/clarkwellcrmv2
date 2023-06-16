@@ -526,6 +526,15 @@ return array(
     'successfully_submit_withdrawal_request' => '成功提交提现请求',
     'fee_remark' => '提现手续费为5美元（不包含加密货币交易所费用)',
 
+    'success' => '成功！',
+    'link_copied' => '链接已复制',
+    'to_withdraw' => '提款：',
+    'setup_usdt_wallet' => '设置USDT钱包',
+    'click_here_to_set_up_usdt_wallet' => '点击这里设置USDT钱包',
+    'setup_withdrawal_pin' => '设置提款密码',
+    'click_here_to_set_up_withdrawal_pin' => '点击这里设置提款密码',
+    'profile_verified' => '已验证个人资料',
+    'pending_kyc' => 'KYC待审核',
 )
 ?>
 

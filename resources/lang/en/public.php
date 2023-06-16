@@ -528,5 +528,15 @@ return array(
     'withdrawal_pin_invalid' => 'The Withdrawal Pin is invalid',
     'successfully_submit_withdrawal_request' => 'Successfully submitted withdrawal request',
     'fee_remark' => 'There is a withdrawal fee of $5 (not including cryptocurrency exchange platform fees)',
+
+    'success' => 'Success!',
+    'link_copied' => 'Link Copied',
+    'to_withdraw' => 'To Withdraw:',
+    'setup_usdt_wallet' => 'Setup USDT Wallet',
+    'click_here_to_set_up_usdt_wallet' => 'Click here to set up USDT Wallet',
+    'setup_withdrawal_pin' => 'Setup Withdrawal Pin',
+    'click_here_to_set_up_withdrawal_pin' => 'Click here to set up Withdrawal Pin',
+    'profile_verified' => 'Profile Verified',
+    'pending_kyc' => 'Pending KYC',
 )
 ?>

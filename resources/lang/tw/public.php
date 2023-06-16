@@ -526,6 +526,15 @@ return array(
     'successfully_submit_withdrawal_request' => '成功提交提現請求',
     'fee_remark' => '提現手續費為5美元（不包含加密貨幣交易所費用)',
 
+    'success' => '成功！',
+    'link_copied' => '已複製連結',
+    'to_withdraw' => '提款：',
+    'setup_usdt_wallet' => '設置 USDT 錢包',
+    'click_here_to_set_up_usdt_wallet' => '點擊這裡設置 USDT 錢包',
+    'setup_withdrawal_pin' => '設置提款 PIN 碼',
+    'click_here_to_set_up_withdrawal_pin' => '點擊這裡設置提款 PIN 碼',
+    'profile_verified' => '已驗證個人資料',
+    'pending_kyc' => 'KYC 審核中',
 )
 ?>
 

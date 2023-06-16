@@ -524,6 +524,16 @@ return array(
     'successfully_submit_withdrawal_request' => 'ส่งคำขอถอนเงินเรียบร้อยแล้ว',
     'fee_remark' => 'มีค่าธรรมเนียมการถอน $5 (ไม่รวมค่าธรรมเนียมแพลตฟอร์มแลกเปลี่ยน cryptocurrency)',
 
+    'success' => 'สำเร็จ!',
+    'link_copied' => 'คัดลอกลิงก์แล้ว',
+    'to_withdraw' => 'สำหรับการถอนเงิน:',
+    'setup_usdt_wallet' => 'ตั้งค่ากระเป๋าเงิน USDT',
+    'click_here_to_set_up_usdt_wallet' => 'คลิกที่นี่เพื่อตั้งค่ากระเป๋าเงิน USDT',
+    'setup_withdrawal_pin' => 'ตั้งค่ารหัส PIN สำหรับการถอนเงิน',
+    'click_here_to_set_up_withdrawal_pin' => 'คลิกที่นี่เพื่อตั้งค่ารหัส PIN สำหรับการถอนเงิน',
+    'profile_verified' => 'ตรวจสอบโปรไฟล์แล้ว',
+    'pending_kyc' => 'รอการตรวจสอบ KYC',
+
 )
 
 ?>
