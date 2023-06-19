@@ -122,10 +122,10 @@
                             {{ date_format($record->created_at, 'Y-m-d, H:i A') }}
                         </th>
                         <td class="px-6 py-4">
-                            {{$record->user->name}}
+                            {{$record->commission->user->name}} from {{ $record->upline_id }}
                         </td>
                         <td class="px-6 py-4">
-                            {{$record->user->email}}
+                            {{$record->commission->user->email}}
                         </td>
                         <td class="px-6 py-4">
                             {{$record->commission->broker->name}}

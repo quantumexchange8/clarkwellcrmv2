@@ -27,7 +27,7 @@ class ExportBonusHistories implements FromCollection, WithHeadings
                 'transaction_date' => Carbon::parse($commission->commission->transaction_at)->format('Y-m-d H:i:s'),
                 'lot_size' =>  number_format((float)$commission->commission_lot, 2, '.', ''),
                 'commissions' =>  number_format((float)$commission->bonus_amount, 2, '.', ''),
-                'email' => $commission->user->email,
+                'email' => $commission->commission->user->email,
                 'broker' => $commission->commission->broker->name,
                 'upload_date' => Carbon::parse($commission->commission->created_at)->format('Y-m-d H:i:s'),
             );

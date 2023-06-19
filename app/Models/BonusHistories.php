@@ -29,29 +29,32 @@ class BonusHistories extends Model
 
     public static function get_record($search)
     {
-
-        $query = BonusHistories::sortable()->with('user')->where('deleted_at', '=', null)->whereHas('user', function ($query) {
-            return $query->where('role', 1);
-        });
+        $query = BonusHistories::sortable()
+            ->with('commission')
+            ->with('user')
+            ->where('deleted_at', '=', null)
+            ->whereHas('user', function ($query) {
+                return $query->where('role', 1);
+            });
 
         $search_text = @$search['freetext'] ?? NULL;
         $freetext = explode(' ', $search_text);
 
-        if($search_text){
-            foreach($freetext as $freetexts) {
-                $query->whereHas('user', function ($q) use ($freetexts) {
-                    $q->where('email', 'like', '%' . $freetexts . '%')
-                        ->orWhere('name', 'like', '%' . $freetexts . '%');
+        if ($search_text) {
+            foreach ($freetext as $freetexts) {
+                $query->whereHas('commission', function ($q) use ($freetexts) {
+                    $q->whereHas('user', function ($innerQ) use ($freetexts) {
+                        $innerQ->where('email', 'like', '%' . $freetexts . '%')
+                            ->orWhere('name', 'like', '%' . $freetexts . '%');
+                    });
                 });
             }
         }
 
         if (@$search['user_id']) {
             $users = User::find(@$search['user_id']);
-
             $users_id = $users->getChildrenIds();
-
-            $query->whereIn('downline_id', $users_id);
+            $query->where('upline_id', @$search['user_id'])->whereIn('downline_id', $users_id);
         }
 
         if (@$search['transaction_start'] && @$search['transaction_end']) {
@@ -60,7 +63,7 @@ class BonusHistories extends Model
             $query->whereBetween('created_at', [$start_date, $end_date]);
         }
 
-        return $query->orderbyDesc('created_at');
+        return $query->orderByDesc('created_at');
     }
 
     public static function get_commissions_table($search, $userId)
