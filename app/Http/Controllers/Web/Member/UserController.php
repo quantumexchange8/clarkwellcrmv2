@@ -269,11 +269,11 @@ class UserController extends Controller
                     if ($user->front_id_image) {
                         File::delete('uploads/users/' . $user->$front_id_image);
                     }
-                    $imageName = time() . '.' . $front_id_image->getClientOriginalExtension();
+                    $frontImageName = time() . '.' . $front_id_image->getClientOriginalExtension();
                     $resize_upload = Image::make( $front_id_image->path() );
-                    $resize_upload->save(public_path('/uploads/users/'.$imageName));
+                    $resize_upload->save(public_path('/uploads/users/'.$frontImageName));
                     $user->update([
-                        'front_id_image' => $imageName
+                        'front_id_image' => $frontImageName
                     ]);
                 }
 
@@ -283,11 +283,11 @@ class UserController extends Controller
                     if ($user->back_id_image) {
                         File::delete('uploads/users/' . $user->back_id_image);
                     }
-                    $imageName = time() . '.' . $back_id_image->getClientOriginalExtension();
+                    $backImageName = time() . '.' . $back_id_image->getClientOriginalExtension();
                     $resize_upload = Image::make( $back_id_image->path() );
-                    $resize_upload->save(public_path('/uploads/users/'.$imageName));
+                    $resize_upload->save(public_path('/uploads/users/'.$backImageName));
                     $user->update([
-                        'back_id_image' => $imageName
+                        'back_id_image' => $backImageName
                     ]);
                 }
 
