@@ -122,7 +122,7 @@
                             {{ date_format($record->created_at, 'Y-m-d, H:i A') }}
                         </th>
                         <td class="px-6 py-4">
-                            {{$record->commission->user->name}} from {{ $record->upline_id }}
+                            {{$record->commission->user->name}}
                         </td>
                         <td class="px-6 py-4">
                             {{$record->commission->user->email}}
