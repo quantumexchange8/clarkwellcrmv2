@@ -267,11 +267,11 @@ class UserController extends Controller
                 $front_id_image = $request->file('front_id_image');
                 if ($front_id_image) {
                     if ($user->front_id_image) {
-                        File::delete('uploads/users/' . $user->$front_id_image);
+                        File::delete('uploads/users/' . $user->front_id_image);
                     }
-                    $frontImageName = time() . '.' . $front_id_image->getClientOriginalExtension();
-                    $resize_upload = Image::make( $front_id_image->path() );
-                    $resize_upload->save(public_path('/uploads/users/'.$frontImageName));
+                    $frontImageName = time() . '_' . uniqid() . '.' . $front_id_image->getClientOriginalExtension();
+                    $resize_upload = Image::make($front_id_image->path());
+                    $resize_upload->save(public_path('/uploads/users/' . $frontImageName));
                     $user->update([
                         'front_id_image' => $frontImageName
                     ]);
@@ -283,9 +283,9 @@ class UserController extends Controller
                     if ($user->back_id_image) {
                         File::delete('uploads/users/' . $user->back_id_image);
                     }
-                    $backImageName = time() . '.' . $back_id_image->getClientOriginalExtension();
-                    $resize_upload = Image::make( $back_id_image->path() );
-                    $resize_upload->save(public_path('/uploads/users/'.$backImageName));
+                    $backImageName = time() . '_' . uniqid() . '.' . $back_id_image->getClientOriginalExtension();
+                    $resize_upload = Image::make($back_id_image->path());
+                    $resize_upload->save(public_path('/uploads/users/' . $backImageName));
                     $user->update([
                         'back_id_image' => $backImageName
                     ]);
