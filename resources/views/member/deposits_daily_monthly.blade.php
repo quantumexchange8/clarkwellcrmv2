@@ -128,36 +128,32 @@
                 </thead>
                 <tbody>
                 @foreach($records as $record)
-                        <tr class="border-b odd:bg-[#F6F6F6] even:bg-[#FDFCF3] text-sm">
-                            <th scope="row" class="p-4 text-center font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $no }}
-                            </th>
-                            <td class="p-4">
-                                {{ $record->month_year ?? $record->date }}
-                            </td>
-                            <td class="p-4">
-                                <a href="{{ route('view_member_profile', $record->user->id) }}" class="underline text-[#1A8BFF]">{{ $record->user->name  }} {{$record->user->id}}</a>
-                            </td>
-                            <td class="p-4">
-                                {{ $record->user->email }}
-                            </td>
-                            <td class="p-4">
-                                {{ $record->broker->name }}
-                            </td>
-                            <td class="p-4">
-                                <span class="text-success font-semibold"> {{ number_format($record->dep_amount, 2) }} </span>
-                            </td>
-                            <td class="p-4">
-                                <span class="text-danger font-semibold"> {{ number_format($record->with_total, 2) }} </span>
-
-                            </td>
-                        </tr>
-
-
-
-                        <?php
+                    <tr class="border-b odd:bg-[#F6F6F6] even:bg-[#FDFCF3] text-sm">
+                        <th scope="row" class="p-4 text-center font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ $no }}
+                        </th>
+                        <td class="p-4">
+                            {{ $record->month_year ?? $record->date }}
+                        </td>
+                        <td class="p-4">
+                            <a href="{{ route('view_member_profile', $record->user->id) }}" class="underline text-[#1A8BFF]">{{ $record->user->name }}</a>
+                        </td>
+                        <td class="p-4">
+                            {{ $record->user->email }}
+                        </td>
+                        <td class="p-4">
+                            {{ $record->broker->name }}
+                        </td>
+                        <td class="p-4">
+                            <span class="text-success font-semibold"> {{ number_format($record->dep_amount, 2) }} </span>
+                        </td>
+                        <td class="p-4">
+                            <span class="text-danger font-semibold"> {{ number_format($record->with_total, 2) }} </span>
+                        </td>
+                    </tr>
+                    <?php
                         $no++;
-                        ?>
+                    ?>
                 @endforeach
                 </tbody>
             </table>

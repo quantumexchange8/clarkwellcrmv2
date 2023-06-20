@@ -12,6 +12,7 @@ use App\Models\SettingCountry;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -178,16 +179,32 @@ class DepositController extends Controller
         $search = session('daily_monthly_deposits_children_search') ? session('daily_monthly_deposits_children_search') : $search;
         $query = Deposits::get_member_daily_monthly_table($search, $user);
 
+        $perPage = 10; // Number of records to display per page
+
+        $records = $query->get();
+
+        // Manually slice the records based on the current page
+        $current_page = request()->input('page', 1);
+        $sliced = $records->slice(($current_page - 1) * $perPage, $perPage);
+
+        $paginator = new LengthAwarePaginator(
+            $sliced,
+            $records->count(),
+            $perPage,
+            $current_page,
+            ['path' => url()->current()]
+        );
+
         return view('member/deposits_daily_monthly', [
             'title' => 'Deposits - Downline',
             'submit' => route('daily_monthly_deposits_listing'),
-            'records' => $query->paginate(10),
-            'search' =>  $search,
+            'records' => $paginator,
+            'search' => $search,
             'user' => $user,
             'users' => $users,
             'get_filter_month' => $month,
             'get_filter_year' => $year,
-            'total' => $query->get()->sum('dep_amount') - $query->get()->sum('with_total')
+            'total' => $records->sum('dep_amount') - $records->sum('with_total')
         ]);
     }
 }
