@@ -222,7 +222,7 @@ class User extends Authenticatable implements JWTSubject
             $query->where('auto_rank_up', $auto_rank_up);
         }
 
-        return $query->orderbyDesc('created_at');
+        return $query->orderbyDesc('deleted_at');
     }
 
     public static function get_member_tree_record($search)
