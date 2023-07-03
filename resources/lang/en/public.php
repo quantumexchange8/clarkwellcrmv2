@@ -538,5 +538,15 @@ return array(
     'click_here_to_set_up_withdrawal_pin' => 'Click here to set up Withdrawal Pin',
     'profile_verified' => 'Profile Verified',
     'pending_kyc' => 'Pending KYC',
+
+    'pamm' => 'PAMM',
+    'add_pamm' => 'Add PAMM',
+    'update_pamm' => 'Update PAMM',
+    'pamm_id' => 'The PAMM selection is invalid',
+    'code' => 'Code',
+    'successfully_added_pamm' => 'Successfully Added PAMM',
+    'successfully_updated_pamm' => 'Successfully Updated PAMM',
+    'successfully_deleted_pamm' => 'Successfully Deleted PAMM',
+    'select_pamm' => 'Select PAMM',
 )
 ?>

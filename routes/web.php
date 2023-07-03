@@ -162,6 +162,13 @@ Route::namespace('Web')->middleware('jwt.set')->group(function () {
                 Route::post('/broker_delete', 'delete')->name('broker_delete');
             });
 
+            Route::controller('PammController')->prefix('pamm')->group(function () {
+                Route::match(['get', 'post'], '/pamm_listing', 'listing')->name('pamm_listing');
+                Route::match(['get', 'post'], '/pamm_add', 'pamm_add')->name('pamm_add');
+                Route::match(['get', 'post'], '/pamm_edit/{id}', 'pamm_edit')->name('pamm_edit');
+                Route::post('/pamm_delete', 'pamm_delete')->name('pamm_delete');
+            });
+
             Route::controller('NewsController')->prefix('news')->group(function () {
                 Route::match(['get', 'post'], '/news_listing', 'news_listing')->name('news_listing');
                 Route::match(['get', 'post'], '/create_news', 'create_news')->name('create_news');

@@ -535,6 +535,16 @@ return array(
     'click_here_to_set_up_withdrawal_pin' => '點擊這裡設置提款 PIN 碼',
     'profile_verified' => '已驗證個人資料',
     'pending_kyc' => 'KYC 審核中',
+
+    'pamm' => 'PAMM',
+    'add_pamm' => '新增PAMM',
+    'update_pamm' => '更新PAMM',
+    'pamm_id' => 'PAMM選擇無效',
+    'code' => '代碼',
+    'successfully_added_pamm' => '成功新增PAMM',
+    'successfully_updated_pamm' => '成功更新PAMM',
+    'successfully_deleted_pamm' => '成功刪除PAMM',
+    'select_pamm' => '選擇PAMM',
 )
 ?>
 

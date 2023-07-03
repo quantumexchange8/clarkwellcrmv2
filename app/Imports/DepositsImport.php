@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\Brokers;
 use App\Models\Deposits;
+use App\Models\Pamm;
 use App\Models\User;
 use Carbon\Carbon;
 use Closure;
@@ -29,10 +30,12 @@ class DepositsImport implements ToCollection, WithHeadingRow, withValidation, Sk
     use Importable, SkipsErrors, SkipsFailures;
 
     private $brokerId;
+    private $pammId;
 
-    public function __construct($brokerId)
+    public function __construct($brokerId, $pammId)
     {
         $this->brokerId = $brokerId;
+        $this->pammId = $pammId;
     }
 
     /**
@@ -65,6 +68,7 @@ class DepositsImport implements ToCollection, WithHeadingRow, withValidation, Sk
                     'transaction_at' => $transactionDate,
                     'userId' => $user->id,
                     'brokersId' =>  $this->brokerId,
+                    'pamm_id' =>  $this->pammId,
                     'type' => $type,
                 ]);
 
@@ -99,7 +103,7 @@ class DepositsImport implements ToCollection, WithHeadingRow, withValidation, Sk
             'email' => 'required|email|exists:users,email',
             'transaction_date' => 'required|regex:/[0-9]+[.]?[0-9]*/|',
             'type' =>  ['required', Rule::in([Deposits::TYPE_DEPOSIT, Deposits::TYPE_WITHDRAW])],
-            'amount' => ['required', 'numeric',],
+            'amount' => ['required', 'numeric'],
         ];
     }
 

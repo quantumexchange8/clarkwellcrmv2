@@ -101,7 +101,7 @@ class Commissions extends Model
     public static function get_record($search)
     {
 
-        $query = Commissions::sortable()->whereHas('user', function ($query) {
+        $query = Commissions::sortable()->with('pamm')->whereHas('user', function ($query) {
            return $query->where('role', 1);
         });
 
@@ -143,6 +143,13 @@ class Commissions extends Model
             });
         }
 
+        $pamm_id = @$search['pamm_id'] ?? NULL;
+        if ($pamm_id) {
+            $query->whereHas('pamm', function ($q) use($pamm_id) {
+                $q->where('id', $pamm_id);
+            });
+        }
+
         return $query->orderbyDesc('transaction_at');
     }
 
@@ -175,5 +182,10 @@ class Commissions extends Model
     public function broker()
     {
         return $this->belongsTo(Brokers::class, 'brokersId', 'id');
+    }
+
+    public function pamm()
+    {
+        return $this->belongsTo(Pamm::class, 'pamm_id', 'id');
     }
 }

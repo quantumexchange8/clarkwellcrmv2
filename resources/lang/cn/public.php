@@ -535,6 +535,16 @@ return array(
     'click_here_to_set_up_withdrawal_pin' => '点击这里设置提款密码',
     'profile_verified' => '已验证个人资料',
     'pending_kyc' => 'KYC待审核',
+
+    'pamm' => 'PAMM',
+    'add_pamm' => '添加PAMM',
+    'update_pamm' => '更新PAMM',
+    'pamm_id' => 'PAMM选择无效',
+    'code' => '代码',
+    'successfully_added_pamm' => '成功添加PAMM',
+    'successfully_updated_pamm' => '成功更新PAMM',
+    'successfully_deleted_pamm' => '成功删除PAMM',
+    'select_pamm' => '选择PAMM',
 )
 ?>
 

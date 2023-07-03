@@ -10,6 +10,7 @@ use App\Models\ActionLogs;
 use App\Models\Announcements;
 use App\Models\Brokers;
 use App\Models\Commissions;
+use App\Models\Pamm;
 use App\Models\SettingCountry;
 use App\Models\User;
 use Carbon\Carbon;
@@ -35,14 +36,16 @@ class CommissionsController extends Controller
                         [
                             'file' => 'required|mimes:xlsx, csv, xls',
                             'broker_id' => ['required', Rule::in(Brokers::pluck('id')->toArray())],
+                            'pamm_id' => ['required', Rule::in(Pamm::pluck('id')->toArray())],
                         ], [
                             'file.required' => trans('public.file_required'),
                             'file.mimes' => trans('public.file_mimes'),
 
                             'broker_id' => trans('public.broker_id'),
+                            'pamm_id' => trans('public.pamm_id'),
                         ]
                     );
-                    $import = new CommissionsImport($request->input('broker_id'));
+                    $import = new CommissionsImport($request->input('broker_id'), $request->input('pamm_id'));
                     $import->import($request->file('file'));
                     $errorMsg = [];
                     if (count($import->failures()) > 0) {
@@ -76,7 +79,8 @@ class CommissionsController extends Controller
                         'freetext' =>  $request->input('freetext'),
                         'transaction_start' => $request->input('transaction_start'),
                         'transaction_end' => $request->input('transaction_end'),
-                        'country' => $request->input('country')
+                        'country' => $request->input('country'),
+                        'pamm_id' => $request->input('pamm_id'),
                     ]]);
                     break;
                 case 'export':
@@ -96,6 +100,7 @@ class CommissionsController extends Controller
             'records' => Commissions::get_record($search)->paginate(10),
             'search' =>  $search,
             'brokers' => Brokers::all(),
+            'get_pamm_sel' => Pamm::get_pamm_sel(),
             'get_country_sel' => SettingCountry::get_country_sel(app()->getLocale()),
         ]);
     }
@@ -233,7 +238,8 @@ class CommissionsController extends Controller
                         'transaction_start' => $request->input('transaction_start'),
                         'transaction_end' => $request->input('transaction_end'),
                         'type' => 'children',
-                        'country' => $request->input('country')
+                        'country' => $request->input('country'),
+                        'pamm_id' => $request->input('pamm_id'),
                     ]]);
                     break;
                 case 'export':
@@ -254,6 +260,7 @@ class CommissionsController extends Controller
             'search' =>  $search,
             'users' => $users,
             'brokers' => Brokers::all(),
+            'get_pamm_sel' => Pamm::get_pamm_sel(),
             'get_country_sel' => SettingCountry::get_country_sel(app()->getLocale()),
         ]);
     }

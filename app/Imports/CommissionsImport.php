@@ -26,10 +26,12 @@ class CommissionsImport implements ToCollection, WithHeadingRow, withValidation,
     use Importable, SkipsErrors, SkipsFailures;
 
     private $brokerId;
+    private $pammId;
 
-    public function __construct($brokerId)
+    public function __construct($brokerId, $pammId)
     {
         $this->brokerId = $brokerId;
+        $this->pammId = $pammId;
     }
 
     /**
@@ -48,6 +50,7 @@ class CommissionsImport implements ToCollection, WithHeadingRow, withValidation,
                 'user_rankId' =>  $user->rank->id,
                 'userId' => $user->id,
                 'brokersId' => $this->brokerId,
+                'pamm_id' => $this->pammId,
             ]);
         }
     }

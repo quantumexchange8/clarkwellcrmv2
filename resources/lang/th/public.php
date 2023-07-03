@@ -534,6 +534,16 @@ return array(
     'profile_verified' => 'ตรวจสอบโปรไฟล์แล้ว',
     'pending_kyc' => 'รอการตรวจสอบ KYC',
 
+    'pamm' => 'PAMM',
+    'add_pamm' => 'เพิ่ม PAMM',
+    'update_pamm' => 'อัปเดต PAMM',
+    'pamm_id' => 'การเลือก PAMM ไม่ถูกต้อง',
+    'code' => 'รหัส',
+    'successfully_added_pamm' => 'เพิ่ม PAMM เรียบร้อยแล้ว',
+    'successfully_updated_pamm' => 'อัปเดต PAMM เรียบร้อยแล้ว',
+    'successfully_deleted_pamm' => 'ลบ PAMM เรียบร้อยแล้ว',
+    'select_pamm' => 'เลือก PAMM',
+
 )
 
 ?>

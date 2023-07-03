@@ -547,6 +547,15 @@ return array(
     'profile_verified' => 'Profil Terverifikasi',
     'pending_kyc' => 'KYC Menunggu Verifikasi',
 
+    'pamm' => 'PAMM',
+    'add_pamm' => 'Tambah PAMM',
+    'update_pamm' => 'Perbarui PAMM',
+    'pamm_id' => 'Pilihan PAMM tidak valid',
+    'code' => 'Kode',
+    'successfully_added_pamm' => 'Berhasil Menambahkan PAMM',
+    'successfully_updated_pamm' => 'Berhasil Memperbarui PAMM',
+    'successfully_deleted_pamm' => 'Berhasil Menghapus PAMM',
+    'select_pamm' => 'Pilih PAMM',
 )
 
 ?>

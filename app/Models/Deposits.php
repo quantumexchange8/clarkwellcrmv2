@@ -81,7 +81,7 @@ class Deposits extends Model
 
     public static function get_report_record($search)
     {
-        $query = Deposits::sortable()->whereHas('user', function ($query) {
+        $query = Deposits::sortable()->with('pamm')->whereHas('user', function ($query) {
             return $query->where('role', 1);
         });
 
@@ -120,6 +120,13 @@ class Deposits extends Model
         if ($search_country) {
             $query->whereHas('user', function ($q) use($search_country) {
                 $q->where('country', $search_country);
+            });
+        }
+
+        $pamm_id = @$search['pamm_id'] ?? NULL;
+        if ($pamm_id) {
+            $query->whereHas('pamm', function ($q) use($pamm_id) {
+                $q->where('id', $pamm_id);
             });
         }
 
@@ -181,5 +188,10 @@ class Deposits extends Model
     public function broker()
     {
         return $this->belongsTo(Brokers::class, 'brokersId', 'id');
+    }
+
+    public function pamm()
+    {
+        return $this->belongsTo(Pamm::class, 'pamm_id', 'id');
     }
 }
