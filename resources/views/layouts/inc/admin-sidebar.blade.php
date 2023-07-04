@@ -23,6 +23,8 @@
             <li>
                 @php
                     $kyc_approval_count = \App\Models\User::where('kyc_approval_status', 2)->count();
+
+                    $walletRequest = \App\Models\UserWallet::where('wallet_address_request_status', \App\Models\UserWallet::STATUS_PENDING)->count();
                 @endphp
                 <button type="button" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-members" data-collapse-toggle="dropdown-members">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 {{ request()->is('admin/member/*') ? 'text-orange-400' : 'text-gray-500'}}">
@@ -50,7 +52,11 @@
                         <a href="{{ route('acknowledgement_letter') }}" class="{{ request()->is('admin/member/acknowledgement_letter') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 text-base font-semibold transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.acknowledgement_letter')</a>
                     </li>
                     <li>
-                        <a href="{{ route('member_wallet') }}" class="{{ request()->is('admin/member/member_wallet') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 text-base font-semibold transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.member_wallet')</a>
+                        <a href="{{ route('member_wallet') }}" class="{{ request()->is('admin/member/member_wallet') ? 'text-sm font-semibold text-orange-400' : 'text-sm font-semibold text-gray-500'}} flex items-center w-full p-2 text-base font-semibold transition duration-75 rounded-lg pl-11 group hover:bg-orange-100 dark:text-white dark:hover:bg-gray-700 font-medium text-lg text-gray-500">@lang('public.member_wallet')
+                            @if($walletRequest > 0)
+                                <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-yellow-200 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ $walletRequest }}</span>
+                            @endif
+                        </a>
                     </li>
                 </ul>
             </li>
