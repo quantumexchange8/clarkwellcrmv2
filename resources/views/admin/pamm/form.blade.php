@@ -15,16 +15,16 @@
     <form class="space-y-6" action="{{ $submit }}" enctype="multipart/form-data" method="post">
         @csrf
         <div>
-            <label for="name" class="block mb-2 font-bold text-[#FFA168] dark:text-white">@lang('public.name')</label>
-            <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white @error('name') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="@lang('public.name')" value="{{ @$post->name }}">
-            @error('name')
+            <label for="code" class="block mb-2 font-bold text-[#FFA168] dark:text-white">@lang('public.code')</label>
+            <input type="text" name="code" id="code" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white @error('code') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="@lang('public.code')" value="{{ @$post->code }}">
+            @error('code')
             <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
             @enderror
         </div>
         <div>
-            <label for="code" class="block mb-2 font-bold text-[#FFA168] dark:text-white">@lang('public.code')</label>
-            <input type="text" name="code" id="code" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white @error('code') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="@lang('public.code')" value="{{ @$post->code }}">
-            @error('code')
+            <label for="name" class="block mb-2 font-bold text-[#FFA168] dark:text-white">@lang('public.name')</label>
+            <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white @error('name') bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 @enderror" placeholder="@lang('public.name')" value="{{ @$post->name }}">
+            @error('name')
             <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
             @enderror
         </div>

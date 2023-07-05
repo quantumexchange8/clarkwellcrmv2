@@ -9,6 +9,7 @@ use App\Models\ActionLogs;
 use App\Models\Brokers;
 use App\Models\Deposits;
 use App\Models\ExtraBonus;
+use App\Models\Pamm;
 use App\Models\Rankings;
 use App\Models\SettingCountry;
 use App\Models\User;
@@ -329,6 +330,7 @@ class MemberController extends Controller
             'total_deposit' => $total_deposit,
             'deposits' => Deposits::get_record($search, $id, 8),
             'deposit_by_group' => $deposit_by_group,
+            'get_pamm_sel' => Pamm::get_pamm_sel(),
             'get_broker_sel' => ['' => trans('public.choose_broker')] + Brokers::get_broker_sel(),
         ]);
     }
@@ -344,18 +346,20 @@ class MemberController extends Controller
             return redirect()->back();
         }
 
-        if ($user->user_wallet->wallet_status == UserWallet::STATUS_INACTIVE)
-        {
+        if (empty($user->user_wallet) || $user->user_wallet->wallet_status === UserWallet::STATUS_INACTIVE) {
             Alert::warning(trans('public.invalid_action'), trans('public.try_again'));
             return redirect()->back();
         }
 
+
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(), [
                 'brokersId' => 'required',
+                'pamm_id' => 'required',
                 'amount' => 'required|numeric',
             ])->setAttributeNames([
                 'brokersId' => trans('public.brokers'),
+                'pamm_id' => trans('public.pamm'),
                 'amount' => trans('public.amount'),
             ]);
             $amount = $request->input('amount');
@@ -385,6 +389,7 @@ class MemberController extends Controller
             if (!$validator->fails()) {
                 Deposits::create([
                     'brokersId' => $request->input('brokersId'),
+                    'pamm_id' => $request->input('pamm_id'),
                     'amount' => $amount,
                     'userId' => $id,
                     'type' => 2,

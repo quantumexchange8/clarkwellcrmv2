@@ -189,6 +189,10 @@
                             {!! Form::select('brokersId', $get_broker_sel, @old('brokersId'), ['class' => 'bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500']) !!}
                         </div>
                         <div>
+                            <label for="email" class="block mb-2 text-md font-medium text-[#FFA168] dark:text-white">@lang('public.pamm')</label>
+                            {!! Form::select('pamm_id', $get_pamm_sel, @old('pamm_id'), ['class' => 'bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500', 'placeholder' => trans('public.select_pamm')]) !!}
+                        </div>
+                        <div>
                             <label for="amount" class="block mb-2 text-md font-medium text-[#FFA168] dark:text-white">@lang('public.amount')</label>
                             <input type="number" name="amount" id="amount" placeholder="0.00" class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" autocomplete="off" min="1">
                         </div>
