@@ -26,6 +26,7 @@ class CommissionsController extends Controller
 {
     public function store(Request $request)
     {
+        $user = Auth::user();
 
         if ($request->isMethod('post')) {
             $submit_type = $request->input('submit');
@@ -61,6 +62,12 @@ class CommissionsController extends Controller
                     return response()->download($filePath);
             }
         }
+
+        ActionLogs::create([
+            'user_id' => $user->id,
+            'type' => Commissions::class,
+            'description' => $user->name. ' with id: ' . $user->id . ' has imported commission records',
+        ]);
 
         Alert::success(trans('public.done'), trans('public.import_success'));
         return redirect()->back()->with('success', 'User Imported Successfully.');
