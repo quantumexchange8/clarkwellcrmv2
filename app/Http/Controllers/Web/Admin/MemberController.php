@@ -628,11 +628,6 @@ class MemberController extends Controller
 
                 } elseif ($send_email_type == 'group') {
 
-                    if ($user->email_status == 0 || $user->email_sent == 1) {
-                        Alert::error(trans('public.invalid_action'), trans('public.status_not_allow'));
-                        return redirect()->back();
-                    }
-
                     $data['title'] = 'Important Information Regarding Your Investment with Clark Well Capital 关于您在汇佳资本的投资的重要信息';
 
                     $user_children_ids = $user->getChildrenIds();
