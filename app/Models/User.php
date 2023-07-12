@@ -294,7 +294,7 @@ class User extends Authenticatable implements JWTSubject
                 $user = User::find($upline[$count]);
                 if ($user->leader_status) {
                     if ($first_leader == $default) {
-                        $first_leader = $user->email;
+                        $first_leader = $user->name;
                     }
                     $top_leader = $user->email;
                 }
