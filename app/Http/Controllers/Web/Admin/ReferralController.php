@@ -66,9 +66,13 @@ class ReferralController extends Controller
         for ($i = 0; $i < $brokers->count(); $i++) {
             $broker = $brokers[$i];
 
-            $personalTotal = Deposits::where('userId', $user->id)->where('brokersId', $broker->id)->sum('amount');
-            $groupTotal = Deposits::whereIn('userId', $children)->where('brokersId', $broker->id)->sum('amount');
-            $groupTotal = $personalTotal + $groupTotal;
+            $personalTotal = Deposits::where('userId', $user->id)->where('brokersId', $broker->id)->where('type', Deposits::TYPE_DEPOSIT)->sum('amount');
+            $groupTotal = Deposits::whereIn('userId', $children)->where('brokersId', $broker->id)->where('type', Deposits::TYPE_DEPOSIT)->sum('amount');
+            $group_deposit_with= Deposits::whereIn('userId', $children)->where('brokersId', $broker->id)->where('type', Deposits::TYPE_WITHDRAW)
+                ->where('status', Deposits::STATUS_APPROVED)
+                ->sum('amount');
+
+            $groupTotal = $personalTotal + $groupTotal - $group_deposit_with;
 
             $personalCommissionTotal = Commissions::where('userId', $user->id)->where('brokersId', $broker->id)->sum('commissions_amount');
             $groupCommissionTotal = Commissions::whereIn('userId', $children)->where('brokersId', $broker->id)->sum('commissions_amount');
